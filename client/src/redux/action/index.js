@@ -31,3 +31,18 @@ export const get_instrumentID = (id) => {
 
     }
 }
+
+export const getInstruments = () => {
+    return async function (dispatch) {
+        return await axios.get(`http://localhost:4000/instruments`)
+        .then(rAxios => {
+            dispatch({
+                type: GET_INSTRUMENTS,
+                payload: rAxios.data
+            })
+        }).catch (error => {
+            console.log("error in redux/action/getInstruments : " + error)
+            return "error in redux/action/getInstruments : " + error
+        }) 
+    }
+}

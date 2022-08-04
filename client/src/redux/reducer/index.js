@@ -17,7 +17,7 @@ const reducer = (state = initialState, action) => {
         case GET_INSTRUMENTS:
             return {
                 ...state,
-                videogame: action.payload,
+                instruments: action.payload,
                 copy: action.payload
             }
 
@@ -36,10 +36,10 @@ const reducer = (state = initialState, action) => {
         case POST_CREATE:
             return {
                 ...state,
-                videogame: [...state.copy, action.payload]
+                instruments: [...state.copy, action.payload]
             }
 
-          default:
+        default:
             return state
     }
 }

@@ -15,18 +15,18 @@ export const getDataClear = (payload) => {
         payload
     }
 }
-export const get_instrumentID=(id)=>{
-     return async function (dispatch) {
-         try {
-             let api=await axios.get("http://localhost:4000/instruments/"+id)
-             
-             return dispatch({
-                type:GET_DETAILS_INSTRUMENTS,
-                payload:api.data
+export const get_instrumentID = (id) => {
+    return async function (dispatch) {
+        try {
+            let api = await axios.get("http://localhost:4000/instruments/" + id)
+
+            return dispatch({
+                type: GET_DETAILS_INSTRUMENTS,
+                payload: api.data
             })
         } catch (error) {
-            console.log("error in redux/action/get_instrumentID : "+error)
-            return "error in redux/action/get_instrumentID : "+error
+            console.log("error in redux/action/get_instrumentID : " + error)
+            return "error in redux/action/get_instrumentID : " + error
         }
 
     }

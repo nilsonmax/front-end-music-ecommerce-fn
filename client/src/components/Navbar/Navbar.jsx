@@ -3,8 +3,8 @@ import { ButtonPrueba, NavContainer } from "./style";
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
-  const [prueba, setPrueba] = useState({prueba1:0, prueba2:0});
-console.log(prueba);
+  const [prueba, setPrueba] = useState({ prueba1: 0, prueba2: 0 });
+  console.log(prueba);
   return (
     <NavContainer>
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
@@ -90,8 +90,8 @@ console.log(prueba);
           </div>
         </div>
       </div>
-      <ButtonPrueba onClick={()=>setPrueba({...prueba,prueba1:1, prueba2:0})}>BOTÓN DE PRUEBA 1 </ButtonPrueba>
-      <ButtonPrueba onClick={()=>setPrueba({...prueba,prueba2:1, prueba1:0})}>BOTÓN DE PRUEBA 2 </ButtonPrueba>
+      <ButtonPrueba onClick={() => setPrueba({ ...prueba, prueba1: 1, prueba2: 0 })}>BOTÓN DE PRUEBA 1 </ButtonPrueba>
+      <ButtonPrueba onClick={() => setPrueba({ ...prueba, prueba2: 1, prueba1: 0 })}>BOTÓN DE PRUEBA 2 </ButtonPrueba>
     </NavContainer>
   );
 }

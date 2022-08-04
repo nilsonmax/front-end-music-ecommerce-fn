@@ -2,7 +2,8 @@ import {
     GET_INSTRUMENTS,
     GET_DETAILS_INSTRUMENTS,
     DATA_CLEAR,
-    POST_CREATE
+    POST_CREATE,
+    GET_BY_NAME
 } from '../action/index.js'
 
 const initialState = {
@@ -25,6 +26,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 detail: action.payload
+            }
+
+        case GET_BY_NAME:
+            return {
+                ...state,
+                instruments: action.payload
             }
 
         case DATA_CLEAR:

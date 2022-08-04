@@ -3,7 +3,7 @@ import LoginForm from '../../components/loginForm/loginForm'
 
 const LoginContainer = () => {
   return (
-    <LoginForm/>
+    <LoginForm />
   )
 }
 

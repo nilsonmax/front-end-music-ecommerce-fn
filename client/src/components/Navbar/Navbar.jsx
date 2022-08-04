@@ -5,7 +5,7 @@ import { NavContainer } from "./style";
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
 
-  return (
+return (
     <NavContainer>
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>

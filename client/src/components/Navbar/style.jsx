@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import tw  from 'twin.macro'
+import tw from 'twin.macro'
 
 export const NavContainer = styled.nav`
-  ${tw `w-full shadow `};
+  ${tw`w-full shadow `};
 `;
 
 export const ButtonPrueba = styled.button`

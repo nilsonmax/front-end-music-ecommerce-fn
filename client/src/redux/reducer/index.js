@@ -2,7 +2,8 @@ import {
     GET_INSTRUMENTS,
     GET_DETAILS_INSTRUMENTS,
     DATA_CLEAR,
-    POST_CREATE
+    POST_CREATE,
+    GET_BY_NAME
 } from '../action/index.js'
 
 const initialState = {
@@ -17,7 +18,7 @@ const reducer = (state = initialState, action) => {
         case GET_INSTRUMENTS:
             return {
                 ...state,
-                videogame: action.payload,
+                instruments: action.payload,
                 copy: action.payload
             }
 
@@ -29,6 +30,12 @@ const reducer = (state = initialState, action) => {
                 detail: action.payload
             }
 
+        case GET_BY_NAME:
+            return {
+                ...state,
+                instruments: action.payload
+            }
+
         case DATA_CLEAR:
             return {
                 ...state,
@@ -38,10 +45,10 @@ const reducer = (state = initialState, action) => {
         case POST_CREATE:
             return {
                 ...state,
-                videogame: [...state.copy, action.payload]
+                instruments: [...state.copy, action.payload]
             }
 
-          default:
+        default:
             return state
     }
 }

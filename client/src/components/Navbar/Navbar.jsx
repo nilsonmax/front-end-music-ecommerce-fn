@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { ButtonPrueba, NavContainer } from "./style";
+import { Search } from "../Search/Search";
+import { NavContainer } from "./style";
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
-  const [prueba, setPrueba] = useState({ prueba1: 0, prueba2: 0 });
-  console.log(prueba);
-  return (
+
+return (
     <NavContainer>
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
@@ -64,16 +64,19 @@ export default function NavBar() {
                 Instruments
               </li>
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600">
-                About US
+                Create
               </li>
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600">
-                Contact US
+                About US
               </li>
             </ul>
 
             <div className="mt-3 space-y-2 lg:hidden md:inline-block">
+              <div className="inline-block w-full">
+                <Search />
+              </div>
               <div className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800">
-                Sign in
+                Sign in1
               </div>
               <div className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
                 Sign up
@@ -82,16 +85,17 @@ export default function NavBar() {
           </div>
         </div>
         <div className="hidden space-x-2 md:inline-block">
+          <div className="md:inline-block">
+            <Search />
+          </div>
           <div className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800 md:inline-block">
-            Sign in
+            Sign in2
           </div>
           <div className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100 md:inline-block">
             Sign up
           </div>
         </div>
       </div>
- {/*      <ButtonPrueba onClick={() => setPrueba({ ...prueba, prueba1: 1, prueba2: 0 })}>BOTÓN DE PRUEBA 1 </ButtonPrueba>
-      <ButtonPrueba onClick={() => setPrueba({ ...prueba, prueba2: 1, prueba1: 0 })}>BOTÓN DE PRUEBA 2 </ButtonPrueba> */}
     </NavContainer>
   );
 }

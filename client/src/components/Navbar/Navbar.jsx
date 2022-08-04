@@ -90,8 +90,8 @@ export default function NavBar() {
           </div>
         </div>
       </div>
-      <ButtonPrueba onClick={() => setPrueba({ ...prueba, prueba1: 1, prueba2: 0 })}>BOTÓN DE PRUEBA 1 </ButtonPrueba>
-      <ButtonPrueba onClick={() => setPrueba({ ...prueba, prueba2: 1, prueba1: 0 })}>BOTÓN DE PRUEBA 2 </ButtonPrueba>
+ {/*      <ButtonPrueba onClick={() => setPrueba({ ...prueba, prueba1: 1, prueba2: 0 })}>BOTÓN DE PRUEBA 1 </ButtonPrueba>
+      <ButtonPrueba onClick={() => setPrueba({ ...prueba, prueba2: 1, prueba1: 0 })}>BOTÓN DE PRUEBA 2 </ButtonPrueba> */}
     </NavContainer>
   );
 }

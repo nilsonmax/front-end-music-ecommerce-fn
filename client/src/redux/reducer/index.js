@@ -22,8 +22,6 @@ const reducer = (state = initialState, action) => {
             }
 
         case GET_DETAILS_INSTRUMENTS:
-            console.log(action.payload, ' id payload')
-
             return {
                 ...state,
                 detail: action.payload

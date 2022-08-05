@@ -8,6 +8,7 @@ import Paginated from "../../components/Paginated/paginated";
 import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
+import Filter from "../../components/Filter/filter";
 
 const HomeContainer = () => {
   const elementsToShow = useSelector((state) => state.instruments);
@@ -35,6 +36,7 @@ const HomeContainer = () => {
       <div>
         <NavBar />
         <Options setCurrentPage={setCurrentPage} />
+        <Filter setCurrentPage={setCurrentPage} />
         <Paginated
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
@@ -42,7 +44,6 @@ const HomeContainer = () => {
           totalElements={elementsToShow.length}
           paginated={paginated}
         />
-
         <div>
           <Link to="/instruments/create">
             <p>Create Instrument</p>

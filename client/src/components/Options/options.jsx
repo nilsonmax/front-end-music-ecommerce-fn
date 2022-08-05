@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ordered, getInstruments, getCategory } from "../../redux/action/index";
+import {
+  sortName,
+  getInstruments,
+  getAllCategories,
+} from "../../redux/action/index";
 
 function Options({ setCurrentPage }) {
   const dispatch = useDispatch();
@@ -11,7 +15,7 @@ function Options({ setCurrentPage }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch(getCategory());
+      dispatch(getAllCategories());
       dispatch(getInstruments());
     }, 1000);
     return () => clearTimeout(timer);
@@ -19,7 +23,7 @@ function Options({ setCurrentPage }) {
 
   const handleOrder = (e) => {
     e.preventDefault();
-    dispatch(ordered(e.target.value));
+    dispatch(sortName(e.target.value));
     setCurrentPage(1);
   };
   return (

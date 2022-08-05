@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from 'react-router-dom';
 import HomePage from "./pages/home/home";
 import LoginPage from "./pages/login/login";
-import Details from "./pages/Details/Details"
+import Details from "./components/Details/details.jsx"
 import CreateInstrument from './components/createInstrument/createInstrument';
 
 const App = () => {

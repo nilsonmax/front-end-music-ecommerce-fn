@@ -7,6 +7,7 @@ export const GET_DETAILS_INSTRUMENTS = "GET_DETAILS_INSTRUMENTS";
 export const POST_CREATE = "POST_CREATE";
 export const DATA_CLEAR = "DATA_CLEAR";
 export const GET_BY_NAME = "GET_BY_NAME";
+export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
 
 
 // const { REACT_APP_HOST } = process.env;
@@ -64,5 +65,34 @@ export const getInstruments = () => {
             console.log("error in redux/action/getInstruments : " + error)
             return "error in redux/action/getInstruments : " + error
         }) 
+    }
+}
+
+export const getAllCategories = () => {
+    return async function(dispatch){
+        try {
+            let categories = await axios.get('http://localhost:4000/category/all')
+            console.log("CATEGORIES", categories)
+
+            return dispatch({
+                type: "GET_ALL_CATEGORIES",
+                payload: categories.data
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const postInstrument = (payload) => {
+    return async function(dispatch){
+        try {
+            let newInstrument = await axios.post('http://localhost:4000/instruments', payload)
+            console.log("NEWINSTRUMENT", newInstrument)
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

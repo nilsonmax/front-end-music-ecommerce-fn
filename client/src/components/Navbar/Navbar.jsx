@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { Search } from "../Search/Search";
-import { NavContainer } from "./style";
+import { DivItemsCenter, DivJustifyBetween, NavContainer, Button, Li } from "./style";
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
 
 return (
     <NavContainer>
-      <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+      <DivJustifyBetween>
         <div>
-          <div className="flex items-center justify-between py-3 md:py-5 md:block">
+          <DivItemsCenter>
 
             <h2 className="text-2xl font-bold">LOGO</h2>
 
             <div className="md:hidden">
-              <button
-                className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
-                onClick={() => setNavbar(!navbar)}
-              >
+              <Button onClick={() => setNavbar(!navbar)}>
                 {navbar ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -47,28 +44,28 @@ return (
                     />
                   </svg>
                 )}
-              </button>
+              </Button>
             </div>
-          </div>
+          </DivItemsCenter>
         </div>
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
+            className={`flex-1 justify-self-center pb-3 mt- md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
               }`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600">
+              <Li>
                 Home
-              </li >
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600">
+              </Li>
+              <Li>
                 Instruments
-              </li>
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600">
+              </Li>
+              <Li>
                 Create
-              </li>
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600">
+              </Li>
+              <Li>
                 About US
-              </li>
+              </Li>
             </ul>
 
             <div className="mt-3 space-y-2 lg:hidden md:inline-block">
@@ -95,7 +92,7 @@ return (
             Sign up
           </div>
         </div>
-      </div>
+      </DivJustifyBetween>
     </NavContainer>
   );
 }

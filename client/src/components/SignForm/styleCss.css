@@ -1,0 +1,10 @@
+.buttonSingup{
+    background: #054996;
+    border: 1px #112a46 solid;
+
+    color: #fcfcfc;
+}
+
+.buttonSingup:hover{
+    background: #103c6d;
+}

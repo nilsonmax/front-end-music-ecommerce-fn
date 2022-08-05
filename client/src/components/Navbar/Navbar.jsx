@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button, Li } from "./style";
+import {Link} from "react-router-dom";
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
@@ -76,7 +77,7 @@ return (
                 Sign in
               </div>
               <div className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
-                Sign up
+                <Link to="/signup">Sign up</Link>
               </div>
             </div>
           </div>

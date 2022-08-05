@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getInstruments } from "../../redux/action/index.js";
+import {Link} from 'react-router-dom';
 
 import NavBar from "../../components/Navbar/Navbar";
 import Paginated from "../../components/Paginated/paginated";
@@ -39,6 +40,13 @@ const HomeContainer = () => {
           totalElements={elementsToShow.length}
           paginated={paginated}
         />
+
+        <div>
+        <Link to="/instruments/create">
+          <p>Create activity</p>
+        </Link>
+        </div>
+
         <ul>
           {currentElements.map((inst) => {
             return (

@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from "./pages/home/home";
 import LoginPage from "./pages/login/login";
 import Details from "./components/Details/details.jsx"
+import CreateInstrument from './components/createInstrument/createInstrument';
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         {/* <Route path="/instruments" element={<instruments />} /> */}
         <Route path="/instruments/:id" element={<Details />} />
-        {/*<Route path="/instruments/create" element={<Create />} /> */}
+        *<Route path="/instruments/create" element={<CreateInstrument />} /> 
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
       {/* <Footer /> */}

@@ -10,37 +10,37 @@ function validate(input){
     let errors = {}
 
     if(!input.name){
-        errors.name = "Instrument name required";
+        errors.name = "*";
     } else if(typeof input.name !== 'string'){
         errors.name = "Instrument name should be a string";
     }
 
     if(!input.brand){
-        errors.brand = "Instrument brand required";
+        errors.brand = "*";
     }
 
     if(!input.price){
-        errors.price = "Instrument price required";
+        errors.price = "*";
     } 
 
     if(!input.img){
-        errors.img = "Instrument img required";
+        errors.img = "*";
     }
 
     if(!input.description){
-        errors.description = "Instrument description required";
+        errors.description = "*";
     }
 
     if(!input.stock){
-        errors.stock = "Instrument stock required";
+        errors.stock = "*";
     } 
 
     if(!input.status){
-        errors.status = "Instrument status required";
+        errors.status = "*";
     }
 
     if(!input.category){
-        errors.category = "Instrument category required";
+        errors.category = "*";
     }
 
     return errors;
@@ -130,87 +130,88 @@ export default function CreateInstrument() {
             </div>
             
             <h2>CREATE PRODUCT</h2>
+            <p>Inputs required</p>
 
             <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                <label>Name: </label>
+                <label>{errors.name && ( <p>{errors.name}</p> )} Name:</label>
                 <input 
                 type="text"
                 value= {input.name}
                 name= "name"
                 onChange={ (e) => handleChange(e)}
                 />
-                {errors.name && ( <p>{errors.name}</p> )}
+                
                 </div>
 
                 <div>
-                    <label>Brand:</label>
+                    <label>{errors.brand && ( <p>{errors.brand}</p> )} Brand:</label>
                     <input 
                     type="text" 
                     value= {input.brand}
                     name="brand"
                     onChange={ e => handleChange(e)} 
                     />
-                    {errors.brand && ( <p>{errors.brand}</p> )}
+                    
                 </div>
                 
                 <div>
-                    <label>Price:</label>
+                    <label>{errors.price && ( <p>{errors.price}</p> )} Price:</label>
                     <input 
                     type="number" 
                     value= {input.price}
                     name='price'
                     onChange={ e => handleChange(e)} 
                     />
-                    {errors.price && ( <p>{errors.price}</p> )}
+                    
                 </div>
 
                 <div>
-                    <label>image URL:</label>
+                    <label>{errors.img && ( <p>{errors.img}</p> )} image URL:</label>
                     <input 
                     type="url" 
                     value= {input.img}
                     name='img'
                     onChange={ e => handleChange(e)} 
                     />
-                    {errors.img && ( <p>{errors.img}</p> )}
+                    
                 </div>
 
                 <div>
-                    <label>Description:</label>
+                    <label>{errors.description && ( <p>{errors.description}</p> )} Description:</label>
                     <input 
                     type="text" 
                     value= {input.description}
                     name='description'
                     onChange={ e => handleChange(e)} 
                     />
-                    {errors.description && ( <p>{errors.description}</p> )}
+                    
                 </div>
 
                 <div>
-                    <label>Stock:</label>
+                    <label>{errors.stock && ( <p>{errors.stock}</p> )} Stock:</label>
                     <input 
                     type="number" 
                     value= {input.stock}
                     name='stock'
                     onChange={ e => handleChange(e)} 
                     />
-                    {errors.stock && ( <p>{errors.stock}</p> )}
+                    
                 </div>
 
                 <div>
-                    <label>Status:</label>
+                    <label>{errors.status && ( <p>{errors.status}</p> )} Status:</label>
                     <select name='status' onChange={ e => handleSelect(e)}>
                     <option hidden>Select</option>
                     <option name="status" value="New">New</option>
                     <option name= "status" value="Used">Used</option>
                     </select>
-                    {errors.status && ( <p>{errors.status}</p> )}             
+                                 
                 </div>
 
                 <div>
-                    <label>Category:</label>
+                    <label>{errors.category && ( <p>{errors.category}</p> )} Category:</label>
                     <select name='category' onChange={ e => handleSelect(e)}>
                     <option hidden>Select</option>
                     {categories?.map(c =>{
@@ -219,7 +220,7 @@ export default function CreateInstrument() {
                         )
                     })}
                     </select>
-                    {errors.category && ( <p>{errors.category}</p> )}             
+                                
                 </div>
 
                 <div>

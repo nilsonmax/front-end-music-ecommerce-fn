@@ -43,7 +43,7 @@ const HomeContainer = () => {
 
         <div>
         <Link to="/instruments/create">
-          <p>Create activity</p>
+          <p>Create Instrument</p>
         </Link>
         </div>
 

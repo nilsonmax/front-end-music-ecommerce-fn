@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { postInstrument, getAllCategories } from '../../redux/action/index'
 
 
 
@@ -10,7 +11,6 @@ function validate(input){
 
     if(!input.name){
         errors.name = "Instrument name required";
-
     } else if(typeof input.name !== 'string'){
         errors.name = "Instrument name should be a string";
     }
@@ -21,38 +21,26 @@ function validate(input){
 
     if(!input.price){
         errors.price = "Instrument price required";
-
-    } else if(!isInteger(input.price)){
-        errors.price = "Instrument price should be an integer";
-    }
+    } 
 
     if(!input.img){
         errors.img = "Instrument img required";
-
-    } else if(typeof img !== 'string'){
-        errors.img = "Instrument image URL should be a string";
     }
 
     if(!input.description){
         errors.description = "Instrument description required";
-
-    } else if(typeof description !== 'string'){
-        errors.description = "Instrument image URL should be a string";
     }
 
     if(!input.stock){
-        errors.stock = "Instrument name required";
-
-    } else if(!isInteger(input.price)){
-        errors.stock = "Instrument stock should be an integer";
-    }
+        errors.stock = "Instrument stock required";
+    } 
 
     if(!input.status){
         errors.status = "Instrument status required";
     }
 
     if(!input.category){
-        errors.category = "Instrument name required";
+        errors.category = "Instrument category required";
     }
 
     return errors;
@@ -95,15 +83,25 @@ export default function CreateInstrument() {
     function handleChange(e){
         setInput({
             ...input,
-            [e.target.value]: e.target.value
+            [e.target.name]: e.target.value
         });
-        setErrors(
-            validate({
-                ...input,
-                [e.target.value]: e.target.value
-            })
-        )
+        setErrors(validate({
+             ...input,
+            [e.target.name]: e.target.value
+        }));
     }
+
+    const handleSelect = (e) => {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        });
+        
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }));
+      };
 
     function handleSubmit(e){
         e.preventDefault();
@@ -121,25 +119,27 @@ export default function CreateInstrument() {
                 status:"",
                 category:""
             })
-            goBack('/home')
+            goBack('/')
         }
     }
 
     return (
         <div>
             <div>
-                <Link to='/home'>Go back</Link>
+                <Link to='/'>Go back</Link>
             </div>
             
+            <h2>CREATE PRODUCT</h2>
+
             <div>
-            <form onSubmit={e => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                <label>Name:</label>
+                <label>Name: </label>
                 <input 
                 type="text"
                 value= {input.name}
-                name='name'
-                onChange={ e=> handleChange(e)}
+                name= "name"
+                onChange={ (e) => handleChange(e)}
                 />
                 {errors.name && ( <p>{errors.name}</p> )}
                 </div>
@@ -148,8 +148,8 @@ export default function CreateInstrument() {
                     <label>Brand:</label>
                     <input 
                     type="text" 
-                    value= {input.name}
-                    name='brand'
+                    value= {input.brand}
+                    name="brand"
                     onChange={ e => handleChange(e)} 
                     />
                     {errors.brand && ( <p>{errors.brand}</p> )}
@@ -158,8 +158,8 @@ export default function CreateInstrument() {
                 <div>
                     <label>Price:</label>
                     <input 
-                    type="text" 
-                    value= {input.name}
+                    type="number" 
+                    value= {input.price}
                     name='price'
                     onChange={ e => handleChange(e)} 
                     />
@@ -169,8 +169,8 @@ export default function CreateInstrument() {
                 <div>
                     <label>image URL:</label>
                     <input 
-                    type="text" 
-                    value= {input.name}
+                    type="url" 
+                    value= {input.img}
                     name='img'
                     onChange={ e => handleChange(e)} 
                     />
@@ -181,7 +181,7 @@ export default function CreateInstrument() {
                     <label>Description:</label>
                     <input 
                     type="text" 
-                    value= {input.name}
+                    value= {input.description}
                     name='description'
                     onChange={ e => handleChange(e)} 
                     />
@@ -191,8 +191,8 @@ export default function CreateInstrument() {
                 <div>
                     <label>Stock:</label>
                     <input 
-                    type="text" 
-                    value= {input.name}
+                    type="number" 
+                    value= {input.stock}
                     name='stock'
                     onChange={ e => handleChange(e)} 
                     />
@@ -201,21 +201,21 @@ export default function CreateInstrument() {
 
                 <div>
                     <label>Status:</label>
-                    <select onChange={ e => handleChange(e)}>
+                    <select name='status' onChange={ e => handleSelect(e)}>
                     <option hidden>Select</option>
-                    <option value="New">New</option>
-                    <option value="Used">Used</option>
+                    <option name="status" value="New">New</option>
+                    <option name= "status" value="Used">Used</option>
                     </select>
                     {errors.status && ( <p>{errors.status}</p> )}             
                 </div>
 
                 <div>
                     <label>Category:</label>
-                    <select onChange={ e => handleChange(e)}>
+                    <select name='category' onChange={ e => handleSelect(e)}>
                     <option hidden>Select</option>
                     {categories?.map(c =>{
                         return(
-                            <option key={c.name} value={c.name}>{c.name}</option>
+                            <option key={c.id} value={c.name}>{c.name}</option>
                         )
                     })}
                     </select>
@@ -240,8 +240,5 @@ export default function CreateInstrument() {
             </form>
             </div>
         </div>
-
     )
-
-
 }

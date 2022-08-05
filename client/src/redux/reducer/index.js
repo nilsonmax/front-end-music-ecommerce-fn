@@ -3,7 +3,8 @@ import {
     GET_DETAILS_INSTRUMENTS,
     DATA_CLEAR,
     POST_CREATE,
-    GET_BY_NAME
+    GET_BY_NAME,
+    GET_ALL_CATEGORIES
 } from '../action/index.js'
 
 const initialState = {
@@ -45,6 +46,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 instruments: [...state.copy, action.payload]
+            }
+        case GET_ALL_CATEGORIES:
+            return {
+                ...state,
+                category: action.payload
             }
 
         default:

@@ -5,7 +5,7 @@ import {
   POST_CREATE,
   GET_BY_NAME,
   GET_ALL_CATEGORIES,
-  SORT_BY_NAME,
+  ORDERED,
 } from "../action/index.js";
 
 const initialState = {
@@ -54,7 +54,7 @@ const reducer = (state = initialState, action) => {
         category: action.payload,
       };
 
-    case SORT_BY_NAME:
+    case ORDERED:
       const orderByname =
         action.payload === "asce"
           ? state.instruments.slice().sort((a, b) => {
@@ -75,9 +75,35 @@ const reducer = (state = initialState, action) => {
               }
               return 0;
             });
+      const orderPrice =
+        action.payload === "low-price"
+          ? state.instruments.slice().sort((a, b) => {
+              if (a.price > b.price) {
+                return 1;
+              }
+              if (b.price > a.price) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.instruments.slice().sort((a, b) => {
+              if (a.price > b.price) {
+                return -1;
+              }
+              if (b.price > a.price) {
+                return 1;
+              }
+              return 0;
+            });
+
+      const diferencia =
+        action.payload === "high-price" || action.payload === "low-price"
+          ? orderPrice
+          : orderByname;
+
       return {
         ...state,
-        instruments: orderByname,
+        instruments: diferencia,
       };
 
     default:

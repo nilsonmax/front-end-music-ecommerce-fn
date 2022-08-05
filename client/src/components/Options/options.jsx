@@ -11,7 +11,7 @@ function Options({ setCurrentPage }) {
   const dispatch = useDispatch();
 
   const categories = useSelector((state) => state.category);
-  const instruments = useSelector((state) => state.instruments);
+  const instruments = useSelector((state) => state.copy);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,13 +29,15 @@ function Options({ setCurrentPage }) {
   return (
     <div>
       <div>
-        Ordered by
+        Ordenar por
         <select defaultValue="sort" onChange={(e) => handleOrder(e)}>
           <option disabled value="sort">
             Sort
           </option>
-          <option value="asce">A - Z</option>
-          <option value="desce">Z - A</option>
+          <option value="asce">Alfabéticamente: A - Z</option>
+          <option value="desce">Alfabéticamente: Z - A</option>
+          <option value="low-price">Precio: menor a mayor</option>
+          <option value="high-price">Precio: mayor a menor</option>
         </select>
       </div>
     </div>

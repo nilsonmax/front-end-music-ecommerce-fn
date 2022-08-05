@@ -29,6 +29,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case GET_BY_NAME:
+            console.log(action.payload, ' payload' , action.type, 'type')
             return {
                 ...state,
                 instruments: action.payload

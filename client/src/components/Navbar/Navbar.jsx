@@ -76,7 +76,7 @@ return (
                 <Search />
               </div>
               <div className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800">
-                Sign in1
+                Sign in
               </div>
               <div className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
                 Sign up
@@ -89,7 +89,7 @@ return (
             <Search />
           </div>
           <div className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800 md:inline-block">
-            Sign in2
+            Sign in
           </div>
           <div className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100 md:inline-block">
             Sign up

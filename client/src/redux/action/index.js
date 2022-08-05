@@ -16,9 +16,8 @@ console.log(REACT_APP_HOST, 'url')
 export const getByName = (name) => {
     return async (dispatch) => {
         try {
-            console.log(REACT_APP_HOST, 'url', name , 'name')
-            const resp = await axios.get(`${REACT_APP_HOST}/instruments?name=${name}`)
-           console.log(resp.data, 'resp.data')
+            // const resp = await axios.get(`${REACT_APP_HOST}/instruments?name=${name}`)
+            const resp = await axios.get(`http://localhost:4000/instruments?name=${name}`)
             return dispatch({
                 type: GET_BY_NAME,
                 payload: resp.data

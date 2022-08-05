@@ -6,6 +6,7 @@ import {
   GET_BY_NAME,
   GET_ALL_CATEGORIES,
   ORDERED,
+  FILTER_BY_CATEGORY,
 } from "../action/index.js";
 
 const initialState = {
@@ -104,6 +105,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         instruments: diferencia,
+      };
+
+    case FILTER_BY_CATEGORY:
+      const filter =
+        action.payload === "All"
+          ? state.copy
+          : state.copy.filter((instruments) =>
+              instruments.category.name.includes(action.payload)
+            );
+      return {
+        ...state,
+        instruments: filter,
       };
 
     default:

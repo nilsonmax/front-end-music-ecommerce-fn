@@ -8,7 +8,7 @@ import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 
 const HomeContainer = () => {
-  const elementsToShow = useSelector((state) => state.copy);
+  const elementsToShow = useSelector((state) => state.instruments);
   const dispatch = useDispatch();
   const elementsPerPage = 9;
 
@@ -20,7 +20,7 @@ const HomeContainer = () => {
 
   useEffect(() => {
     dispatch(getInstruments());
-  }, []);
+  }, [dispatch]);
 
   const paginated = (number) => {
     setCurrentPage(number);

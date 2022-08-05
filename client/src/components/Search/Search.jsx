@@ -1,5 +1,5 @@
 import React from 'react'
-import { getByName } from '../../redux/action';
+import { getByName} from '../../redux/action';
 import { useDispatch } from 'react-redux';
 import { ButtonSearch, SearchContainer, SubSearchContainer } from "./style";
 import { useState } from 'react';
@@ -9,7 +9,9 @@ export const Search = () => {
     const dispatch = useDispatch()
     const [name, SetName] = useState("");
 
-        const handleChange = (e) => {
+    // useEffect(() => {dispatch(getInstruments())})
+
+    const handleChange = (e) => {
         e.preventDefault()
         SetName(e.target.value)
     }

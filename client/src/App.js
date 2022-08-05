@@ -4,7 +4,7 @@ import HomePage from "./pages/home/home";
 import LoginPage from "./pages/login/login";
 import Details from "./components/Details/details.jsx"
 import CreateInstrument from './components/createInstrument/createInstrument';
-import Signup from "./pages/Signup/Signup"
+import Signup from "./pages/Signup/Signup";
 
 const App = () => {
   return (

@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
-import { get_instrumentID } from "../../redux/action";
+import { getDataClear, get_instrumentID } from "../../redux/action";
+
+
+
 export default function Details() {
-
-
     const { id } = useParams()
-
     const dispatch = useDispatch()
-
     let reduxDetail = useSelector(e => e.detail)
-
+    
     useEffect(() => {
         dispatch(get_instrumentID(id))
+        return function(){
+            dispatch(getDataClear())
+        }
     }, [])
-
-
+    
     return (
         <>
             {reduxDetail.name ?
@@ -29,7 +30,7 @@ export default function Details() {
                     <p>{"stock: " + reduxDetail.stock}</p>
                     <p>{"status: " + reduxDetail.status}</p>
                 </div>
-                : <p>Loading..</p>}
+                : <h1>Loading...</h1>}
         </>
     )
 }

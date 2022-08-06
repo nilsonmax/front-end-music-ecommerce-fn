@@ -97,7 +97,7 @@ export default function NavBar() {
             Sign in
           </div>
           <div className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100 lg:inline-block">
-            Sign up
+           <Link to="/signup">Sign up</Link>
           </div>
         </div>
       </DivJustifyBetween>

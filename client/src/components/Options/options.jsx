@@ -1,25 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 
-import {
-  sortName,
-  getInstruments,
-  getAllCategories,
-} from "../../redux/action/index";
+import { sortName } from "../../redux/action/index";
 
 function Options({ setCurrentPage }) {
   const dispatch = useDispatch();
-
-  const categories = useSelector((state) => state.category);
-  const instruments = useSelector((state) => state.copy);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(getAllCategories());
-      dispatch(getInstruments());
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [dispatch]);
 
   const handleOrder = (e) => {
     e.preventDefault();
@@ -30,9 +15,9 @@ function Options({ setCurrentPage }) {
     <div>
       <div>
         Ordenar por
-        <select defaultValue="sort" onChange={(e) => handleOrder(e)}>
-          <option disabled value="sort">
-            Sort
+        <select defaultValue="caracteristicas" onChange={(e) => handleOrder(e)}>
+          <option disabled value="caracteristicas">
+            Características
           </option>
           <option value="asce">Alfabéticamente: A - Z</option>
           <option value="desce">Alfabéticamente: Z - A</option>

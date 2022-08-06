@@ -9,6 +9,7 @@ export const DATA_CLEAR = "DATA_CLEAR";
 export const GET_BY_NAME = "GET_BY_NAME";
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const ORDERED = "ORDERED";
+export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 
 // const { REACT_APP_HOST } = process.env;
 const REACT_APP_HOST = "http://localhost:4000";
@@ -103,6 +104,13 @@ export const postInstrument = (payload) => {
 export const sortName = function (payload) {
   return {
     type: "ORDERED",
+    payload,
+  };
+};
+
+export const filterByCategory = function (payload) {
+  return {
+    type: "FILTER_BY_CATEGORY",
     payload,
   };
 };

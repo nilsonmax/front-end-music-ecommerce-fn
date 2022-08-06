@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getInstruments } from "../../redux/action/index.js";
-import { Link } from "react-router-dom";
-
-import NavBar from "../../components/Navbar/Navbar";
 import Paginated from "../../components/Paginated/paginated";
 import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
-
-import { Footer } from "../../components/Footer/Footer.jsx";
-
 import Filter from "../../components/Filter/filter";
 
 const HomeContainer = () => {
@@ -37,7 +31,7 @@ const HomeContainer = () => {
   } else
     return (
       <div>
-        <NavBar />
+
         <Options setCurrentPage={setCurrentPage} />
         <Filter setCurrentPage={setCurrentPage} />
         <Paginated
@@ -47,12 +41,7 @@ const HomeContainer = () => {
           totalElements={elementsToShow.length}
           paginated={paginated}
         />
-        <div>
-          <Link to="/instruments/create">
-            <p>Create Instrument</p>
-          </Link>
-        </div> */}
-
+  
         <ul>
           {currentElements.map((inst) => {
             return (
@@ -72,7 +61,6 @@ const HomeContainer = () => {
             );
           })}
         </ul>
-        <Footer/>
       </div>
     );
 };

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-// import tw from 'twin.macro'
-import tw, { css } from 'twin.macro'
+import tw from 'twin.macro'
 
 export const NavContainer = styled.nav`
   ${tw`w-full shadow `};
@@ -27,10 +26,4 @@ export const DivItemsCenter = styled.div`
 export const Li= styled.li`
     ${tw` font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600`}
  
-`;
-
-export const Li2 = styled.li`
-  ${tw`
-  font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600
-  `}
 `;

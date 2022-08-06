@@ -74,7 +74,7 @@ export default function CreateInstrument() {
 
     useEffect(() => {
         dispatch(getAllCategories());
-    },[])
+    },[dispatch])
 
     useEffect(() => {
         setErrors(validate(input))

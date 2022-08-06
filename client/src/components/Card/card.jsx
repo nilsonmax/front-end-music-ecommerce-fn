@@ -5,7 +5,7 @@ export default function Card({id, name, brand, price, img, description, stock, s
   return (
     <Link to={"/instruments/"+id} key={id}>
       <h2>{name}</h2>
-      <img src={img}/>
+      <img src={img} alt={name}/>
       <h3>{brand}</h3>
       <h4>{`$${price}`}</h4>
       <h4>{`${status}`}</h4>

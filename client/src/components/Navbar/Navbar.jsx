@@ -11,8 +11,9 @@ export default function NavBar() {
       <DivJustifyBetween>
 
         <DivItemsCenter>
-
-          <h2 className="text-2xl font-bold">LOGO</h2>
+          <Link to="/">
+            <h2 className="text-2xl font-bold">LOGO</h2>
+          </Link>
 
           <div className="lg:hidden">
             <Button onClick={() => setNavbar(!navbar)}>
@@ -62,11 +63,6 @@ export default function NavBar() {
                 </Link>
               </li>
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-orange-600">
-                <Link to="/">
-                  <p>Instruments</p>
-                </Link>
-              </li>
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-orange-600">
                 <Link to="/instruments/create">
                   <p>Create</p>
                 </Link>
@@ -76,7 +72,7 @@ export default function NavBar() {
               </li>
             </ul>
 
-            <div className="mt-3 space-y-2 lg:hidden lg:inline-block">
+            <div className="mt-3 space-y-2 lg:hidden">
               <div className="inline-block w-full">
                 <Search />
               </div>
@@ -97,7 +93,7 @@ export default function NavBar() {
             Sign in
           </div>
           <div className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100 lg:inline-block">
-           <Link to="/signup">Sign up</Link>
+            <Link to="/signup">Sign up</Link>
           </div>
         </div>
       </DivJustifyBetween>

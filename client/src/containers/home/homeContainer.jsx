@@ -8,6 +8,9 @@ import Paginated from "../../components/Paginated/paginated";
 import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
+
+import { Footer } from "../../components/Footer/Footer.jsx";
+
 import Filter from "../../components/Filter/filter";
 
 const HomeContainer = () => {
@@ -48,7 +51,7 @@ const HomeContainer = () => {
           <Link to="/instruments/create">
             <p>Create Instrument</p>
           </Link>
-        </div>
+        </div> */}
 
         <ul>
           {currentElements.map((inst) => {
@@ -69,6 +72,7 @@ const HomeContainer = () => {
             );
           })}
         </ul>
+        <Footer/>
       </div>
     );
 };

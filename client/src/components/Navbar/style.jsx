@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import tw from 'twin.macro'
+// import tw from 'twin.macro'
+import tw, { css } from 'twin.macro'
 
 export const NavContainer = styled.nav`
   ${tw`w-full shadow `};
@@ -13,17 +14,22 @@ export const Button = styled.button`
 
 export const DivJustifyBetween = styled.div`
   ${tw`
-  justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8
+  justify-between px-4 mx-auto lg:max-w-7xl md:items-center lg:flex md:px-8
   `}
 `; 
 
 export const DivItemsCenter = styled.div`
   ${tw`
-  flex items-center justify-between py-3 md:py-5 md:block
+  flex items-center justify-between py-3 lg:py-5 lg:block
   `}
 `;
 
-export const Li = styled.li`
+export const Li= styled.li`
+    ${tw` font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600`}
+ 
+`;
+
+export const Li2 = styled.li`
   ${tw`
   font-bold transition duration-150 border-b-2 border-transparent hover:border-purple-600
   `}

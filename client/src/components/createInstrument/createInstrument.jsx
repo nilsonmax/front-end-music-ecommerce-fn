@@ -2,7 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { postInstrument, getAllCategories } from '../../redux/action/index'
+import { postInstrument, getAllCategories } from '../../redux/action/index';
+import { Container, MainContainer, Title, Required, FormContainer, SixItemsContainer, ThreeItemsContainer, InputUp, InputDown, SubmitButton, Select } from './style';
 
 
 
@@ -124,63 +125,110 @@ export default function CreateInstrument() {
     }
 
     return (
-        <div>
-            <div>
+        <Container>
+             <div>
                 <Link to='/'>Go back</Link>
             </div>
+
+        <MainContainer>
+           
+            <Title>Create product</Title>
             
-            <h2>CREATE PRODUCT</h2>
-            <p>Inputs required</p>
 
             <div>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <FormContainer onSubmit={(e) => handleSubmit(e)}>
+
+                <Required>
+                <p>(*) Inputs required</p>
+                </Required>
+
+                <SixItemsContainer>
+                <ThreeItemsContainer>
                 <div>
-                <label>{errors.name && ( <p>{errors.name}</p> )} Name:</label>
-                <input 
+                {/* <label>{errors.name && ( <p>{errors.name}</p> )} Name:</label> */}
+                <InputUp 
+                placeholder='Name*'
                 type="text"
                 value= {input.name}
                 name= "name"
                 onChange={ (e) => handleChange(e)}
                 />
-                
                 </div>
 
                 <div>
-                    <label>{errors.brand && ( <p>{errors.brand}</p> )} Brand:</label>
-                    <input 
+                    {/*<label>{errors.brand && ( <p>{errors.brand}</p> )} Brand:</label>*/}
+                    <InputUp 
+                    placeholder='Brand*'
                     type="text" 
                     value= {input.brand}
                     name="brand"
                     onChange={ e => handleChange(e)} 
                     />
-                    
                 </div>
-                
+
                 <div>
-                    <label>{errors.price && ( <p>{errors.price}</p> )} Price:</label>
-                    <input 
+                    {/*<label>{errors.category && ( <p>{errors.category}</p> )} Category:</label>*/}
+                    <Select name='category' onChange={ e => handleSelect(e)}>
+                    <option hidden>Category*</option>
+                    {categories?.map(c =>{
+                        return(
+                            <option key={c.id} value={c.name}>{c.name}</option>
+                        )
+                    })}
+                    </Select>             
+                </div>
+                </ThreeItemsContainer>
+
+                <ThreeItemsContainer>
+                <div>
+                    {/*<label>{errors.price && ( <p>{errors.price}</p> )} Price:</label>*/}
+                    <InputUp 
+                    placeholder='Price*'
                     type="number" 
                     value= {input.price}
                     name='price'
                     onChange={ e => handleChange(e)} 
                     />
-                    
                 </div>
 
                 <div>
-                    <label>{errors.img && ( <p>{errors.img}</p> )} image URL:</label>
-                    <input 
+                    {/*<label>{errors.stock && ( <p>{errors.stock}</p> )} Stock:</label>*/}
+                    <InputUp
+                    placeholder='Stock*'
+                    type="number" 
+                    value= {input.stock}
+                    name='stock'
+                    onChange={ e => handleChange(e)} 
+                    />
+                </div>
+
+                <div>
+                    {/*<label>{errors.status && ( <p>{errors.status}</p> )} Status:</label>*/}
+                    <Select name='status' onChange={ e => handleSelect(e)}>
+                    <option hidden>Status*</option>
+                    <option name="status" value="New">New</option>
+                    <option name= "status" value="Used">Used</option>
+                    </Select>       
+                </div>
+                </ThreeItemsContainer>
+                </SixItemsContainer>
+
+                <ThreeItemsContainer>
+                <div>
+                    {/*<label>{errors.img && ( <p>{errors.img}</p> )} image URL:</label>*/}
+                    <InputDown 
+                    placeholder='Image URL*'
                     type="url" 
                     value= {input.img}
                     name='img'
                     onChange={ e => handleChange(e)} 
-                    />
-                    
+                    />  
                 </div>
 
                 <div>
-                    <label>{errors.description && ( <p>{errors.description}</p> )} Description:</label>
-                    <input 
+                    {/*<label>{errors.description && ( <p>{errors.description}</p> )} Description:</label>*/}
+                    <InputDown 
+                    placeholder='Description*'
                     type="text" 
                     value= {input.description}
                     name='description'
@@ -189,42 +237,7 @@ export default function CreateInstrument() {
                     
                 </div>
 
-                <div>
-                    <label>{errors.stock && ( <p>{errors.stock}</p> )} Stock:</label>
-                    <input 
-                    type="number" 
-                    value= {input.stock}
-                    name='stock'
-                    onChange={ e => handleChange(e)} 
-                    />
-                    
-                </div>
-
-                <div>
-                    <label>{errors.status && ( <p>{errors.status}</p> )} Status:</label>
-                    <select name='status' onChange={ e => handleSelect(e)}>
-                    <option hidden>Select</option>
-                    <option name="status" value="New">New</option>
-                    <option name= "status" value="Used">Used</option>
-                    </select>
-                                 
-                </div>
-
-                <div>
-                    <label>{errors.category && ( <p>{errors.category}</p> )} Category:</label>
-                    <select name='category' onChange={ e => handleSelect(e)}>
-                    <option hidden>Select</option>
-                    {categories?.map(c =>{
-                        return(
-                            <option key={c.id} value={c.name}>{c.name}</option>
-                        )
-                    })}
-                    </select>
-                                
-                </div>
-
-                <div>
-                    <button 
+                <SubmitButton 
                     type='submit' 
                     disabled={
                         errors.name || 
@@ -236,10 +249,12 @@ export default function CreateInstrument() {
                         errors.status || 
                         errors.category}>
                     Create Instrument   
-                    </button>
-                </div>
-            </form>
+                    </SubmitButton>
+                </ThreeItemsContainer>
+
+            </FormContainer>
             </div>
-        </div>
+        </MainContainer>
+        </Container>
     )
 }

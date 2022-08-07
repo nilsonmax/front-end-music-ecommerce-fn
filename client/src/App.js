@@ -9,7 +9,7 @@ import CreateInstrumentContainer from "./containers/createInstrument/createInstr
 
 const App = () => {
   return (
-    <div id='body'>
+    <>
      {/* <NavBar /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -21,7 +21,7 @@ const App = () => {
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
       <Footer />
-    </div>
+    </>
   );
 };
 

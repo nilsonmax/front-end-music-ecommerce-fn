@@ -6,6 +6,7 @@ import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
+import { StyledUl } from "./style";
 
 const HomeContainer = () => {
   const elementsToShow = useSelector((state) => state.instruments);
@@ -42,7 +43,7 @@ const HomeContainer = () => {
           paginated={paginated}
         />
   
-        <ul>
+        <StyledUl>
           {currentElements.map((inst) => {
             return (
               <Card
@@ -60,7 +61,7 @@ const HomeContainer = () => {
               />
             );
           })}
-        </ul>
+        </StyledUl>
       </div>
     );
 };

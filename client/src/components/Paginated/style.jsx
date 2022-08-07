@@ -17,7 +17,7 @@ export const StyledNav = styled.nav`
       content-start
       flex
       p-2
-      m-2
+      m-1
     `}
   }
 `;

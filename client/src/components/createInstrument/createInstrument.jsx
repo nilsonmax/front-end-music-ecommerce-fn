@@ -1,9 +1,9 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postInstrument, getAllCategories } from '../../redux/action/index';
-import { Container, MainContainer, Title, Required, FormContainer, SixItemsContainer, ThreeItemsContainer, InputUp, InputDown, SubmitButton, Select } from './style';
+import { Container, MainContainer, Title, Required, FormContainer, SixItemsContainer, ThreeItemsContainer, InputUp, InputDown, SubmitButton, Select, TextArea } from './style';
 
 
 
@@ -12,9 +12,7 @@ function validate(input){
 
     if(!input.name){
         errors.name = "*";
-    } else if(typeof input.name !== 'string'){
-        errors.name = "Instrument name should be a string";
-    }
+    } 
 
     if(!input.brand){
         errors.brand = "*";
@@ -126,20 +124,16 @@ export default function CreateInstrument() {
 
     return (
         <Container>
-             <div>
-                <Link to='/'>Go back</Link>
-            </div>
 
         <MainContainer>
            
-            <Title>Create product</Title>
+            <Title>Product creation form</Title>
             
-
             <div>
             <FormContainer onSubmit={(e) => handleSubmit(e)}>
 
                 <Required>
-                <p>(*) Inputs required</p>
+                <p><i>(*) Inputs required</i></p>
                 </Required>
 
                 <SixItemsContainer>
@@ -227,13 +221,13 @@ export default function CreateInstrument() {
 
                 <div>
                     {/*<label>{errors.description && ( <p>{errors.description}</p> )} Description:</label>*/}
-                    <InputDown 
-                    placeholder='Description*'
-                    type="text" 
-                    value= {input.description}
-                    name='description'
-                    onChange={ e => handleChange(e)} 
-                    />
+                    <TextArea placeholder='Description*' 
+                    name="description" 
+                    cols="30" 
+                    rows="5"
+                    onChange={ e => handleChange(e)}
+                    >
+                    </TextArea>
                     
                 </div>
 

@@ -110,7 +110,10 @@ export default function Details() {
                         </div>
                     </div>
                 </div>
-                : <Loader />}
+                : <div className="w-80">
+                    <Loader />
+                </div>
+                }
         </div>
     )
 }

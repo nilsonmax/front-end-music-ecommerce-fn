@@ -89,8 +89,8 @@ export default function NavBar() {
           <div className="lg:inline-block">
             <Search />
           </div>
-          <div className="px-4 py-2 text-white bg-gray-600 rounded-md shadow hover:bg-gray-800 lg:inline-block">
-            Sign in
+          <div className="px-4 py-2 cursor-pointer text-white bg-gray-600 rounded-md shadow hover:bg-gray-800 lg:inline-block">
+            <Link to="/login">Sign in</Link>
           </div>
           <div className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100 lg:inline-block">
             <Link to="/signup">Sign up</Link>

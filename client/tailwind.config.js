@@ -10,8 +10,9 @@ module.exports = {
       secondary: '#279AF1',  // blue
       tertiary: '#8c8c8c',  // gray
       background: '#ffffff', // white
-      highlight: '#DB5A42',  // orange
-      transparent: '#AARRGGBB',  // transparent
+      highlight: '#DB5A42',  // 
+      orange: '#F37042',
+      transparent: 'transparent',  // transparent
 
     }
   },

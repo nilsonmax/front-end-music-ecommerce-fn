@@ -30,7 +30,7 @@ export const Search = () => {
                     <div className="relative w-full">
                         <form action='' onSubmit={handleSubmit}>
                             <input
-                                className="block w-full pl-11 py-2 text-orange-700 bg-background border rounded-full focus:border-orange-600 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                                className="block w-full pl-11 py-2 bg-background border border-tertiary rounded-full focus:border-orange focus:ring-orange focus:outline-none focus:ring focus:ring-opacity-40"
                                 type="text"
                                 placeholder="Search..."
                                 onChange={handleChange}

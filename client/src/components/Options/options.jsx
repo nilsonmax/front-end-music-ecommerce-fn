@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-
 import { sortName } from "../../redux/action/index";
+import { Container } from "../Options/style";
 
 function Options({ setCurrentPage }) {
   const dispatch = useDispatch();
@@ -12,12 +12,22 @@ function Options({ setCurrentPage }) {
     setCurrentPage(1);
   };
   return (
-    <div>
-      <div>
-        Ordenar por
-        <select defaultValue="caracteristicas" onChange={(e) => handleOrder(e)}>
-          <option disabled value="caracteristicas">
-            Características
+    <Container>
+      <div
+        for="options"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+      >
+        <label class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-400">
+          Ordenar por
+        </label>
+        <select
+          id="options"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          defaultValue="order"
+          onChange={(e) => handleOrder(e)}
+        >
+          <option disabled value="order">
+            Order by
           </option>
           <option value="asce">Alfabéticamente: A - Z</option>
           <option value="desce">Alfabéticamente: Z - A</option>
@@ -25,7 +35,7 @@ function Options({ setCurrentPage }) {
           <option value="high-price">Precio: mayor a menor</option>
         </select>
       </div>
-    </div>
+    </Container>
   );
 }
 

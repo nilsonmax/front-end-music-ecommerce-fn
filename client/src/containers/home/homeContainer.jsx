@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getInstruments } from "../../redux/action/index.js";
+import { getInstruments, SetCurrentPageGlobal } from "../../redux/action/index.js";
 import Paginated from "../../components/Paginated/paginated";
 import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
@@ -8,8 +8,12 @@ import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
 import { StyledUl } from "./style";
 
+import { Search } from "../../components/Search/Search.jsx";
+import NavBar from "../../components/Navbar/Navbar.jsx";
+
 const HomeContainer = () => {
   const elementsToShow = useSelector((state) => state.instruments);
+  const setCurrentPageGlobal = useSelector(state => state.currentPageGlobal)
   const dispatch = useDispatch();
   const elementsPerPage = 9;
 
@@ -25,6 +29,7 @@ const HomeContainer = () => {
 
   const paginated = (number) => {
     setCurrentPage(number);
+    // dispatch(SetCurrentPageGlobal(number));
   };
 
   if (elementsToShow.length === 0) {
@@ -32,9 +37,10 @@ const HomeContainer = () => {
   } else
     return (
       <div>
-
+        <NavBar setCurrentPage={setCurrentPage} />
         <Options setCurrentPage={setCurrentPage} />
         <Filter setCurrentPage={setCurrentPage} />
+
         <Paginated
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
@@ -42,7 +48,7 @@ const HomeContainer = () => {
           totalElements={elementsToShow.length}
           paginated={paginated}
         />
-  
+
         <StyledUl>
           {currentElements.map((inst) => {
             return (

@@ -10,6 +10,7 @@ export const GET_BY_NAME = "GET_BY_NAME";
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const ORDERED = "ORDERED";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 // const { REACT_APP_HOST } = process.env;
 const REACT_APP_HOST = "http://localhost:4000";
@@ -27,7 +28,7 @@ export const getByName = (name) => {
         payload: resp.data,
       });
     } catch (error) {
-      console.log(error, "error resp.data");
+      // console.log(error, "error resp.data");
     }
   };
 };
@@ -38,6 +39,7 @@ export const getDataClear = (payload) => {
     payload,
   };
 };
+
 export const get_instrumentID = (id) => {
   return async function (dispatch) {
     try {

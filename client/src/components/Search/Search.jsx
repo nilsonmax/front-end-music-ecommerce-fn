@@ -1,15 +1,13 @@
-import React from 'react'
-import { getByName } from '../../redux/action';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react'
+import { getByName, getInstruments, SetCurrentPageGlobal } from '../../redux/action';
+import { useDispatch, useSelector } from 'react-redux';
 import { SearchContainer, SubSearchContainer } from "./style";
 import { useState } from 'react';
 
-export const Search = () => {
+export const Search = ({ setCurrentPage }) => {
 
     const dispatch = useDispatch()
     const [name, SetName] = useState("");
-
-    // useEffect(() => {dispatch(getInstruments())})
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -18,6 +16,7 @@ export const Search = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setCurrentPage(1);
         dispatch(getByName(name))
         SetName('')
     }
@@ -54,24 +53,6 @@ export const Search = () => {
                             </svg>
                         </button>
                     </div>
-
-                    {/* <button className="px-4 text-background bg-secondary rounded-full ">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-5 h-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                    </svg>
-                </button> */}
-
                 </SubSearchContainer>
             </SearchContainer>
 

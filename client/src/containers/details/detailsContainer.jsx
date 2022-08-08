@@ -1,11 +1,12 @@
 import React from "react";
 import Details from "../../components/Details/details";
-import NavBar from "../../components/Navbar/Navbar";
+import Header from "../../components/Header/Header";
+
 
 export function DetailsContainer() {
     return (
         <>
-            <NavBar />
+            <Header />
             <Details />
         </>
     )

@@ -1,12 +1,13 @@
 import React from 'react'
 import CreateInstrument from '../../components/createInstrument/createInstrument'
-import NavBar from '../../components/Navbar/Navbar'
+import Header from '../../components/Header/Header'
+
 
 const CreateInstrumentContainer = () => {
 
   return (
     <>
-      <NavBar />
+      <Header />
       <CreateInstrument />
     </>
   )

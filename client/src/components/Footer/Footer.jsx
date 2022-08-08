@@ -6,12 +6,12 @@ export const Footer = () => {
         <footer class="relative bg-tertiary text-background px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24">
             <div class="flex flex-col md:flex-row">
                 <div class="w-full lg:w-2/6 lg:mx-4 lg:pr-8">
-                    <h3 class="font-bold text-2xl">DentalPro</h3>
-                    <p class="text-tertiary ">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.</p>
+                    <h3 class="font-bold text-2xl">Music Pro</h3>
+                    <p class="text-background ">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.</p>
 
                     <form class="flex items-center mt-6">
                         <div class="w-full">
-                            <label class="block uppercase tracking-wide text-tertiary text-xs font-bold mb-2" for="grid-last-name">
+                            <label class="block uppercase tracking-wide text-primary text-xs font-bold mb-2" for="grid-last-name">
                                 Subscribe for our Newsletter
                             </label>
                             <div class="relative">
@@ -27,16 +27,16 @@ export const Footer = () => {
                 </div>
 
                 <div class="w-full lg:w-1/6 mt-8 lg:mt-0 lg:mx-4">
-                    <h5 class="uppercase tracking-wider font-semibold text-tertiary ">Treatments</h5>
+                    <h5 class="uppercase tracking-wider font-semibold  ">Treatments</h5>
                     <ul class="mt-4">
-                        <li class="mt-2"><p title="" class="opacity-75 hover:opacity-100">General Dentistry</p></li>
-                        <li class="mt-2"><p title="" class="opacity-75 hover:opacity-100">Cosmetic Dentistry</p></li>
-                        <li class="mt-2"><p title="" class="opacity-75 hover:opacity-100">Oral Health</p></li>
+                        <li class="mt-2"><p title="" class="opacity-75 hover:opacity-100">General Instruments</p></li>
+                        <li class="mt-2"><p title="" class="opacity-75 hover:opacity-100">Acesory Instruments</p></li>
+                        <li class="mt-2"><p title="" class="opacity-75 hover:opacity-100">Music Health</p></li>
                     </ul>
                 </div>
 
                 <div class="w-full lg:w-2/6 mt-8 lg:mt-0 lg:mx-4 lg:pr-8">
-                    <h5 class="uppercase tracking-wider font-semibold text-tertiary ">Contact Details</h5>
+                    <h5 class="uppercase tracking-wider font-semibold  ">Contact Details</h5>
                     <ul class="mt-4">
                         <li>
                             <p title="" class="flex items-center opacity-75 hover:opacity-100">
@@ -99,7 +99,7 @@ export const Footer = () => {
                 </div>
 
                 <div class="w-full lg:w-1/6 mt-8 lg:mt-0 lg:mx-4">
-                    <h5 class="uppercase tracking-wider font-semibold text-tertiary ">We're Social</h5>
+                    <h5 class="uppercase tracking-wider font-semibold  ">We're Social</h5>
                     <ul class="mt-4 flex">
                         <li>
                             <p target="_blank" title="">
@@ -138,7 +138,7 @@ export const Footer = () => {
                         </li>
                     </ul>
 
-                    <p class="text-sm text-tertiary mt-12">© 2022 Tigers Dev. <br class="hidden lg:block" />All Rights Reserved.
+                    <p class="text-sm  mt-12">© 2022 Tigers Dev. <br class="hidden lg:block" />All Rights Reserved.
                     </p>
                 </div>
             </div>

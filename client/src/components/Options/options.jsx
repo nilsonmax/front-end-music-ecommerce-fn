@@ -17,7 +17,7 @@ function Options({ setCurrentPage }) {
         for="options"
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
       >
-        <label class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-400">
+        <label class="block mb-2 text-base font-bold text-gray-900 dark:text-gray-400">
           Ordenar por
         </label>
         <select

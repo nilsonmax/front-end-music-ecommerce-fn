@@ -30,17 +30,17 @@ export const Search = () => {
                     <div className="relative w-full">
                         <form action='' onSubmit={handleSubmit}>
                             <input
-                                className="block w-full pl-11 py-2 text-orange-700 bg-white border rounded-full focus:border-orange-600 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                                className="block w-full pl-11 py-2 text-orange-700 bg-background border rounded-full focus:border-orange-600 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
                                 type="text"
                                 placeholder="Search..."
                                 onChange={handleChange}
                                 value={name}
                             />
                         </form>
-                        <button className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3" onClick={handleSubmit} type='submit' value=''>
+                        <button className="absolute top-0 bottom-0 w-6 h-6 my-auto text-tertiary  left-3" onClick={handleSubmit} type='submit' value=''>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                // className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3"
+                                // className="absolute top-0 bottom-0 w-6 h-6 my-auto text-tertiary  left-3"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -55,7 +55,7 @@ export const Search = () => {
                         </button>
                     </div>
 
-                    {/* <button className="px-4 text-white bg-purple-600 rounded-full ">
+                    {/* <button className="px-4 text-background bg-secondary rounded-full ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"

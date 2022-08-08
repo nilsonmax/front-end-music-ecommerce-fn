@@ -23,19 +23,19 @@ export const ThreeItemsContainer = styled.div`
 ${tw `flex flex-col justify-around m-2`}`;
 
 export const SubmitButton = styled.button`
-${tw `py-1.5 rounded-md bg-[#F37042] text-white font-semibold hover:p-2.5`}`
+${tw `py-1.5 rounded-md bg-[#F37042] text-background font-semibold hover:p-2.5`}`
 
 export const InputUp = styled.input`
-${tw `p-1 my-1.5 border-[0.5px] rounded-md placeholder-[#0A0A0A] border-gray-400 hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}`
+${tw `p-1 my-1.5 border-[0.5px] rounded-md placeholder-[#0A0A0A] border-tertiary hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}`
 
 export const InputDown = styled.input`
-${tw `w-full p-1 my-1.5 border-[0.5px] rounded-md placeholder-[#0A0A0A] border-gray-400 hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}`
+${tw `w-full p-1 my-1.5 border-[0.5px] rounded-md placeholder-[#0A0A0A] border-tertiary hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}`
 
 export const Select = styled.select`
-${tw `p-1 border rounded-md border-gray-400 hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}`
+${tw `p-1 border rounded-md border-tertiary hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}`
 
 export const TextArea = styled.textarea`
-${tw `w-full p-1 my-1.5 border-[0.5px] rounded-md border-gray-400 placeholder-[#0A0A0A] hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}`
+${tw `w-full p-1 my-1.5 border-[0.5px] rounded-md border-tertiary placeholder-[#0A0A0A] hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}`
 
 
 

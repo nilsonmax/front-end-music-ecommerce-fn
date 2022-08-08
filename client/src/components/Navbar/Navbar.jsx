@@ -76,10 +76,10 @@ export default function NavBar() {
               <div className="inline-block w-full">
                 <Search />
               </div>
-              <div className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800">
+              <div className="inline-block w-full px-4 py-2 text-center text-background bg-tertiary  rounded-md shadow hover:bg-tertiary ">
                 Sign in
               </div>
-              <div className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100">
+              <div className="inline-block w-full px-4 py-2 text-center text-tertiary  bg-background rounded-md shadow hover:bg-tertiary ">
                 Sign up
               </div>
             </div>
@@ -89,10 +89,10 @@ export default function NavBar() {
           <div className="lg:inline-block">
             <Search />
           </div>
-          <div className="px-4 py-2 cursor-pointer text-white bg-gray-600 rounded-md shadow hover:bg-gray-800 lg:inline-block">
+          <div className="px-4 py-2 cursor-pointer text-background bg-tertiary  rounded-md shadow hover:bg-tertiary  lg:inline-block">
             <Link to="/login">Sign in</Link>
           </div>
-          <div className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100 lg:inline-block">
+          <div className="px-4 py-2 text-tertiary  bg-background rounded-md shadow hover:bg-tertiary  lg:inline-block">
             <Link to="/signup">Sign up</Link>
           </div>
         </div>

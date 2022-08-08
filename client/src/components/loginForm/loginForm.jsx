@@ -5,28 +5,28 @@ const LoginForm = () => {
   return (
     <div class="bg-slate-100 py-6 sm:py-8 lg:py-12">
   <div class=" max-w-screen-2xl px-4 md:px-8 mx-auto">
-    <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">MusiCommerce Login</h2>
+    <h2 class="text-tertiary  text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">MusiCommerce Login</h2>
 
     <form class="max-w-lg border shadow-2xl rounded-lg mx-auto">
       <div class="flex flex-col gap-4 p-4 md:p-8">
         <div>
-          <label for="email" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Email</label>
-          <input name="email" class="border-4 w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
+          <label for="email" class="inline-block text-tertiary  text-sm sm:text-base mb-2">Email</label>
+          <input name="email" class="border-4 w-full bg-tertiary  text-tertiary  border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
         </div>
 
         <div className=''>
-          <label for="password" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Password</label>
-          <input name="password" class="border-4 w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
+          <label for="password" class="inline-block text-tertiary  text-sm sm:text-base mb-2">Password</label>
+          <input name="password" class="border-4 w-full bg-tertiary  text-tertiary  border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
         </div>
 
-        <button class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Log in</button>
+        <button class="block bg-tertiary  hover:bg-tertiary  active:bg-tertiary  focus-visible:ring ring-tertiary  text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Log in</button>
 
         <div class="flex justify-center items-center relative">
-          <span class="h-px bg-gray-300 absolute inset-x-0"></span>
-          <span class="bg-white text-gray-400 text-sm relative px-4">Log in with social</span>
+          <span class="h-px bg-tertiary  absolute inset-x-0"></span>
+          <span class="bg-background text-tertiary  text-sm relative px-4">Log in with social</span>
         </div>
 
-        <button class="flex justify-center items-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
+        <button class="flex justify-center items-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
           <svg class="w-5 h-5 shrink-0" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 0C5.37273 0 0 5.37273 0 12C0 18.0164 4.43182 22.9838 10.2065 23.8516V15.1805H7.23764V12.0262H10.2065V9.92727C10.2065 6.45218 11.8996 4.92655 14.7878 4.92655C16.1711 4.92655 16.9025 5.02909 17.2489 5.076V7.82945H15.2787C14.0525 7.82945 13.6244 8.99182 13.6244 10.302V12.0262H17.2178L16.7302 15.1805H13.6244V23.8773C19.4815 23.0825 24 18.0747 24 12C24 5.37273 18.6273 0 12 0Z" fill="white" />
           </svg>
@@ -34,7 +34,7 @@ const LoginForm = () => {
           Continue with Facebook
         </button>
 
-        <button class="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
+        <button class="flex justify-center items-center bg-background hover:bg-tertiary  active:bg-tertiary  border border-tertiary  focus-visible:ring ring-tertiary  text-tertiary  text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
           <svg class="w-5 h-5 shrink-0" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M23.7449 12.27C23.7449 11.48 23.6749 10.73 23.5549 10H12.2549V14.51H18.7249C18.4349 15.99 17.5849 17.24 16.3249 18.09V21.09H20.1849C22.4449 19 23.7449 15.92 23.7449 12.27Z" fill="#4285F4" />
             <path d="M12.2549 24C15.4949 24 18.2049 22.92 20.1849 21.09L16.3249 18.09C15.2449 18.81 13.8749 19.25 12.2549 19.25C9.12492 19.25 6.47492 17.14 5.52492 14.29H1.54492V17.38C3.51492 21.3 7.56492 24 12.2549 24Z" fill="#34A853" />
@@ -46,8 +46,8 @@ const LoginForm = () => {
         </button>
       </div>
 
-      <div class="flex justify-center items-center bg-gray-100 p-4">
-        <p class="text-gray-500 text-sm text-center">Don't have an account? <Link to="/signup" class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100">Sign Up</Link></p>
+      <div class="flex justify-center items-center bg-tertiary  p-4">
+        <p class="text-tertiary  text-sm text-center">Don't have an account? <Link to="/signup" class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100">Sign Up</Link></p>
       </div>
     </form>
   </div>

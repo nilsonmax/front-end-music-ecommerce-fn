@@ -3,31 +3,31 @@ import React from 'react'
 export const Footer = () => {
     return (
 
-        <footer class="relative bg-gray-900 text-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24">
+        <footer class="relative bg-tertiary text-background px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24">
             <div class="flex flex-col md:flex-row">
                 <div class="w-full lg:w-2/6 lg:mx-4 lg:pr-8">
                     <h3 class="font-bold text-2xl">DentalPro</h3>
-                    <p class="text-gray-400">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.</p>
+                    <p class="text-tertiary ">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.</p>
 
                     <form class="flex items-center mt-6">
                         <div class="w-full">
-                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="grid-last-name">
+                            <label class="block uppercase tracking-wide text-tertiary text-xs font-bold mb-2" for="grid-last-name">
                                 Subscribe for our Newsletter
                             </label>
                             <div class="relative">
                                 <input
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-4 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    class="appearance-none block w-full bg-tertiary  text-tertiary  border border-tertiary  rounded py-4 px-4 leading-tight focus:outline-none focus:bg-background focus:border-tertiary "
                                     type="email" placeholder="Enter Your Email Address" />
 
                                 <button type="submit"
-                                    class="bg-teal-500 hover:bg-teal-400 text-white px-4 py-2 text-sm font-bold rounded absolute top-0 right-0 my-2 mr-2">Subscribe</button>
+                                    class="bg-teal-500 hover:bg-teal-400 text-background px-4 py-2 text-sm font-bold rounded absolute top-0 right-0 my-2 mr-2">Subscribe</button>
                             </div>
                         </div>
                     </form>
                 </div>
 
                 <div class="w-full lg:w-1/6 mt-8 lg:mt-0 lg:mx-4">
-                    <h5 class="uppercase tracking-wider font-semibold text-gray-500">Treatments</h5>
+                    <h5 class="uppercase tracking-wider font-semibold text-tertiary ">Treatments</h5>
                     <ul class="mt-4">
                         <li class="mt-2"><p title="" class="opacity-75 hover:opacity-100">General Dentistry</p></li>
                         <li class="mt-2"><p title="" class="opacity-75 hover:opacity-100">Cosmetic Dentistry</p></li>
@@ -36,7 +36,7 @@ export const Footer = () => {
                 </div>
 
                 <div class="w-full lg:w-2/6 mt-8 lg:mt-0 lg:mx-4 lg:pr-8">
-                    <h5 class="uppercase tracking-wider font-semibold text-gray-500">Contact Details</h5>
+                    <h5 class="uppercase tracking-wider font-semibold text-tertiary ">Contact Details</h5>
                     <ul class="mt-4">
                         <li>
                             <p title="" class="flex items-center opacity-75 hover:opacity-100">
@@ -99,7 +99,7 @@ export const Footer = () => {
                 </div>
 
                 <div class="w-full lg:w-1/6 mt-8 lg:mt-0 lg:mx-4">
-                    <h5 class="uppercase tracking-wider font-semibold text-gray-500">We're Social</h5>
+                    <h5 class="uppercase tracking-wider font-semibold text-tertiary ">We're Social</h5>
                     <ul class="mt-4 flex">
                         <li>
                             <p target="_blank" title="">
@@ -138,7 +138,7 @@ export const Footer = () => {
                         </li>
                     </ul>
 
-                    <p class="text-sm text-gray-400 mt-12">© 2022 Tigers Dev. <br class="hidden lg:block" />All Rights Reserved.
+                    <p class="text-sm text-tertiary mt-12">© 2022 Tigers Dev. <br class="hidden lg:block" />All Rights Reserved.
                     </p>
                 </div>
             </div>

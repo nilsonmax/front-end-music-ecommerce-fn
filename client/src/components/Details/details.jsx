@@ -21,22 +21,22 @@ export default function Details() {
         <div>
             {reduxDetail.name ?
                 <div>
-                    <div class="bg-white py-6 sm:my-4">
+                    <div class="bg-background py-6 sm:my-4">
                         <div class="max-w-screen-xl px-4 md:px-8 mx-auto ">
                             <div class="grid sm:grid-cols-2 gap-8 sm:gap-12 shadow-2xl mb-4">
 
-                                <div class="h-80 md:h-auto bg-gray-100 overflow-hidden  sm:shadow-none rounded-lg sm:rounded-none">
+                                <div class="h-80 md:h-auto bg-tertiary overflow-hidden  sm:shadow-none rounded-lg sm:rounded-none">
                                     <img src={reduxDetail.img} loading="lazy" alt={reduxDetail.name} class="w-full h-full object-cover object-center" />
                                 </div>
 
                                 <div class="flex flex-col justify-center items-center sm:items-start md:py-24 lg:py-32 xl:py-64">
 
-                                    <h1 class="text-gray-800 text-2xl md:text-3xl font-bold text-center sm:text-left mb-2">{reduxDetail.name}</h1>
+                                    <h1 class="text-tertiary text-2xl md:text-3xl font-bold text-center sm:text-left mb-2">{reduxDetail.name}</h1>
 
                                     <p class="m-1 mb-8 text-green-900 font-bold text-2xl">{"$ " + reduxDetail.price}</p>
 
-                                    <p class="inline-block mb-6 bg-orange-400 hover:bg-orange-600 active:bg-orange-700 focus-visible:ring ring-orange-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-40 py-3">Buy!</p>
-                                    <p class="inline-block mb-6 bg-orange-400 hover:bg-orange-600 active:bg-orange-700 focus-visible:ring ring-orange-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-40 py-3">cart</p>
+                                    <p class="inline-block mb-6 bg-orange-400 hover:bg-orange-600 active:bg-orange-700 focus-visible:ring ring-orange-300 text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-40 py-3">Buy!</p>
+                                    <p class="inline-block mb-6 bg-orange-400 hover:bg-orange-600 active:bg-orange-700 focus-visible:ring ring-orange-300 text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-40 py-3">cart</p>
                                 </div>
 
                             </div>
@@ -44,7 +44,7 @@ export default function Details() {
                     </div>
                     {/* <div class="">
                         <div class="lg:flex justify-evenly">
-                            <div class="xl:w-5/12 h-50 lg:h-auto bg-gray-100 overflow-hidden  rounded-lg">
+                            <div class="xl:w-5/12 h-50 lg:h-auto bg-tertiary overflow-hidden  rounded-lg">
                                 <img src={reduxDetail.img} loading="lazy" alt="" class="w-full h-full object-cover object-center" />
                             </div>
                             <section class="flex flex-col lg:flex-row justify-between gap-6 sm:gap-10 md:gap-16">
@@ -54,18 +54,18 @@ export default function Details() {
                                     <p className="m-1  text-2xl font-semibold">{reduxDetail.name}</p>
                                     <p className="m-1 text-green-900 font-bold text-2xl">{"$ " + reduxDetail.price}</p>
                                     <div class="flex flex-col sm:flex-row p-4 sm:justify-center lg:justify-start gap-2.5">
-                                        <p class="inline-block bg-orange-400 hover:bg-orange-600 active:bg-orange-700 focus-visible:ring ring-orange-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Buy!</p>
-                                        <p class="inline-block bg-orange-200 hover:bg-orange-300 focus-visible:ring ring-orange-300 text-gray-800 active:text-slate-200 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Add cart</p>
+                                        <p class="inline-block bg-orange-400 hover:bg-orange-600 active:bg-orange-700 focus-visible:ring ring-orange-300 text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Buy!</p>
+                                        <p class="inline-block bg-orange-200 hover:bg-orange-300 focus-visible:ring ring-orange-300 text-tertiary active:text-slate-200 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Add cart</p>
                                     </div>
                                 </div>
                             </section>
                         </div>
                     </div> */}
-                    <div class="bg-white py-6 sm:py-8 lg:py-12">
+                    <div class="bg-background py-6 sm:py-8 lg:py-12">
                         <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
 
                             <div class="mb-10 md:mb-16">
-                                <h2 class="text-gray-800  text-1xl lg:text-3xl font-bold text-center mb-4 md:mb-6">{"More about " + reduxDetail.name + ":"}</h2>
+                                <h2 class="text-tertiary  text-1xl lg:text-3xl font-bold text-center mb-4 md:mb-6">{"More about " + reduxDetail.name + ":"}</h2>
                             </div>
 
 
@@ -73,37 +73,37 @@ export default function Details() {
 
                                 <div class="flex flex-col border rounded-lg p-2 md:p-4">
                                     <h3 class="text-lg md:text-xl font-semibold mb-2">Description:</h3>
-                                    <p class="text-gray-500 mb-4">{reduxDetail.description}</p>
+                                    <p class="text-tertiary mb-4">{reduxDetail.description}</p>
                                     {/* <p class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 font-bold transition duration-100 mt-auto">More</p> */}
                                 </div>
 
                                 <div class="flex flex-col border rounded-lg p-2 md:p-4">
                                     <h3 class="text-lg md:text-xl font-semibold mb-2">Brand:</h3>
-                                    <p class="text-gray-500 mb-4">{reduxDetail.brand}</p>
+                                    <p class="text-tertiary mb-4">{reduxDetail.brand}</p>
                                     {/* <p class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 font-bold transition duration-100 mt-auto">More</p> */}
                                 </div>
 
                                 <div class="flex flex-col border rounded-lg p-2 md:p-4">
                                     <h3 class="text-lg md:text-xl font-semibold mb-2">Status:</h3>
-                                    <p class="text-gray-500 mb-4">{reduxDetail.status}</p>
+                                    <p class="text-tertiary mb-4">{reduxDetail.status}</p>
                                     {/* <p class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 font-bold transition duration-100 mt-auto">More</p> */}
                                 </div>
 
                                 <div class="flex flex-col border rounded-lg p-2 md:p-4">
                                     <h3 class="text-lg md:text-xl font-semibold mb-2">Category:</h3>
-                                    <p class="text-gray-500 mb-4">{reduxDetail.category.name}</p>
+                                    <p class="text-tertiary mb-4">{reduxDetail.category.name}</p>
                                     {/* <p class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 font-bold transition duration-100 mt-auto">More</p> */}
                                 </div>
 
                                 <div class="flex flex-col border rounded-lg p-2 md:p-4">
                                     <h3 class="text-lg md:text-xl font-semibold mb-2">Stock:</h3>
-                                    <p class="text-gray-500 mb-4">{reduxDetail.stock}</p>
+                                    <p class="text-tertiary mb-4">{reduxDetail.stock}</p>
                                     {/* <p class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 font-bold transition duration-100 mt-auto">More</p> */}
                                 </div>
 
                                 <div class="flex flex-col border rounded-lg p-2 md:p-4">
                                     <h3 class="text-lg md:text-xl font-semibold mb-2">Price:</h3>
-                                    <p class="text-gray-500 mb-4">{"$ " + reduxDetail.price}</p>
+                                    <p class="text-tertiary mb-4">{"$ " + reduxDetail.price}</p>
                                     {/* <p class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 font-bold transition duration-100 mt-auto">More</p> */}
                                 </div>
                             </div>

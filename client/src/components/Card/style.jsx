@@ -10,11 +10,10 @@ export const StyledCard = styled.div`
     overflow-hidden
     p-2
     m-1 
-    max-w-sm 
-    grid-cols-3 
+    max-w-md
     gap-0
     bg-background
-    max-w-sm
+    max-w-md
     grid gap-0.5 
     grid-cols-6
     leading-tight
@@ -30,7 +29,7 @@ export const StyledCard = styled.div`
       ${tw`
       place-content-center
       justify-center
-      row-span-6
+      row-span-5
       max-h-48
       self-auto
       border-0
@@ -90,6 +89,7 @@ export const StyledCard = styled.div`
       m-0
       p-0
       col-span-2
+      row-span-1
     `}
   } 
 

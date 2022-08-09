@@ -28,11 +28,13 @@ export default function Card({id, name, brand, price, img, description, stock, s
         <br></br>
         {/* <b>{`Status:`}</b> <span>{`${status}`}</span> */}
         <b>{`Type:`}</b> <span>{`${categoryName}`}</span>
-        <button class="inline-flex items-center h-8 px-5 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-2">
-        <span>{`Add Car  `}</span>
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+{/*         <span class=" text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
+        <button class="inline-flex items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1">
+        <span className="">{`➕`}</span>
+            <svg width="24px" height="24px" viewBox="0 0 25 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill="none" stroke="#FFFFFF" stroke-width="1" d="M5,5 L22,5 L20,14 L7,14 L4,2 L0,2 M7,14 L8,18 L21,18 M19,23 C18.4475,23 18,22.5525 18,22 C18,21.4475 18.4475,21 19,21 C19.5525,21 20,21.4475 20,22 C20,22.5525 19.5525,23 19,23 Z M9,23 C8.4475,23 8,22.5525 8,22 C8,21.4475 8.4475,21 9,21 C9.5525,21 10,21.4475 10,22 C10,22.5525 9.5525,23 9,23 Z"/>
+          </svg>
         </button>
-        <span class=" text-ls font-bold leading-none text-tertiary bg-primary m-4 p-4 rounded absolute bottom-5 left-3" >{status}</span>
       </StyledCard>
     </Link>
   )

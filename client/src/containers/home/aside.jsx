@@ -6,7 +6,7 @@ import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
-import { StyledUl } from "./style";
+import { StyledUl, StyledBox } from "./style";
 
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
@@ -88,6 +88,14 @@ export function Aside() {
     setCurrentPage(number);
   };
 
+ /* ----------------options------------------ */
+  const handleOrder = (e) => {
+    e.preventDefault();
+    dispatch(sortName(e.target.value));
+    setCurrentPage(1);
+  };
+  /* ----------------options------------------ */
+
   if (elementsToShow.length === 0) {
     return <Loader />;
   } else
@@ -106,7 +114,8 @@ export function Aside() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 bg-black bg-opacity-25" />
+              <div className="fixed inset-0 bg-black bg-opacity-25">
+              </div>
             </Transition.Child>
 
             <div className="fixed inset-0 flex z-40">
@@ -196,7 +205,7 @@ export function Aside() {
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative z-10 flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">New Arrivals</h1>
+            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Our Instruments</h1>
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
@@ -317,13 +326,37 @@ export function Aside() {
                   </Disclosure>
                 ))}
               </form>
-
-              {/* Product grid */}
-              <div className="lg:col-span-3">
-                {/* Replace with your content */}
-                <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full" />
-                {/* /End replace */}
+            {/* Product grid */}
+            <div className="lg:col-span-3">
+        <Paginated
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          elementsPerPage={elementsPerPage}
+          totalElements={elementsToShow.length}
+          paginated={paginated}
+        />
+  
+        <StyledUl>
+          {currentElements.map((inst) => {
+            return (
+              <Card
+                key={inst.id}
+                id={inst.id}
+                name={inst.name}
+                brand={inst.brand}
+                price={inst.price}
+                img={inst.img}
+                description={inst.description}
+                stock={inst.stock}
+                status={inst.status}
+                categoryId={inst.categoryId}
+                categoryName={inst.category.name}
+              />
+            );
+          })}
+        </StyledUl>
               </div>
+
             </div>
           </section>
         </main>

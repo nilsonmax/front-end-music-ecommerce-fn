@@ -7,12 +7,12 @@ export const StyledCard = styled.div`
     rounded-lg
     overflow-hidden
     p-2
-    m-0 
+    m-1 
     max-w-sm 
     grid-cols-3 
     gap-1
     bg-background
-    max-w-md
+    max-w-sm
     grid gap-1 
     grid-cols-4
     leading-tight

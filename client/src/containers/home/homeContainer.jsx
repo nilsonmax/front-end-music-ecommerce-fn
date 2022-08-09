@@ -41,7 +41,8 @@ const HomeContainer = () => {
           totalElements={elementsToShow.length}
           paginated={paginated}
         />
-  
+      <Options setCurrentPage={setCurrentPage}/>
+      <Filter setCurrentPage={setCurrentPage}/>
         <StyledUl>
           {currentElements.map((inst) => {
             return (

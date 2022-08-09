@@ -7,8 +7,6 @@ export const StyledNav = styled.nav`
     gap-2
     max-h-12
     items-center
-    ml-12
-    mr-12
   `}
     
     li {

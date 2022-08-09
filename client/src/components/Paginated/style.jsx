@@ -7,6 +7,7 @@ export const StyledNav = styled.nav`
     gap-2
     max-h-12
     items-center
+    pl-4
   `}
     
     li {

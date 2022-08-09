@@ -1,4 +1,4 @@
-import { StyledNav } from "./style";
+import { StyledNav, Li } from "./style";
 
 function Paginated({
   setCurrentPage,
@@ -31,18 +31,18 @@ function Paginated({
     <StyledNav>
       {pageNumbers[0] && (
         <>
-            <li>
+            <Li>
               <button onClick={() => backward(currentPage)}>Previous</button>
-            </li>
+            </Li>
             {pageNumbers &&
               pageNumbers.map((number) => (
-                <li>
+                <Li>
                   <button onClick={() => paginated(number)}>{number}</button>
-                </li>
+                </Li>
               ))}
-            <li>
+            <Li>
               <button onClick={() => forward(currentPage)}>Next</button>
-            </li>
+            </Li>
         </>
       )}
     </StyledNav>

@@ -292,6 +292,8 @@ export default function HomeContainer() {
             {/* Product grid */}
             <div className="lg:col-span-3">
 
+
+        
         <Paginated
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
@@ -299,6 +301,8 @@ export default function HomeContainer() {
           totalElements={elementsToShow.length}
           paginated={paginated}
         />
+        
+
 
         <StyledUl>
           {currentElements.map((inst) => {

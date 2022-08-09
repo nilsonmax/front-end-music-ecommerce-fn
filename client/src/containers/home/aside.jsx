@@ -1,5 +1,13 @@
+import React, { Fragment, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getInstruments } from "../../redux/action/index.js";
+import Paginated from "../../components/Paginated/paginated";
+import Card from "../../components/Card/card";
+import Loader from "../../components/Loader/loader.jsx";
+import Options from "../../components/Options/options.jsx";
+import Filter from "../../components/Filter/filter";
+import { StyledUl } from "./style";
 
-import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon, FilterIcon, MinusSmIcon, PlusSmIcon, ViewGridIcon } from '@heroicons/react/solid'
@@ -62,8 +70,28 @@ function classNames(...classes) {
 
 export function Aside() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const elementsToShow = useSelector((state) => state.instruments);
+  const dispatch = useDispatch();
+  const elementsPerPage = 9;
 
-  return (
+  const [currentPage, setCurrentPage] = useState(1);
+  const firstIndex = [elementsPerPage * currentPage] - elementsPerPage;
+  const lastIndex = [elementsPerPage * currentPage] - 1;
+  const currentElements =
+    elementsToShow && elementsToShow.slice(firstIndex, lastIndex + 1);
+
+  useEffect(() => {
+    dispatch(getInstruments());
+  }, [dispatch]);
+
+  const paginated = (number) => {
+    setCurrentPage(number);
+  };
+
+  if (elementsToShow.length === 0) {
+    return <Loader />;
+  } else
+    return (
     <div className="bg-white">
       <div>
         {/* Mobile filter dialog */}

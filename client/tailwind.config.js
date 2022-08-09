@@ -6,16 +6,17 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      primary: '#070600',  // black
-      secondary: '#279AF1',  // blue
-      tertiary: '#8c8c8c',  // gray
-      background: '#ffffff', // white
-      highlight: '#DB5A42',  // 
-      orange: '#F37042',
+      primary: '#2B4570',  // Dark Corn
+      secondary: '#5497A7',  // blue
+      tertiary: '#50858B',  // gray
+      background: '#FOF7F4', // white
+      highlight: '#62A8AC',  // 
+      orange: '#D7D9CE',
       transparent: 'transparent',  // transparent
 
     }
   },
-  plugins: [],
+  plugins: [
+  ],
 }
 

@@ -1,33 +1,31 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getInstruments, SetCurrentPageGlobal } from "../../redux/action/index.js";
+import { getInstruments } from "../../redux/action/index.js";
 import Paginated from "../../components/Paginated/paginated";
 import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
 import { StyledUl, StyledBox } from "./style";
-import { Search } from "../../components/Search/Search.jsx";
-import NavBar from "../../components/Navbar/Navbar.jsx";
+
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
-import { FilterIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon, FilterIcon, MinusSmIcon, PlusSmIcon, ViewGridIcon } from '@heroicons/react/solid'
 
-
-
-
+const sortOptions = [
+  { name: 'Alfabéticamente: A - Z', value: 'asce', current: true },
+  { name: 'Alfabéticamente: Z - A', value: 'desce', current: false },
+  { name: 'Precio: menor a mayor', value: 'low-price', current: false },  { name: 'Price: Low to High', href: '#', current: false },
+  { name: 'high-price', value: 'Precio: mayor a menor', current: false },
+]
+const subCategories = [
+  { name: 'Totes', href: '#' },
+  { name: 'Backpacks', href: '#' },
+  { name: 'Travel Bags', href: '#' },
+  { name: 'Hip Bags', href: '#' },
+  { name: 'Laptop Sleeves', href: '#' },
+]
 const filters = [
-  {
-    id: 'category',
-    name: 'Category',
-    options: [
-      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-      { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
-      { value: 'organization', label: 'Organization', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
-    ],
-  },
   {
     id: 'color',
     name: 'Color',
@@ -40,17 +38,38 @@ const filters = [
       { value: 'purple', label: 'Purple', checked: false },
     ],
   },
+  {
+    id: 'category',
+    name: 'Category',
+    options: [
+      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
+      { value: 'sale', label: 'Sale', checked: false },
+      { value: 'travel', label: 'Travel', checked: true },
+      { value: 'organization', label: 'Organization', checked: false },
+      { value: 'accessories', label: 'Accessories', checked: false },
+    ],
+  },
+  {
+    id: 'size',
+    name: 'Size',
+    options: [
+      { value: '2l', label: '2L', checked: false },
+      { value: '6l', label: '6L', checked: false },
+      { value: '12l', label: '12L', checked: false },
+      { value: '18l', label: '18L', checked: false },
+      { value: '20l', label: '20L', checked: false },
+      { value: '40l', label: '40L', checked: true },
+    ],
+  },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function HomeContainer() {
+export default function Aside() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-
   const elementsToShow = useSelector((state) => state.instruments);
-  const setCurrentPageGlobal = useSelector(state => state.currentPageGlobal)
   const dispatch = useDispatch();
   const elementsPerPage = 9;
 
@@ -66,7 +85,6 @@ export default function HomeContainer() {
 
   const paginated = (number) => {
     setCurrentPage(number);
-    // dispatch(SetCurrentPageGlobal(number));
   };
 
  /* ----------------options------------------ */
@@ -83,14 +101,10 @@ export default function HomeContainer() {
     return (
     <div className="bg-white">
       <div>
-
- <NavBar setCurrentPage={setCurrentPage} />
-        <Options setCurrentPage={setCurrentPage} />
-          <Filter setCurrentPage={setCurrentPage} />
-          {/* Mobile filter dialog */}
-            <Transition.Root show={mobileFiltersOpen} as={Fragment}>
-              <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
-                <Transition.Child
+        {/* Mobile filter dialog */}
+        <Transition.Root show={mobileFiltersOpen} as={Fragment}>
+          <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
+            <Transition.Child
               as={Fragment}
               enter="transition-opacity ease-linear duration-300"
               enterFrom="opacity-0"
@@ -129,6 +143,15 @@ export default function HomeContainer() {
                   {/* Filters */}
                   <form className="mt-4 border-t border-gray-200">
                     <h3 className="sr-only">Categories</h3>
+                    <ul role="list" className="font-medium text-gray-900 px-2 py-3">
+                      {subCategories.map((category) => (
+                        <li key={category.name}>
+                          <a href={category.href} className="block px-2 py-3">
+                            {category.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
 
                     {filters.map((section) => (
                       <Disclosure as="div" key={section.id} className="border-t border-gray-200 px-4 py-6">
@@ -185,18 +208,15 @@ export default function HomeContainer() {
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
-
-
-
                 <div>
-                  <Options setCurrentPage={setCurrentPage}/>
-                  <Filter setCurrentPage={setCurrentPage}/>
+                  <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                    Sort
+                    <ChevronDownIcon
+                      className="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                      aria-hidden="true"
+                    />
+                  </Menu.Button>
                 </div>
-
-
-
-
-
 
                 <Transition
                   as={Fragment}
@@ -208,25 +228,31 @@ export default function HomeContainer() {
                   leaveTo="transform opacity-0 scale-95"
                 >
                   <Menu.Items className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <select
-                        id="options"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        defaultValue="order"
-                        onChange={(e) => handleOrder(e)}
-                    >
-                        <option disabled value="order">
-                        </option>
-                        <option value="asce">Alfabéticamente: A - Z</option>
-                        <option value="desce">Alfabéticamente: Z - A</option>
-                        <option value="low-price">Precio: menor a mayor</option>
-                        <option value="high-price">Precio: mayor a menor</option>
-                    </select>
+                    <div className="py-1">
+                      {sortOptions.map((option) => (
+                        <Menu.Item key={option.name}>
+                          {({ active }) => (
+                            <a
+                              href={option.href}
+                              className={classNames(
+                                option.current ? 'font-medium text-gray-900' : 'text-gray-500',
+                                active ? 'bg-gray-100' : '',
+                                'block px-4 py-2 text-sm'
+                              )}
+                            >
+                              {option.name}
+                            </a>
+                          )}
+                        </Menu.Item>
+                      ))}
+                    </div>
                   </Menu.Items>
                 </Transition>
               </Menu>
 
               <button type="button" className="p-2 -m-2 ml-5 sm:ml-7 text-gray-400 hover:text-gray-500">
                 <span className="sr-only">View grid</span>
+                <ViewGridIcon className="w-5 h-5" aria-hidden="true" />
               </button>
               <button
                 type="button"
@@ -247,6 +273,14 @@ export default function HomeContainer() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
               {/* Filters */}
               <form className="hidden lg:block">
+                <h3 className="sr-only">Categories</h3>
+                <ul role="list" className="text-sm font-medium text-gray-900 space-y-4 pb-6 border-b border-gray-200">
+                  {subCategories.map((category) => (
+                    <li key={category.name}>
+                      <a href={category.href}>{category.name}</a>
+                    </li>
+                  ))}
+                </ul>
 
                 {filters.map((section) => (
                   <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
@@ -293,7 +327,6 @@ export default function HomeContainer() {
               </form>
             {/* Product grid */}
             <div className="lg:col-span-3">
-
         <Paginated
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
@@ -301,7 +334,7 @@ export default function HomeContainer() {
           totalElements={elementsToShow.length}
           paginated={paginated}
         />
-
+  
         <StyledUl>
           {currentElements.map((inst) => {
             return (

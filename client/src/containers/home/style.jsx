@@ -3,8 +3,21 @@ import tw from 'twin.macro'
 
 export const StyledUl = styled.ul`
   ${tw`
+    m-4
     flex
     flex-wrap
     gap-4
   `}
 `;
+
+export const StyledBox = styled.div`
+  ${tw`
+    m-4
+    flex
+    flex-wrap
+    gap-4
+    w-full
+    h-full
+  `}
+`
+

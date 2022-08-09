@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
 
-export default function NavBar({setCurrentPage}) {
+export default function Header({setCurrentPage}) {
   const [navbar, setNavbar] = useState(false);
 
   return (
@@ -56,12 +56,12 @@ export default function NavBar({setCurrentPage}) {
               }`}
           >
 
-            <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              {/* <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
+           {/*  <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
                 <Link to="/">
                   <p>Home</p>
                 </Link>
-              </li> */}
+              </li>
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
                 <Link to="/instruments/create">
                   <p>Create</p>
@@ -69,12 +69,12 @@ export default function NavBar({setCurrentPage}) {
               </li>
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
                 <p>About US</p>
-              </li>
-            </ul>
+              </li> 
+            </ul>*/}
 
             <div className="mt-3 space-y-2 lg:hidden">
               <div className="inline-block w-full">
-                <Search setCurrentPage={setCurrentPage}/>
+                {/* <Search setCurrentPage={setCurrentPage}/> */}
               </div>
               <div className="inline-block w-full px-4 py-2 text-center  text-background bg-primary  rounded-md shadow hover:bg-tertiary ">
                 Sign in
@@ -87,7 +87,7 @@ export default function NavBar({setCurrentPage}) {
         </div>
         <div className="hidden space-x-2 lg:inline-block">
           <div className="lg:inline-block">
-            <Search setCurrentPage={setCurrentPage} />
+            {/* <Search setCurrentPage={setCurrentPage} /> */}
           </div>
           <div className="px-4 py-2 cursor-pointer text-background bg-primary  rounded-md shadow hover:bg-tertiary  lg:inline-block">
             <Link to="/login">Sign in</Link>

@@ -1,12 +1,12 @@
 import React from 'react'
-import NavBar from '../../components/Navbar/Navbar'
+import Header from '../../components/Header/Header'
 import SingForm from '../../components/SignForm/SingForm'
 
 const Signup = () => {
   return (
     <>
-      <NavBar />
-      < SingForm />
+      <Header />
+      <SingForm />
     </>
   )
 }

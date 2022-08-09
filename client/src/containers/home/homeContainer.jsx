@@ -1,16 +1,19 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getInstruments } from "../../redux/action/index.js";
+import { getInstruments, SetCurrentPageGlobal } from "../../redux/action/index.js";
 import Paginated from "../../components/Paginated/paginated";
 import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
 import { StyledUl, StyledBox } from "./style";
-
+import { Search } from "../../components/Search/Search.jsx";
+import NavBar from "../../components/Navbar/Navbar.jsx";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { FilterIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/react/solid'
+
+
 
 
 const filters = [
@@ -45,7 +48,9 @@ function classNames(...classes) {
 
 export default function HomeContainer() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+
   const elementsToShow = useSelector((state) => state.instruments);
+  const setCurrentPageGlobal = useSelector(state => state.currentPageGlobal)
   const dispatch = useDispatch();
   const elementsPerPage = 9;
 
@@ -61,6 +66,7 @@ export default function HomeContainer() {
 
   const paginated = (number) => {
     setCurrentPage(number);
+    // dispatch(SetCurrentPageGlobal(number));
   };
 
  /* ----------------options------------------ */
@@ -77,10 +83,14 @@ export default function HomeContainer() {
     return (
     <div className="bg-white">
       <div>
-        {/* Mobile filter dialog */}
-        <Transition.Root show={mobileFiltersOpen} as={Fragment}>
-          <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
-            <Transition.Child
+
+ <NavBar setCurrentPage={setCurrentPage} />
+        <Options setCurrentPage={setCurrentPage} />
+          <Filter setCurrentPage={setCurrentPage} />
+          {/* Mobile filter dialog */}
+            <Transition.Root show={mobileFiltersOpen} as={Fragment}>
+              <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
+                <Transition.Child
               as={Fragment}
               enter="transition-opacity ease-linear duration-300"
               enterFrom="opacity-0"
@@ -283,6 +293,7 @@ export default function HomeContainer() {
               </form>
             {/* Product grid */}
             <div className="lg:col-span-3">
+
         <Paginated
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
@@ -290,7 +301,7 @@ export default function HomeContainer() {
           totalElements={elementsToShow.length}
           paginated={paginated}
         />
-  
+
         <StyledUl>
           {currentElements.map((inst) => {
             return (

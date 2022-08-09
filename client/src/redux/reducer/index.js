@@ -7,6 +7,7 @@ import {
   GET_ALL_CATEGORIES,
   ORDERED,
   FILTER_BY_CATEGORY,
+  SET_CURRENT_PAGE
 } from "../action/index.js";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   copy: [],
   detail: {},
   category: [],
+  currentPageGlobal:{}
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,7 +34,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case GET_BY_NAME:
-      console.log(action.payload, " payload", action.type, "type");
+      // console.log(action.payload, " payload", action.type, "type");
       return {
         ...state,
         instruments: action.payload,

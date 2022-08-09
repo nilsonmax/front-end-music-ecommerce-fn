@@ -84,9 +84,7 @@ export default function HomeContainer() {
     <div className="bg-white">
       <div>
 
- <NavBar setCurrentPage={setCurrentPage} />
-        <Options setCurrentPage={setCurrentPage} />
-          <Filter setCurrentPage={setCurrentPage} />
+  <NavBar setCurrentPage={setCurrentPage} />
           {/* Mobile filter dialog */}
             <Transition.Root show={mobileFiltersOpen} as={Fragment}>
               <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>

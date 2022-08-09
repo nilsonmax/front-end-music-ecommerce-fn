@@ -7,6 +7,7 @@ import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
 import { StyledUl } from "./style";
+import { Aside } from "../../components/Aside/aside.jsx";
 
 const HomeContainer = () => {
   const elementsToShow = useSelector((state) => state.instruments);
@@ -32,9 +33,7 @@ const HomeContainer = () => {
   } else
     return (
       <div>
-
-        <Options setCurrentPage={setCurrentPage} />
-        <Filter setCurrentPage={setCurrentPage} />
+      <Aside setCurrentPage={setCurrentPage}/>
         <Paginated
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}

@@ -48,7 +48,7 @@ export const StyledCard = styled.div`
     
   h4 {
     ${tw`
-      bg-highlight
+      bg-orange
       p-1
       m-0
       rounded-full

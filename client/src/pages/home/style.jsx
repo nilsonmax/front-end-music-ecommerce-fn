@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import tw from 'twin.macro'
 
-export const StyledUl = styled.ul`
+export const StyledHome = styled.div`
   ${tw`
-    m-4
-    flex
-    flex-wrap
-    gap-4
+    mb-6
+    
   `}
-`;
-
+`

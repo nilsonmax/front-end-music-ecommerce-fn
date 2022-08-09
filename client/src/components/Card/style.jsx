@@ -44,7 +44,8 @@ export const StyledCard = styled.div`
       p-0
       font-bold    
     `};
-  }
+    }
+
     
   h4 {
     ${tw`

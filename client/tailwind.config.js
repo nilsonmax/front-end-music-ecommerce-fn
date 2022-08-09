@@ -6,11 +6,11 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      primary: '#040404',  // black
-      secondary: '#13505B',  // blue
-      tertiary: '#119DA4',  // gray
-      background: '#F7F0F0', // white
-      highlight: '#D7D9CE',  // 
+      primary: '#2B4570',  // Dark Corn
+      secondary: '#5497A7',  // blue
+      tertiary: '#50858B',  // gray
+      background: '#FOF7F4', // white
+      highlight: '#62A8AC',  // 
       orange: '#D7D9CE',
       transparent: 'transparent',  // transparent
 

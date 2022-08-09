@@ -13,11 +13,10 @@ import { XIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon, FilterIcon, MinusSmIcon, PlusSmIcon, ViewGridIcon } from '@heroicons/react/solid'
 
 const sortOptions = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
-  { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
+  { name: 'Alfabéticamente: A - Z', value: 'asce', current: true },
+  { name: 'Alfabéticamente: Z - A', value: 'desce', current: false },
+  { name: 'Precio: menor a mayor', value: 'low-price', current: false },  { name: 'Price: Low to High', href: '#', current: false },
+  { name: 'high-price', value: 'Precio: mayor a menor', current: false },
 ]
 const subCategories = [
   { name: 'Totes', href: '#' },
@@ -68,7 +67,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function Aside() {
+export default function Aside() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const elementsToShow = useSelector((state) => state.instruments);
   const dispatch = useDispatch();

@@ -1,10 +1,10 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search } from "../Search/Search";
-import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
+// import { Search } from "../Search/Search";
+import { DivItemsCenter, DivJustifyBetween, NavContainer} from "./style";
 
-export default function Header({setCurrentPage}) {
-  const [navbar, setNavbar] = useState(false);
+export default function Header({ setCurrentPage }) {
+  // const [navbar, setNavbar] = useState(false);
 
   return (
     <NavContainer>
@@ -15,7 +15,7 @@ export default function Header({setCurrentPage}) {
             <h2 className="text-2xl font-bold">LOGO</h2>
           </Link>
 
-          <div className="lg:hidden">
+          {/* <div className="lg:hidden">
             <Button onClick={() => setNavbar(!navbar)}>
               {navbar ? (
                 <svg
@@ -47,16 +47,16 @@ export default function Header({setCurrentPage}) {
                 </svg>
               )}
             </Button>
-          </div>
+          </div> */}
         </DivItemsCenter>
 
-        <div>
+        {/* <div>
           <div
             className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
               }`}
-          >
+          > */}
 
-           {/*  <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+            {/*  <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
                 <Link to="/">
                   <p>Home</p>
@@ -72,30 +72,28 @@ export default function Header({setCurrentPage}) {
               </li> 
             </ul>*/}
 
-            <div className="mt-3 space-y-2 lg:hidden">
+            {/* <div className="mt-3 space-y-2 lg:hidden">
               <div className="inline-block w-full">
-                {/* <Search setCurrentPage={setCurrentPage}/> */}
+               
               </div>
-              <div className="inline-block w-full px-4 py-2 text-center  text-background bg-primary  rounded-md shadow hover:bg-tertiary ">
+               <div className="inline-block w-full px-4 py-2 text-center  text-background bg-primary  rounded-md shadow hover:bg-tertiary ">
                 Sign in
               </div>
               <div className="inline-block w-full px-4 py-2 text-center text-primary  bg-orange rounded-md shadow hover:bg-tertiary ">
                 Sign up
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="hidden space-x-2 lg:inline-block">
-          <div className="lg:inline-block">
-            {/* <Search setCurrentPage={setCurrentPage} /> */}
-          </div>
+            </div> */}
+          {/* </div>
+        </div> */}
+        {/* <div className="hidden space-x-2 lg:inline-block">
+
           <div className="px-4 py-2 cursor-pointer text-background bg-primary  rounded-md shadow hover:bg-tertiary  lg:inline-block">
             <Link to="/login">Sign in</Link>
           </div>
           <div className="px-4 py-2 text-primary  bg-orange rounded-md shadow hover:bg-tertiary lg:inline-block">
             <Link to="/signup">Sign up</Link>
           </div>
-        </div>
+        </div> */}
       </DivJustifyBetween>
     </NavContainer>
   );

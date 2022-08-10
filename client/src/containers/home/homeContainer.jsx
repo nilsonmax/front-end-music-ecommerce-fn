@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getInstruments, SetCurrentPageGlobal } from "../../redux/action/index.js";
+import { getInstruments, sortName } from "../../redux/action/index.js";
 import Paginated from "../../components/Paginated/paginated";
 import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
-import { StyledUl, StyledBox } from "./style";
-import { Search } from "../../components/Search/Search.jsx";
+import { StyledUl } from "./style";
 import NavBar from "../../components/Navbar/Navbar.jsx";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
@@ -42,15 +41,14 @@ const filters = [
   },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(' ')
+// }
 
 export default function HomeContainer() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   const elementsToShow = useSelector((state) => state.instruments);
-  const setCurrentPageGlobal = useSelector(state => state.currentPageGlobal)
   const dispatch = useDispatch();
   const elementsPerPage = 9;
 
@@ -178,7 +176,7 @@ export default function HomeContainer() {
         </Transition.Root>
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative z-10 flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
+          <div className=" flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Our Instruments</h1>
 
             <div className="flex items-center">

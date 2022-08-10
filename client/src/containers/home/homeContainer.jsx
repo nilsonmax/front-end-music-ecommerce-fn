@@ -11,6 +11,7 @@ import NavBarNoLogin from "../../components/NavbarNoLogin/NavbarNoLogin.jsx";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { FilterIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/react/solid'
+import NavBarLogin from "../../components/NavBarLogin/NavbarLogin.jsx";
 
 
 
@@ -58,8 +59,11 @@ export default function HomeContainer() {
   const currentElements =
     elementsToShow && elementsToShow.slice(firstIndex, lastIndex + 1);
 
+  const localStore=window.localStorage.getItem("dataUser") 
+
   useEffect(() => {
     dispatch(getInstruments());
+    console.log(localStore)
   }, [dispatch]);
 
   const paginated = (number) => {
@@ -82,7 +86,8 @@ export default function HomeContainer() {
     <div className="bg-white">
       <div>
 
-  <NavBarNoLogin setCurrentPage={setCurrentPage} />
+  {localStore===null ? <NavBarNoLogin setCurrentPage={setCurrentPage} />: 
+  <NavBarLogin setCurrentPage={setCurrentPage} />}
           {/* Mobile filter dialog */}
             <Transition.Root show={mobileFiltersOpen} as={Fragment}>
               <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>

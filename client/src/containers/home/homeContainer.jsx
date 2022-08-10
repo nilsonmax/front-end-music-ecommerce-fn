@@ -50,7 +50,7 @@ export default function HomeContainer() {
 
   const elementsToShow = useSelector((state) => state.instruments);
   const dispatch = useDispatch();
-  const elementsPerPage = 9;
+  const elementsPerPage = 10;
 
   const [currentPage, setCurrentPage] = useState(1);
   const firstIndex = [elementsPerPage * currentPage] - elementsPerPage;

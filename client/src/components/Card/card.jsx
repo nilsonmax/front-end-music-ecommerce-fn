@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { StyledCard, StyledButton } from "./style";
-import { BsCart3 } from "react-icons/bs";
+import { StyledCard } from "./style";
+// import { BsCart3 } from "react-icons/bs";
 
 
 export default function Card({id, name, brand, price, img, description, stock, status, categoryId, categoryName}) {
@@ -19,7 +19,7 @@ export default function Card({id, name, brand, price, img, description, stock, s
     <Link to={"/instruments/"+id} key={id}>
       <br></br>
       <StyledCard>
-        <img src={img}/>
+        <img src={img} alt={name}/>
         <p>{brand}</p>
         <h2>{name}</h2>
         <h3>{`${colMoney}`}</h3>

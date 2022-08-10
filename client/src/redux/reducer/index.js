@@ -16,7 +16,9 @@ const initialState = {
   detail: {},
   category: [],
   currentPageGlobal:{},
-  visible: false
+  visible: false,
+  user:{
+  }
 };
 
 const reducer = (state = initialState, action) => {

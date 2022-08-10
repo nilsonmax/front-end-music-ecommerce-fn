@@ -240,7 +240,7 @@ export default function HomeContainer() {
               Products
             </h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-8 gap-y-10">
               {/* Filters */}
               <form className="hidden lg:block">
 
@@ -288,8 +288,10 @@ export default function HomeContainer() {
                 ))}
               </form>
             {/* Product grid */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-5">
 
+
+        
         <Paginated
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
@@ -297,6 +299,8 @@ export default function HomeContainer() {
           totalElements={elementsToShow.length}
           paginated={paginated}
         />
+        
+
 
         <StyledUl>
           {currentElements.map((inst) => {

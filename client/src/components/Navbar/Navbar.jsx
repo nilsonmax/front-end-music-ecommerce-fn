@@ -65,12 +65,12 @@ export default function NavBar({ setCurrentPage }) {
                   <p>Home</p>
                 </Link>
               </li> */}
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
+              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
                 <Link to="/instruments/create">
                   <p>Create</p>
                 </Link>
               </li>
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
+              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
                 <p>About US</p>
               </li>
             </ul>
@@ -79,13 +79,13 @@ export default function NavBar({ setCurrentPage }) {
               <div className="inline-block w-full">
                 <Search setCurrentPage={setCurrentPage} />
               </div>
-              <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center  text-background bg-primary  rounded-md shadow hover:bg-tertiary ">
+              <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center  text-white bg-darkconrflower  rounded-md shadow hover:bg-steelteal ">
                 Sign in
               </div>
               <Link to="/signup">
-              <div className="inline-block w-full px-4 py-2 text-center text-primary  bg-orange rounded-md shadow hover:bg-tertiary ">
-                Sign up
-              </div>
+                <div className="inline-block w-full px-4 py-2 text-center text-dark  bg-bluemunsell rounded-md shadow hover:bg-steelteal ">
+                  Sign up
+                </div>
               </Link>
             </div>
           </div>
@@ -94,13 +94,13 @@ export default function NavBar({ setCurrentPage }) {
           <div className="lg:inline-block">
             <Search setCurrentPage={setCurrentPage} />
           </div>
-          <div onClick={() => dispatch(showLogin(true))} className="px-4 py-2 cursor-pointer text-background bg-primary  rounded-md shadow hover:bg-tertiary  lg:inline-block">
+          <div onClick={() => dispatch(showLogin(true))} className="px-4 py-2 cursor-pointer text-white bg-darkconrflower  rounded-md shadow hover:bg-steelteal  lg:inline-block">
             Sign in
           </div>
           <Link to="/signup">
-          <div className="px-4 py-2 text-primary  bg-orange rounded-md shadow hover:bg-tertiary lg:inline-block">
-            Sign up
-          </div>
+            <div className="px-4 py-2 text-dark bg-bluemunsell rounded-md shadow hover:bg-steelteal lg:inline-block">
+              Sign up
+            </div>
           </Link>
         </div>
 

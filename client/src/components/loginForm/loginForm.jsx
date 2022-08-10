@@ -12,7 +12,7 @@ const LoginForm = ({ visible, onClose }) => {
       <div class="bg-slate-100 py-6 sm:py-8 lg:py-12">
         <div class=" max-w-screen-2xl px-4 md:px-8 mx-auto">
          
-          <form class="max-w-lg border shadow-2xl rounded-lg mx-auto bg-orange">
+          <form class="max-w-lg border shadow-2xl rounded-lg mx-auto bg-mintcream">
           <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                 {/* <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                     Terms of Service
@@ -27,12 +27,12 @@ const LoginForm = ({ visible, onClose }) => {
             <div class="flex flex-col gap-4 p-4 md:p-8">
               <div>
                 <label for="email" class="inline-block text-tertiary  text-sm sm:text-base mb-2">Email</label>
-                <input name="email" class="border-4 w-full bg-tertiary  text-tertiary  border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
+                <input name="email" class="border w-full bg-tertiary  text-tertiary  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
               </div>
 
               <div className=''>
                 <label for="password" class="inline-block text-tertiary  text-sm sm:text-base mb-2">Password</label>
-                <input name="password" class="border-4 w-full bg-tertiary  text-tertiary  border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
+                <input name="password" class="border w-full bg-tertiary  text-tertiary  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
               </div>
 
               <button class="block bg-tertiary  hover:bg-tertiary  active:bg-tertiary  focus-visible:ring ring-tertiary  text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Log in</button>

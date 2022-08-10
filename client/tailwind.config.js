@@ -13,14 +13,20 @@ module.exports = {
       highlight: '#62A8AC',  // Cadet Blue
       orange: '#D7D9CE',
       transparent: 'transparent',  // transparent
-
+      darkconrflower: '#2B4570',
+      mintcream: '#F0F7F4',
+      cadetblue: '#62A8AC',
+      bluemunsell: '#5497A7',
+      steelteal: '#50858B',
+      dark:'black',
+      white:'white',
     }
   },
   plugins: [
   ],
   variants: {
     textColor: ['responsive', 'hover', 'focus', 'group-hover'],
-    },
+  },
 
 }
 

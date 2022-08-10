@@ -3,7 +3,7 @@ import React from 'react'
 export const Footer = () => {
     return (
 
-        <footer class="relative bg-tertiary text-background px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24">
+        <footer class="relative bg-cadetblue text-background px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24">
             <div class="flex flex-col md:flex-row">
                 <div class="w-full lg:w-2/6 lg:mx-4 lg:pr-8">
                     <h3 class="font-bold text-2xl">Music Pro</h3>
@@ -16,7 +16,7 @@ export const Footer = () => {
                             </label>
                             <div class="relative">
                                 <input
-                                    class="appearance-none block w-full bg-tertiary  text-tertiary  border border-tertiary  rounded py-4 px-4 leading-tight focus:outline-none focus:bg-background focus:border-tertiary "
+                                    class="appearance-none block w-full bg-cadetblue  text-cadetblue  border border-cadetblue  rounded py-4 px-4 leading-tight focus:outline-none focus:bg-background focus:border-cadetblue "
                                     type="email" placeholder="Enter Your Email Address" />
 
                                 <button type="submit"

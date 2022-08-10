@@ -12,6 +12,7 @@ import { showLogin } from './redux/action/index';
 import { useDispatch } from "react-redux";
 
 
+
 const App = () => {
   let visible = useSelector(e => e.visible)
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const App = () => {
       {/* <NavBar /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        {/* <Route path="/user/perfil" element={} /> */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="/instruments" element={<instruments />} /> */}

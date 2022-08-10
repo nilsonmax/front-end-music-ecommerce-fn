@@ -2,12 +2,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
-import { useDispatch } from "react-redux";
-import { showLogin } from "../../redux/action/index";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function NavBar({ setCurrentPage }) {
+
+export default function NavBarLogin({ setCurrentPage }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
+
+
+  //traer nombre de cuenta
+    let user=useSelector(e=>e.user)
+
 
   return (
     <NavContainer>
@@ -55,16 +60,10 @@ export default function NavBar({ setCurrentPage }) {
 
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
-              }`}
-          >
+            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`}>
 
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              {/* <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
-                <Link to="/">
-                  <p>Home</p>
-                </Link>
-              </li> */}
+             
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
                 <Link to="/instruments/create">
                   <p>Create</p>
@@ -79,27 +78,22 @@ export default function NavBar({ setCurrentPage }) {
               <div className="inline-block w-full">
                 <Search setCurrentPage={setCurrentPage} />
               </div>
-              <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center  text-white bg-darkconrflower  rounded-md shadow hover:bg-steelteal ">
-                Sign in
-              </div>
-              <Link to="/signup">
-                <div className="inline-block w-full px-4 py-2 text-center text-dark  bg-bluemunsell rounded-md shadow hover:bg-steelteal ">
-                  Sign up
+              <Link to="/user/perfil">
+                <div className="inline-block w-full  py-1 my-2 text-center text-white  bg-darkconrflower rounded-full shadow hover:bg-[#F37042] ">
+                {user.userName?user.userName:"usuario"}
                 </div>
               </Link>
             </div>
+           
           </div>
         </div>
         <div className="hidden space-x-2 lg:inline-block">
           <div className="lg:inline-block">
             <Search setCurrentPage={setCurrentPage} />
           </div>
-          <div onClick={() => dispatch(showLogin(true))} className="px-4 py-2 cursor-pointer text-white bg-darkconrflower  rounded-md shadow hover:bg-steelteal  lg:inline-block">
-            Sign in
-          </div>
-          <Link to="/signup">
-            <div className="px-4 py-2 text-dark bg-bluemunsell rounded-md shadow hover:bg-steelteal lg:inline-block">
-              Sign up
+          <Link to="/user/perfil">
+          <div className="px-2 py-1 text-white text-1xl bg-darkconrflower rounded-full shadow hover:bg-[#F37042] lg:inline-block">
+                    {user.userName?user.userName:"usuario"}
             </div>
           </Link>
         </div>

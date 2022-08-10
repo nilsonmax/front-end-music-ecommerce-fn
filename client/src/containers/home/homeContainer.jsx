@@ -7,7 +7,7 @@ import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
 import { StyledUl } from "./style";
-import NavBar from "../../components/Navbar/Navbar.jsx";
+import NavBarNoLogin from "../../components/NavbarNoLogin/NavbarNoLogin.jsx";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { FilterIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/react/solid'
@@ -82,7 +82,7 @@ export default function HomeContainer() {
     <div className="bg-white">
       <div>
 
-  <NavBar setCurrentPage={setCurrentPage} />
+  <NavBarNoLogin setCurrentPage={setCurrentPage} />
           {/* Mobile filter dialog */}
             <Transition.Root show={mobileFiltersOpen} as={Fragment}>
               <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>

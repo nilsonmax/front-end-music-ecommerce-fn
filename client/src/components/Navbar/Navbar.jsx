@@ -82,9 +82,11 @@ export default function NavBar({ setCurrentPage }) {
               <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center  text-background bg-primary  rounded-md shadow hover:bg-tertiary ">
                 Sign in
               </div>
+              <Link to="/signup">
               <div className="inline-block w-full px-4 py-2 text-center text-primary  bg-orange rounded-md shadow hover:bg-tertiary ">
-                <Link to="/signup">Sign up</Link>
+                Sign up
               </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -95,9 +97,11 @@ export default function NavBar({ setCurrentPage }) {
           <div onClick={() => dispatch(showLogin(true))} className="px-4 py-2 cursor-pointer text-background bg-primary  rounded-md shadow hover:bg-tertiary  lg:inline-block">
             Sign in
           </div>
+          <Link to="/signup">
           <div className="px-4 py-2 text-primary  bg-orange rounded-md shadow hover:bg-tertiary lg:inline-block">
-            <Link to="/signup">Sign up</Link>
+            Sign up
           </div>
+          </Link>
         </div>
 
       </DivJustifyBetween>

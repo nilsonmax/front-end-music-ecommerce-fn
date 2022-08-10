@@ -1,11 +1,15 @@
 import React from 'react'
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import imgAside from "./imgSide.jpg"
 import { ImgContainer} from "./style";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../redux/action'
 import "./styleCss.css"
 
 const SingForm = () => {
+    const dispatch = useDispatch();
+    const goBack = useNavigate();
 
     return (
         <div className="h-screen md:flex flex-row items-center">
@@ -16,11 +20,11 @@ const SingForm = () => {
                 <div className="mb-7"><h1 className="font-medium">¡Singn up now!</h1></div>
                 <div className="flex flex-col">
                     <Formik
-                        initialValues={{ username:"", email: '', password: '', confirmpassword:"" }}
+                        initialValues={{ userName:"", email: '', password: '', confirmpassword:"" }}
                         validate={values => {
                             const errors = {};
-                            if(!values.username || values.username.length<4){
-                                errors.username = 'Required';
+                            if(!values.userName || values.userName.length<4){
+                                errors.userName = 'Required';
                             }else if (!values.email) {
                                 errors.email = 'Required';
                             } else if (
@@ -42,14 +46,21 @@ const SingForm = () => {
                     }}
                     onSubmit={(values, { setSubmitting }) => {
                         setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
+                            dispatch(registerUser(values)).
+                            then((d)=>{
+                                console.log(d)
+                                goBack('/')
+                            })
+                            .catch((e)=>{
+                                console.log(e);
+                            })
                             setSubmitting(false);
                         }, 400);
                     }}
                     >
                     {({ isSubmitting }) => (
                         <Form className="flex flex-col">
-                            <Field type="text" name="username" placeholder="username" 
+                            <Field type="text" name="userName" placeholder="username" 
                                 className="outline-none border border-inherit rounded-md py-1.5 px-5 w-72 shadow-sm hover:shadow-indigo-500/40 focus:shadow-indigo-500/40"
                             />
                             <ErrorMessage name="username" component="div" className="text-red-500 text-center"/>
@@ -59,7 +70,7 @@ const SingForm = () => {
                             />
                             <ErrorMessage name="email" component="div" className="text-red-500 text-center"/>
 
-                            <Field type="text" name="password" placeholder="password" 
+                            <Field type="password" name="password" placeholder="password" 
                                 className="outline-none border border-inherit rounded-md py-1.5 px-5 mt-3.5 shadow-sm hover:shadow-indigo-500/40 focus:shadow-indigo-500/40"
                             />
                             <ErrorMessage name="password" component="div" className="text-red-500 text-center"/>

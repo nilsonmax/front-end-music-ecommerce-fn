@@ -1,10 +1,29 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link , useNavigate} from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/action'
 
 const LoginForm = ({ visible, onClose }) => {
+  const dispatch = useDispatch();
+  const goBack = useNavigate();
   // const handleOnclose = () => {
   //   onClose()
   // }
+  const onClickLogin=(e)=>{
+    e.preventDefault()
+    const objectUserLogin={
+      userName:"neider",
+      password:"neider123"
+    }
+    dispatch(loginUser(objectUserLogin))
+    .then(async(data)=>{
+      window.localStorage.setItem("dataUser",JSON.stringify({token:data.token}))
+      window.location.href="/"
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
   if (!visible) return null;
   return (
     <div  className="fixed inset-0 bg-tertiary bg-opacity-25 backdrop-blur-sm flex items-center justify-center">
@@ -35,7 +54,10 @@ const LoginForm = ({ visible, onClose }) => {
                 <input name="password" class="border w-full bg-tertiary  text-tertiary  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
               </div>
 
-              <button class="block bg-tertiary  hover:bg-tertiary  active:bg-tertiary  focus-visible:ring ring-tertiary  text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Log in</button>
+              <button class="block bg-tertiary  hover:bg-tertiary  active:bg-tertiary  focus-visible:ring ring-tertiary  text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+                onClick={(e) => onClickLogin(e)
+              }
+              >Log in</button>
 
               <div class="flex justify-center items-center relative">
                 <span class="h-px bg-tertiary  absolute inset-x-0"></span>

@@ -123,3 +123,33 @@ export const showLogin = function (payload) {
     payload,
   };
 };
+
+export const registerUser = (objectUser) => {
+  return async function () {
+    try {
+      let newUser = await axios.post(
+        "http://localhost:4000/auth/register",
+        objectUser
+      );
+      console.log(newUser)
+      return newUser.data;
+    } catch (error) {
+      console.log(error)
+      throw new TypeError(error.response.data)
+    }
+  };
+};
+
+export const loginUser = (objectUser) => {
+  return async function () {
+    try {
+      let newUser = await axios.post(
+        "http://localhost:4000/auth/login",
+        objectUser
+      );
+      return newUser.data;
+    } catch (error) {
+      throw new TypeError(error.response.data)
+    }
+  };
+};

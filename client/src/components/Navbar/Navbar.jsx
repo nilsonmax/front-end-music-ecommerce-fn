@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
+import { useDispatch } from "react-redux";
+import { showLogin } from "../../redux/action/index";
 
-export default function NavBar({setCurrentPage}) {
+export default function NavBar({ setCurrentPage }) {
   const [navbar, setNavbar] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <NavContainer>
@@ -74,13 +77,13 @@ export default function NavBar({setCurrentPage}) {
 
             <div className="mt-3 space-y-2 lg:hidden">
               <div className="inline-block w-full">
-                <Search setCurrentPage={setCurrentPage}/>
+                <Search setCurrentPage={setCurrentPage} />
               </div>
-              <div className="inline-block w-full px-4 py-2 text-center  text-background bg-primary  rounded-md shadow hover:bg-tertiary ">
+              <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center  text-background bg-primary  rounded-md shadow hover:bg-tertiary ">
                 Sign in
               </div>
               <div className="inline-block w-full px-4 py-2 text-center text-primary  bg-orange rounded-md shadow hover:bg-tertiary ">
-                Sign up
+                <Link to="/signup">Sign up</Link>
               </div>
             </div>
           </div>
@@ -89,13 +92,14 @@ export default function NavBar({setCurrentPage}) {
           <div className="lg:inline-block">
             <Search setCurrentPage={setCurrentPage} />
           </div>
-          <div className="px-4 py-2 cursor-pointer text-background bg-primary  rounded-md shadow hover:bg-tertiary  lg:inline-block">
-            <Link to="/login">Sign in</Link>
+          <div onClick={() => dispatch(showLogin(true))} className="px-4 py-2 cursor-pointer text-background bg-primary  rounded-md shadow hover:bg-tertiary  lg:inline-block">
+            Sign in
           </div>
           <div className="px-4 py-2 text-primary  bg-orange rounded-md shadow hover:bg-tertiary lg:inline-block">
             <Link to="/signup">Sign up</Link>
           </div>
         </div>
+
       </DivJustifyBetween>
     </NavContainer>
   );

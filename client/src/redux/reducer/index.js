@@ -7,7 +7,7 @@ import {
   GET_ALL_CATEGORIES,
   ORDERED,
   FILTER_BY_CATEGORY,
-  SET_CURRENT_PAGE
+  SHOW_LOGIN
 } from "../action/index.js";
 
 const initialState = {
@@ -15,7 +15,8 @@ const initialState = {
   copy: [],
   detail: {},
   category: [],
-  currentPageGlobal:{}
+  currentPageGlobal:{},
+  visible: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,6 +46,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         detail: {},
       };
+
+      case SHOW_LOGIN:
+        return {
+          ...state,
+          visible: action.payload
+        };
 
     case POST_CREATE:
       return {

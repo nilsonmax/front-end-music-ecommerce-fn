@@ -10,6 +10,7 @@ import LoginForm from "./components/loginForm/loginForm";
 import { useSelector } from 'react-redux';
 import { showLogin } from './redux/action/index';
 import { useDispatch } from "react-redux";
+import Prueba from "./pages/Prueba/prueba";
 
 
 
@@ -29,6 +30,8 @@ const App = () => {
         <Route path="/instruments/:id" element={<><DetailsPage /><Footer /></>} />
         *<Route path="/instruments/create" element={<><CreateInstrumentContainer /><Footer /></>} />
         {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="/payment"/>
+
       </Routes>
       <LoginForm  onClose={handleOnClose} visible={visible} />
     </>

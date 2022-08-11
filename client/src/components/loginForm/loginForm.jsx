@@ -26,9 +26,9 @@ const LoginForm = ({ visible, onClose }) => {
     .then(async(data)=>{
       window.localStorage.setItem("dataUser",JSON.stringify({token:data.token}))
       const token=decodeToken(data.token)
-      if(token.user_id==="admin"){
+      if(token.user_rol==="admin"){
         window.location.href="/admin"
-      }else if(token.user_id==="user"){
+      }else if(token.user_rol==="user"){
         window.location.href="/"
       }
     })

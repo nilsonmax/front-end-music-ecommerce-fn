@@ -21,16 +21,15 @@ const App = () => {
     <>
       {/* <NavBar /> */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<><HomePage /><Footer /></>} />
         {/* <Route path="/user/perfil" element={} /> */}
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<><LoginPage /><Footer /></>} />
         <Route path="/signup" element={<Signup />} />
         {/* <Route path="/instruments" element={<instruments />} /> */}
-        <Route path="/instruments/:id" element={<DetailsPage />} />
-        *<Route path="/instruments/create" element={<CreateInstrumentContainer />} />
+        <Route path="/instruments/:id" element={<><DetailsPage /><Footer /></>} />
+        *<Route path="/instruments/create" element={<><CreateInstrumentContainer /><Footer /></>} />
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
-      <Footer />
       <LoginForm  onClose={handleOnClose} visible={visible} />
     </>
   );

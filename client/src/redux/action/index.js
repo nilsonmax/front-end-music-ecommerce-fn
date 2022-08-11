@@ -131,11 +131,13 @@ export const registerUser = (objectUser) => {
         "http://localhost:4000/auth/register",
         objectUser
       );
-      console.log(newUser)
       return newUser.data;
     } catch (error) {
-      console.log(error)
-      throw new TypeError(error.response.data)
+      var errorRes=error.response.data.error;
+      if(!errorRes){
+        errorRes=error.response.data
+      }
+      throw new TypeError(errorRes)
     }
   };
 };

@@ -1,21 +1,29 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Link , useNavigate} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/action'
 
+
+
 const LoginForm = ({ visible, onClose }) => {
   const dispatch = useDispatch();
   const goBack = useNavigate();
-  // const handleOnclose = () => {
-  //   onClose()
-  // }
+ 
+  const [state,setState]=useState({
+    userName:"",
+    password:""
+  })
+
+  const handledChange=(e)=>{
+    e.preventDefault(e)
+    setState({
+      ...state,
+      [e.target.name]:e.target.value
+    })
+  }
   const onClickLogin=(e)=>{
     e.preventDefault()
-    const objectUserLogin={
-      userName:"neider",
-      password:"neider123"
-    }
-    dispatch(loginUser(objectUserLogin))
+    dispatch(loginUser(state))
     .then(async(data)=>{
       window.localStorage.setItem("dataUser",JSON.stringify({token:data.token}))
       window.location.href="/"
@@ -45,19 +53,16 @@ const LoginForm = ({ visible, onClose }) => {
           
             <div class="flex flex-col gap-4 p-4 md:p-8">
               <div>
-                <label for="email" class="inline-block text-tertiary  text-sm sm:text-base mb-2">Email</label>
-                <input name="email" class="border w-full bg-tertiary  text-tertiary  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
+                <label for="email" class="inline-block text-dark  text-sm sm:text-base mb-2">userName</label>
+                <input onChange={e=>{handledChange(e)}} type="text" name="userName" class="border w-full bg-mintcream  text-dark  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
               </div>
 
               <div className=''>
-                <label for="password" class="inline-block text-tertiary  text-sm sm:text-base mb-2">Password</label>
-                <input name="password" class="border w-full bg-tertiary  text-tertiary  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
+                <label for="password" class="inline-block text-dark  text-sm sm:text-base mb-2">Password</label>
+                <input onChange={e=>{handledChange(e)}} name="password" class="border w-full bg-mintcream  text-dark  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
               </div>
 
-              <button class="block bg-tertiary  hover:bg-tertiary  active:bg-tertiary  focus-visible:ring ring-tertiary  text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
-                onClick={(e) => onClickLogin(e)
-              }
-              >Log in</button>
+              <button onClick={(e) => onClickLogin(e)} class="block bg-tertiary  hover:bg-tertiary  active:bg-tertiary  focus-visible:ring ring-tertiary  text-background text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Log in</button>
 
               <div class="flex justify-center items-center relative">
                 <span class="h-px bg-tertiary  absolute inset-x-0"></span>

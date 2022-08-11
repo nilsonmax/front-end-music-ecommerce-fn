@@ -4,7 +4,7 @@ import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
-import { isExpired, decodeToken } from "react-jwt";
+
 
 export default function NavBarLogin({ setCurrentPage }) {
   const [navbar, setNavbar] = useState(false);
@@ -12,15 +12,7 @@ export default function NavBarLogin({ setCurrentPage }) {
 
 
   //traer nombre de cuenta
-    let user=useSelector(e=>e.user)
-  useEffect(()=>{
-    const token=window.localStorage.getItem("dataUser");
-    console.log(decodeToken(JSON.parse(token).token))
-    // const decoded = jwt.verify(token.token, "tigers");
-    // console.log(decoded)
-    // req.user_id = decoded.user_id;
-    // req.user_rol = decoded.user_rol;
-  })
+
 
   return (
     <NavContainer>
@@ -71,12 +63,6 @@ export default function NavBarLogin({ setCurrentPage }) {
             className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`}>
 
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-             
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <Link to="/instruments/create">
-                  <p>Create</p>
-                </Link>
-              </li>
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
                 <p>About US</p>
               </li>
@@ -86,27 +72,25 @@ export default function NavBarLogin({ setCurrentPage }) {
               <div className="inline-block w-full">
                 <Search setCurrentPage={setCurrentPage} />
               </div>
-              <div onClick={() =>{
+              <div onClick={() => {
                 window.localStorage.removeItem("dataUser")
-                window.location.href="/"
+                window.location.href = "/"
               }}>
                 <div className="inline-block w-full  py-1 my-2 text-center text-white  bg-darkconrflower rounded-full shadow hover:bg-[#F37042] ">
-                {user.userName?user.userName:"usuario"}
+                  Sign Out
                 </div>
               </div>
             </div>
-           
+
           </div>
         </div>
         <div className="hidden space-x-2 lg:inline-block">
           <div className="lg:inline-block">
             <Search setCurrentPage={setCurrentPage} />
           </div>
-          <Link to="/user/perfil">
-          <div className="px-2 py-1 text-white text-1xl bg-darkconrflower rounded-full shadow hover:bg-[#F37042] lg:inline-block">
-                    {user.userName?user.userName:"usuario"}
+            <div onClick={() => {window.localStorage.removeItem("dataUser"); window.location.href = "/"}}  className="px-2 py-1 text-white text-1xl bg-darkconrflower rounded-full shadow hover:bg-[#F37042] lg:inline-block">
+             Sign Out
             </div>
-          </Link>
         </div>
 
       </DivJustifyBetween>

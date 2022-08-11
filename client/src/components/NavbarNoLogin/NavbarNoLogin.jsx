@@ -79,7 +79,7 @@ export default function NavBarNoLogin({ setCurrentPage }) {
               <div className="inline-block w-full">
                 <Search setCurrentPage={setCurrentPage} />
               </div>
-              <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center  text-white bg-darkconrflower  rounded-md shadow hover:bg-steelteal ">
+              <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center  text-dark bg-darkconrflower  rounded-md shadow hover:bg-steelteal ">
                 Sign in
               </div>
               <Link to="/signup">
@@ -94,7 +94,7 @@ export default function NavBarNoLogin({ setCurrentPage }) {
           <div className="lg:inline-block">
             <Search setCurrentPage={setCurrentPage} />
           </div>
-          <div onClick={() => dispatch(showLogin(true))} className="px-4 py-2 cursor-pointer text-white bg-darkconrflower  rounded-md shadow hover:bg-steelteal  lg:inline-block">
+          <div onClick={() => dispatch(showLogin(true))} className="px-4 py-2 cursor-pointer text-dark bg-bluemunsell  rounded-md shadow hover:bg-steelteal  lg:inline-block">
             Sign in
           </div>
           <Link to="/signup">

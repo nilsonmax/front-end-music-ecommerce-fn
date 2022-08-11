@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { StyledFilter } from "./style";
 import Loader from "../Loader/loader";
 
 import {
@@ -34,7 +35,7 @@ function Filter({ setCurrentPage }) {
   };
 
   return (
-    <div>
+    <StyledFilter>
       {instruments.length ? (
         <div>
           Categories
@@ -65,7 +66,7 @@ function Filter({ setCurrentPage }) {
       ) : (
         <Loader />
       )}
-    </div>
+    </StyledFilter>
   );
 }
 

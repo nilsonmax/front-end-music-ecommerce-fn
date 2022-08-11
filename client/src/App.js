@@ -4,6 +4,7 @@ import HomePage from "./pages/home/home";
 import LoginPage from "./pages/login/login"
 import DetailsPage from "./pages/Details/details"
 import Signup from "./pages/Signup/Signup";
+import UserInfo from './components/UserInfo/userInfo';
 import { Footer } from "./components/Footer/Footer";
 import CreateInstrumentContainer from "./containers/createInstrument/createInstrumentContainer";
 import LoginForm from "./components/loginForm/loginForm";
@@ -27,6 +28,7 @@ const App = () => {
         {/* <Route path="/user/perfil" element={} /> */}
         <Route path="/login" element={<><LoginPage /><Footer /></>} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/user/info" element={<UserInfo />} />
         {/* <Route path="/instruments" element={<instruments />} /> */}
         <Route path="/instruments/:id" element={<><DetailsPage /><Footer /></>} />
         *<Route path="/instruments/create" element={<><CreateInstrumentContainer /><Footer /></>} />

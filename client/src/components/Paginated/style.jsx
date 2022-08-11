@@ -3,10 +3,11 @@ import tw from 'twin.macro'
 
 export const StyledNav = styled.nav`
   ${tw`
-    flex items-center justify-center gap-0 max-h-10
+    flex items-center justify-center gap-0 max-h-10 list-none
   `}
 `;
-export const Li= styled.li`
+
+export const StyledButton= styled.button`
   ${tw`
   py-1
   px-3

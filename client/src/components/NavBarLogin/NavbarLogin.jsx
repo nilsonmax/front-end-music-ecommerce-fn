@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useJwt } from "react-jwt";
+import { isExpired, decodeToken } from "react-jwt";
 
 export default function NavBarLogin({ setCurrentPage }) {
   const [navbar, setNavbar] = useState(false);
@@ -12,7 +13,14 @@ export default function NavBarLogin({ setCurrentPage }) {
 
   //traer nombre de cuenta
     let user=useSelector(e=>e.user)
-
+  useEffect(()=>{
+    const token=window.localStorage.getItem("dataUser");
+    console.log(decodeToken(JSON.parse(token).token))
+    // const decoded = jwt.verify(token.token, "tigers");
+    // console.log(decoded)
+    // req.user_id = decoded.user_id;
+    // req.user_rol = decoded.user_rol;
+  })
 
   return (
     <NavContainer>
@@ -78,11 +86,14 @@ export default function NavBarLogin({ setCurrentPage }) {
               <div className="inline-block w-full">
                 <Search setCurrentPage={setCurrentPage} />
               </div>
-              <Link to="/user/perfil">
+              <div onClick={() =>{
+                window.localStorage.removeItem("dataUser")
+                window.location.href="/"
+              }}>
                 <div className="inline-block w-full  py-1 my-2 text-center text-white  bg-darkconrflower rounded-full shadow hover:bg-[#F37042] ">
                 {user.userName?user.userName:"usuario"}
                 </div>
-              </Link>
+              </div>
             </div>
            
           </div>

@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { StyledFilter } from "./style";
 import Loader from "../Loader/loader";
-import { Container } from "../Filter/style";
 
 import {
   filterByCategory,
@@ -15,57 +15,58 @@ function Filter({ setCurrentPage }) {
   const instruments = useSelector((state) => state.instruments);
   const categories = useSelector((state) => state.category);
 
+  const [checkState, setCheckState] = useState("");
+  const [dispatched, setDispatched] = useState(null);
+
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (dispatched === null) {
       dispatch(getAllCategories());
       dispatch(getInstruments());
-    }, 1000);
-    return () => clearTimeout(timer);
+
+      console.log(checkState);
+      setDispatched(false);
+    }
   }, [dispatch]);
 
   const handleFilterCategory = (e) => {
-    e.preventDefault();
-    dispatch(filterByCategory(e.target.value));
+    setCheckState(e.target.value);
     setCurrentPage(1);
+    dispatch(filterByCategory(e.target.value));
   };
 
   return (
-    <div>
+    <StyledFilter>
       {instruments.length ? (
-        <Container>
-          <div
-            for="categories"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-          >
-{/*             <label class="block mb-2 text-base font-bold text-gray-900 dark:text-gray-400">
-              Category Filter
-            </label> */}
-            <select
-              id="categories"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              defaultValue="filter"
-              onChange={(e) => {
-                handleFilterCategory(e);
-              }}
-            >
-              <option disabled value="filter">
-                Category Filter
-              </option>
-              <option value="All">All</option>
-              {categories.map((category) => (
-                <option
-                  key={category.id}
+        <div>
+          Categories
+          <div>
+            <input
+              type="radio"
+              name="checkname"
+              value="All"
+              onChange={(e) => handleFilterCategory(e)}
+            />{" "}
+            All
+            <br />
+            {categories.map((category, index) => (
+              <p key={`c${index}`}>
+                <input
+                  type="radio"
+                  name="checkname"
                   value={category.name}
-                  label={category.name}
-                ></option>
-              ))}
-            </select>
+                  onClick={(e) => handleFilterCategory(e)}
+                />{" "}
+                {category.name.slice(0, 1).toUpperCase() +
+                  category.name.slice(1)}
+              </p>
+            ))}
+            <br />
           </div>
-        </Container>
+        </div>
       ) : (
         <Loader />
       )}
-    </div>
+    </StyledFilter>
   );
 }
 

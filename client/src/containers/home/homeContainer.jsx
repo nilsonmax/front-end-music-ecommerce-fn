@@ -6,27 +6,18 @@ import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
-import { StyledUl } from "./style";
+import { StyledCardContainer } from "./style";
 import NavBarNoLogin from "../../components/NavbarNoLogin/NavbarNoLogin.jsx";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { FilterIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/react/solid'
+import NavBarLogin from "../../components/NavBarLogin/NavbarLogin.jsx";
 
 
 
 
 const filters = [
-  {
-    id: 'category',
-    name: 'Category',
-    options: [
-      { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-      { value: 'sale', label: 'Sale', checked: false },
-      { value: 'travel', label: 'Travel', checked: true },
-      { value: 'organization', label: 'Organization', checked: false },
-      { value: 'accessories', label: 'Accessories', checked: false },
-    ],
-  },
+
   {
     id: 'color',
     name: 'Color',
@@ -58,8 +49,11 @@ export default function HomeContainer() {
   const currentElements =
     elementsToShow && elementsToShow.slice(firstIndex, lastIndex + 1);
 
+  const localStore=window.localStorage.getItem("dataUser") 
+
   useEffect(() => {
     dispatch(getInstruments());
+    console.log(localStore)
   }, [dispatch]);
 
   const paginated = (number) => {
@@ -82,7 +76,8 @@ export default function HomeContainer() {
     <div className="bg-white">
       <div>
 
-  <NavBarNoLogin setCurrentPage={setCurrentPage} />
+  {localStore===null ? <NavBarNoLogin setCurrentPage={setCurrentPage} />: 
+      <NavBarLogin setCurrentPage={setCurrentPage} />}
           {/* Mobile filter dialog */}
             <Transition.Root show={mobileFiltersOpen} as={Fragment}>
               <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
@@ -124,6 +119,7 @@ export default function HomeContainer() {
 
                   {/* Filters */}
                   <form className="mt-4 border-t border-gray-200">
+                  <Filter setCurrentPage={setCurrentPage}/>
                     <h3 className="sr-only">Categories</h3>
 
                     {filters.map((section) => (
@@ -181,19 +177,9 @@ export default function HomeContainer() {
 
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
-
-
-
                 <div>
-                  <Options setCurrentPage={setCurrentPage}/>
-                  <Filter setCurrentPage={setCurrentPage}/>
+                <Options setCurrentPage={setCurrentPage}/>
                 </div>
-
-
-
-
-
-
                 <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"
@@ -204,26 +190,10 @@ export default function HomeContainer() {
                   leaveTo="transform opacity-0 scale-95"
                 >
                   <Menu.Items className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <select
-                        id="options"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        defaultValue="order"
-                        onChange={(e) => handleOrder(e)}
-                    >
-                        <option disabled value="order">
-                        </option>
-                        <option value="asce">Alfabéticamente: A - Z</option>
-                        <option value="desce">Alfabéticamente: Z - A</option>
-                        <option value="low-price">Precio: menor a mayor</option>
-                        <option value="high-price">Precio: mayor a menor</option>
-                    </select>
+                          
                   </Menu.Items>
                 </Transition>
               </Menu>
-
-              <button type="button" className="p-2 -m-2 ml-5 sm:ml-7 text-gray-400 hover:text-gray-500">
-                <span className="sr-only">View grid</span>
-              </button>
               <button
                 type="button"
                 className="p-2 -m-2 ml-4 sm:ml-6 text-gray-400 hover:text-gray-500 lg:hidden"
@@ -240,9 +210,12 @@ export default function HomeContainer() {
               Products
             </h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-8 gap-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-8 gap-y-10 ">
               {/* Filters */}
               <form className="hidden lg:block">
+
+              <Filter setCurrentPage={setCurrentPage}/>
+
 
                 {filters.map((section) => (
                   <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
@@ -287,40 +260,36 @@ export default function HomeContainer() {
                   </Disclosure>
                 ))}
               </form>
-            {/* Product grid */}
-            <div className="lg:col-span-5">
 
 
-        
-        <Paginated
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          elementsPerPage={elementsPerPage}
-          totalElements={elementsToShow.length}
-          paginated={paginated}
-        />
-        
-
-
-        <StyledUl>
-          {currentElements.map((inst) => {
-            return (
-              <Card
-                key={inst.id}
-                id={inst.id}
-                name={inst.name}
-                brand={inst.brand}
-                price={inst.price}
-                img={inst.img}
-                description={inst.description}
-                stock={inst.stock}
-                status={inst.status}
-                categoryId={inst.categoryId}
-                categoryName={inst.category.name}
-              />
-            );
-          })}
-        </StyledUl>
+            {/* Product grid showed */}
+            <div className="lg:col-span-5 shadow">
+                <Paginated
+                  setCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                  elementsPerPage={elementsPerPage}
+                  totalElements={elementsToShow.length}
+                  paginated={paginated}
+                />
+                <StyledCardContainer>
+                  {currentElements.map((inst) => {
+                    return (
+                      <Card
+                        key={inst.id}
+                        id={inst.id}
+                        name={inst.name}
+                        brand={inst.brand}
+                        price={inst.price}
+                        img={inst.img}
+                        description={inst.description}
+                        stock={inst.stock}
+                        status={inst.status}
+                        categoryId={inst.categoryId}
+                        categoryName={inst.category.name}
+                      />
+                    );
+                  })}
+                </StyledCardContainer>
               </div>
 
             </div>

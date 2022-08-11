@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'raleway': ['Raleway', 'sans-serif'],
+      }
+    },
       colors: {
         primary: '#2B4570',  // Dark Corn
         secondary: '#5497A7',  // Blue Munsell
@@ -26,11 +30,10 @@ module.exports = {
         orange: colors.orange,
       }
     },
-
   },
   plugins: [],
   variants: {
-    textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    backgroundColor: ['responsive', 'hover', 'focus', 'active'],
   },
 
 }

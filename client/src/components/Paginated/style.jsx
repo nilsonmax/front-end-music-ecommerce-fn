@@ -9,17 +9,20 @@ export const StyledNav = styled.nav`
 export const Li= styled.li`
   ${tw`
   py-1
-  px-2
-  m-2
+  px-3
+  m-1
   flex
   text-center
-
+  rounded
+  shadow
+  
   hover:border-b-2
-  hover:border-secondary
+  hover:border-bluemunsell
 
   active:rounded-md
-  active:bg-secondary
-  active:px-3.5
+  active:bg-bluemunsell
+  active:px-4
   active:py-1.5
 `}
 `;
+

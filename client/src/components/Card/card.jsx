@@ -25,6 +25,7 @@ export default function Card({ id, name, brand, price, img, description, stock, 
       {/* <span>{`USD${price/4500}`}</span> */}
       <br></br>
       <br></br>
+
       {/* <b>{`Status:`}</b> <span>{`${status}`}</span> */}
       <b>{`Type:`}</b> <span>{`${categoryName}`}</span>
       {/*         <span class=" text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
@@ -37,6 +38,5 @@ export default function Card({ id, name, brand, price, img, description, stock, 
         </svg>
       </button>
     </StyledCard>
-
   )
 }

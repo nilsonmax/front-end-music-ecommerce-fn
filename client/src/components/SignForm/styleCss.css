@@ -1,10 +1,40 @@
 .buttonSingup{
     background: #054996;
     border: 1px #112a46 solid;
-
     color: #fcfcfc;
 }
 
 .buttonSingup:hover{
     background: #103c6d;
+    font-weight: 600;
+}
+
+.titleLogo{
+    font-weight: 600;
+    font-size: 15pt;
+    margin-bottom: 10px;
+}
+.logInNow{
+    color: rgb(24, 60, 205);
+}
+.logInNow:hover{
+    font-weight: 600;
+}
+.divFormRegister{
+    background: rgba(250, 250, 250, 0.9);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 1px gray solid;
+}
+.inputFormRegister{
+    border: 1px rgb(215, 208, 208) solid;
+}
+.inputFormRegister:hover{
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.inputFormRegister:focus{
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.error{
+    color: red;
+    margin-top: 5px;
 }

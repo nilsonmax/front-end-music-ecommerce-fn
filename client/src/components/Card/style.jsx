@@ -10,8 +10,6 @@ export const StyledCard = styled.div`
     overflow-hidden
     p-2
     m-1 
-    max-w-md
-    gap-0
     bg-background
     max-w-md
     grid gap-0.5 
@@ -61,7 +59,7 @@ export const StyledCard = styled.div`
     
   h4 {
     ${tw`
-      bg-orange
+      bg-orange-300
       p-1
       m-0
       rounded-full

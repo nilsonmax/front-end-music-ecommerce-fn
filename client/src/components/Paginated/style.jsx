@@ -22,6 +22,4 @@ export const Li= styled.li`
   active:px-3.5
   active:py-1.5
 `}
-}
- 
 `;

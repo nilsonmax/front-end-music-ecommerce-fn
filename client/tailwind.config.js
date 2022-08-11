@@ -9,8 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'raleway': ['Raleway', 'sans-serif'],
-      }
-    },
+      },
       colors: {
         primary: '#2B4570',  // Dark Corn
         secondary: '#5497A7',  // Blue Munsell
@@ -28,13 +27,14 @@ module.exports = {
         white: 'white',
         blur: 'rgba(0,0,0,0.5)',
         orange: colors.orange,
-      }
+      },
+    },
+  },
+  variants: {
+    extend:{
+      backgroundColor: ['responsive', 'hover', 'focus', 'active'],
     },
   },
   plugins: [],
-  variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'active'],
-  },
-
-}
+};
 

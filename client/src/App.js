@@ -10,6 +10,7 @@ import LoginForm from "./components/loginForm/loginForm";
 import { useSelector } from 'react-redux';
 import { showLogin } from './redux/action/index';
 import { useDispatch } from "react-redux";
+import Admin from "./pages/Admin/Admin";
 
 
 
@@ -22,6 +23,7 @@ const App = () => {
       {/* <NavBar /> */}
       <Routes>
         <Route path="/" element={<><HomePage /><Footer /></>} />
+        <Route path="/admin" element={<><Admin /><Footer /></>} />
         {/* <Route path="/user/perfil" element={} /> */}
         <Route path="/login" element={<><LoginPage /><Footer /></>} />
         <Route path="/signup" element={<Signup />} />

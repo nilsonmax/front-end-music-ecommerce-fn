@@ -1,13 +1,12 @@
 import React,{useState} from 'react'
-import { Link , useNavigate} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/action'
-
-
+import { isExpired, decodeToken } from "react-jwt";
+import Swal from 'sweetalert2'
 
 const LoginForm = ({ visible, onClose }) => {
   const dispatch = useDispatch();
-  const goBack = useNavigate();
  
   const [state,setState]=useState({
     userName:"",
@@ -26,12 +25,33 @@ const LoginForm = ({ visible, onClose }) => {
     dispatch(loginUser(state))
     .then(async(data)=>{
       window.localStorage.setItem("dataUser",JSON.stringify({token:data.token}))
-      window.location.href="/"
+      const token=decodeToken(data.token)
+      if(token.user_id==="admin"){
+        window.location.href="/admin"
+      }else if(token.user_id==="user"){
+        window.location.href="/"
+      }
     })
     .catch((error)=>{
-      console.log(error)
+      Toast.fire({
+        icon: 'error',
+        title: error.message
+      })
     })
   }
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   if (!visible) return null;
   return (
     <div  className="fixed inset-0 bg-tertiary bg-opacity-25 backdrop-blur-sm flex items-center justify-center">

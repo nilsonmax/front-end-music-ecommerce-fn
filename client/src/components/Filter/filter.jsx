@@ -39,7 +39,7 @@ function Filter({ setCurrentPage }) {
       {instruments.length ? (
         <div>
           Categories
-          <p>
+          <div>
             <input
               type="radio"
               name="checkname"
@@ -48,8 +48,8 @@ function Filter({ setCurrentPage }) {
             />{" "}
             All
             <br />
-            {categories.map((category) => (
-              <p>
+            {categories.map((category, index) => (
+              <p key={`c${index}`}>
                 <input
                   type="radio"
                   name="checkname"
@@ -61,7 +61,7 @@ function Filter({ setCurrentPage }) {
               </p>
             ))}
             <br />
-          </p>
+          </div>
         </div>
       ) : (
         <Loader />

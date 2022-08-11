@@ -5,7 +5,6 @@ export const StyledCard = styled.div`
   ${tw`
     h-56
     rounded-lg
-    border-solid
     border-tertiary
     overflow-hidden
     p-2
@@ -18,10 +17,9 @@ export const StyledCard = styled.div`
     grid-cols-6
     leading-tight
     relative
-    drop-shadow-md
-    shadow-inner
     transition-all duration-500
     scale-y-75
+    hover:scale-y-100
   `};
     
     

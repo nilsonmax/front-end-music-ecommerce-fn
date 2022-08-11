@@ -36,7 +36,7 @@ function Paginated({
             </Li>
             {pageNumbers &&
               pageNumbers.map((number) => (
-                <Li>
+                <Li key={number}>
                   <button onClick={() => paginated(number)}>{number}</button>
                 </Li>
               ))}

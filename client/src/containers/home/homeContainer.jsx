@@ -6,7 +6,7 @@ import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
-import { StyledUl } from "./style";
+import { StyledCardContainer } from "./style";
 import NavBarNoLogin from "../../components/NavbarNoLogin/NavbarNoLogin.jsx";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
@@ -77,7 +77,7 @@ export default function HomeContainer() {
       <div>
 
   {localStore===null ? <NavBarNoLogin setCurrentPage={setCurrentPage} />: 
-  <NavBarLogin setCurrentPage={setCurrentPage} />}
+      <NavBarLogin setCurrentPage={setCurrentPage} />}
           {/* Mobile filter dialog */}
             <Transition.Root show={mobileFiltersOpen} as={Fragment}>
               <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
@@ -210,10 +210,13 @@ export default function HomeContainer() {
               Products
             </h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-8 gap-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-8 gap-y-10 ">
               {/* Filters */}
               <form className="hidden lg:block">
+
               <Filter setCurrentPage={setCurrentPage}/>
+
+
                 {filters.map((section) => (
                   <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
                     {({ open }) => (
@@ -257,40 +260,36 @@ export default function HomeContainer() {
                   </Disclosure>
                 ))}
               </form>
-            {/* Product grid */}
-            <div className="lg:col-span-5">
 
 
-        
-        <Paginated
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          elementsPerPage={elementsPerPage}
-          totalElements={elementsToShow.length}
-          paginated={paginated}
-        />
-        
-
-
-        <StyledUl>
-          {currentElements.map((inst) => {
-            return (
-              <Card
-                key={inst.id}
-                id={inst.id}
-                name={inst.name}
-                brand={inst.brand}
-                price={inst.price}
-                img={inst.img}
-                description={inst.description}
-                stock={inst.stock}
-                status={inst.status}
-                categoryId={inst.categoryId}
-                categoryName={inst.category.name}
-              />
-            );
-          })}
-        </StyledUl>
+            {/* Product grid showed */}
+            <div className="lg:col-span-5 shadow">
+                <Paginated
+                  setCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                  elementsPerPage={elementsPerPage}
+                  totalElements={elementsToShow.length}
+                  paginated={paginated}
+                />
+                <StyledCardContainer>
+                  {currentElements.map((inst) => {
+                    return (
+                      <Card
+                        key={inst.id}
+                        id={inst.id}
+                        name={inst.name}
+                        brand={inst.brand}
+                        price={inst.price}
+                        img={inst.img}
+                        description={inst.description}
+                        stock={inst.stock}
+                        status={inst.status}
+                        categoryId={inst.categoryId}
+                        categoryName={inst.category.name}
+                      />
+                    );
+                  })}
+                </StyledCardContainer>
               </div>
 
             </div>

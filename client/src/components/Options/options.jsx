@@ -14,15 +14,15 @@ function Options({ setCurrentPage }) {
   return (
     <Container>
       <div
-        for="options"
-        class="block mb-2 text-sm font-medium text-primary dark:text-secondary"
+        htmlFor="options"
+        className="block mb-2 text-sm font-medium text-dark dark:text-secondary"
       >
-{/*         <label class="block mb-2 text-base font-bold text-gray-900 dark:text-gray-400">
+{/*         <label className="block mb-2 text-base font-bold text-gray-900 dark:text-gray-400">
           Ordenar por
         </label> */}
         <select
           id="options"
-          class="bg-background text-primary text-sm rounded-lg focus:ring-secondary focus:border-secondary block w-full p-2.5 dark:bg-background dark:border-primary dark:placeholder-secondary dark:text-background dark:focus:ring-secondary dark:focus:border-secondary"
+          className="bg-background text-dark text-sm rounded-lg focus:ring-secondary focus:border-secondary block w-full p-2.5 dark:bg-background dark:border-primary dark:placeholder-secondary dark:text-background dark:focus:ring-secondary dark:focus:border-secondary font-extrabold "
           defaultValue="order"
           onChange={(e) => handleOrder(e)}
         >

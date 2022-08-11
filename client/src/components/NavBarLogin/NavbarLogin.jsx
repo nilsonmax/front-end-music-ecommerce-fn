@@ -68,8 +68,8 @@ export default function NavBarLogin({ setCurrentPage }) {
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
              
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <Link to="/instruments/create">
-                  <p>Create</p>
+                <Link to="/user/info">
+                  <p>User Info</p>
                 </Link>
               </li>
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">

@@ -155,3 +155,18 @@ export const loginUser = (objectUser) => {
     }
   };
 };
+
+export const updateUserInfo = (payload) => {
+  return async function (dispatch) {
+      try {
+          let userUpdated = await axios.put(
+              "http://localhost:4000/instruments",
+              payload
+          );
+          console.log('USERUPDATED', userUpdated);
+
+      } catch (error) {
+          console.log(error);
+      }
+  }
+}

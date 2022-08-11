@@ -6,7 +6,7 @@ import Card from "../../components/Card/card";
 import Loader from "../../components/Loader/loader.jsx";
 import Options from "../../components/Options/options.jsx";
 import Filter from "../../components/Filter/filter";
-import { StyledUl } from "./style";
+import { StyledCardContainer } from "./style";
 import NavBarNoLogin from "../../components/NavbarNoLogin/NavbarNoLogin.jsx";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
@@ -70,9 +70,11 @@ export default function HomeContainer() {
     return <Loader />;
   } else
     return (
+
       <div className="bg-white">
         <div>
           <NavBarNoLogin setCurrentPage={setCurrentPage} /> {/*navbar*/}
+
           {/* Mobile filter dialog */}
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>
             <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
@@ -205,58 +207,57 @@ export default function HomeContainer() {
                 Products
               </h2>
 
-              <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-8 gap-y-10">
-                {/* Filters */}
-                <form className="hidden lg:block">
-                  <Filter setCurrentPage={setCurrentPage} />
-                  {filters.map((section) => (
-                    <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
-                      {({ open }) => (
-                        <>
-                          <h3 className="-my-3 flow-root">
-                            <Disclosure.Button className="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500">
-                              <span className="font-medium text-gray-900">{section.name}</span>
-                              <span className="ml-6 flex items-center">
-                                {open ? (
-                                  <MinusSmIcon className="h-5 w-5" aria-hidden="true" />
-                                ) : (
-                                  <PlusSmIcon className="h-5 w-5" aria-hidden="true" />
-                                )}
-                              </span>
-                            </Disclosure.Button>
-                          </h3>
-                          <Disclosure.Panel className="pt-6">
-                            <div className="space-y-4">
-                              {section.options.map((option, optionIdx) => (
-                                <div key={option.value} className="flex items-center">
-                                  <input
-                                    id={`filter-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    defaultChecked={option.checked}
-                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`filter-${section.id}-${optionIdx}`}
-                                    className="ml-3 text-sm text-gray-600"
-                                  >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
-                            </div>
-                          </Disclosure.Panel>
-                        </>
-                      )}
-                    </Disclosure>
-                  ))}
-                </form>
-                {/* Product grid */}
-                <div className="lg:col-span-5">
+
+            <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-8 gap-y-10 ">
+              {/* Filters */}
+              <form className="hidden lg:block">
+
+              <Filter setCurrentPage={setCurrentPage}/>
 
 
-
+                {filters.map((section) => (
+                  <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
+                    {({ open }) => (
+                      <>
+                        <h3 className="-my-3 flow-root">
+                          <Disclosure.Button className="py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400 hover:text-gray-500">
+                            <span className="font-medium text-gray-900">{section.name}</span>
+                            <span className="ml-6 flex items-center">
+                              {open ? (
+                                <MinusSmIcon className="h-5 w-5" aria-hidden="true" />
+                              ) : (
+                                <PlusSmIcon className="h-5 w-5" aria-hidden="true" />
+                              )}
+                            </span>
+                          </Disclosure.Button>
+                        </h3>
+                        <Disclosure.Panel className="pt-6">
+                          <div className="space-y-4">
+                            {section.options.map((option, optionIdx) => (
+                              <div key={option.value} className="flex items-center">
+                                <input
+                                  id={`filter-${section.id}-${optionIdx}`}
+                                  name={`${section.id}[]`}
+                                  defaultValue={option.value}
+                                  type="checkbox"
+                                  defaultChecked={option.checked}
+                                  className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                />
+                                <label
+                                  htmlFor={`filter-${section.id}-${optionIdx}`}
+                                  className="ml-3 text-sm text-gray-600"
+                                >
+                                  {option.label}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                ))}
+              </form>
                   <Paginated
                     setCurrentPage={setCurrentPage}
                     currentPage={currentPage}
@@ -264,8 +265,6 @@ export default function HomeContainer() {
                     totalElements={elementsToShow.length}
                     paginated={paginated}
                   />
-
-
 
                   <StyledUl>
                     {currentElements.map((inst) => {

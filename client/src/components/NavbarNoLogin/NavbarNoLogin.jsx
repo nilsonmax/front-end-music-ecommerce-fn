@@ -4,8 +4,12 @@ import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
 import { useDispatch } from "react-redux";
 import { showLogin } from "../../redux/action/index";
+import { useStateContext } from "../../context/stateContext";
+import { HiShoppingCart } from "react-icons/hi";
+import Cart from "../Shopping/cart";
 
 export default function NavBarNoLogin({ setCurrentPage }) {
+  const { showCart, setShowCart, totalQuantities } = useStateContext();
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
 
@@ -103,6 +107,20 @@ export default function NavBarNoLogin({ setCurrentPage }) {
             </div>
           </Link>
         </div>
+        <button
+            type="button"
+            onClick={() => setShowCart(true)}
+            className=" relative link flex items-center"
+          >
+            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-ora">
+              {totalQuantities} 
+            </span>
+            <HiShoppingCart size={20} className="h-10" />
+            <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+              Carrito
+            </p>
+          </button>
+          {showCart && <Cart />}
 
       </DivJustifyBetween>
     </NavContainer>

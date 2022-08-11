@@ -16,6 +16,8 @@ code {
 @tailwind components;
 @tailwind utilities;
 
+
+
 body {
   background-color: theme('colors.background');
   font-family: 'Raleway', sans-serif;
@@ -25,4 +27,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+}
+
+@layer components{
+  
+  .button{
+    @apply w-full max-w-[400px] py-[10px] px-3 rounded-[15px] border-none text-xl mt-[10px] uppercase bg-secondary text-white cursor-pointer scale-100 transform ease-in duration-500
+  }
 }

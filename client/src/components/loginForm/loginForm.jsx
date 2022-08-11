@@ -79,9 +79,6 @@ const LoginForm = ({ visible, onClose }) => {
               <div class="flex justify-center items-center relative">
                 <span class="bg-background text-dark underline  text-sm relative px-4">Log in with social</span>
               </div>
-
-
-
               <button class="flex justify-center items-center bg-background hover:bg-primary  active:bg-tertiary  border border-tertiary  focus-visible:ring ring-tertiary  text-dark  text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
                 <svg class="w-5 h-5 shrink-0" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M23.7449 12.27C23.7449 11.48 23.6749 10.73 23.5549 10H12.2549V14.51H18.7249C18.4349 15.99 17.5849 17.24 16.3249 18.09V21.09H20.1849C22.4449 19 23.7449 15.92 23.7449 12.27Z" fill="#4285F4" />
@@ -94,8 +91,10 @@ const LoginForm = ({ visible, onClose }) => {
               </button>
             </div>
 
+
             <div class="flex justify-center items-center bg-white   pb-14 ">
               <p class="text-dark font-bold  text-md text-center">Don't have an account? <Link to="/signup" class="text-darkcornflower hover:text-dark active:text-darkcornflower transition underline duration-100">Sign Up</Link></p>
+
             </div>
           </form>
         </div>

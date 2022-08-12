@@ -1,16 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import Modal from "../Modal/Modal";
+import Swal from "sweetalert2";
 
-const Table = ({ dataRender, columnsRender }) => {
+const Table = ({ dataRender, columnsRender, activarEliminar }) => {
   const [modal, setModal] = useState(false);
   const [imgTrue, setImgTrue] = useState(false);
   useEffect(() => {
     if (dataRender[0].column2.slice(0, 8) === "https://") {
       setImgTrue(true);
     }
+    console.log(dataRender);
   });
-
+  const alertEliminar = (columnNameArray, idDelete) => {
+    Swal.fire({
+      title: "¿Seguro que deseas eliminar " + columnNameArray + " ?",
+      text: "Se borrará de forma permanente",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Eliminar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (columnNameArray === "users") {
+          activarEliminar(columnNameArray, idDelete);
+        }
+      }
+    });
+  };
   return (
     <>
       <table class="table-auto  mx-auto max-w-[70%]">
@@ -55,7 +73,12 @@ const Table = ({ dataRender, columnsRender }) => {
                   <td class="text-center  border-b ">{data.column4}</td>
                 )}
                 <td class="  content-center w-1  border-b ">
-                  <GoTrashcan class=" mx-auto h-6" />
+                  <GoTrashcan
+                    class=" mx-auto h-6"
+                    onClick={() => {
+                      alertEliminar(data.columnNameArray, data.column0);
+                    }}
+                  />
                 </td>
                 <td class=" content-center w-1  border-b ">
                   <GoPencil
@@ -70,7 +93,12 @@ const Table = ({ dataRender, columnsRender }) => {
           })}
         </tbody>
       </table>
-      {modal === true && <Modal setModal={setModal} />}
+      {modal === true && (
+        <Modal
+          setModal={setModal}
+          dataArrayRender={{ nameArray: dataRender[0].columnNameArray }}
+        />
+      )}
     </>
   );
 };

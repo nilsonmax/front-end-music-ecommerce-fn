@@ -37,16 +37,16 @@ const Users = () => {
   }, [users, refreshUsers]);
 
   function activarEliminar(columnNameArray, idDelete) {
-    if (columnNameArray === "users") {
+    if (columnNameArray === "User") {
       const token = window.localStorage.getItem("dataUser");
       let tokenDecode = JSON.parse(token);
       dispatch(deleteUser(idDelete))
         .then((data) => {
           setRefreshUsers(true);
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          Swal.fire("Eliminado!", "El usuario ha sido eliminado", "success");
         })
         .catch((error) => {
-          Swal.fire("Deleted!", "Fallo", "success");
+          Swal.fire("Error", "Algo salio mal", "error");
         });
     }
   }

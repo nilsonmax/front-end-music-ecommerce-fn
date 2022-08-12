@@ -23,7 +23,9 @@ const Table = ({ dataRender, columnsRender, activarEliminar }) => {
       confirmButtonText: "Eliminar",
     }).then((result) => {
       if (result.isConfirmed) {
-        if (columnNameArray === "users") {
+        if (columnNameArray === "User") {
+          activarEliminar(columnNameArray, idDelete);
+        } else if (columnNameArray === "Instrument") {
           activarEliminar(columnNameArray, idDelete);
         }
       }

@@ -46,7 +46,7 @@ export default function Profile() {
                              Firsname:
                             </div>
                             <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
-                               {user.firsName ? user.firsName : "unknown"}
+                               {user.firstName ? user.firstName : "unknown"}
                             </div>
                         </div>
                         {////datos
@@ -86,7 +86,7 @@ export default function Profile() {
                             Contact Number:
                             </div>
                             <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
-                               {user.contactNumber ? user.Number : "unknown"}
+                               {user.contactNumber ? user.contactNumber : "unknown"}
                             </div>
                         </div>
                         {////datos

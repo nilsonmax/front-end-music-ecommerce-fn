@@ -4,11 +4,15 @@ import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { isExpired, decodeToken } from "react-jwt";
-import { get_user } from '../../redux/action/index'
+import { get_user } from '../../redux/action/index';
+import { useStateContext } from "../../context/stateContext";
+import { HiShoppingCart } from "react-icons/hi";
+import Cart from "../Shopping/cart";
 
 export default function NavBarLogin({ setCurrentPage }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
+  const { showCart, setShowCart, totalQuantities } = useStateContext();
 
 
   //traer nombre de cuenta
@@ -78,7 +82,7 @@ export default function NavBarLogin({ setCurrentPage }) {
               </li>
 
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <Link onClick={() => {window.localStorage.removeItem("dataUser"); window.location.href = "/"}} to="/user/Profile">
+                <Link onClick={() => { window.localStorage.removeItem("dataUser"); window.location.href = "/" }} to="/user/Profile">
                   <p>Log out</p>
                 </Link>
               </li>
@@ -105,12 +109,18 @@ export default function NavBarLogin({ setCurrentPage }) {
             <Search setCurrentPage={setCurrentPage} />
           </div>
           <h2 className="px-2 py-1 text-1xl text-bluemunsell font-bold lg:inline-block">
-          {`Welcome ${user.userName}`}
+            {`Welcome ${user.userName}`}
           </h2>
           {/*<div onClick={() => {window.localStorage.removeItem("dataUser"); window.location.href = "/"}} className="px-2 py-1 text-white text-1xl bg-darkconrflower rounded-full shadow hover:bg-[#F37042] lg:inline-block">
             NickName
             </div>*/}
         </div>
+      <button type="button" onClick={() => setShowCart(true)} className=" relative link flex items-center">
+      {totalQuantities!==0&&<span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{totalQuantities!==0&&totalQuantities}</span>}
+        <HiShoppingCart size={20} className="h-10" />
+        <p className="hidden md:inline font-extrabold md: text-sm mt-2">Cart</p>
+      </button>
+      {showCart && <Cart />}
       </DivJustifyBetween>
     </NavContainer>
   );

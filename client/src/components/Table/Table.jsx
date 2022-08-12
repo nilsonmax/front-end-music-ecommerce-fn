@@ -6,11 +6,11 @@ import Swal from "sweetalert2";
 const Table = ({ dataRender, columnsRender, activarEliminar }) => {
   const [modal, setModal] = useState(false);
   const [imgTrue, setImgTrue] = useState(false);
+  const [idArrayModal, setIdArrayModal] = useState(null);
   useEffect(() => {
     if (dataRender[0].column2.slice(0, 8) === "https://") {
       setImgTrue(true);
     }
-    console.log(dataRender);
   });
   const alertEliminar = (columnNameArray, idDelete) => {
     Swal.fire({
@@ -25,32 +25,32 @@ const Table = ({ dataRender, columnsRender, activarEliminar }) => {
       if (result.isConfirmed) {
         if (columnNameArray === "User") {
           activarEliminar(columnNameArray, idDelete);
-        } else if (columnNameArray === "Instrument") {
-          activarEliminar(columnNameArray, idDelete);
         }
       }
     });
   };
   return (
     <>
-      <table class="table-auto  mx-auto max-w-[70%]">
+      <table className="table-auto  mx-auto max-w-[70%]">
         <thead>
-          <tr class="bg-[#62A8AC] content-center  h-10 ">
-            <th class="content-center font-raleway  text-white border">Id</th>
-            {columnsRender.map((name) => {
+          <tr className="bg-[#62A8AC] content-center  h-10 ">
+            <th className="content-center font-raleway  text-white border">
+              Id
+            </th>
+            {columnsRender.map((name, key) => {
               return (
                 <th
-                  class="content-center font-raleway text-white border "
-                  key={name.id}
+                  className="content-center font-raleway text-white border "
+                  key={key + 1}
                 >
                   {name}
                 </th>
               );
             })}
-            <th class="content-center font-raleway text-white p-2 border">
+            <th className="content-center font-raleway text-white p-2 border">
               Eliminar
             </th>
-            <th class="content-center font-raleway text-white p-2 border">
+            <th className="content-center font-raleway text-white p-2 border">
               Editar
             </th>
           </tr>
@@ -58,34 +58,37 @@ const Table = ({ dataRender, columnsRender, activarEliminar }) => {
         <tbody>
           {dataRender.map((data, key) => {
             return (
-              <tr class=" content-center ">
-                <td class="text-center border-b ">{key + 1}</td>
-                <td class="text-center  border-b ">{data.column1}</td>
-                <td class="text-center  border-b ">
+              <tr className=" content-center " key={key + 1}>
+                <td className="text-center border-b ">{key + 1}</td>
+                <td className="text-center  border-b ">{data.column1}</td>
+                <td className="text-center  border-b ">
                   {imgTrue ? (
-                    <img class="mx-auto w-28 h-18 " src={data.column2} />
+                    <img className="mx-auto w-28 h-18 " src={data.column2} />
                   ) : (
                     data.column2
                   )}
                 </td>
                 {data.column3 && (
-                  <td class="text-center w-1/3  border-b ">{data.column3}</td>
+                  <td className="text-center w-1/3  border-b ">
+                    {data.column3}
+                  </td>
                 )}
                 {data.column4 && (
-                  <td class="text-center  border-b ">{data.column4}</td>
+                  <td className="text-center  border-b ">{data.column4}</td>
                 )}
-                <td class="  content-center w-1  border-b ">
+                <td className="  content-center w-1  border-b ">
                   <GoTrashcan
-                    class=" mx-auto h-6"
+                    className=" mx-auto h-6"
                     onClick={() => {
                       alertEliminar(data.columnNameArray, data.column0);
                     }}
                   />
                 </td>
-                <td class=" content-center w-1  border-b ">
+                <td className=" content-center w-1  border-b ">
                   <GoPencil
-                    class=" mx-auto h-6 "
+                    className=" mx-auto h-6 "
                     onClick={() => {
+                      setIdArrayModal(data.column0);
                       setModal(true);
                     }}
                   />
@@ -98,7 +101,10 @@ const Table = ({ dataRender, columnsRender, activarEliminar }) => {
       {modal === true && (
         <Modal
           setModal={setModal}
-          dataArrayRender={{ nameArray: dataRender[0].columnNameArray }}
+          dataArrayRender={{
+            nameArray: dataRender[0].columnNameArray,
+            idArray: idArrayModal,
+          }}
         />
       )}
     </>

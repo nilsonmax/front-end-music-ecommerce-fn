@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 import {
   AiOutlineShopping,
@@ -10,15 +11,17 @@ import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
 import { useStateContext } from '../../context/stateContext';
 import getStripe from "../../lib/getStripe";
-import { Bottom, BtnContainer, CartBottom, CartContainer, CartHeading, CartNumItems, CartWrapper, ContinueShopping, EmptyCart, Heading, Hidden, ItemDescription, ItemImage, PayBtn, Product, ProductContainer, QuantityDesc, QuantityDescMinus, QuantityDescNumCart, QuantityDescPlus, QuantityDescSpan, RemoveItemButton, SubTotal, Top, Total, TotalPrice } from './style';
+import { Bottom, BtnContainer, CartBottom, CartContainer, CartHeading, CartNumItems, CartWrapper, ContinueShopping, EmptyCart, Heading, Hidden, ItemDescription, ItemImage, PayBtn, Product, ProductContainer, QuantityDesc, QuantityDescMinus, QuantityDescNumCart, QuantityDescPlus, RemoveItemButton, SubTotal, Top, Total, TotalPrice } from './style';
 
 const Cart = () => {
   const cartRef = useRef();
   const { cartItems, totalPrice, totalQuantities, removeFromCart, setShowCart, toogleCartItemQuantity } = useStateContext();
-  /* const handleCheckout = async () => {
+  
+  const handleCheckout = async () => {
     const stripe = await getStripe();
+    console.log(stripe);
 
-    const response = await fetch("/api/stripe", {
+    const response = await axios.post("/localhost:4000/payment/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +37,7 @@ const Cart = () => {
     toast.loading("Redirecting...");
 
     stripe.redirectToCheckout({ sessionId: data.id });
-  }; */
+  };
   return (
     <CartWrapper ref={cartRef}>
       <CartContainer>
@@ -47,16 +50,16 @@ const Cart = () => {
         </CartHeading>
 
         {cartItems.length < 1 && (
-          <EmptyCart> 
+          <EmptyCart>
             <AiOutlineShopping size={150} />
             <h3>Your shopping cart is empty</h3>
-            
-              <ContinueShopping 
-                type="button"
-                onClick={() => setShowCart(false)}
-                >
-                Continue Shopping
-              </ContinueShopping>
+
+            <ContinueShopping
+              type="button"
+              onClick={() => setShowCart(false)}
+            >
+              Continue Shopping
+            </ContinueShopping>
           </EmptyCart>
         )}
 
@@ -126,7 +129,7 @@ const Cart = () => {
               <TotalPrice className='totalprice'>${totalPrice}</TotalPrice>
             </Total>
             <BtnContainer className="btn-container">
-              <PayBtn className="btn" type="button">
+              <PayBtn className="btn" type="button" onClick={handleCheckout}>
                 Pay with Stripe
               </PayBtn>
             </BtnContainer>

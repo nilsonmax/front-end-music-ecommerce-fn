@@ -162,24 +162,37 @@ export const loginUser = (objectUser) => {
 };
 
 export const updateUserInfo = (payload) => {
-  return async function (dispatch) {
-    try {
-      let userUpdated = await axios.put(
-        "http://localhost:4000/instruments",
-        payload
-      );
-      console.log("USERUPDATED", userUpdated);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+  return async function () {
+    let token = window.localStorage.getItem("dataUser")
+    let tokenJSON = JSON.parse(token)
+      try {
+          let userUpdated = await axios.put(
+            "http://localhost:4000/users",
+            payload,
+            {
+              headers:{
+                Authorization: `Bearer ${tokenJSON.token}`
+              }
+            }
+          );
+          console.log("TOKEN: ", window.localStorage.getItem('token'))
+          console.log('USERUPDATED', userUpdated);
+          return userUpdated.data;
+
+      } catch (error) {
+          console.log(error);
+      }
+  }
+}
+
 export const get_user = (token) => {
   return async function (dispatch) {
+    //let token = window.localStorage.getItem("dataUser")
+    let tokenJSON = JSON.parse(token)
     try {
       let usuario = await axios.get("http://localhost:4000/users/token", {
-        headers: {
-          Authorization: "Bearer " + token,
+        headers:{
+          Authorization: "Bearer " + tokenJSON.token,
         },
       });
       return dispatch({
@@ -188,7 +201,7 @@ export const get_user = (token) => {
       });
     } catch (error) {}
   };
-};
+}
 
 export const getUsers = () => {
   return async function (dispatch) {

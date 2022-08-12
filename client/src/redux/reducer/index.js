@@ -8,6 +8,7 @@ import {
   ORDERED,
   FILTER_BY_CATEGORY,
   SHOW_LOGIN,
+  GET_USER,
   GET_USERS,
 } from "../action/index.js";
 
@@ -48,6 +49,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         detail: {},
+        user:{}
       };
 
     case SHOW_LOGIN:
@@ -130,6 +132,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         instruments: filter,
       };
+    
+    case GET_USER:
+      return{
+        ...state,
+        user:action.payload
+      }
 
     case GET_USERS:
       return {

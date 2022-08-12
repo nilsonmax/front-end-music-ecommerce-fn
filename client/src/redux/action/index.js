@@ -9,7 +9,7 @@ export const DATA_CLEAR = "DATA_CLEAR";
 export const GET_BY_NAME = "GET_BY_NAME";
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const ORDERED = "ORDERED";
-export const GET_USER="GET_USER";
+export const GET_USER = "GET_USER";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const SHOW_LOGIN = "SHOW_LOGIN";
 export const GET_USERS = "GET_USERS";
@@ -151,8 +151,8 @@ export const loginUser = (objectUser) => {
         "http://localhost:4000/auth/login",
         objectUser
       );
-      window.localStorage.setItem("dataUser",JSON.stringify(newUser.data))
-      console.log("tu token: "+newUser.data)
+      window.localStorage.setItem("dataUser", JSON.stringify(newUser.data));
+      console.log("tu token: " + newUser.data);
       return newUser.data;
     } catch (error) {
       throw new TypeError(error.response.data);
@@ -162,35 +162,32 @@ export const loginUser = (objectUser) => {
 
 export const updateUserInfo = (payload) => {
   return async function (dispatch) {
-
-      try {
-          let userUpdated = await axios.put(
-              "http://localhost:4000/instruments",
-              payload
-          );
-          console.log('USERUPDATED', userUpdated);
-
-      } catch (error) {
-          console.log(error);
-      }
-  }
-}
-export const get_user=(token)=>{
-  return async function(dispatch){
     try {
-      let usuario=await axios.get("http://localhost:4000/users/token",{
-        headers:{
-            Authorization: "Bearer "+token} 
-    })
-    return dispatch({
-      type: GET_USER,
-      payload: usuario.data
-    })
+      let userUpdated = await axios.put(
+        "http://localhost:4000/instruments",
+        payload
+      );
+      console.log("USERUPDATED", userUpdated);
     } catch (error) {
-      
+      console.log(error);
     }
-  }
-}
+  };
+};
+export const get_user = (token) => {
+  return async function (dispatch) {
+    try {
+      let usuario = await axios.get("http://localhost:4000/users/token", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      return dispatch({
+        type: GET_USER,
+        payload: usuario.data,
+      });
+    } catch (error) {}
+  };
+};
 
 export const getUsers = () => {
   return async function (dispatch) {
@@ -205,5 +202,18 @@ export const getUsers = () => {
       .catch((error) => {
         throw new TypeError(error.response.data);
       });
+  };
+};
+
+export const deleteUser = (user_id) => {
+  return async function () {
+    try {
+      let userDeleted = await axios.delete(
+        `http://localhost:4000/users/${user_id}`
+      );
+      return userDeleted.data;
+    } catch (error) {
+      throw new TypeError(error.response.data);
+    }
   };
 };

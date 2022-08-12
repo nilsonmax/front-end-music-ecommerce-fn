@@ -7,7 +7,8 @@ import {
   GET_ALL_CATEGORIES,
   ORDERED,
   FILTER_BY_CATEGORY,
-  SHOW_LOGIN
+  SHOW_LOGIN,
+  GET_USER
 } from "../action/index.js";
 
 const initialState = {
@@ -17,8 +18,7 @@ const initialState = {
   category: [],
   currentPageGlobal:{},
   visible: false,
-  user:{
-  }
+  user:{}
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +47,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         detail: {},
+        user:{}
       };
 
       case SHOW_LOGIN:
@@ -129,6 +130,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         instruments: filter,
       };
+    
+    case GET_USER:
+      return{
+        ...state,
+        user:action.payload
+      }
 
     default:
       return state;

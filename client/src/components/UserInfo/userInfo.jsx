@@ -25,7 +25,7 @@ export default function UserInfo () {
 
     return(
         <div>
-        <Link to='/'>
+        <Link to='/user/Profile'>
                 <p>Go back</p>
         </Link>
 

@@ -13,6 +13,7 @@ export const GET_USER = "GET_USER";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const SHOW_LOGIN = "SHOW_LOGIN";
 export const GET_USERS = "GET_USERS";
+export const DELETE_INSTRUMENT = "DELETE_INSTRUMENT";
 
 // const { REACT_APP_HOST } = process.env;
 const REACT_APP_HOST = "http://localhost:4000";
@@ -212,6 +213,19 @@ export const deleteUser = (user_id) => {
         `http://localhost:4000/users/${user_id}`
       );
       return userDeleted.data;
+    } catch (error) {
+      throw new TypeError(error.response.data);
+    }
+  };
+};
+
+export const deleteInstrument = (id) => {
+  return async function () {
+    try {
+      let instrumentDeleted = await axios.delete(
+        `http://localhost:4000/instruments/${id}`
+      );
+      return instrumentDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
     }

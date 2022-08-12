@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import { showLogin } from './redux/action/index';
 import { useDispatch } from "react-redux";
 import Admin from "./pages/Admin/Admin";
-import Profile from "./components/Profile/Profile";
+import Profile from "./pages/profile/Profile"
 
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
         <Route path="/login" element={<><LoginPage /><Footer /></>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/user/info" element={<UserInfo />} />
-        <Route path="/user/profile" element={<Profile />} />
+        <Route path="/user/Profile" element={<><Profile /><Footer/></>} />
         {/* <Route path="/instruments" element={<instruments />} /> */}
         <Route path="/instruments/:id" element={<><DetailsPage /><Footer /></>} />
         *<Route path="/instruments/create" element={<><CreateInstrumentContainer /><Footer /></>} />

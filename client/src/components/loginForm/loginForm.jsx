@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 
 const LoginForm = ({ visible, onClose }) => {
   const dispatch = useDispatch();
-  
+ 
 
   const [error, setError] = useState("")
   const [logeado,setLogeado]=useState("")
@@ -107,7 +107,7 @@ const LoginForm = ({ visible, onClose }) => {
 
 
             <div class="flex justify-center items-center bg-white   pb-14 ">
-              <p class="text-dark font-bold  text-md text-center">Don't have an account? <Link to="/signup" class="text-darkcornflower hover:text-dark active:text-darkcornflower transition underline duration-100">Sign Up</Link></p>
+              <p class="text-dark font-bold  text-md text-center">Don't have an account? <div to="/signup" class="text-darkcornflower hover:text-dark active:text-darkcornflower transition underline duration-100" onClick={()=>{ window.location.href="/signup"; setTimeout(()=>{onClose()},2000)}}>Sign Up</div></p>
 
             </div>
           </form>

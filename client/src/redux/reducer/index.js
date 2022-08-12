@@ -8,7 +8,8 @@ import {
   ORDERED,
   FILTER_BY_CATEGORY,
   SHOW_LOGIN,
-  GET_USER
+  GET_USER,
+  GET_USERS,
 } from "../action/index.js";
 
 const initialState = {
@@ -16,9 +17,10 @@ const initialState = {
   copy: [],
   detail: {},
   category: [],
-  currentPageGlobal:{},
+  currentPageGlobal: {},
   visible: false,
-  user:{}
+  user: {},
+  users: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,11 +52,11 @@ const reducer = (state = initialState, action) => {
         user:{}
       };
 
-      case SHOW_LOGIN:
-        return {
-          ...state,
-          visible: action.payload
-        };
+    case SHOW_LOGIN:
+      return {
+        ...state,
+        visible: action.payload,
+      };
 
     case POST_CREATE:
       return {
@@ -136,6 +138,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         user:action.payload
       }
+
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
 
     default:
       return state;

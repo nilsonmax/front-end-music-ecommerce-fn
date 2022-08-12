@@ -12,6 +12,7 @@ export const ORDERED = "ORDERED";
 export const GET_USER="GET_USER";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const SHOW_LOGIN = "SHOW_LOGIN";
+export const GET_USERS = "GET_USERS";
 
 // const { REACT_APP_HOST } = process.env;
 const REACT_APP_HOST = "http://localhost:4000";
@@ -134,11 +135,11 @@ export const registerUser = (objectUser) => {
       );
       return newUser.data;
     } catch (error) {
-      var errorRes=error.response.data.error;
-      if(!errorRes){
-        errorRes=error.response.data
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
       }
-      throw new TypeError(errorRes)
+      throw new TypeError(errorRes);
     }
   };
 };
@@ -154,13 +155,14 @@ export const loginUser = (objectUser) => {
       console.log("tu token: "+newUser.data)
       return newUser.data;
     } catch (error) {
-      throw new TypeError(error.response.data)
+      throw new TypeError(error.response.data);
     }
   };
 };
 
 export const updateUserInfo = (payload) => {
   return async function (dispatch) {
+
       try {
           let userUpdated = await axios.put(
               "http://localhost:4000/instruments",
@@ -189,3 +191,19 @@ export const get_user=(token)=>{
     }
   }
 }
+
+export const getUsers = () => {
+  return async function (dispatch) {
+    return await axios
+      .get(`http://localhost:4000/users`)
+      .then((resp) => {
+        dispatch({
+          type: GET_USERS,
+          payload: resp.data,
+        });
+      })
+      .catch((error) => {
+        throw new TypeError(error.response.data);
+      });
+  };
+};

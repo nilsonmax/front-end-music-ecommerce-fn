@@ -3,6 +3,7 @@ import Table from "../../Table/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { getInstruments, deleteInstrument } from "../../../redux/action/index";
 import Swal from "sweetalert2";
+import Aside from "../Aside/Aside";
 
 const Instruments = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const Instruments = () => {
   const columns = ["idInstrument", "Image", "Name", "Stock"];
   var [dataRender, setDataRender] = useState([]);
   var [refreshInstruments, setRefresInstruments] = useState(null);
+  var [visibleCrear, setVisibleCrear] = useState(false);
   useEffect(() => {
     if (instruments.length === 0 && refreshInstruments === null) {
       dispatch(getInstruments());
@@ -55,8 +57,11 @@ const Instruments = () => {
     }
   }
   return (
-    <div>
-      {dataRender.length > 0 ? (
+    <div className="flex flex-row">
+      <div>
+        <Aside setVisibleCrear={setVisibleCrear} />
+      </div>
+      {dataRender.length > 0 && visibleCrear === false ? (
         <Table
           dataRender={dataRender}
           columnsRender={columns}
@@ -64,6 +69,15 @@ const Instruments = () => {
         />
       ) : (
         <p class="w-screen text-center">No hay Instrumentos</p>
+      )}
+      {visibleCrear === true && (
+        <input
+          type="button"
+          value="Registrar"
+          onClick={() => {
+            setVisibleCrear(false);
+          }}
+        />
       )}
     </div>
   );

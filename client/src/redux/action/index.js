@@ -166,15 +166,23 @@ export const updateUserInfo = (payload) => {
       try {
           let userUpdated = await axios.put(
               "http://localhost:4000/instruments",
-              payload
+              payload,
+              {headers:{
+                 Authorization: `Bearer ${window.localStorage.getItem("token")}`
+               }
+              }
+
           );
           console.log('USERUPDATED', userUpdated);
+          return userUpdated.data
 
       } catch (error) {
           console.log(error);
       }
   }
 }
+
+
 export const get_user=(token)=>{
   return async function(dispatch){
     try {

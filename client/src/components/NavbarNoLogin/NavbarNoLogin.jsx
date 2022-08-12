@@ -107,18 +107,10 @@ export default function NavBarNoLogin({ setCurrentPage }) {
             </div>
           </Link>
         </div>
-        <button
-            type="button"
-            onClick={() => setShowCart(true)}
-            className=" relative link flex items-center"
-          >
-            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-ora">
-              {totalQuantities} 
-            </span>
+        <button type="button" onClick={() => alert("redireccionado a iniciar sesion o registrarse")} className=" relative link flex items-center">
+            {totalQuantities!==0&&<span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{totalQuantities!==0&&totalQuantities}</span>}
             <HiShoppingCart size={20} className="h-10" />
-            <p className="hidden md:inline font-extrabold md: text-sm mt-2">
-              Carrito
-            </p>
+            <p className="hidden md:inline font-extrabold md: text-sm mt-2">Cart</p>
           </button>
           {showCart && <Cart />}
 

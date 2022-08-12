@@ -3,6 +3,7 @@ import Table from "../../Table/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers, deleteUser } from "../../../redux/action";
 import Swal from "sweetalert2";
+import Aside from "../Aside/Aside";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const Users = () => {
   const columns = ["Nombre y Apellido", "userName", "Email", "Rol"];
   var [dataRender, setDataRender] = useState([]);
   var [refreshUsers, setRefreshUsers] = useState(null);
+  var [visibleCrear, setVisibleCrear] = useState(false);
   useEffect(() => {
     if (users.length === 0 && refreshUsers === null) {
       dispatch(getUsers());
@@ -43,23 +45,36 @@ const Users = () => {
       dispatch(deleteUser(idDelete))
         .then((data) => {
           setRefreshUsers(true);
-          Swal.fire("Eliminado!", "El usuario ha sido eliminado", "success");
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
         })
         .catch((error) => {
-          Swal.fire("Error", "Algo salio mal", "error");
+          Swal.fire("Deleted!", "Fallo", "success");
         });
     }
   }
+
   return (
-    <div>
-      {dataRender.length > 0 ? (
+    <div className="flex flex-row">
+      <div>
+        <Aside setVisibleCrear={setVisibleCrear} />
+      </div>
+      {dataRender.length > 0 && visibleCrear === false ? (
         <Table
           dataRender={dataRender}
           columnsRender={columns}
           activarEliminar={activarEliminar}
         />
       ) : (
-        <p class="w-screen text-center">No hay users</p>
+        <p className="w-screen text-center">No hay users</p>
+      )}
+      {visibleCrear === true && (
+        <input
+          type="button"
+          value="Registrar"
+          onClick={() => {
+            setVisibleCrear(false);
+          }}
+        />
       )}
     </div>
   );

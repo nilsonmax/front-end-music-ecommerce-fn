@@ -5,6 +5,7 @@ import { ImgContainer} from "./style";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/action'
+import { showLogin } from "../../redux/action/index";
 import "./styleCss.css"
 import Swal from 'sweetalert2'
 
@@ -115,7 +116,7 @@ const SingForm = () => {
                     
                     <div className="flex justify-center">
                         <p className="mr-3">Have an account?</p>
-                        <Link to="/login"><p className="logInNow">Log in now</p></Link>
+                        <p className="logInNow" onClick={() => dispatch(showLogin(true))}>Log in now</p>
                     </div>
                 </div>
             </div>

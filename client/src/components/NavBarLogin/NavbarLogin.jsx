@@ -68,7 +68,7 @@ export default function NavBarLogin({ setCurrentPage }) {
 
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
                 <Link to="/user/Profile">
-                  {/* <p>User Info</p> */}<p>Profile</p>
+                  <p>Profile</p>
                 </Link>
               </li>
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">

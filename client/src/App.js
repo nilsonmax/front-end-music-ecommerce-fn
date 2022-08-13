@@ -13,6 +13,7 @@ import { showLogin } from './redux/action/index';
 import { useDispatch } from "react-redux";
 import Admin from "./pages/Admin/Admin";
 import Profile from "./pages/profile/Profile"
+import SuccessPayment from "./pages/SuccessPayment/SuccessPayment";
 
 
 const App = () => {
@@ -34,7 +35,7 @@ const App = () => {
         <Route path="/instruments/:id" element={<><DetailsPage /><Footer /></>} />
         *<Route path="/instruments/create" element={<><CreateInstrumentContainer /><Footer /></>} />
         {/* <Route path="*" element={<NotFound />} /> */}
-        <Route path="/payment"/>
+        <Route path="/success" element={<SuccessPayment/>}/>
 
       </Routes>
       <LoginForm  onClose={handleOnClose} visible={visible} />

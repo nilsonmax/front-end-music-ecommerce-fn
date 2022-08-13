@@ -26,6 +26,9 @@ const Table = ({ dataRender, columnsRender, activarEliminar }) => {
         if (columnNameArray === "User") {
           activarEliminar(columnNameArray, idDelete);
         }
+        if (columnNameArray === "Instrument") {
+          activarEliminar(columnNameArray, idDelete);
+        }
       }
     });
   };

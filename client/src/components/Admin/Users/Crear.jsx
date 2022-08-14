@@ -17,7 +17,6 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
     "email",
     "userName",
     "password",
-    "rating",
     "buyerAddress",
   ];
 
@@ -45,7 +44,6 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
           email: "",
           userName: "",
           password: "",
-          rating: "",
           buyerAddress: "",
           rol: "user",
         }}
@@ -96,9 +94,7 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
                           ? "email"
                           : data === "password"
                           ? "password"
-                          : data === "dni" ||
-                            data === "contactNumber" ||
-                            data === "rating"
+                          : data === "dni" || data === "contactNumber"
                           ? "number"
                           : "text"
                       }

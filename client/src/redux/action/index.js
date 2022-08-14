@@ -244,11 +244,16 @@ export const deleteInstrument = (id) => {
   };
 };
 
-export const putUser = (objectUser) => {
+export const putUser = (objectUser, token) => {
   return async function () {
     try {
+      let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
-      let newUser = await axios.put("http://localhost:4000/users", objectUser);
+      let newUser = await axios.put("http://localhost:4000/users", objectUser, {
+        headers: {
+          Authorization: "Bearer " + tokenJSON.token,
+        },
+      });
       return newUser.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -269,11 +274,6 @@ function camposNullUser(objectUser) {
   }
   if (objectUser.firstName === "") {
     objectUser.firstName = null;
-  }
-  if (objectUser.rating === "") {
-    objectUser.rating = null;
-  } else if (objectUser.rating !== null) {
-    objectUser.rating = [objectUser.rating];
   }
   return objectUser;
 }

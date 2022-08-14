@@ -1,14 +1,14 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import imgAside from "./imgSide.jpg";
-import { ImgContainer } from "./style";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/action";
 import { showLogin } from "../../redux/action/index";
-import validarUserRegister from "../../utils/validateUserRegister";
+import validateUserRegister from "../../utils/validateUserRegister";
 import "./styleCss.css";
 import Swal from "sweetalert2";
+import imgAside from "./imgSide.jpg";
+import { ImgContainer } from "./style";
 
 const SingForm = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const SingForm = () => {
                 confirmpassword: "",
               }}
               validate={(values) => {
-                return validarUserRegister(values);
+                return validateUserRegister(values);
               }}
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
@@ -76,11 +76,11 @@ const SingForm = () => {
                   <Field
                     type="text"
                     name="userName"
-                    placeholder="username"
+                    placeholder="userName"
                     className="inputFormRegister outline-none rounded-md py-1.5 px-5 w-72"
                   />
                   <ErrorMessage
-                    name="username"
+                    name="userName"
                     component="div"
                     className="error text-red-500 text-center"
                   />

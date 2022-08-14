@@ -49,29 +49,29 @@ export default function UserInfo () {
             let errors = {}
 
             if(!values.firstName){
-                errors.firstName = "input required";
+                errors.firstName = "Input required";
 
             } else if(!values.lastName){
-                errors.lastName = "input required";
+                errors.lastName = "Input required";
             
             } else if(!values.userName){
-                errors.userName = "input required";
+                errors.userName = "Input required";
 
             } else if(!values.dni){
-                errors.dni = "input required";
+                errors.dni = "Input required";
 
             }  else if(!values.contactNumber){
-                errors.contactNumber = "input required";
+                errors.contactNumber = "Input required";
             }else if(`${values.contactNumber}`.length<10){
                 errors.contactNumber = "should have 10 digits at least"
 
             } else if(!values.email){
-                errors.email = "input required";
+                errors.email = "Input required";
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address';
 
             } else if(!values.buyerAddress){
-                errors.buyerAddress = "input required";
+                errors.buyerAddress = "Input required";
                 
             } 
             return errors;
@@ -104,43 +104,43 @@ export default function UserInfo () {
         {({ isSubmitting }) => (
             <Form className="flex flex-col">
                 <div className="flex justify-center">
-                <div className="flex flex-col mr-1">
+                <div className="flex flex-col mr-1 gap-2">
                 <Field type="text" name="firstName" placeholder="Firstname" 
-                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower focus:shadow-md shadow-[#2B4570]"
                 />
                 <ErrorMessage name="firstName" component="div" className="error text-red-500 text-center text-xs"/>
 
                 <Field type="text" name="lastName" placeholder="Lastname" 
-                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower focus:shadow-md shadow-[#2B4570]"
                 />
                 <ErrorMessage name="lastName" component="div" className="error text-red-500 text-center text-xs"/>
 
                 <Field type="text" name="userName" placeholder="Username" 
-                   className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
+                   className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower focus:shadow-md shadow-[#2B4570]"
                 />
                 <ErrorMessage name="username" component="div" className="error text-red-500 text-center text-xs"/>
                 </div>
 
-                <div className="flex flex-col ml-1">
-                <Field type="number" name="dni" placeholder="Id number" 
-                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
+                <div className="flex flex-col ml-1 gap-2">
+                <Field type="number" name="dni" placeholder="ID number" 
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower focus:shadow-md shadow-[#2B4570]"
                 />
                 <ErrorMessage name="dni" component="div" className="error text-red-500 text-center text-xs"/>
 
                 <Field type="number" name="contactNumber" placeholder="Contact Number" 
-                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower focus:shadow-md shadow-[#2B4570]"
                 />
                 <ErrorMessage name="contactNumber" component="div" className="error text-red-500 text-center text-xs"/>
 
                 <Field type="email" name="email" placeholder="Email" 
-                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower focus:shadow-md shadow-[#2B4570]"
                 />
                 <ErrorMessage name="email" component="div" className="error text-red-500 text-center text-xs"/>
                 </div>
                 </div>
 
                 <Field type="text" name="buyerAddress" placeholder="Address" 
-                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-2 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower focus:shadow-md shadow-[#2B4570]"
                 />
                 <ErrorMessage name="buyerAddress" component="div" className="error text-red-500 text-center text-xs"/>
 

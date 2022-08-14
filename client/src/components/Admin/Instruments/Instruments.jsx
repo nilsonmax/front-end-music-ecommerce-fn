@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import Table from "../../Table/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { getInstruments, deleteInstrument } from "../../../redux/action/index";
+import Crear from "./Crear";
 import Swal from "sweetalert2";
 import Aside from "../Aside/Aside";
 
-const Instruments = () => {
+const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
   const instruments = useSelector((state) => state.reducer.instruments);
   const columns = ["idInstrument", "Image", "Name", "Stock"];
   var [dataRender, setDataRender] = useState([]);
-  var [refreshInstruments, setRefresInstruments] = useState(null);
-  var [visibleCrear, setVisibleCrear] = useState(false);
+  var [refreshInstruments, setRefreshInstruments] = useState(null);
   useEffect(() => {
     if (instruments.length === 0 && refreshInstruments === null) {
       dispatch(getInstruments());
-      setRefresInstruments();
+      setRefreshInstruments(false);
     } else {
       if (refreshInstruments === true) {
         dispatch(getInstruments());
-        setRefresInstruments();
+        setRefreshInstruments(false);
       }
       setDataRender([]);
       instruments.map((instrument) => {
@@ -44,7 +44,7 @@ const Instruments = () => {
       let tokenDecode = JSON.parse(token);
       dispatch(deleteInstrument(idDelete))
         .then((data) => {
-          setRefresInstruments(true);
+          setRefreshInstruments(true);
           Swal.fire(
             "Eliminado!",
             "El instrumento ha sido eliminado",
@@ -59,24 +59,22 @@ const Instruments = () => {
   return (
     <div className="flex flex-row">
       <div>
-        <Aside setVisibleCrear={setVisibleCrear} />
+        <Aside setShowCreateComponent={setShowCreateComponent} />
       </div>
-      {dataRender.length > 0 && visibleCrear === false ? (
+      {dataRender.length > 0 && showCreateComponent === false && (
         <Table
           dataRender={dataRender}
           columnsRender={columns}
           activarEliminar={activarEliminar}
         />
-      ) : (
-        <p class="w-screen text-center">No hay Instrumentos</p>
       )}
-      {visibleCrear === true && (
-        <input
-          type="button"
-          value="Registrar"
-          onClick={() => {
-            setVisibleCrear(false);
-          }}
+      {dataRender.length < 1 && showCreateComponent === false && (
+        <p className="w-screen text-center">No hay Instrumentos</p>
+      )}
+      {showCreateComponent === true && (
+        <Crear
+          setShowCreateComponent={setShowCreateComponent}
+          setRefreshInstruments={setRefreshInstruments}
         />
       )}
     </div>

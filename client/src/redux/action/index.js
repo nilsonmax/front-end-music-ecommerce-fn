@@ -163,35 +163,34 @@ export const loginUser = (objectUser) => {
 
 export const updateUserInfo = (payload) => {
   return async function () {
-    let token = window.localStorage.getItem("dataUser")
-    let tokenJSON = JSON.parse(token)
-      try {
-          let userUpdated = await axios.put(
-            "http://localhost:4000/users",
-            payload,
-            {
-              headers:{
-                Authorization: `Bearer ${tokenJSON.token}`
-              }
-            }
-          );
-          console.log("TOKEN: ", window.localStorage.getItem('token'))
-          console.log('USERUPDATED', userUpdated);
-          return userUpdated.data;
-
-      } catch (error) {
-          console.log(error);
-      }
-  }
-}
+    let token = window.localStorage.getItem("dataUser");
+    let tokenJSON = JSON.parse(token);
+    try {
+      let userUpdated = await axios.put(
+        "http://localhost:4000/users",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenJSON.token}`,
+          },
+        }
+      );
+      console.log("TOKEN: ", window.localStorage.getItem("token"));
+      console.log("USERUPDATED", userUpdated);
+      return userUpdated.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const get_user = (token) => {
   return async function (dispatch) {
     //let token = window.localStorage.getItem("dataUser")
-    let tokenJSON = JSON.parse(token)
+    let tokenJSON = JSON.parse(token);
     try {
       let usuario = await axios.get("http://localhost:4000/users/token", {
-        headers:{
+        headers: {
           Authorization: "Bearer " + tokenJSON.token,
         },
       });
@@ -201,7 +200,7 @@ export const get_user = (token) => {
       });
     } catch (error) {}
   };
-}
+};
 
 export const getUsers = () => {
   return async function (dispatch) {
@@ -241,6 +240,81 @@ export const deleteInstrument = (id) => {
       return instrumentDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
+    }
+  };
+};
+
+export const putUser = (objectUser, token) => {
+  return async function () {
+    try {
+      let tokenJSON = JSON.parse(token);
+      objectUser = camposNullUser(objectUser);
+      let newUser = await axios.put("http://localhost:4000/users", objectUser, {
+        headers: {
+          Authorization: "Bearer " + tokenJSON.token,
+        },
+      });
+      return newUser.data;
+    } catch (error) {
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
+      }
+      throw new TypeError(errorRes);
+    }
+  };
+};
+
+function camposNullUser(objectUser) {
+  if (objectUser.dni === "") {
+    objectUser.dni = null;
+  }
+  if (objectUser.contactNumber === "") {
+    objectUser.contactNumber = null;
+  }
+  if (objectUser.firstName === "") {
+    objectUser.firstName = null;
+  }
+  return objectUser;
+}
+
+export const postUser = (objectUser) => {
+  return async function () {
+    try {
+      objectUser = camposNullUser(objectUser);
+      let newUser = await axios.post("http://localhost:4000/users", objectUser);
+      return newUser.data;
+    } catch (error) {
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
+      }
+      throw new TypeError(errorRes);
+    }
+  };
+};
+
+export const putInstrument = (objectInstrument, token) => {
+  return async function () {
+    try {
+      let tokenJSON = JSON.parse(token);
+      //objectInstrument = camposNullUser(objectInstrument);
+      let newInstrument = await axios.put(
+        "http://localhost:4000/instruments",
+        objectInstrument,
+        {
+          headers: {
+            Authorization: "Bearer " + tokenJSON.token,
+          },
+        }
+      );
+      return newInstrument.data;
+    } catch (error) {
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
+      }
+      throw new TypeError(errorRes);
     }
   };
 };

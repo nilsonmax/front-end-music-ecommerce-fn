@@ -5,48 +5,69 @@ import NavBarLogin from "../../components/NavBarLogin/NavbarLogin";
 
 const Panel = () => {
   const [componentVisible, setComponentVisible] = useState("Instruments");
+  var [showCreateComponent, setShowCreateComponent] = useState(false);
+
+  const setearStates = (nameComponentVisible) => {
+    setComponentVisible(nameComponentVisible);
+    setShowCreateComponent(false);
+  };
   return (
     <>
       <NavBarLogin />
       <nav>
         <p
           onClick={() => {
-            setComponentVisible("Instruments");
+            setearStates("Instruments");
           }}
         >
           Instruments
         </p>
+
         <p
           onClick={() => {
-            setComponentVisible("Users");
+            setearStates("Users");
           }}
         >
           Users
         </p>
+
         <p
           onClick={() => {
-            setComponentVisible("Categorys");
+            setearStates("Categorys");
           }}
         >
           Categorys
         </p>
+
         <p
           onClick={() => {
-            setComponentVisible("Admins");
+            setearStates("Admins");
           }}
         >
           Admins
         </p>
+
         <p
           onClick={() => {
-            setComponentVisible("Account");
+            setearStates("Account");
           }}
         >
           Account
         </p>
       </nav>
-      {componentVisible === "Users" && <Users />}
-      {componentVisible === "Instruments" && <Instruments />}
+
+      {componentVisible === "Users" && (
+        <Users
+          setShowCreateComponent={setShowCreateComponent}
+          showCreateComponent={showCreateComponent}
+        />
+      )}
+      {componentVisible === "Instruments" && (
+        <Instruments
+          setShowCreateComponent={setShowCreateComponent}
+          showCreateComponent={showCreateComponent}
+        />
+      )}
     </>
   );
 };

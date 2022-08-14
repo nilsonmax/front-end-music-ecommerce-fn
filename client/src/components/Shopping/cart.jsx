@@ -13,7 +13,7 @@ import { useStateContext } from '../../context/stateContext';
 import getStripe from "../../lib/getStripe";
 import { loadStripe } from "@stripe/stripe-js";
 import { Bottom, BtnContainer, CartBottom, CartContainer, CartHeading, CartNumItems, CartWrapper, ContinueShopping, EmptyCart, Heading, Hidden, ItemDescription, ItemImage, PayBtn, Product, ProductContainer, QuantityDesc, QuantityDescMinus, QuantityDescNumCart, QuantityDescPlus, RemoveItemButton, SubTotal, Top, Total, TotalPrice } from './style';
-import util from '../../Utils/util';
+import util from '../../utils/util';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart, removeOneFromCart, toogleCartItemQuantity } from '../../redux/action/cartActions';
 

@@ -16,7 +16,7 @@ export default function NavBarLogin({ setCurrentPage }) {
 
 
   //traer nombre de cuenta
-  let user = useSelector(e => e.user)
+  let user = useSelector(e => e.reducer.user)
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
     dispatch(get_user(token))

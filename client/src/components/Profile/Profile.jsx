@@ -16,7 +16,7 @@ export default function Profile() {
             dispatch(getDataClear())
         }
     }, [])
-    let user = useSelector(e => e.user)
+    let user = useSelector(e => e.reducer.user)
 
     // {
     //     "id": 4,

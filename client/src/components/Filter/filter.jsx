@@ -12,8 +12,8 @@ import {
 function Filter({ setCurrentPage }) {
   const dispatch = useDispatch();
 
-  const instruments = useSelector((state) => state.instruments);
-  const categories = useSelector((state) => state.category);
+  const instruments = useSelector((state) => state.reducer.instruments);
+  const categories = useSelector((state) => state.reducer.category);
 
   const [checkState, setCheckState] = useState("");
   const [dispatched, setDispatched] = useState(null);

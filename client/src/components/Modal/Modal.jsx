@@ -16,13 +16,15 @@ import Swal from "sweetalert2";
 const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
   const [copiaArray, setCopiaArray] = useState([]);
   const [keysArray, setKeyArray] = useState([]);
+
   const [objectActualizar, setObjectActualizar] = useState();
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   var reduxArray = useSelector((state) =>
     dataArrayRender.nameArray === "User"
-      ? state.users
-      : dataArrayRender.nameArray === "Instrument" && state.instruments
+      ? state.reducer.users
+      : dataArrayRender.nameArray === "Instrument" && state.reducer.instruments
+
   );
 
   useEffect(() => {

@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useStateContext } from "../../context/stateContext";
+import { addToCart } from "../../redux/action/cartActions";
 import { StyledCard } from "./style";
 // import { BsCart3 } from "react-icons/bs";
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Card({
   id,
@@ -15,8 +17,20 @@ export default function Card({
   status,
   categoryId,
   categoryName,
+  instruments
 }) {
-  const { decQty, incQty, qty, addToCart, setShowCart } = useStateContext();
+
+  // const instruments = useSelector((state) => state.reducer.instruments);
+  const dispatch = useDispatch()
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const hanledSummit = (e) => {
+    console.log('estoy en hanled aadcart')
+    e.preventDefault();
+    dispatch(addToCart(cartItems, instruments))
+  }
+
+  // const { decQty, incQty, qty, addToCart, setShowCart } = useStateContext();
   const formattedMoney = price.toLocaleString("es-us", {
     style: "currency",
     currency: "COL",
@@ -36,24 +50,11 @@ export default function Card({
       {/* <b>{`Status:`}</b> <span>{`${status}`}</span> */}
       <b>{`Type:`}</b> <span>{`${categoryName}`}</span>
       {/*         <span " text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
-      <button
-        onClick={() =>
-          addToCart(
-            {
-              id,
-              name,
-              brand,
-              price,
-              img,
-              description,
-              stock,
-              status,
-              categoryId,
-              categoryName,
-            },
-            qty
-          )
-        }
+      {/* <a
+            href={`#${product.id}`}
+            onClick={(e) => this.props.addToCart(this.props.cartItems, product)}
+          ></a> */}
+      <button onClick={(e) => hanledSummit(e)}
         className="inline-flex items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1"
       >
         <span className="">{`➕`}</span>

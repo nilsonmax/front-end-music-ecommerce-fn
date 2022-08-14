@@ -8,7 +8,7 @@ import Loader from "../Loader/loader"
 export default function Details() {
     const { id } = useParams()
     const dispatch = useDispatch()
-    let reduxDetail = useSelector(e => e.detail)
+    let reduxDetail = useSelector(e => e.reducer.detail)
 
     useEffect(() => {
         dispatch(get_instrumentID(id))

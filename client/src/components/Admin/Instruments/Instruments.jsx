@@ -8,7 +8,7 @@ import Aside from "../Aside/Aside";
 
 const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
-  const instruments = useSelector((state) => state.instruments);
+  const instruments = useSelector((state) => state.reducer.instruments);
   const columns = ["idInstrument", "Image", "Name", "Stock"];
   var [dataRender, setDataRender] = useState([]);
   var [refreshInstruments, setRefreshInstruments] = useState(null);

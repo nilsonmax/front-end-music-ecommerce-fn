@@ -5,7 +5,7 @@ import NavBarLogin from "../../components/NavBarLogin/NavbarLogin";
 
 const Panel = () => {
   const [componentVisible, setComponentVisible] = useState("Instruments");
-  var [showCreateComponent, setShowCreateComponent] = useState(null);
+  var [showCreateComponent, setShowCreateComponent] = useState(false);
 
   const setearStates = (nameComponentVisible) => {
     setComponentVisible(nameComponentVisible);

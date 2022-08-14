@@ -23,7 +23,9 @@ const stripePromise = loadStripe(
 );
 
 const App = () => {
-  let visible = useSelector((e) => e.visible);
+
+  let visible = useSelector(e => e.reducer.visible)
+
   const dispatch = useDispatch();
   const handleOnClose = () => dispatch(showLogin(false));
   return (
@@ -59,16 +61,11 @@ const App = () => {
           }
         />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/user/info" element={<UserInfo />} />
-        <Route
-          path="/user/Profile"
-          element={
-            <>
-              <Profile />
-              <Footer />
-            </>
-          }
-        />
+
+
+        <Route path="/user/info" element={<><UserInfo /><Footer/></>} />
+        <Route path="/user/Profile" element={<><Profile /><Footer/></>} />
+
         {/* <Route path="/instruments" element={<instruments />} /> */}
         <Route
           path="/instruments/:id"

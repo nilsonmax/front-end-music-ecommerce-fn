@@ -24,12 +24,15 @@ export default function UserInfo () {
 
 
     return(
-        <div>
-        <Link to='/user/Profile'>
+        <div className='flex flex-col my-10 gap-6'>
+            <div className='text-center text-darkconrflower font-semibold hover:text-lg'>
+            <Link to='/user/Profile'>
                 <p>Go back</p>
-        </Link>
+            </Link>
+            </div>
 
-        <Formik
+        <div className='flex justify-center'>
+            <Formik
         initialValues={{
             name:"",
             firstName:"",
@@ -45,19 +48,21 @@ export default function UserInfo () {
         validate={values => {
             let errors = {}
 
-            if(!values.dni){
-                errors.dni = "input required";
-
-            } else if(!values.firstName){
+            if(!values.firstName){
                 errors.firstName = "input required";
 
             } else if(!values.lastName){
                 errors.lastName = "input required";
+            
+            } else if(!values.userName){
+                errors.userName = "input required";
 
-            } else if(!values.contactNumber){
+            } else if(!values.dni){
+                errors.dni = "input required";
+
+            }  else if(!values.contactNumber){
                 errors.contactNumber = "input required";
-
-            } else if(`${values.contactNumber}`.length<10){
+            }else if(`${values.contactNumber}`.length<10){
                 errors.contactNumber = "should have 10 digits at least"
 
             } else if(!values.email){
@@ -65,20 +70,12 @@ export default function UserInfo () {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address';
 
-            } else if(!values.userName){
-                errors.userName = "input required";
-
-            } else if(!values.password){
-                errors.password = "input required";
-            } else if (!/^(?=.*\d)(?=.*[a-z])\w{8,}$/.test(values.password)) {
-                errors.password = 'Invalid Password';
-
             } else if(!values.buyerAddress){
                 errors.buyerAddress = "input required";
                 
             } 
             return errors;
-            }
+          }
         }
 
         onSubmit={(values, { setSubmitting }) => {
@@ -106,53 +103,58 @@ export default function UserInfo () {
 
         {({ isSubmitting }) => (
             <Form className="flex flex-col">
-                <Field type="number" name="dni" placeholder="Id number" 
-                    className="inputFormRegister outline-none rounded-md py-1.5 px-5 w-72"
-                />
-                <ErrorMessage name="dni" component="div" className="error text-red-500 text-center"/>
-
+                <div className="flex justify-center">
+                <div className="flex flex-col mr-1">
                 <Field type="text" name="firstName" placeholder="Firstname" 
-                    className="inputFormRegister outline-none rounded-md py-1.5 px-5 w-72"
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
                 />
-                <ErrorMessage name="firstName" component="div" className="error text-red-500 text-center"/>
+                <ErrorMessage name="firstName" component="div" className="error text-red-500 text-center text-xs"/>
 
                 <Field type="text" name="lastName" placeholder="Lastname" 
-                    className="inputFormRegister outline-none rounded-md py-1.5 px-5 w-72"
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
                 />
-                <ErrorMessage name="lastName" component="div" className="error text-red-500 text-center"/>
-
-                <Field type="number" name="contactNumber" placeholder="Contact Number" 
-                    className="inputFormRegister outline-none rounded-md py-1.5 px-5 w-72"
-                />
-                <ErrorMessage name="contactNumber" component="div" className="error text-red-500 text-center"/>
-
-                <Field type="email" name="email" placeholder="Email" 
-                    className="inputFormRegister outline-none rounded-md py-1.5 px-5 mt-3.5"
-                />
-                <ErrorMessage name="email" component="div" className="error text-red-500 text-center"/>
+                <ErrorMessage name="lastName" component="div" className="error text-red-500 text-center text-xs"/>
 
                 <Field type="text" name="userName" placeholder="Username" 
-                   className="inputFormRegister outline-none rounded-md py-1.5 px-5 w-72"
+                   className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
                 />
-                <ErrorMessage name="username" component="div" className="error text-red-500 text-center"/>
+                <ErrorMessage name="username" component="div" className="error text-red-500 text-center text-xs"/>
+                </div>
 
-                <Field type="password" name="password" placeholder="Password" 
-                    className="inputFormRegister outline-none rounded-md py-1.5 px-5 mt-3.5"
+                <div className="flex flex-col ml-1">
+                <Field type="number" name="dni" placeholder="Id number" 
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
                 />
-                <ErrorMessage name="password" component="div" className="error text-red-500 text-center"/>
+                <ErrorMessage name="dni" component="div" className="error text-red-500 text-center text-xs"/>
+
+                <Field type="number" name="contactNumber" placeholder="Contact Number" 
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
+                />
+                <ErrorMessage name="contactNumber" component="div" className="error text-red-500 text-center text-xs"/>
+
+                <Field type="email" name="email" placeholder="Email" 
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
+                />
+                <ErrorMessage name="email" component="div" className="error text-red-500 text-center text-xs"/>
+                </div>
+                </div>
 
                 <Field type="text" name="buyerAddress" placeholder="Address" 
-                    className="inputFormRegister outline-none rounded-md py-1.5 px-5 mt-3.5"
+                    className="border border-bluemunsell outline-none rounded-md py-1.5 px-5 my-1 focus:border-darkconrflower focus:py-2 focus:px-6 focus:shadow-darkconrflower"
                 />
-                <ErrorMessage name="buyerAddress" component="div" className="error text-red-500 text-center"/>
+                <ErrorMessage name="buyerAddress" component="div" className="error text-red-500 text-center text-xs"/>
 
                 <button type="submit" disabled={isSubmitting} 
-                    className=" border rounded-md my-5 p-1.5 buttonSingup">
-                    Send
+                    className="border-none rounded-md my-5 p-1.5 bg-darkconrflower text-white font-semibold hover:bg-bluemunsell hover:text-black"
+                >
+                Send
                 </button>
             </Form>  
         )}    
         </Formik>
+
+       
+        </div>
         </div>
     )
 }

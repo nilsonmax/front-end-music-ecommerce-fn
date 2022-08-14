@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
-import axios from 'axios';
-import { Link, Route, Routes } from 'react-router-dom';
+import React, { useRef, useState } from "react";
+import axios from "axios";
+import { Link, Route, Routes } from "react-router-dom";
 import {
   AiOutlineShopping,
   AiOutlineMinus,
@@ -9,41 +9,72 @@ import {
 } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
-import { useStateContext } from '../../context/stateContext';
+import { useStateContext } from "../../context/stateContext";
 import getStripe from "../../lib/getStripe";
 import { loadStripe } from "@stripe/stripe-js";
-import { Bottom, BtnContainer, CartBottom, CartContainer, CartHeading, CartNumItems, CartWrapper, ContinueShopping, EmptyCart, Heading, Hidden, ItemDescription, ItemImage, PayBtn, Product, ProductContainer, QuantityDesc, QuantityDescMinus, QuantityDescNumCart, QuantityDescPlus, RemoveItemButton, SubTotal, Top, Total, TotalPrice } from './style';
-import util from '../../utils/util';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart, removeOneFromCart, toogleCartItemQuantity } from '../../redux/action/cartActions';
+import {
+  Bottom,
+  BtnContainer,
+  CartBottom,
+  CartContainer,
+  CartHeading,
+  CartNumItems,
+  CartWrapper,
+  ContinueShopping,
+  EmptyCart,
+  Heading,
+  Hidden,
+  ItemDescription,
+  ItemImage,
+  PayBtn,
+  Product,
+  ProductContainer,
+  QuantityDesc,
+  QuantityDescMinus,
+  QuantityDescNumCart,
+  QuantityDescPlus,
+  RemoveItemButton,
+  SubTotal,
+  Top,
+  Total,
+  TotalPrice,
+} from "./style";
+import util from "../../utils/util";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  removeFromCart,
+  removeOneFromCart,
+  toogleCartItemQuantity,
+} from "../../redux/action/cartActions";
+import e from "cors";
 
 const Cart = () => {
   // const cartRef = useRef();
-  const {  setShowCart } = useStateContext();
+  const { setShowCart } = useStateContext();
   // const [showCart, setShowCart] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
   const hanledDelete = (e, item) => {
-    console.log('estoy en hanled aadcart')
+    console.log("estoy en hanled aadcart");
     e.preventDefault();
-    dispatch(removeFromCart(cartItems, item))
-  }
+    dispatch(removeFromCart(cartItems, item));
+  };
 
   const hanledIncODec = (e, item, incOdec) => {
-    console.log('estoy en hanled aadcart')
+    console.log("estoy en hanled aadcart");
     e.preventDefault();
-    dispatch(toogleCartItemQuantity(item, incOdec))
-  }
+    dispatch(toogleCartItemQuantity(item, incOdec));
+  };
 
   const hanledAsc = (e, item) => {
-    console.log('estoy en hanled aadcartASC')
+    console.log("estoy en hanled aadcartASC");
     e.preventDefault();
-    dispatch(addToCart(cartItems, item))
-  }
+    dispatch(addToCart(cartItems, item));
+  };
 
-
-  const handleCheckout = async () => {
+  /*   const handleCheckout = async () => {
     const stripe = await getStripe();
     console.log(stripe, 'stripe data');
     const response = await fetch("http://localhost:4000/payment", {
@@ -57,11 +88,15 @@ const Cart = () => {
     const data = await response.json();
     toast.loading("Redirecting...");
     stripe.redirectToCheckout({ sessionId: data.id });
-  };
+  }; */
 
+  function handleCheckout(e) {
+    e.preventDefault();
+    window.location = "/checkout";
+  }
 
   return (
-    <CartWrapper >
+    <CartWrapper>
       <CartContainer>
         <CartHeading
           type="button"
@@ -70,7 +105,6 @@ const Cart = () => {
         >
           <AiOutlineLeft />
           <Heading>Back to shopping</Heading>
-
         </CartHeading>
 
         {cartItems.length < 1 && (
@@ -82,7 +116,7 @@ const Cart = () => {
               type="button"
               // ShowCart={true}
               onClick={() => setShowCart(false)}
-            // isSidebarOpen={isSidebarOpen} closeSidebar={() => setSidebarOpen(false)}
+              // isSidebarOpen={isSidebarOpen} closeSidebar={() => setSidebarOpen(false)}
             >
               Continue Shopping
             </ContinueShopping>
@@ -91,30 +125,22 @@ const Cart = () => {
 
         <ProductContainer>
           {cartItems.length >= 1 ? (
-            <div >
+            <div>
               <CartHeading>Your Cart</CartHeading>
-              <CartNumItems>
-                ({cartItems.length} items)
-              </CartNumItems>
+              <CartNumItems>({cartItems.length} items)</CartNumItems>
             </div>
           ) : (
             <Hidden>
               <CartHeading>Your Cart</CartHeading>
-              <CartNumItems>
-                ({cartItems.length} items)
-              </CartNumItems>
+              <CartNumItems>({cartItems.length} items)</CartNumItems>
             </Hidden>
           )}
-
 
           {/* {cartItems.length >= 1 && */}
           {cartItems.length > 0 &&
             cartItems.map((item, index) => (
               <Product key={item.id}>
-                <ItemImage
-                  src={item.img}
-                  alt=""
-                />
+                <ItemImage src={item.img} alt="" />
                 <ItemDescription>
                   <Top>
                     <h5>{item.name}</h5>
@@ -142,7 +168,7 @@ const Cart = () => {
                     <RemoveItemButton
                       type="button"
                       onClick={(e) => hanledDelete(e, item)}
-                    // onClick={() => removeFromCart(item)}
+                      // onClick={() => removeFromCart(item)}
                     >
                       <TiDeleteOutline size={20} />
                     </RemoveItemButton>
@@ -169,7 +195,6 @@ const Cart = () => {
             </BtnContainer>
           </CartBottom>
         )}
-
       </CartContainer>
     </CartWrapper>
   );
@@ -247,8 +272,6 @@ const Cart = () => {
   //     </div>
   //   </div>
   // );
+};
 
-
-}
-
-export default Cart
+export default Cart;

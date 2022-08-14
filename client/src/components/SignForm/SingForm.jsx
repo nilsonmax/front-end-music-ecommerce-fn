@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/action";
 import { showLogin } from "../../redux/action/index";
-import validarUserRegister from "../../Utils/validateUserRegister";
+import validarUserRegister from "../../utils/validateUserRegister";
 import "./styleCss.css";
 import Swal from "sweetalert2";
 

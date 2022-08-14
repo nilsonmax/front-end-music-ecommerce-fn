@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsers, deleteUser } from "../../../redux/action";
 import Swal from "sweetalert2";
 import Aside from "../Aside/Aside";
+import Crear from "./Crear";
 
-const Users = () => {
+const Users = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
   const columns = ["Nombre y Apellido", "userName", "Email", "Rol"];
   var [dataRender, setDataRender] = useState([]);
   var [refreshUsers, setRefreshUsers] = useState(null);
-  var [visibleCrear, setVisibleCrear] = useState(false);
   useEffect(() => {
     if (users.length === 0 && refreshUsers === null) {
       dispatch(getUsers());
@@ -56,26 +56,26 @@ const Users = () => {
   return (
     <div className="flex flex-row">
       <div>
-        <Aside setVisibleCrear={setVisibleCrear} />
+        <Aside setShowCreateComponent={setShowCreateComponent} />
       </div>
-      {dataRender.length > 0 && visibleCrear === false ? (
-        <Table
-          dataRender={dataRender}
-          columnsRender={columns}
-          activarEliminar={activarEliminar}
-        />
-      ) : (
-        <p className="w-screen text-center">No hay users</p>
-      )}
-      {visibleCrear === true && (
-        <input
-          type="button"
-          value="Registrar"
-          onClick={() => {
-            setVisibleCrear(false);
-          }}
-        />
-      )}
+      <div>
+        {dataRender.length > 0 && showCreateComponent === false && (
+          <Table
+            dataRender={dataRender}
+            columnsRender={columns}
+            activarEliminar={activarEliminar}
+          />
+        )}
+        {dataRender.length < 1 && showCreateComponent === false && (
+          <p className="w-screen text-center">No hay users</p>
+        )}
+        {showCreateComponent === true && (
+          <Crear
+            setShowCreateComponent={setShowCreateComponent}
+            setRefreshUsers={setRefreshUsers}
+          />
+        )}
+      </div>
     </div>
   );
 };

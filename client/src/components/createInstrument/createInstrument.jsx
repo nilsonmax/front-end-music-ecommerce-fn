@@ -49,7 +49,7 @@ function validate(input){
 export default function CreateInstrument() {
     const dispatch = useDispatch();
     const goBack = useNavigate();
-    const categories = useSelector((state) => state.category);
+    const categories = useSelector((state) => state.reducer.category);
     const [errors, setErrors] = useState({
         name:"",
         brand:"",

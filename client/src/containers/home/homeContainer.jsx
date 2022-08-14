@@ -5,12 +5,13 @@ import Loader from "../../components/Loader/loader.jsx";
 import NavBarNoLogin from "../../components/NavbarNoLogin/NavbarNoLogin.jsx";
 import NavBarLogin from "../../components/NavBarLogin/NavbarLogin.jsx";
 import Aside from "../../components/Aside/aside.jsx";
+import { combineReducers } from 'redux';
 
 export default function HomeContainer() {
   const localStore = window.localStorage.getItem("dataUser");
   const dispatch = useDispatch();
 
-  const elementsToShow = useSelector((state) => state.instruments);
+  const elementsToShow = useSelector((state) => state.reducer.instruments);
   const elementsPerPage = 10;
 
   const [currentPage, setCurrentPage] = useState(1);

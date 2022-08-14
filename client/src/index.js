@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -10,8 +11,11 @@ import { StateContext } from './context/stateContext';
 // import dotenv from 'dotenv'
 // dotenv.config
 // axios.defaults.baseURL=process.env.REACT_APP_API || 'http://localhost:3001'
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
 
-ReactDOM.render(
+// ReactDOM.render(
+  root.render(
   <Provider store={store}>
     <StateContext>
       <BrowserRouter>
@@ -19,7 +23,7 @@ ReactDOM.render(
       </BrowserRouter>
     </StateContext>
   </Provider>,
-  document.getElementById('root')
+  // document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

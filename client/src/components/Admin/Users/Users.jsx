@@ -7,7 +7,7 @@ import Aside from "../Aside/Aside";
 
 const Users = () => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.reducer.users);
   const columns = ["Nombre y Apellido", "userName", "Email", "Rol"];
   var [dataRender, setDataRender] = useState([]);
   var [refreshUsers, setRefreshUsers] = useState(null);

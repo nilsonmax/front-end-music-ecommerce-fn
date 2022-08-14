@@ -7,7 +7,7 @@ const Modal = ({ setModal, dataArrayRender }) => {
   const [keysArray, setKeyArray] = useState([]);
   const [objectActualizar, setObjectActualizar] = useState({});
   var reduxArray = useSelector(
-    (state) => dataArrayRender.nameArray === "User" && state.users
+    (state) => dataArrayRender.nameArray === "User" && state.reducer.users
   );
 
   useEffect(() => {

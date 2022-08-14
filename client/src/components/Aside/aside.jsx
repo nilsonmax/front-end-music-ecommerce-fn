@@ -34,7 +34,7 @@ export default function Aside({
 }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  const elementsToShow = useSelector((state) => state.instruments);
+  const elementsToShow = useSelector((state) => state.reducer.instruments);
   return (
     <>
       <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -274,6 +274,7 @@ export default function Aside({
                       status={inst.status}
                       categoryId={inst.categoryId}
                       categoryName={inst.category.name}
+                      instruments={inst}
                     />
                   );
                 })}

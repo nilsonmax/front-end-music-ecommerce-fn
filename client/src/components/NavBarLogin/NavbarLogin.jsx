@@ -16,7 +16,7 @@ export default function NavBarLogin({ setCurrentPage }) {
 
 
   //traer nombre de cuenta
-  let user = useSelector(e => e.user)
+  let estadoGlobal = useSelector(e => e)
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
     dispatch(get_user(token))
@@ -96,9 +96,6 @@ export default function NavBarLogin({ setCurrentPage }) {
                 window.localStorage.removeItem("dataUser")
                 window.location.href = "/"
               }}>
-                <div className="inline-block w-full  py-1 my-2 text-center text-white  bg-darkconrflower rounded-full shadow hover:bg-[#F37042] ">
-                  NickName
-                </div>
               </div>
             </div>
 
@@ -108,13 +105,10 @@ export default function NavBarLogin({ setCurrentPage }) {
           <div className="lg:inline-block">
             <Search setCurrentPage={setCurrentPage} />
           </div>
-          <h2 className="px-2 py-1 text-1xl text-bluemunsell font-bold lg:inline-block">
-            {`Welcome ${user.userName}`}
-          </h2>
-          {/*<div onClick={() => {window.localStorage.removeItem("dataUser"); window.location.href = "/"}} className="px-2 py-1 text-white text-1xl bg-darkconrflower rounded-full shadow hover:bg-[#F37042] lg:inline-block">
-            NickName
-            </div>*/}
         </div>
+          <h2 className="lg: px-2 py-1 text-1xl text-bluemunsell font-bold lg:inline-block">
+            {estadoGlobal.user?`Welcome ${estadoGlobal.user.userName}`:"Loading.."}
+          </h2>
       <button type="button" onClick={() => setShowCart(true)} className=" relative link flex items-center">
       {totalQuantities!==0&&<span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{totalQuantities!==0&&totalQuantities}</span>}
         <HiShoppingCart size={20} className="h-10" />

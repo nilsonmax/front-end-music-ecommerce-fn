@@ -10,6 +10,7 @@ import {
   SHOW_LOGIN,
   GET_USER,
   GET_USERS,
+  SIGN_IN
 } from "../action/index.js";
 
 const initialState = {
@@ -19,7 +20,7 @@ const initialState = {
   category: [],
   currentPageGlobal: {},
   visible: false,
-  user: {},
+  user: null,
   users: [],
 };
 
@@ -144,7 +145,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         users: action.payload,
       };
-
+    case SIGN_IN:
+      return{
+        ...state,
+        user:action.payload.user,
+        token:action.payload.token
+      }
     default:
       return state;
   }

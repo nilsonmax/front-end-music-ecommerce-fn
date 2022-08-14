@@ -14,6 +14,7 @@ export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const SHOW_LOGIN = "SHOW_LOGIN";
 export const GET_USERS = "GET_USERS";
 export const DELETE_INSTRUMENT = "DELETE_INSTRUMENT";
+export const SIGN_IN="SIGN_IN";
 
 // const { REACT_APP_HOST } = process.env;
 const REACT_APP_HOST = "http://localhost:4000";
@@ -146,15 +147,21 @@ export const registerUser = (objectUser) => {
 };
 
 export const loginUser = (objectUser) => {
-  return async function () {
+  return async function (dispatch) {
     try {
       let newUser = await axios.post(
         "http://localhost:4000/auth/login",
         objectUser
       );
-      window.localStorage.setItem("dataUser", JSON.stringify(newUser.data));
-      console.log("tu token: " + newUser.data);
-      return newUser.data;
+      window.localStorage.setItem("dataUser", JSON.stringify(newUser.data.token));
+      console.log(newUser.data)
+      return dispatch({
+        type:SIGN_IN,
+        payload:newUser.data
+      })
+      // window.localStorage.setItem("dataUser", JSON.stringify(newUser.data));
+      // console.log("tu token: " + newUser.data);
+      // return newUser.data;
     } catch (error) {
       throw new TypeError(error.response.data);
     }
@@ -187,12 +194,12 @@ export const updateUserInfo = (payload) => {
 
 export const get_user = (token) => {
   return async function (dispatch) {
-    //let token = window.localStorage.getItem("dataUser")
+    let token = window.localStorage.getItem("dataUser")
     let tokenJSON = JSON.parse(token)
     try {
       let usuario = await axios.get("http://localhost:4000/users/token", {
         headers:{
-          Authorization: "Bearer " + tokenJSON.token,
+          Authorization: "Bearer " + tokenJSON,
         },
       });
       return dispatch({

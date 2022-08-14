@@ -35,10 +35,11 @@ const LoginForm = ({ visible, onClose }) => {
     
     dispatch(loginUser(state))
     .then(async(data)=>{
-      const token=decodeToken(data.token)
-      if(token.user_rol==="admin"){
+      console.log(data.payload.token)
+      const token2=decodeToken(data.payload.token)
+      if(token2.user_rol==="admin"){
         window.location.href="/admin"
-      }else if(token.user_rol==="user"){
+      }else if(token2.user_rol==="user"){
         window.location.href="/"
       }
     })

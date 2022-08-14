@@ -28,7 +28,7 @@ export default function NavBarLogin({ setCurrentPage }) {
 
         <DivItemsCenter>
           <Link to="/">
-            <h2 className="text-2xl font-bold">LOGO</h2>
+            <h2 className="text-2xl font-bold w-auto text-secondary">LOGO</h2>
           </Link>
 
           <div className="lg:hidden">
@@ -96,9 +96,11 @@ export default function NavBarLogin({ setCurrentPage }) {
                 window.localStorage.removeItem("dataUser")
                 window.location.href = "/"
               }}>
-                <div className="inline-block w-full  py-1 my-2 text-center text-white  bg-darkconrflower rounded-full shadow hover:bg-[#F37042] ">
-                  NickName
-                </div>
+              <Link to="/user/Profile">
+              <h2 className=" py-1 text-1xl text-secondary text-lg underline lg:inline-block">
+                  {`Welcome ${user.userName}`}
+                </h2>
+              </Link>
               </div>
             </div>
 
@@ -108,19 +110,18 @@ export default function NavBarLogin({ setCurrentPage }) {
           <div className="lg:inline-block">
             <Search setCurrentPage={setCurrentPage} />
           </div>
-          <h2 className="px-2 py-1 text-1xl text-bluemunsell font-bold lg:inline-block">
+        </div>
+        <Link to="/user/Profile">
+          <h2 className="hidden lg: py-1 text-1xl text-secondary text-lg underline lg:inline-block">
             {`Welcome ${user.userName}`}
           </h2>
-          {/*<div onClick={() => {window.localStorage.removeItem("dataUser"); window.location.href = "/"}} className="px-2 py-1 text-white text-1xl bg-darkconrflower rounded-full shadow hover:bg-[#F37042] lg:inline-block">
-            NickName
-            </div>*/}
-        </div>
-      <button type="button" onClick={() => setShowCart(true)} className=" relative link flex items-center">
-      {totalQuantities!==0&&<span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{totalQuantities!==0&&totalQuantities}</span>}
-        <HiShoppingCart size={20} className="h-10" />
-        <p className="hidden md:inline font-extrabold md: text-sm mt-2">Cart</p>
-      </button>
-      {showCart && <Cart />}
+        </Link>
+        <button type="button" onClick={() => setShowCart(true)} className=" relative link flex items-center">
+          {totalQuantities !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{totalQuantities !== 0 && totalQuantities}</span>}
+          <HiShoppingCart size={20} className="h-10" />
+          <p className="hidden md:inline font-extrabold md: text-sm mt-2">Cart</p>
+        </button>
+        {showCart && <Cart />}
       </DivJustifyBetween>
     </NavContainer>
   );

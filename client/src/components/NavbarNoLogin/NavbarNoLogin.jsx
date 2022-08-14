@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ export default function NavBarNoLogin({ setCurrentPage }) {
   const { showCart, setShowCart, totalQuantities } = useStateContext();
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   return (
     <NavContainer>
@@ -19,7 +20,7 @@ export default function NavBarNoLogin({ setCurrentPage }) {
 
         <DivItemsCenter>
           <Link to="/">
-            <h2 className="text-2xl font-bold">LOGO</h2>
+            <h2 className="text-2xl font-bold text-secondary">LOGO</h2>
           </Link>
 
           <div className="lg:hidden">
@@ -64,16 +65,6 @@ export default function NavBarNoLogin({ setCurrentPage }) {
           >
 
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              {/* <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
-                <Link to="/">
-                  <p>Home</p>
-                </Link>
-              </li> */}
-              {/* <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <Link to="/instruments/create">
-                  <p>Create</p>
-                </Link>
-              </li> */}
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
                 <p>About US</p>
               </li>
@@ -83,36 +74,32 @@ export default function NavBarNoLogin({ setCurrentPage }) {
               <div className="inline-block w-full">
                 <Search setCurrentPage={setCurrentPage} />
               </div>
-              <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center  text-white bg-darkconrflower  rounded-md shadow hover:bg-steelteal ">
+              <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center text-white  bg-bluemunsell rounded-md shadow hover:bg-steelteal ">
                 Sign in
               </div>
-              <Link to="/signup">
-                <div className="inline-block w-full px-4 py-2 text-center text-dark  bg-bluemunsell rounded-md shadow hover:bg-steelteal ">
-                  Sign up
-                </div>
-              </Link>
+              <div onClick={e => navigate("/signup")} className="inline-block w-full px-4 py-2 text-center text-white  bg-bluemunsell rounded-md shadow hover:bg-steelteal ">
+                Sign up
+              </div>
             </div>
           </div>
         </div>
-        <div className="hidden space-x-2 lg:inline-block">
-          <div className="lg:inline-block">
+        <div className="hidden space-x-4 lg:flex justify-between">
+          <div className="">
             <Search setCurrentPage={setCurrentPage} />
           </div>
-          <div onClick={() => dispatch(showLogin(true))} className="px-4 py-2 cursor-pointer text-white bg-darkconrflower  rounded-md shadow hover:bg-steelteal  lg:inline-block">
-            Sign in
+          <div onClick={() => dispatch(showLogin(true))} className="my-2 px-2 text-lg font-semibold bg-secondary rounded-xl text-white hover:bg-primary cursor-pointer ease-in-out duration-300 ">
+            Sign In
           </div>
-          <Link to="/signup">
-            <div className="px-4 py-2 text-dark bg-bluemunsell rounded-md shadow hover:bg-steelteal lg:inline-block">
-              Sign up
-            </div>
-          </Link>
+          <div onClick={e => navigate("/signup")} className="my-2 px-2 text-lg font-semibold bg-secondary rounded-xl text-white hover:bg-primary cursor-pointer ease-in-out duration-300">
+            Sign Up
+          </div>
         </div>
-        <button type="button" onClick={() => alert("redireccionado a iniciar sesion o registrarse")} className=" relative link flex items-center">
-            {totalQuantities!==0&&<span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{totalQuantities!==0&&totalQuantities}</span>}
-            <HiShoppingCart size={20} className="h-10" />
-            <p className="hidden md:inline font-extrabold md: text-sm mt-2">Cart</p>
-          </button>
-          {showCart && <Cart />}
+        <button type="button" onClick={() =>dispatch(showLogin(true))} className=" relative link flex items-center">
+          {totalQuantities !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{totalQuantities !== 0 && totalQuantities}</span>}
+          <HiShoppingCart size={20} className="h-10" />
+          <p className="hidden md:inline font-extrabold md: text-sm mt-2">Cart</p>
+        </button>
+        {showCart && <Cart />}
 
       </DivJustifyBetween>
     </NavContainer>

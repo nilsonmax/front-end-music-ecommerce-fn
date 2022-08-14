@@ -21,6 +21,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
         dispatch(getUsers());
         setRefreshUsers(false);
       }
+
       setDataRender([]);
       users.map((user) => {
         setDataRender((data) => [

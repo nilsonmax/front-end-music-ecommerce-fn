@@ -1,0 +1,58 @@
+import styled from "styled-components";
+import tw from "twin.macro";
+
+export const Container = styled.div`
+  ${tw`flex flex-col items-center w-screen h-auto`}
+`;
+
+export const MainContainer = styled.div`
+  ${tw`flex flex-col items-center w-2/4 p-2`}
+`;
+
+export const Title = styled.h2`
+  ${tw`m-4 text-[#0A0A0A] text-3xl font-bold`}
+`;
+
+export const Required = styled.div`
+  ${tw`flex items-start w-full`}
+`;
+
+export const FormContainer = styled.form`
+  ${tw`flex flex-col `};
+`;
+
+export const SixItemsContainer = styled.div`
+  ${tw`flex flex-wrap justify-around`}
+`;
+
+export const ThreeItemsContainer = styled.div`
+  ${tw`flex flex-col justify-around m-2`}
+`;
+
+export const SubmitButton = styled.button`
+  ${tw`py-1.5 rounded-md bg-[#F37042] text-background font-semibold hover:p-2.5`}
+`;
+
+export const InputUp = styled.input`
+  ${tw`p-1 my-1.5 border-[0.5px] rounded-md placeholder-[#0A0A0A] border-tertiary hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}
+`;
+
+export const InputDown = styled.input`
+  ${tw`w-full p-1 my-1.5 border-[0.5px] rounded-md placeholder-[#0A0A0A] border-tertiary hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}
+`;
+
+export const Select = styled.select`
+  ${tw`p-1 border rounded-md border-tertiary hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}
+`;
+
+export const TextArea = styled.textarea`
+  ${tw`w-full p-1 my-1.5 border-[0.5px] rounded-md border-tertiary placeholder-[#0A0A0A] hover:border-[#F37042] hover:shadow-md shadow-[#F37042]`}
+`;
+
+export const ButtonAceptar = styled.button`
+  ${tw`text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`};
+`;
+
+export const ButtonCancelar = styled.button`
+  ${tw`py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700`};
+`;

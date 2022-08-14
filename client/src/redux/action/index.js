@@ -293,3 +293,28 @@ export const postUser = (objectUser) => {
     }
   };
 };
+
+export const putInstrument = (objectInstrument, token) => {
+  return async function () {
+    try {
+      let tokenJSON = JSON.parse(token);
+      //objectInstrument = camposNullUser(objectInstrument);
+      let newInstrument = await axios.put(
+        "http://localhost:4000/instruments",
+        objectInstrument,
+        {
+          headers: {
+            Authorization: "Bearer " + tokenJSON.token,
+          },
+        }
+      );
+      return newInstrument.data;
+    } catch (error) {
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
+      }
+      throw new TypeError(errorRes);
+    }
+  };
+};

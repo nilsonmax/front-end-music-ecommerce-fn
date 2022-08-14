@@ -9,7 +9,8 @@ import {
   Select,
 } from "./style";
 import validateUserRegister from "../../utils/validateUserRegister";
-import { putUser } from "../../redux/action/index";
+import validateInstrument from "../../utils/validateInstrument";
+import { putUser, putInstrument } from "../../redux/action/index";
 import Swal from "sweetalert2";
 
 const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
@@ -33,6 +34,8 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
           setObjectActualizar(data);
         }
       });
+    } else {
+      console.log(keysArray);
     }
   }, [copiaArray]);
 
@@ -42,7 +45,14 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
       ...objectActualizar,
       [name]: value,
     });
-    const returnError = validateUserRegister(objectActualizar);
+
+    let returnError = null;
+    if (dataArrayRender.nameArray === "User") {
+      returnError = validateUserRegister(objectActualizar);
+    } else {
+      returnError = validateInstrument(objectActualizar);
+    }
+
     for (const error in returnError) {
       if (error === "confirmpassword") {
         setErrors("");
@@ -53,7 +63,13 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
   };
 
   const onClickActulizar = () => {
-    const returnError = validateUserRegister(objectActualizar);
+    let returnError = null;
+    if (dataArrayRender.nameArray === "User") {
+      returnError = validateUserRegister(objectActualizar);
+    } else {
+      returnError = validateInstrument(objectActualizar);
+    }
+
     for (const error in returnError) {
       if (error === "confirmpassword") {
         setErrors("");
@@ -61,7 +77,7 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
         setErrors(`${error} : ${returnError[error]}`);
       }
     }
-    if (errors.length === 0) {
+    if (errors.length === 0 || Object.entries(errors).length === 0) {
       alertActualizar(dataArrayRender.nameArray, objectActualizar);
     }
   };
@@ -81,6 +97,14 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
         const tokenCode = window.localStorage.getItem("dataUser");
         if (nameModelActualizar === "User") {
           dispatch(putUser(objectActualizar, tokenCode))
+            .then((data) => {
+              exitoAndErrorAlert("success", data);
+            })
+            .catch((error) => {
+              exitoAndErrorAlert("error", error);
+            });
+        } else {
+          dispatch(putInstrument(objectActualizar, tokenCode))
             .then((data) => {
               exitoAndErrorAlert("success", data);
             })
@@ -155,7 +179,9 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
                     {keysArray.map((data, key) => {
                       return (
                         <div key={key + 1}>
-                          {data !== "rol" && data !== "category" ? (
+                          {data !== "rol" &&
+                          data !== "category" &&
+                          data !== "status" ? (
                             <Input
                               type={
                                 data === "email"
@@ -187,6 +213,19 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
                                 <>
                                   <option value="users">User</option>
                                   <option value="banned">Banned</option>
+                                </>
+                              )}
+                              {data === "category" && (
+                                <>
+                                  <option value="stringed">Stringed</option>
+                                  <option value="wind">Wind</option>
+                                  <option value="percussion">Percussion</option>
+                                </>
+                              )}
+                              {data === "status" && (
+                                <>
+                                  <option value="new">New</option>
+                                  <option value="used">Used</option>
                                 </>
                               )}
                             </Select>

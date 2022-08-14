@@ -17,7 +17,7 @@ import SuccessPayment from "./pages/SuccessPayment/SuccessPayment";
 
 
 const App = () => {
-  let visible = useSelector(e => e.visible)
+  let visible = useSelector(e => e.reducer.visible)
   const dispatch = useDispatch();
   const handleOnClose=()=>dispatch(showLogin(false));
   return (

@@ -64,7 +64,7 @@ const LoginForm = ({ visible, onClose }) => {
 
   if (!visible) return null;
   return (
-    <div className="fixed inset-0 bg-dark bg-opacity-25 backdrop-blur-sm flex items-center justify-center">
+    <div className="fixed inset-0 bg-dark bg-opacity-25 backdrop-blur-sm flex items-center justify-center mt-3">
 
       <div class=" py-6 sm:py-8 lg:py-12">
         <div class=" bg-white rounded-lg max-w-screen-2xl px-4 md:px-8 mx-auto">

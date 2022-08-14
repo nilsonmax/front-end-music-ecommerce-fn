@@ -71,6 +71,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case ORDERED:
+      if(action.payload==="default") return{
+        ...state,
+        instruments:state.copy
+      }
       const orderByname =
         action.payload === "asce"
           ? state.instruments.slice().sort((a, b) => {

@@ -1,5 +1,6 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../../context/stateContext";
 import { addToCart } from "../../redux/action/cartActions";
 import { StyledCard } from "./style";
@@ -23,7 +24,7 @@ export default function Card({
   // const instruments = useSelector((state) => state.reducer.instruments);
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart.items);
-
+  const navigate=useNavigate()
   const hanledSummit = (e) => {
     console.log('estoy en hanled aadcart')
     e.preventDefault();
@@ -40,15 +41,16 @@ export default function Card({
 
   return (
     <StyledCard>
-      <img src={img} alt={name} />
+      
+      <img src={img} alt={name} onClick={e=>navigate("/instruments/"+id)}/>
       <p>{brand}</p>
-      <h2>{name}</h2>
-      <h3>{`${colMoney}`}</h3>
+      <h2 onClick={e=>navigate("/instruments/"+id)}>{name}</h2>
+      <h3 onClick={e=>navigate("/instruments/"+id)}>{`${colMoney}`}</h3>
       {/* <span>{`USD${price/4500}`}</span> */}
       <br></br>
       <br></br>
       {/* <b>{`Status:`}</b> <span>{`${status}`}</span> */}
-      <b>{`Type:`}</b> <span>{`${categoryName}`}</span>
+      <b>{`Type:`}</b> <span onClick={e=>navigate("/instruments/"+id)}>{`${categoryName}`}</span>
       {/*         <span " text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
       {/* <a
             href={`#${product.id}`}
@@ -72,6 +74,7 @@ export default function Card({
           />
         </svg>
       </button>
+    
     </StyledCard>
   );
 }

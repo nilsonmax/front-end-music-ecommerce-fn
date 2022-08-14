@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import tw from 'twin.macro'
 
 export const NavContainer = styled.nav`
-  ${tw`w-full shadow `};
+  ${tw`w-full shadow-lg sticky top-0 bg-white z-40`};
 `;
 
 export const Button = styled.button`

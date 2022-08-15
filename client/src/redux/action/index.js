@@ -80,14 +80,12 @@ export const getAllCategories = () => {
   return async function (dispatch) {
     try {
       let categories = await axios.get("http://localhost:4000/category/all");
-      console.log("CATEGORIES", categories);
-
       return dispatch({
         type: "GET_ALL_CATEGORIES",
         payload: categories.data,
       });
     } catch (error) {
-      console.log(error);
+      throw new TypeError(error.response);
     }
   };
 };
@@ -225,6 +223,19 @@ export const deleteUser = (user_id) => {
         `http://localhost:4000/users/${user_id}`
       );
       return userDeleted.data;
+    } catch (error) {
+      throw new TypeError(error.response.data);
+    }
+  };
+};
+
+export const deleteCategory = (category_id) => {
+  return async function () {
+    try {
+      let categoryDeleted = await axios.delete(
+        `http://localhost:4000/category/${category_id}`
+      );
+      return categoryDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
     }

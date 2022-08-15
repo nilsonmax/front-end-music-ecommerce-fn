@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
-	
+
   const [qty, setQty] = useState(1);
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -47,34 +47,17 @@ export const StateContext = ({ children }) => {
 
   const toogleCartItemQuantity = (id, value) => {
     foundProduct = cartItems.find((item) => item._id === id);
-	 index = cartItems.findIndex((product) => product._id === id);
-    // foundProductIndex = cartItems.indexOf((item) => item._id === id);
-    // const newCartItems = cartItems.filter((item) => item._id !== id);
-    // const itemIndex = cartItems
-      // .map((item, index) => {
-        // if (item._id === id) {
-          // return index;
-        // }
-      // })
-      // .filter((item) => item !== undefined)[0];
+    index = cartItems.findIndex((product) => product._id === id);
+
     if (value === "inc") {
-       setCartItems([...cartItems.slice(0, index), { ...foundProduct, quantity: foundProduct.quantity + 1 }, ...cartItems.slice(index + 1)]);
-      // newCartItems.splice(itemIndex, 0, {
-        // ...foundProduct,
-        // quantity: foundProduct.quantity + 1,
-      // });
-      // setCartItems([...newCartItems]);
+      setCartItems([...cartItems.slice(0, index), { ...foundProduct, quantity: foundProduct.quantity + 1 }, ...cartItems.slice(index + 1)]);
+
       setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price);
       setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + 1);
     } else if (value === "dec") {
       if (foundProduct.quantity > 1) {
-		  setCartItems([...cartItems.slice(0, index), { ...foundProduct, quantity: foundProduct.quantity - 1 }, ...cartItems.slice(index + 1)]);
+        setCartItems([...cartItems.slice(0, index), { ...foundProduct, quantity: foundProduct.quantity - 1 }, ...cartItems.slice(index + 1)]);
 
-        // newCartItems.splice(itemIndex, 0, {
-          // ...foundProduct,
-          // quantity: foundProduct.quantity - 1,
-        // });
-        // setCartItems([...newCartItems]);
         setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price);
         setTotalQuantities((prevTotalQuantities) => prevTotalQuantities - 1);
       }
@@ -85,11 +68,8 @@ export const StateContext = ({ children }) => {
   };
 
   const decQty = () => {
-	  setQty((prev) => (prev === 1 ? prev : prev - 1));
-    // setQty((prev) => {
-      // const result = prev - 1 < 1 ? 1 : prev - 1;
-      // return result;
-    // });
+    setQty((prev) => (prev === 1 ? prev : prev - 1));
+
   };
   return (
     <Context.Provider

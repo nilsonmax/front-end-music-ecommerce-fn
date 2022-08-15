@@ -91,11 +91,12 @@ export const Product = styled.div`
 ${tw`
 flex
 gap-[30px]
-p-5
+py-3
 `}`;
 
 export const ItemDescription = styled.div`
 ${tw`
+px-5
 flex
 justify-between
 w-[350px]
@@ -103,8 +104,8 @@ text-primary
 `}`;
 
 export const ItemImage = styled.img`${tw`
-  w-[180px]
-  h-[150px]
+  w-[120px]
+  h-[120px]
   rounded-[15px]
   bg-white
 `}`
@@ -125,7 +126,7 @@ export const QuantityDesc = styled.p`
 ${tw`
 flex
 border border-gray-500
-p-1.5
+p-1
 `
 }`;
 
@@ -134,7 +135,7 @@ ${tw`
 flex
 text-base
 py-1.5
-px-3
+px-2
 cursor-pointer
 text-red-500
 border-r border-gray-500
@@ -146,10 +147,10 @@ ${tw`
 flex
 text-base
 py-1.5
-px-3
+px-2
 cursor-pointer
 text-green-500
-
+border-r border-gray-500
 `
 }`;
 export const QuantityDescNumCart = styled.span`
@@ -164,7 +165,8 @@ border-r border-gray-500
 
 export const RemoveItemButton = styled.button`${tw`
 flex
-  text-2xl
+px-1
+  text-xl
   text-red-500
   cursor-pointer
   bg-transparent

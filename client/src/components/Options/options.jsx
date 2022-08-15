@@ -13,7 +13,7 @@ function Options({ setCurrentPage }) {
   };
   return (
     <Container>
-      <div htmlFor="options" className="block mb-2 text-sm font-medium text-dark dark:text-red-500 flex" >
+      <div htmlFor="options" className="mb-2 text-sm font-medium text-dark dark:text-red-500 flex" >
         <p className="text-xl mt-1 font-extralight text-stone-700">Ordering:</p>
         <select id="options" onChange={(e) => handleOrder(e)} defaultValue="order" className="bg-background text-gray-800 text-base rounded-sm focus:ring-primary focus:border-primary block  p-2.5 dark:bg-background dark:border-primary dark:placeholder-red-500 dark:text-red-500 dark:focus:ring-red-500 dark:focus:border-red-500 w-36 transition-all ml-1">
           <option value="default">Default</option>

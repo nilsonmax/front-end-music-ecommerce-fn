@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "./style";
 
-const Aside = ({ setShowCreateComponent }) => {
+const Aside = ({ setShowCreateComponent, setRefresh, setValueSearch }) => {
   return (
     <div>
       <form className="flex items-center">
@@ -30,9 +30,12 @@ const Aside = ({ setShowCreateComponent }) => {
             id="simple-search"
             placeholder="Search"
             required
+            onChange={(e)=>{
+              setValueSearch(e.target.value)
+            }}
           />
         </div>
-        <Button type="submit">
+        <Button type="submit" onClick={(e)=>{e.preventDefault(); setRefresh("search")}}>
           <svg
             className="w-5 h-5"
             fill="none"

@@ -9,35 +9,74 @@ import Crear from "./Crear";
 const Users = ({ setShowCreateComponent, showCreateComponent, setRefresh }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.reducer.users);
+  var [copyUser, setCopyUser] = useState([]);
   const columns = ["Nombre y Apellido", "userName", "Email", "Rol"];
   var [dataRender, setDataRender] = useState([]);
+  var [valueSearch, setValueSearch] = useState("");
   var [refreshUsers, setRefreshUsers] = useState(null);
+
   useEffect(() => {
     if (users.length === 0 && refreshUsers === null) {
       dispatch(getUsers());
       setRefreshUsers(false);
     } else {
+      var a=[]
       if (refreshUsers === true) {
         dispatch(getUsers());
         setRefreshUsers(false);
+      }else if(refreshUsers === "search"){
+        var userNoFound=true;
+        users.map((user) => {
+          if(user.userName.toLowerCase().includes(valueSearch.toLowerCase())){
+            setCopyUser((data)=>[...data,user])
+            userNoFound=false
+          }
+        })
+        if(valueSearch!=="" && userNoFound===true){
+          Toast.fire({
+            icon: "error",
+            title: "User no encontardo",
+          })
+        }
+        setRefreshUsers(false);
       }
-
-      setDataRender([]);
-      users.map((user) => {
-        setDataRender((data) => [
-          ...data,
-          {
-            column0: user.id,
-            column1: user.firstName + " " + user.lastName,
-            column2: user.userName,
-            column3: user.email,
-            column4: user.rol,
-            columnNameArray: "User",
-          },
-        ]);
-      });
+        setDataRender([]);
+        if(copyUser.length>0){
+          setearDataRender(copyUser)
+          setCopyUser([])
+        }else{
+          setearDataRender(users)
+        }
     }
   }, [users, refreshUsers]);
+
+  const setearDataRender=(array)=>{
+    array.map((user) => {
+      setDataRender((data) => [
+        ...data,
+        {
+          column0: user.id,
+          column1: user.firstName + " " + user.lastName,
+          column2: user.userName,
+          column3: user.email,
+          column4: user.rol,
+          columnNameArray: "User",
+        },
+      ]);
+    });
+  }
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
   function activarEliminar(columnNameArray, idDelete) {
     if (columnNameArray === "User") {
@@ -57,7 +96,11 @@ const Users = ({ setShowCreateComponent, showCreateComponent, setRefresh }) => {
   return (
     <div className="flex flex-row">
       <div>
-        <Aside setShowCreateComponent={setShowCreateComponent} />
+        <Aside 
+          setShowCreateComponent={setShowCreateComponent}
+          setRefresh={setRefreshUsers} 
+          setValueSearch={setValueSearch} 
+        />
       </div>
       <div>
         {dataRender.length > 0 && showCreateComponent === false && (

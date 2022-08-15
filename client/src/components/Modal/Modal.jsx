@@ -79,6 +79,7 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
 
   const onClickActulizar = () => {
     let returnError = null;
+    let errorActual=false;
     if (dataArrayRender.nameArray === "User") {
       returnError = validateUserRegister(objectActualizar);
     } else {
@@ -88,11 +89,13 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
     for (const error in returnError) {
       if (error === "confirmpassword") {
         setErrors("");
+        errorActual=false;
       } else {
+        errorActual=true;
         setErrors(`${error} : ${returnError[error]}`);
       }
     }
-    if (errors.length === 0 || Object.entries(errors).length === 0) {
+    if (errorActual===false) {
       alertActualizar(dataArrayRender.nameArray, objectActualizar);
     }
   };
@@ -108,7 +111,6 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       confirmButtonText: "Aceptar",
     }).then((result) => {
       if (result.isConfirmed) {
-        const status = null;
         const tokenCode = window.localStorage.getItem("dataUser");
         if (nameModelActualizar === "User") {
           dispatch(putUser(objectActualizar, tokenCode))

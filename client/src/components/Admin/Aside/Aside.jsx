@@ -30,12 +30,18 @@ const Aside = ({ setShowCreateComponent, setRefresh, setValueSearch }) => {
             id="simple-search"
             placeholder="Search"
             required
-            onChange={(e)=>{
-              setValueSearch(e.target.value)
+            onChange={(e) => {
+              setValueSearch(e.target.value);
             }}
           />
         </div>
-        <Button type="submit" onClick={(e)=>{e.preventDefault(); setRefresh("search")}}>
+        <Button
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            setRefresh("search");
+          }}
+        >
           <svg
             className="w-5 h-5"
             fill="none"

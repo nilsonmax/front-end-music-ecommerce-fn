@@ -6,15 +6,40 @@ import Crear from "./Crear";
 import Swal from "sweetalert2";
 import Aside from "../Aside/Aside";
 
-const Instruments = ({
-  setShowCreateComponent,
-  showCreateComponent,
-}) => {
+const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
   const instruments = useSelector((state) => state.reducer.instruments);
+  var [copyInstruments, setCopyInstruments] = useState([]);
   const columns = ["idInstrument", "Image", "Name", "Stock"];
   var [dataRender, setDataRender] = useState([]);
   var [refreshInstruments, setRefreshInstruments] = useState(null);
+  var [valueSearch, setValueSearch] = useState("");
+  const setearDatarender = (array) => {
+    array.map((instrument) => {
+      setDataRender((data) => [
+        ...data,
+        {
+          column0: instrument.id,
+          column1: instrument.id,
+          column2: instrument.img,
+          column3: instrument.name,
+          column4: instrument.stock,
+          columnNameArray: "Instrument",
+        },
+      ]);
+    });
+  };
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
   useEffect(() => {
     if (instruments.length === 0 && refreshInstruments === null) {
       dispatch(getInstruments());
@@ -23,21 +48,33 @@ const Instruments = ({
       if (refreshInstruments === true) {
         dispatch(getInstruments());
         setRefreshInstruments(false);
+      } else if (refreshInstruments === "search") {
+        let instrumentFound = false;
+        setShowCreateComponent(false);
+        instruments.map((instrument) => {
+          if (
+            instrument.name.toLowerCase().includes(valueSearch.toLowerCase())
+          ) {
+            setCopyInstruments((data) => [...data, instrument]);
+            instrumentFound = true;
+          }
+        });
+        if (valueSearch !== "" && instrumentFound === false)
+          Toast.fire({
+            icon: "error",
+            title: "Instrumento no encontrado",
+          });
+        setRefreshInstruments(false);
       }
+
       setDataRender([]);
-      instruments.map((instrument) => {
-        setDataRender((data) => [
-          ...data,
-          {
-            column0: instrument.id,
-            column1: instrument.id,
-            column2: instrument.img,
-            column3: instrument.name,
-            column4: instrument.stock,
-            columnNameArray: "Instrument",
-          },
-        ]);
-      });
+      console.log(copyInstruments);
+      if (copyInstruments.length > 0) {
+        setearDatarender(copyInstruments);
+        setCopyInstruments([]);
+      } else {
+        setearDatarender(instruments);
+      }
     }
   }, [instruments, refreshInstruments]);
 
@@ -62,7 +99,11 @@ const Instruments = ({
   return (
     <div className="flex flex-row">
       <div>
-        <Aside setShowCreateComponent={setShowCreateComponent} />
+        <Aside
+          setShowCreateComponent={setShowCreateComponent}
+          setRefresh={setRefreshInstruments}
+          setValueSearch={setValueSearch}
+        />
       </div>
       {dataRender.length > 0 && showCreateComponent === false && (
         <Table

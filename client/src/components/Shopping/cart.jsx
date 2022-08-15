@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Link, Route, Routes } from "react-router-dom";
 import {
@@ -50,11 +50,16 @@ import {
 import e from "cors";
 
 const Cart = () => {
-  // const cartRef = useRef();
+
   const { setShowCart } = useStateContext();
-  // const [showCart, setShowCart] = useState(false);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+
+  // const { onAdd, onRemove } = props;
+  // const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  // const taxPrice = itemsPrice * 0.14;
+  // const shippingPrice = itemsPrice > 2000 ? 0 : 20;
+  // const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
   const hanledDelete = (e, item) => {
     console.log("estoy en hanled aadcart");
@@ -62,17 +67,18 @@ const Cart = () => {
     dispatch(removeFromCart(cartItems, item));
   };
 
-  const hanledIncODec = (e, item, incOdec) => {
+  const hanledDel = (e, item) => {
     console.log("estoy en hanled aadcart");
     e.preventDefault();
-    dispatch(toogleCartItemQuantity(item, incOdec));
+    dispatch(removeOneFromCart(cartItems, item));
   };
 
-  const hanledAsc = (e, item) => {
-    console.log("estoy en hanled aadcartASC");
+  const hanledAdd = (e, item) => {
+    console.log("estoy en hanled aadcart");
     e.preventDefault();
     dispatch(addToCart(cartItems, item));
   };
+
 
   /*   const handleCheckout = async () => {
     const stripe = await getStripe();
@@ -116,7 +122,7 @@ const Cart = () => {
               type="button"
               // ShowCart={true}
               onClick={() => setShowCart(false)}
-              // isSidebarOpen={isSidebarOpen} closeSidebar={() => setSidebarOpen(false)}
+            // isSidebarOpen={isSidebarOpen} closeSidebar={() => setSidebarOpen(false)}
             >
               Continue Shopping
             </ContinueShopping>
@@ -147,31 +153,29 @@ const Cart = () => {
                     <h4>${item.price}</h4>
                   </Top>
                   <Bottom>
-                    {/* <div> */}
+
                     <QuantityDesc>
-                      <QuantityDescMinus
-                        onClick={(e) => hanledIncODec(e, item, "dec")}
-                      >
+                      {/* <QuantityDescMinus onClick={(e) => hanledDel(e, item)}>
                         <AiOutlineMinus />
-                      </QuantityDescMinus>
+                      </QuantityDescMinus> */}
+
                       <QuantityDescNumCart>
                         {item.count}
                         {/* {item.quantity} */}
                       </QuantityDescNumCart>
-                      <QuantityDescPlus
-                        onClick={(e) => hanledIncODec(e, item, "inc")}
-                      >
+
+                      <QuantityDescPlus onClick={(e) => hanledAdd(e, item)}>
                         <AiOutlinePlus />
                       </QuantityDescPlus>
+
+                      <RemoveItemButton
+                        type="button"
+                        onClick={(e) => hanledDelete(e, item)}
+                      >
+
+                        <TiDeleteOutline size={25} />
+                      </RemoveItemButton>
                     </QuantityDesc>
-                    {/* </div> */}
-                    <RemoveItemButton
-                      type="button"
-                      onClick={(e) => hanledDelete(e, item)}
-                      // onClick={() => removeFromCart(item)}
-                    >
-                      <TiDeleteOutline size={20} />
-                    </RemoveItemButton>
                   </Bottom>
                 </ItemDescription>
               </Product>
@@ -198,7 +202,7 @@ const Cart = () => {
       </CartContainer>
     </CartWrapper>
   );
- 
+
 };
 
 export default Cart;

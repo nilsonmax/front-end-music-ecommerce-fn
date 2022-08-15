@@ -25,6 +25,7 @@ const Categories = ({ setShowCreateComponent, showCreateComponent }) => {
             setRefreshCategories(false);
           }else if(refreshCategories === "search"){
             var categoryNoFound=true;
+            setShowCreateComponent(false)
             categories.map((category) => {
               if(category.name.toLowerCase().includes(valueSearch.toLowerCase())){
                 setCopyCategories((data)=>[...data,category])

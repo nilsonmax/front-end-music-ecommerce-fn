@@ -260,7 +260,7 @@ export const putUser = (objectUser, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
-      let newUser = await axios.put("http://localhost:4000/users", objectUser, {
+      let newUser = await axios.put("http://localhost:4000/users/admin", objectUser, {
         headers: {
           Authorization: "Bearer " + tokenJSON.token,
         },
@@ -295,6 +295,21 @@ export const postUser = (objectUser) => {
       objectUser = camposNullUser(objectUser);
       let newUser = await axios.post("http://localhost:4000/users", objectUser);
       return newUser.data;
+    } catch (error) {
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
+      }
+      throw new TypeError(errorRes);
+    }
+  };
+};
+
+export const postCategory = (objectCategory) => {
+  return async function () {
+    try {
+      let newCategory = await axios.post("http://localhost:4000/category", objectCategory);
+      return newCategory.data;
     } catch (error) {
       var errorRes = error.response.data.error;
       if (!errorRes) {

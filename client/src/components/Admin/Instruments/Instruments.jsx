@@ -6,7 +6,11 @@ import Crear from "./Crear";
 import Swal from "sweetalert2";
 import Aside from "../Aside/Aside";
 
-const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
+const Instruments = ({
+  setShowCreateComponent,
+  showCreateComponent,
+  setRefresh,
+}) => {
   const dispatch = useDispatch();
   const instruments = useSelector((state) => state.reducer.instruments);
   const columns = ["idInstrument", "Image", "Name", "Stock"];
@@ -63,6 +67,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
       </div>
       {dataRender.length > 0 && showCreateComponent === false && (
         <Table
+          setRefresh={setRefreshInstruments}
           dataRender={dataRender}
           columnsRender={columns}
           activarEliminar={activarEliminar}

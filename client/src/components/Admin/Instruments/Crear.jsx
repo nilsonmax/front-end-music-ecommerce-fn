@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postInstrument, getAllCategories } from "../../../redux/action/index";
 import validateInstrument from "../../../utils/validateInstrument";
+import Swal from "sweetalert2";
 import {
   Container,
   MainContainer,
@@ -23,7 +24,7 @@ import {
 
 export default function CreateInstrument({
   setShowCreateComponent,
-  showCreateComponent,
+  setRefreshInstruments,
 }) {
   const dispatch = useDispatch();
   const goBack = useNavigate();
@@ -47,6 +48,17 @@ export default function CreateInstrument({
     stock: "",
     status: "",
     category: "",
+  });
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
   });
 
   useEffect(() => {
@@ -85,11 +97,25 @@ export default function CreateInstrument({
   };
 
   function handleSubmit(e) {
-    e.preventDefault();
     setErrors(validateInstrument(input));
     if (Object.keys(errors).length === 0) {
-      dispatch(postInstrument(input));
-      alert("Instrument succesfullly created :)");
+      dispatch(postInstrument(input))
+        .then((data) => {
+          Toast.fire({
+            icon: "success",
+            title: data.ok,
+          }).then((result) => {
+            setRefreshInstruments(true);
+            setShowCreateComponent(false);
+          });
+        })
+        .catch((error) => {
+          Toast.fire({
+            icon: "error",
+            title: error.message,
+          });
+        });
+      //alert("Instrument succesfullly created :)");
       setInput({
         name: "",
         brand: "",
@@ -100,7 +126,8 @@ export default function CreateInstrument({
         status: "",
         category: "",
       });
-      goBack("/");
+
+      //goBack("/");
     }
   }
 

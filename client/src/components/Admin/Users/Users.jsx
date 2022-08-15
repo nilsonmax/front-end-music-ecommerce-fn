@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import Aside from "../Aside/Aside";
 import Crear from "./Crear";
 
-const Users = ({ setShowCreateComponent, showCreateComponent }) => {
+const Users = ({ setShowCreateComponent, showCreateComponent, setRefresh }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.reducer.users);
   const columns = ["Nombre y Apellido", "userName", "Email", "Rol"];
@@ -62,6 +62,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
       <div>
         {dataRender.length > 0 && showCreateComponent === false && (
           <Table
+            setRefresh={setRefreshUsers}
             dataRender={dataRender}
             columnsRender={columns}
             activarEliminar={activarEliminar}

@@ -13,7 +13,7 @@ import validateInstrument from "../../utils/validateInstrument";
 import { putUser, putInstrument } from "../../redux/action/index";
 import Swal from "sweetalert2";
 
-const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
+const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
   const [copiaArray, setCopiaArray] = useState([]);
   const [keysArray, setKeyArray] = useState([]);
 
@@ -23,8 +23,21 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
   var reduxArray = useSelector((state) =>
     dataArrayRender.nameArray === "User"
       ? state.reducer.users
-      : dataArrayRender.nameArray === "Instrument" && state.reducer.instruments
-
+      : dataArrayRender.nameArray === "Instrument" &&
+        state.reducer.instruments.map((e) => {
+          return {
+            id: e.id,
+            name: e.name,
+            brand: e.brand,
+            price: e.price,
+            img: e.img,
+            description: e.description,
+            stock: e.stock,
+            status: e.status,
+            adminId: e.adminId,
+            category: e.category.name,
+          };
+        })
   );
 
   useEffect(() => {
@@ -136,7 +149,7 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
       title: message,
     }).then((result) => {
       if (typeAlert === "success") {
-        setRefreshUsers(true);
+        setRefresh(true);
         setModal(false);
       }
     });
@@ -188,7 +201,11 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
                               type={
                                 data === "email"
                                   ? "email"
-                                  : data === "dni" || data === "contactNumber"
+                                  : data === "dni" ||
+                                    data === "contactNumber" ||
+                                    data === "price" ||
+                                    data === "stock" ||
+                                    data === "adminId"
                                   ? "number"
                                   : data === "password"
                                   ? "password"
@@ -207,7 +224,13 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
                               }}
                             />
                           ) : (
-                            <Select defaultValue={objectActualizar[data]}>
+                            <Select
+                              defaultValue={objectActualizar[data]}
+                              onChange={(e) => {
+                                onChangeInputs(e);
+                              }}
+                              name={data}
+                            >
                               <option value={data} disabled>
                                 {data}
                               </option>
@@ -226,8 +249,8 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
                               )}
                               {data === "status" && (
                                 <>
-                                  <option value="new">New</option>
-                                  <option value="used">Used</option>
+                                  <option value="New">New</option>
+                                  <option value="Used">Used</option>
                                 </>
                               )}
                             </Select>
@@ -249,9 +272,7 @@ const Modal = ({ setModal, dataArrayRender, setRefreshUsers }) => {
                     </BotonAceptar>
                     <BotonCancelar
                       type="button"
-                      onClick={() => {
-                        setModal(false);
-                      }}
+                      onClick={() => setModal(false)}
                     >
                       Cancelar
                     </BotonCancelar>

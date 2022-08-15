@@ -3,7 +3,7 @@ import { GoTrashcan, GoPencil } from "react-icons/go";
 import Modal from "../Modal/Modal";
 import Swal from "sweetalert2";
 
-const Table = ({ dataRender, columnsRender, activarEliminar }) => {
+const Table = ({ dataRender, columnsRender, activarEliminar, setRefresh }) => {
   const [modal, setModal] = useState(false);
   const [imgTrue, setImgTrue] = useState(false);
   const [idArrayModal, setIdArrayModal] = useState(null);
@@ -103,6 +103,7 @@ const Table = ({ dataRender, columnsRender, activarEliminar }) => {
       </table>
       {modal === true && (
         <Modal
+          setRefresh={setRefresh}
           setModal={setModal}
           dataArrayRender={{
             nameArray: dataRender[0].columnNameArray,

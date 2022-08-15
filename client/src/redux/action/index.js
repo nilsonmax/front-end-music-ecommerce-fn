@@ -276,6 +276,27 @@ export const putUser = (objectUser, token) => {
   };
 };
 
+export const putUserAdmin = (objectUser, token) => {
+  return async function () {
+    try {
+      let tokenJSON = JSON.parse(token);
+      objectUser = camposNullUser(objectUser);
+      let newUser = await axios.put("http://localhost:4000/users/admin", objectUser, {
+        headers: {
+          Authorization: "Bearer " + tokenJSON.token,
+        },
+      });
+      return newUser.data;
+    } catch (error) {
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
+      }
+      throw new TypeError(errorRes);
+    }
+  };
+};
+
 function camposNullUser(objectUser) {
   if (objectUser.dni === "") {
     objectUser.dni = null;
@@ -335,6 +356,30 @@ export const putInstrument = (objectInstrument, token) => {
         }
       );
       return newInstrument.data;
+    } catch (error) {
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
+      }
+      throw new TypeError(errorRes);
+    }
+  };
+};
+
+export const putCategory = (objectCategory, token) => {
+  return async function () {
+    try {
+      let tokenJSON = JSON.parse(token);
+      let newCategory = await axios.put(
+        "http://localhost:4000/category",
+        objectCategory,
+        {
+          headers: {
+            Authorization: "Bearer " + tokenJSON.token,
+          },
+        }
+      );
+      return newCategory.data;
     } catch (error) {
       var errorRes = error.response.data.error;
       if (!errorRes) {

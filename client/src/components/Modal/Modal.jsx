@@ -10,7 +10,7 @@ import {
 } from "./style";
 import validateUserRegister from "../../utils/validateUserRegister";
 import validateInstrument from "../../utils/validateInstrument";
-import { putUser, putInstrument } from "../../redux/action/index";
+import {  putUserAdmin, putInstrument, putCategory } from "../../redux/action/index";
 import Swal from "sweetalert2";
 
 const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
@@ -23,7 +23,7 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
   var reduxArray = useSelector((state) =>
     dataArrayRender.nameArray === "User"
       ? state.reducer.users
-      : dataArrayRender.nameArray === "Instrument" &&
+      : dataArrayRender.nameArray === "Instrument" ?
         state.reducer.instruments.map((e) => {
           return {
             id: e.id,
@@ -38,6 +38,7 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
             category: e.category.name,
           };
         })
+      : state.reducer.category
   );
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
         }
       });
     } else {
-      console.log(keysArray);
+      console.log(objectActualizar);
     }
   }, [copiaArray]);
 
@@ -61,19 +62,22 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       [name]: value,
     });
 
-    let returnError = null;
+    var returnError = null;
     if (dataArrayRender.nameArray === "User") {
       returnError = validateUserRegister(objectActualizar);
-    } else {
+      if(returnError.hasOwnProperty("confirmpassword")){returnError={};}
+    } else if(dataArrayRender.nameArray === "Instrument") {
       returnError = validateInstrument(objectActualizar);
-    }
-
-    for (const error in returnError) {
-      if (error === "confirmpassword") {
-        setErrors("");
-      } else {
-        setErrors(`${error} : ${returnError[error]}`);
+    }else if(dataArrayRender.nameArray === "Category"){
+      if(value===""){
+        returnError={name:"Required"}
+      }else{
+        returnError={};
       }
+    }
+    if(Object.keys(returnError).length === 0){setErrors("");}
+    for (const error in returnError) {
+        setErrors(`${error} : ${returnError[error]}`);
     }
   };
 
@@ -82,18 +86,20 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
     let errorActual=false;
     if (dataArrayRender.nameArray === "User") {
       returnError = validateUserRegister(objectActualizar);
-    } else {
+      if(returnError.hasOwnProperty("confirmpassword")){returnError={};}
+    } else if(dataArrayRender.nameArray === "Instrument"){
       returnError = validateInstrument(objectActualizar);
-    }
-
-    for (const error in returnError) {
-      if (error === "confirmpassword") {
-        setErrors("");
-        errorActual=false;
-      } else {
-        errorActual=true;
-        setErrors(`${error} : ${returnError[error]}`);
+    }else if(dataArrayRender.nameArray === "Category"){
+      if(objectActualizar.name===""){
+        returnError={name:"Required"}
+      }else{
+        returnError={};
       }
+    }
+    if(Object.keys(returnError).length === 0){setErrors("");}
+    for (const error in returnError) {
+      errorActual=true;
+      setErrors(`${error} : ${returnError[error]}`);
     }
     if (errorActual===false) {
       alertActualizar(dataArrayRender.nameArray, objectActualizar);
@@ -102,7 +108,7 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
 
   const alertActualizar = (nameModelActualizar, objectActualizar) => {
     Swal.fire({
-      title: "¿Seguro que deseas actualizar" + nameModelActualizar + " ?",
+      title: "¿Seguro que deseas actualizar " + nameModelActualizar + " ?",
       text: "Se actualizarán los datos",
       icon: "warning",
       showCancelButton: true,
@@ -113,25 +119,25 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       if (result.isConfirmed) {
         const tokenCode = window.localStorage.getItem("dataUser");
         if (nameModelActualizar === "User") {
-          dispatch(putUser(objectActualizar, tokenCode))
-            .then((data) => {
-              exitoAndErrorAlert("success", data);
-            })
-            .catch((error) => {
-              exitoAndErrorAlert("error", error);
-            });
-        } else {
-          dispatch(putInstrument(objectActualizar, tokenCode))
-            .then((data) => {
-              exitoAndErrorAlert("success", data);
-            })
-            .catch((error) => {
-              exitoAndErrorAlert("error", error);
-            });
+          dispatchActualizar( putUserAdmin,objectActualizar,tokenCode)
+        } else if(dataArrayRender.nameArray === "Instrument") {
+          dispatchActualizar(putInstrument,objectActualizar,tokenCode)
+        }else if(dataArrayRender.nameArray === "Category"){
+          dispatchActualizar(putCategory,objectActualizar,tokenCode)
         }
       }
     });
   };
+
+  const dispatchActualizar=(accion, objectActualizar, tokenCode)=>{
+    dispatch(accion(objectActualizar, tokenCode))
+    .then((data) => {
+      exitoAndErrorAlert("success", data);
+    })
+    .catch((error) => {
+      exitoAndErrorAlert("error", error);
+    });
+  }
 
   const Toast = Swal.mixin({
     toast: true,

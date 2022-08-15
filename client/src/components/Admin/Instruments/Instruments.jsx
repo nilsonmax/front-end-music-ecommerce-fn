@@ -68,8 +68,8 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
       }
 
       setDataRender([]);
-      console.log(copyInstruments);
       if (copyInstruments.length > 0) {
+        console.log(copyInstruments);
         setearDatarender(copyInstruments);
         setCopyInstruments([]);
       } else {

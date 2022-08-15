@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import Aside from "../Aside/Aside";
 import Crear from "./Crear";
 
-const Users = ({ setShowCreateComponent, showCreateComponent, setRefresh }) => {
+const Users = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.reducer.users);
   var [copyUser, setCopyUser] = useState([]);
@@ -20,7 +20,6 @@ const Users = ({ setShowCreateComponent, showCreateComponent, setRefresh }) => {
       dispatch(getUsers());
       setRefreshUsers(false);
     } else {
-      var a=[]
       if (refreshUsers === true) {
         dispatch(getUsers());
         setRefreshUsers(false);
@@ -35,7 +34,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent, setRefresh }) => {
         if(valueSearch!=="" && userNoFound===true){
           Toast.fire({
             icon: "error",
-            title: "User no encontardo",
+            title: "User no encontrado",
           })
         }
         setRefreshUsers(false);
@@ -85,10 +84,10 @@ const Users = ({ setShowCreateComponent, showCreateComponent, setRefresh }) => {
       dispatch(deleteUser(idDelete))
         .then((data) => {
           setRefreshUsers(true);
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          Swal.fire("Deleted!", "El User se elimino con exito.", "success");
         })
         .catch((error) => {
-          Swal.fire("Deleted!", "Fallo", "success");
+          Swal.fire("Error!", "Algo salio mal.", "error");
         });
     }
   }

@@ -9,7 +9,6 @@ import Aside from "../Aside/Aside";
 const Instruments = ({
   setShowCreateComponent,
   showCreateComponent,
-  setRefresh,
 }) => {
   const dispatch = useDispatch();
   const instruments = useSelector((state) => state.reducer.instruments);

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import Admins from "../../components/Admin/Admins/Admins";
 import Categories from "../../components/Admin/Categories/Categories";
+import Historyshops from "../../components/Admin/Histotyshop/Historyshops";
 import Instruments from "../../components/Admin/Instruments/Instruments";
 import Users from "../../components/Admin/Users/Users";
 import NavBarLogin from "../../components/NavBarLogin/NavbarLogin";
@@ -47,14 +49,6 @@ const Panel = () => {
         >
           Admins
         </p>
-
-        <p
-          onClick={() => {
-            setearStates("Account");
-          }}
-        >
-          Account
-        </p>
       </nav>
 
       {componentVisible === "Users" && (
@@ -71,6 +65,18 @@ const Panel = () => {
       )}
       {componentVisible === "Categories" && (
         <Categories
+          setShowCreateComponent={setShowCreateComponent}
+          showCreateComponent={showCreateComponent}
+        />
+      )}
+      {componentVisible === "Admins" && (
+        <Admins
+          setShowCreateComponent={setShowCreateComponent}
+          showCreateComponent={showCreateComponent}
+        />
+      )}
+      {componentVisible === "Historyshops" && (
+        <Historyshops
           setShowCreateComponent={setShowCreateComponent}
           showCreateComponent={showCreateComponent}
         />

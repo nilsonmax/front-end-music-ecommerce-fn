@@ -110,7 +110,7 @@ const Categories = ({ setShowCreateComponent, showCreateComponent }) => {
               />
             )}
             {dataRender.length < 1 && showCreateComponent === false && (
-              <p className="w-screen text-center">No hay users</p>
+              <p className="w-screen text-center">No hay Admins</p>
             )}
             {showCreateComponent === true && (
               <Crear

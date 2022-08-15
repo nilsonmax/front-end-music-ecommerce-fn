@@ -25,6 +25,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
         setRefreshUsers(false);
       }else if(refreshUsers === "search"){
         var userNoFound=true;
+        setShowCreateComponent(false)
         users.map((user) => {
           if(user.userName.toLowerCase().includes(valueSearch.toLowerCase())){
             setCopyUser((data)=>[...data,user])

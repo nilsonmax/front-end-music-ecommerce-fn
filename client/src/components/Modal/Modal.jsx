@@ -236,7 +236,7 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
                               </option>
                               {data === "rol" && (
                                 <>
-                                  <option value="users">User</option>
+                                  <option value="user">User</option>
                                   <option value="banned">Banned</option>
                                 </>
                               )}

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/action";
 import { isExpired, decodeToken } from "react-jwt";
 import Swal from "sweetalert2";
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
+
 
 const LoginForm = ({ visible, onClose }) => {
   const dispatch = useDispatch();
@@ -14,6 +17,15 @@ const LoginForm = ({ visible, onClose }) => {
     userName: "",
     password: "",
   });
+
+  useEffect(()=>{
+    gapi.load("client:auth2", () => {
+      gapi.auth2.init({
+        clientId:
+        "792574028129-c6pm057082v13te29d5imcal6v5jag49.apps.googleusercontent.com",
+      });
+    });
+  }, [])
 
   const handledChange = (e) => {
     e.preventDefault(e);
@@ -60,6 +72,13 @@ const LoginForm = ({ visible, onClose }) => {
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
+
+  const responseGoogle = (response) => {
+    console.log(response.profileObj)
+    dispatch(loginUser({
+    }))
+  }
+
 
   if (!visible) return null;
   return (
@@ -135,6 +154,14 @@ const LoginForm = ({ visible, onClose }) => {
               >
                 Log in
               </button>
+
+            <GoogleLogin
+             clientId="792574028129-c6pm057082v13te29d5imcal6v5jag49.apps.googleusercontent.com"
+             buttonText="Login with Google"
+             onSuccess={responseGoogle}
+             onFailure={responseGoogle}
+             cookiePolicy={'single_host_origin'}
+            />
 
               {/*               <div class="flex justify-center items-center relative">
                 <span class="bg-background text-dark underline  text-sm relative px-4">Log in with social</span>

@@ -1,9 +1,10 @@
-import { ADD_TO_CART, REMOVE_ALL_FROM_CART, REMOVE_ONE_FROM_CART, DATA_CLEAR_CAR, SET_SHOW_CART, SET_CART_ITEMS, SET_TOTAL_QUANTITIES } from "../action/types";
+import { ADD_TO_CART, REMOVE_ALL_FROM_CART, REMOVE_ONE_FROM_CART, DATA_CLEAR_CAR, SET_SHOW_CART, SET_TOTAL_QUANTITIES } from "../action/types";
 
 const initialState = {
   showCart: false,
   items: {},
-  cartItems: []
+  cartItems: [],
+  quanTities: 0
 };
 
 // const [showCart, setShowCart] = useState(false);
@@ -23,19 +24,17 @@ const cartReducers = (state = initialState, action) => {
       return { ...state, items: action.payload.cartItems};
 
     case REMOVE_ONE_FROM_CART: {
-      console.log(action.payload.cartItems, 'action.payload.cartItems oneremove')
       return { ...state, items: action.payload.cartItems };
     }
 
     case SET_SHOW_CART: {
-      console.log(action.payload.cartItems, 'action.payload.cartItems oneremove')
-      return { ...state, items: action.payload.cartItems };
+         return { ...state, items: action.payload.cartItems };
     }
 
-    // case SET_TOTAL_QUANTITIES: {
-    //   console.log(action.payload.cartItems, 'action.payload.cartItems oneremove')
-    //   return { ...state, items: action.payload.cartItems };
-    // }
+    case SET_TOTAL_QUANTITIES: {
+      console.log(action.payload, 'action.payload quanTities')
+      return { ...state, quanTities: action.payload };
+    }
 
     default:
       return state;

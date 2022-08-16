@@ -45,6 +45,7 @@ import {
   addToCart,
   removeFromCart,
   removeOneFromCart,
+  SetTotalQuanTities,
   toogleCartItemQuantity,
 } from "../../redux/action/cartActions";
 import e from "cors";
@@ -55,16 +56,11 @@ const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
-  // const { onAdd, onRemove } = props;
-  // const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
-  // const taxPrice = itemsPrice * 0.14;
-  // const shippingPrice = itemsPrice > 2000 ? 0 : 20;
-  // const totalPrice = itemsPrice + taxPrice + shippingPrice;
-
   const hanledDelete = (e, item) => {
     console.log("estoy en hanled aadcart");
     e.preventDefault();
     dispatch(removeFromCart(cartItems, item));
+    dispatch(SetTotalQuanTities(cartItems, item))
   };
 
   const hanledDel = (e, item) => {
@@ -72,15 +68,19 @@ const Cart = () => {
     e.preventDefault();
     if(item.count>1){
       dispatch(removeOneFromCart(cartItems, item));
+      dispatch(SetTotalQuanTities(cartItems, item))
     }else{
       dispatch(removeFromCart(cartItems, item));
+      dispatch(SetTotalQuanTities(cartItems, item))
     }
+    
   };
 
   const hanledAdd = (e, item) => {
     console.log("estoy en hanled aadcart");
     e.preventDefault();
     dispatch(addToCart(cartItems, item));
+    dispatch(SetTotalQuanTities(cartItems, item))
   };
 
 

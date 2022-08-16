@@ -16,8 +16,6 @@ code {
 @tailwind components;
 @tailwind utilities;
 
-
-
 body {
   background-color: theme('colors.background');
   font-family: 'Raleway', sans-serif;

@@ -20,6 +20,7 @@ export default function NavBarLogin({ setCurrentPage }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { showCart, setShowCart, totalQuantities } = useStateContext();
+  const quanTities = useSelector((state) => state.cart.quanTities);
 
   //traer nombre de cuenta
   let user = useSelector((e) => e.reducer.user);
@@ -130,16 +131,10 @@ export default function NavBarLogin({ setCurrentPage }) {
             {`Welcome ${user.userName}`}
           </h2>
         </Link>
-        <button
-          type="button"
-          onClick={() => setShowCart(true)}
-          className=" relative link flex items-center"
-        >
-          {totalQuantities !== 0 && (
-            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
-              {totalQuantities !== 0 && totalQuantities}
-            </span>
-          )}
+
+        <button type="button" onClick={() => setShowCart(true)} className=" relative link flex items-center">
+          {quanTities !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{quanTities !== 0 && quanTities}</span>}
+
           <HiShoppingCart size={20} className="h-10" />
           <p className="hidden md:inline font-extrabold md: text-sm mt-2">
             Cart

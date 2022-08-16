@@ -32,7 +32,6 @@ export const StyledCard = styled.div`
       m-0
       col-span-3
       block
-
       `};
   }
 

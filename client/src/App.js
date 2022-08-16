@@ -17,6 +17,11 @@ import SuccessPayment from "./pages/SuccessPayment/SuccessPayment";
 import Checkout from "./components/Checkout/checkout";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import NotFound from "./components/NotFound/notFound";
+import AboutUs from "./components/AboutUs/AboutUs"
+
+
+
 
 const stripePromise = loadStripe(
   "pk_test_51LVhuNGZCoUhdempeuLZScU9BSjym86ji19YjkpFBaBMuACGX5anJToeQpMH4ksNFSyeGshaX83d9AVMXnShe0KY00xHD6MAe6"
@@ -89,7 +94,8 @@ const App = () => {
         {/* <Route path="*" element={<NotFound />} /> */}
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/success" element={<SuccessPayment />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="/aboutUs" element={<><AboutUs/></>}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <LoginForm onClose={handleOnClose} visible={visible} />
     </Elements>

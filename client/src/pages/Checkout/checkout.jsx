@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -14,6 +15,14 @@ const stripePromise = loadStripe(
 export default function Checkout() {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate()
+  useEffect(()=>{
+    const token = window.localStorage.getItem("dataUser");
+    if(token){ 
+        navigate("/")
+        return 
+    }
+  },[])
 
   const { error, paymentMethod } = async function handleSubmit(event) {
     event.preventDefault();

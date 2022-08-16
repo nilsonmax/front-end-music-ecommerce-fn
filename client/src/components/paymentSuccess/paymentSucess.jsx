@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 import { BsBagCheckFill } from "react-icons/bs";
 import { useStateContext } from "../../context/stateContext";
 import { runFireworks } from "../../lib/confetti";
@@ -8,8 +8,17 @@ import { ContinueShopping } from "../Shopping/style";
 
 const Success = () => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
-
+  const navigate=useNavigate()
   useEffect(() => {
+    
+    const token = window.localStorage.getItem("dataUser");
+    if(token===null){ 
+        navigate("/")
+        return 
+    }
+ 
+
+
     localStorage.clear();
     setCartItems([]);
     setTotalPrice(0);

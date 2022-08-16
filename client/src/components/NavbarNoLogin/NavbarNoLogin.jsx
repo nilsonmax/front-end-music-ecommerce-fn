@@ -65,8 +65,8 @@ export default function NavBarNoLogin({ setCurrentPage }) {
           >
 
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <p>About US</p>
+              <li className="font-bold transition cursor-pointer duration-150 border-b-2 border-transparent hover:border-bluemunsell">
+                <p onClick={()=>navigate("/aboutUs")}>About US</p>
               </li>
             </ul>
 

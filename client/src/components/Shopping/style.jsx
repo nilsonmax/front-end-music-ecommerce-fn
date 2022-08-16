@@ -99,7 +99,7 @@ ${tw`
 px-5
 flex
 justify-between
-w-[350px]
+${'' /* w-[350px] */}
 text-primary
 `}`;
 
@@ -118,6 +118,7 @@ gap-2.5
 
 export const Bottom = styled.div`
 ${tw`
+px-3
 mt-[30px]
 justify-between
 `}`;

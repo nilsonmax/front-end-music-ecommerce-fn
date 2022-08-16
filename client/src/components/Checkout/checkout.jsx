@@ -7,6 +7,7 @@ import { StyledCard } from "../Card/style";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { getDataClearCar } from "../../redux/action/cartActions";
+import Loader from "../Loader/loader";
 
 function validate(userInfo) {
   let errors = {};
@@ -44,8 +45,9 @@ function validate(userInfo) {
 
 export default function Checkout() {
 
-
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
     if (token === null) {
@@ -128,6 +130,7 @@ export default function Checkout() {
       type: "card",
       card: elements.getElement(CardElement), // Element capture input
     });
+    setLoading(true)
 
     const total = items.reduce((a, b) => a + b.price, 0);
 
@@ -173,6 +176,7 @@ export default function Checkout() {
           title: error.message,
         });
       }, 400);
+      setLoading(false)
       }
     }
   }
@@ -327,7 +331,7 @@ export default function Checkout() {
                 || errors.cus_country
                 || errors.cus_zip
                 || !stripe}>
-              {`$${items.reduce((a, b) => a + b.price, 0)}`}
+              {loading ? (<Loader/>):`$${items.reduce((a, b) => a + b.price, 0)}`}
             </button>
           </div>
         </form>

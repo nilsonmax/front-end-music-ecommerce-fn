@@ -68,9 +68,13 @@ const Cart = () => {
   };
 
   const hanledDel = (e, item) => {
-    console.log("estoy en hanled aadcart");
+    console.log(item, "estoy en hanled removeaadcart");
     e.preventDefault();
-    dispatch(removeOneFromCart(cartItems, item));
+    if(item.count>1){
+      dispatch(removeOneFromCart(cartItems, item));
+    }else{
+      dispatch(removeFromCart(cartItems, item));
+    }
   };
 
   const hanledAdd = (e, item) => {
@@ -155,9 +159,9 @@ const Cart = () => {
                   <Bottom>
 
                     <QuantityDesc>
-                      {/* <QuantityDescMinus onClick={(e) => hanledDel(e, item)}>
+                      <QuantityDescMinus onClick={(e) => hanledDel(e, item)}>
                         <AiOutlineMinus />
-                      </QuantityDescMinus> */}
+                      </QuantityDescMinus>
 
                       <QuantityDescNumCart>
                         {item.count}

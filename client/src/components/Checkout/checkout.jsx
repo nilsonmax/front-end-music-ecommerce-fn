@@ -1,38 +1,41 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StyledCheckout } from "./style";
 import { StyledCard } from "../Card/style";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { getDataClearCar } from "../../redux/action/cartActions";
 
-function validate(userInfo){
+function validate(userInfo) {
   let errors = {};
 
-  if(!userInfo.cus_name){
+  if (!userInfo.cus_name) {
     errors.cus_name = "Input required";
 
-  } else if(!userInfo.cus_email){
+  } else if (!userInfo.cus_email) {
     errors.cus_email = "Input required";
 
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(userInfo.cus_email)) {
     errors.cus_email = 'Invalid email address';
 
-  } else if(!userInfo.cus_phone){
+  } else if (!userInfo.cus_phone) {
     errors.cus_phone = "Input required";
 
-  } else if(`${userInfo.cus_phone}`.length<10){
+  } else if (`${userInfo.cus_phone}`.length < 10) {
     errors.cus_phone = "should have 10 digits at least";
 
-  }else if(!userInfo.cus_address){
+  } else if (!userInfo.cus_address) {
     errors.cus_address = "Input required";
 
-  } else if(!userInfo.cus_city){
+  } else if (!userInfo.cus_city) {
     errors.cus_city = "Input required";
 
-  } else if(!userInfo.cus_country){
+  } else if (!userInfo.cus_country) {
     errors.cus_country = "Input required";
 
-  } else if(!userInfo.cus_zip){
+  } else if (!userInfo.cus_zip) {
     errors.cus_zip = "Input required";
   }
 
@@ -44,6 +47,20 @@ export default function Checkout() {
   console.log("items", items);
   const stripe = useStripe();
   const elements = useElements();
+  const goBack = useNavigate();
+  const dispatch = useDispatch();
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
   function formattedMoney(value) {
     value.toLocaleString("es-us", {
@@ -83,7 +100,7 @@ export default function Checkout() {
     });
     setErrors(validate({
       ...userInfo,
-     [e.target.name]: e.target.value
+      [e.target.name]: e.target.value
     }));
   }
 
@@ -114,8 +131,35 @@ export default function Checkout() {
         });
 
         elements.getElement(CardElement).clear();
+        setUserInfo({
+          cus_name: "",
+          cus_email: "",
+          cus_phone: "",
+          cus_address: "",
+          cus_city: "",
+          cus_country: "",
+          cus_zip: ""
+        })
+         
+        setTimeout(() => {
+          Toast.fire({
+            icon: "success",
+            title: "We have sent you an email with your order details.",
+          }).then((result) => {
+            dispatch(getDataClearCar())
+            goBack("/");
+          });
+          // setSubmitting(false);
+        }, 400);
+        
       } catch (error) {
         console.log(error);
+        setTimeout(() => {
+        Toast.fire({
+          icon: "error",
+          title: error.message,
+        });
+      }, 400);
       }
     }
   }
@@ -146,7 +190,7 @@ export default function Checkout() {
               aria-label="Name"
               onChange={(e) => onChange(e)}
             />
-            {errors.cus_name && ( <p className="text-xs text-red-600">{errors.cus_name}</p> )}
+            {errors.cus_name && (<p className="text-xs text-red-600">{errors.cus_name}</p>)}
           </div>
 
           <div class="mt-2">
@@ -163,7 +207,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_email && ( <p className="text-xs text-red-600">{errors.cus_email}</p> )}
+            {errors.cus_email && (<p className="text-xs text-red-600">{errors.cus_email}</p>)}
           </div>
 
           <div class="mt-2">
@@ -180,7 +224,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_phone && ( <p className="text-xs text-red-600">{errors.cus_phone}</p> )}
+            {errors.cus_phone && (<p className="text-xs text-red-600">{errors.cus_phone}</p>)}
           </div>
 
           <div class="mt-2">
@@ -197,7 +241,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_address && ( <p className="text-xs text-red-600">{errors.cus_address}</p> )}
+            {errors.cus_address && (<p className="text-xs text-red-600">{errors.cus_address}</p>)}
           </div>
 
           <div class="mt-2">
@@ -214,7 +258,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_city && ( <p className="text-xs text-red-600">{errors.cus_city}</p> )}
+            {errors.cus_city && (<p className="text-xs text-red-600">{errors.cus_city}</p>)}
           </div>
 
           <div class="inline-block mt-2 w-1/2 pr-1">
@@ -231,7 +275,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_country && ( <p className="text-xs text-red-600">{errors.cus_country}</p> )}
+            {errors.cus_country && (<p className="text-xs text-red-600">{errors.cus_country}</p>)}
           </div>
 
           <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
@@ -248,7 +292,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_zip && ( <p className="text-xs text-red-600">{errors.cus_zip}</p> )}
+            {errors.cus_zip && (<p className="text-xs text-red-600">{errors.cus_zip}</p>)}
           </div>
 
           <p class="mt-4 text-gray-800 font-medium">Payment information</p>

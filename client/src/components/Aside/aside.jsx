@@ -13,14 +13,7 @@ const filters = [
   {
     id: "color",
     name: "Color",
-    options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
-    ],
+    options: [{ value: "all", label: "All", checked: true }],
   },
 ];
 
@@ -186,7 +179,7 @@ export default function Aside({
             Products
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-6 gap-x-8 gap-y-10 ">
+          <div className="grid grid-cols-1 lg:grid-cols-8 gap-x-8 gap-y-10 ">
             {/* Filters */}
             <form className="hidden lg:block">
               <Filter setCurrentPage={setCurrentPage} />
@@ -251,7 +244,7 @@ export default function Aside({
             </form>
 
             {/* Product grid showed */}
-            <div className="lg:col-span-5 shadow">
+            <div className="lg:col-span-7 shadow">
               <Paginated
                 setCurrentPage={setCurrentPage}
                 currentPage={currentPage}

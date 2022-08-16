@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import tw from 'twin.macro'
+import styled from "styled-components";
+import tw from "twin.macro";
 
 export const StyledCard = styled.div`
   ${tw`
@@ -19,10 +19,9 @@ export const StyledCard = styled.div`
     scale-y-75
     hover:scale-y-100
   `};
-    
-    
-    img {
-      ${tw`
+
+  img {
+    ${tw`
       place-content-center
       justify-center
       row-span-5
@@ -33,28 +32,26 @@ export const StyledCard = styled.div`
       m-0
       col-span-3
       block
-
       `};
-    }
+  }
 
-    h2 {
-      ${tw`
+  h2 {
+    ${tw`
       col-span-3
       m-0
       p-0
       font-bold    
     `};
-    }
+  }
 
-    h3 {
-      ${tw`
+  h3 {
+    ${tw`
         text-highlight
         font-bold
         col-span-2
       `}
-    }
+  }
 
-    
   h4 {
     ${tw`
       bg-orange-300
@@ -76,18 +73,17 @@ export const StyledCard = styled.div`
       col-span-3
       text-tertiary
       `}
-    }
-    
-    span {
-      ${tw`
+  }
+
+  span {
+    ${tw`
       m-0
       p-0
       col-span-2
       row-span-1
     `}
-  } 
-
-`
+  }
+`;
 
 export const StyledButton = styled.figure`
   ${tw`
@@ -102,4 +98,4 @@ export const StyledButton = styled.figure`
     border-secondary
     rounded-md
   `};
-`
+`;

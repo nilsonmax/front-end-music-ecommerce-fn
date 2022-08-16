@@ -4,10 +4,14 @@ import axios from "axios";
 export const GET_ADMINS = "GET_ADMINS";
 const REACT_APP_HOST = "http://localhost:4000";
 
-export const getAdmins = () => {
+export const getAdmins = (token) => {
   return async function (dispatch) {
+    let tokenJSON = JSON.parse(token);
     return await axios
-      .get(`http://localhost:4000/admins`)
+      .get(`http://localhost:4000/admins`, {
+        headers: {
+          Authorization: "Bearer " + tokenJSON.token,
+        }})
       .then((resp) => {
         dispatch({
           type: GET_ADMINS,
@@ -20,13 +24,18 @@ export const getAdmins = () => {
   };
 };
 
-export const deleteAdmin = (admin_id) => {
+export const deleteAdmin = (admin_id, token) => {
   return async function () {
     try {
+      let tokenJSON = JSON.parse(token);
       let adminDeleted = await axios.delete(
         `http://localhost:4000/admins`,{data: {
             id: admin_id
-          }}
+          },
+            headers: {
+              Authorization: "Bearer " + tokenJSON.token,
+            }
+        }
       );
       return adminDeleted.data;
     } catch (error) {

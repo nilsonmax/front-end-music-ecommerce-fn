@@ -29,6 +29,7 @@ export default function CreateInstrument({
   const dispatch = useDispatch();
   const goBack = useNavigate();
   const categories = useSelector((state) => state.reducer.category);
+  const token = window.localStorage.getItem("dataUser");
   const [errors, setErrors] = useState({
     name: "",
     brand: "",
@@ -99,7 +100,7 @@ export default function CreateInstrument({
   function handleSubmit(e) {
     setErrors(validateInstrument(input));
     if (Object.keys(errors).length === 0) {
-      dispatch(postInstrument(input))
+      dispatch(postInstrument(input,token))
         .then((data) => {
           Toast.fire({
             icon: "success",

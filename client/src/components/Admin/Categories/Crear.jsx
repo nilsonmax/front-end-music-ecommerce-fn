@@ -8,6 +8,7 @@ import { ButtonAceptar, ButtonCancelar } from "./style";
 
 const Crear = ({ setShowCreateComponent, setRefreshCategories }) => {
         const dispatch = useDispatch();
+        const token = window.localStorage.getItem("dataUser");
         const categoryAtributos = [
           "name"
         ];
@@ -37,7 +38,7 @@ const Crear = ({ setShowCreateComponent, setRefreshCategories }) => {
             }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                dispatch(postCategory(values))
+                dispatch(postCategory(values,token))
                   .then((data) => {
                     Toast.fire({
                       icon: "success",

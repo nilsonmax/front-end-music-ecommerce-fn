@@ -81,8 +81,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
   function activarEliminar(columnNameArray, idDelete) {
     if (columnNameArray === "Instrument") {
       const token = window.localStorage.getItem("dataUser");
-      let tokenDecode = JSON.parse(token);
-      dispatch(deleteInstrument(idDelete))
+      dispatch(deleteInstrument(idDelete,token))
         .then((data) => {
           setRefreshInstruments(true);
           Swal.fire(

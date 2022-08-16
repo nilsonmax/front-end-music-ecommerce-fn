@@ -1,10 +1,13 @@
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState,useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StyledCheckout } from "./style";
 import { StyledCard } from "../Card/style";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { getDataClearCar } from "../../redux/action/cartActions";
 
 function validate(userInfo) {
   let errors = {};
@@ -58,6 +61,20 @@ export default function Checkout() {
   console.log("items", items);
   const stripe = useStripe();
   const elements = useElements();
+  const goBack = useNavigate();
+  const dispatch = useDispatch();
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
   function formattedMoney(value) {
     value.toLocaleString("es-us", {
@@ -128,8 +145,35 @@ export default function Checkout() {
         });
 
         elements.getElement(CardElement).clear();
+        setUserInfo({
+          cus_name: "",
+          cus_email: "",
+          cus_phone: "",
+          cus_address: "",
+          cus_city: "",
+          cus_country: "",
+          cus_zip: ""
+        })
+         
+        setTimeout(() => {
+          Toast.fire({
+            icon: "success",
+            title: "We have sent you an email with your order details.",
+          }).then((result) => {
+            dispatch(getDataClearCar())
+            goBack("/");
+          });
+          // setSubmitting(false);
+        }, 400);
+        
       } catch (error) {
         console.log(error);
+        setTimeout(() => {
+        Toast.fire({
+          icon: "error",
+          title: error.message,
+        });
+      }, 400);
       }
     }
   }

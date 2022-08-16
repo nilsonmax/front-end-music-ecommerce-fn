@@ -1,26 +1,31 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search } from "../Search/Search";
-import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
+import {
+  DivItemsCenter,
+  DivJustifyBetween,
+  NavContainer,
+  Button,
+} from "./style";
 import { useDispatch } from "react-redux";
 import { showLogin } from "../../redux/action/index";
 import { useStateContext } from "../../context/stateContext";
 import { HiShoppingCart } from "react-icons/hi";
 import Cart from "../Shopping/cart";
+import Logo from "../../assets/Logo.png";
 
 export default function NavBarNoLogin({ setCurrentPage }) {
   const { showCart, setShowCart, totalQuantities } = useStateContext();
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <NavContainer>
       <DivJustifyBetween>
-
         <DivItemsCenter>
           <Link to="/">
-            <h2 className="text-2xl font-bold text-secondary">LOGO</h2>
+            <img src={Logo} className="w-14" />
           </Link>
 
           <div className="lg:hidden">
@@ -60,13 +65,13 @@ export default function NavBarNoLogin({ setCurrentPage }) {
 
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
-              }`}
+            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${
+              navbar ? "block" : "hidden"
+            }`}
           >
-
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="font-bold transition cursor-pointer duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <p onClick={()=>navigate("/aboutUs")}>About US</p>
+                <p onClick={() => navigate("/aboutUs")}>About US</p>
               </li>
             </ul>
 
@@ -74,10 +79,16 @@ export default function NavBarNoLogin({ setCurrentPage }) {
               <div className="inline-block w-full">
                 <Search setCurrentPage={setCurrentPage} />
               </div>
-              <div onClick={() => dispatch(showLogin(true))} className="inline-block w-full px-4 py-2 text-center text-white  bg-bluemunsell rounded-md shadow hover:bg-steelteal ">
+              <div
+                onClick={() => dispatch(showLogin(true))}
+                className="inline-block w-full px-4 py-2 text-center text-white  bg-bluemunsell rounded-md shadow hover:bg-steelteal "
+              >
                 Sign in
               </div>
-              <div onClick={e => navigate("/signup")} className="inline-block w-full px-4 py-2 text-center text-white  bg-bluemunsell rounded-md shadow hover:bg-steelteal ">
+              <div
+                onClick={(e) => navigate("/signup")}
+                className="inline-block w-full px-4 py-2 text-center text-white  bg-bluemunsell rounded-md shadow hover:bg-steelteal "
+              >
                 Sign up
               </div>
             </div>
@@ -87,20 +98,35 @@ export default function NavBarNoLogin({ setCurrentPage }) {
           <div className="">
             <Search setCurrentPage={setCurrentPage} />
           </div>
-          <div onClick={() => dispatch(showLogin(true))} className="my-2 px-2 text-lg font-semibold bg-secondary rounded-xl text-white hover:bg-primary cursor-pointer ease-in-out duration-300 ">
+          <div
+            onClick={() => dispatch(showLogin(true))}
+            className="my-2 px-2 text-lg font-semibold bg-secondary rounded-xl text-white hover:bg-primary cursor-pointer ease-in-out duration-300 "
+          >
             Sign In
           </div>
-          <div onClick={e => navigate("/signup")} className="my-2 px-2 text-lg font-semibold bg-secondary rounded-xl text-white hover:bg-primary cursor-pointer ease-in-out duration-300">
+          <div
+            onClick={(e) => navigate("/signup")}
+            className="my-2 px-2 text-lg font-semibold bg-secondary rounded-xl text-white hover:bg-primary cursor-pointer ease-in-out duration-300"
+          >
             Sign Up
           </div>
         </div>
-        <button type="button" onClick={() =>dispatch(showLogin(true))} className=" relative link flex items-center">
-          {totalQuantities !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{totalQuantities !== 0 && totalQuantities}</span>}
+        <button
+          type="button"
+          onClick={() => dispatch(showLogin(true))}
+          className=" relative link flex items-center"
+        >
+          {totalQuantities !== 0 && (
+            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
+              {totalQuantities !== 0 && totalQuantities}
+            </span>
+          )}
           <HiShoppingCart size={20} className="h-10" />
-          <p className="hidden md:inline font-extrabold md: text-sm mt-2">Cart</p>
+          <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+            Cart
+          </p>
         </button>
         {showCart && <Cart />}
-
       </DivJustifyBetween>
     </NavContainer>
   );

@@ -9,6 +9,7 @@ import "./styleCss.css";
 import Swal from "sweetalert2";
 import imgAside from "./imgSide.jpg";
 import { ImgContainer } from "./style";
+import Logo from "../../assets/Logo.png";
 
 const SingForm = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const SingForm = () => {
         <div className="px-16 py-10 rounded divFormRegister">
           <div className="mb-7 text-center">
             <Link to="/">
-              <h1 className="titleLogo">LOGO</h1>
+              <img src={Logo} className="w-14 self-center" />
             </Link>
             <h1 className="">¡Singn up now!</h1>
           </div>

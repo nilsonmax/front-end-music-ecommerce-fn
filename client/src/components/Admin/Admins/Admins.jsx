@@ -16,18 +16,19 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
     var [dataRender, setDataRender] = useState([]);
     var [valueSearch, setValueSearch] = useState("");
     var [refreshAdmins, setRefreshAdmins] = useState(null);
+    const token = window.localStorage.getItem("dataUser");
 
     
   useEffect(() => {
     if (
         admins.length === 0 && 
         refreshAdmins === null) {
-      dispatch(getAdmins());
+      dispatch(getAdmins(token));
       setRefreshAdmins(false);
     } 
     else {
       if (refreshAdmins === true) {
-        dispatch(getAdmins());
+        dispatch(getAdmins(token));
         setRefreshAdmins(false);
       }else if(refreshAdmins === "search"){
         var adminNoFound=true;
@@ -85,9 +86,7 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
 
   function activarEliminar(columnNameArray, idDelete) {
     if (columnNameArray === "Admin") {
-      const token = window.localStorage.getItem("dataUser");
-      let tokenDecode = JSON.parse(token);
-      dispatch(deleteAdmin(idDelete))
+      dispatch(deleteAdmin(idDelete,token))
         .then((data) => {
           setRefreshAdmins(true);
           Swal.fire("Deleted!", "El Admin se elimino con exito.", "success");

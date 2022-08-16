@@ -90,16 +90,25 @@ export const getAllCategories = () => {
   };
 };
 
-export const postInstrument = (payload) => {
+export const postInstrument = (payload,token) => {
   return async function (dispatch) {
     try {
+    let tokenJSON = JSON.parse(token);
       let newInstrument = await axios.post(
         "http://localhost:4000/instruments",
-        payload
+        payload,{
+          headers: {
+            Authorization: `Bearer ${tokenJSON.token}`,
+          },
+        }
       );
-      console.log("NEWINSTRUMENT", newInstrument);
+      return newInstrument.data;
     } catch (error) {
-      console.log(error);
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
+      }
+      throw new TypeError(errorRes);
     }
   };
 };
@@ -229,11 +238,18 @@ export const deleteUser = (user_id) => {
   };
 };
 
-export const deleteCategory = (category_id) => {
+export const deleteCategory = (category_id,token) => {
   return async function () {
     try {
+    let tokenJSON = JSON.parse(token);
       let categoryDeleted = await axios.delete(
-        `http://localhost:4000/category/${category_id}`
+        `http://localhost:4000/category`,{data: {
+          id: category_id
+        },
+          headers: {
+            Authorization: "Bearer " + tokenJSON.token,
+          }
+        }
       );
       return categoryDeleted.data;
     } catch (error) {
@@ -242,11 +258,18 @@ export const deleteCategory = (category_id) => {
   };
 };
 
-export const deleteInstrument = (id) => {
+export const deleteInstrument = (id,token) => {
   return async function () {
     try {
+    let tokenJSON = JSON.parse(token);
       let instrumentDeleted = await axios.delete(
-        `http://localhost:4000/instruments/${id}`
+        `http://localhost:4000/instruments`,{data: {
+          id: id
+        },
+          headers: {
+            Authorization: "Bearer " + tokenJSON.token,
+          }
+        }
       );
       return instrumentDeleted.data;
     } catch (error) {
@@ -326,10 +349,13 @@ export const postUser = (objectUser) => {
   };
 };
 
-export const postCategory = (objectCategory) => {
+export const postCategory = (objectCategory,token) => {
   return async function () {
     try {
-      let newCategory = await axios.post("http://localhost:4000/category", objectCategory);
+      let tokenJSON = JSON.parse(token);
+      let newCategory = await axios.post("http://localhost:4000/category", objectCategory,{headers: {
+        Authorization: "Bearer " + tokenJSON.token,
+      }});
       return newCategory.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -345,7 +371,6 @@ export const putInstrument = (objectInstrument, token) => {
   return async function () {
     try {
       let tokenJSON = JSON.parse(token);
-      //objectInstrument = camposNullUser(objectInstrument);
       let newInstrument = await axios.put(
         "http://localhost:4000/instruments",
         objectInstrument,

@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
   const [copiaArray, setCopiaArray] = useState([]);
   const [keysArray, setKeyArray] = useState([]);
+  const tokenCode = window.localStorage.getItem("dataUser");
 
   const [objectActualizar, setObjectActualizar] = useState();
   const [errors, setErrors] = useState({});
@@ -107,11 +108,11 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       setErrors(`${error} : ${returnError[error]}`);
     }
     if (errorActual===false) {
-      alertActualizar(dataArrayRender.nameArray, objectActualizar);
+      alertActualizar(dataArrayRender.nameArray);
     }
   };
 
-  const alertActualizar = (nameModelActualizar, objectActualizar) => {
+  const alertActualizar = (nameModelActualizar) => {
     Swal.fire({
       title: "¿Seguro que deseas actualizar " + nameModelActualizar + " ?",
       text: "Se actualizarán los datos",
@@ -122,21 +123,20 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       confirmButtonText: "Aceptar",
     }).then((result) => {
       if (result.isConfirmed) {
-        const tokenCode = window.localStorage.getItem("dataUser");
         if (nameModelActualizar === "User") {
-          dispatchActualizar( putUserAdmin,objectActualizar,tokenCode)
+          dispatchActualizar(putUserAdmin)
         } else if(dataArrayRender.nameArray === "Instrument") {
-          dispatchActualizar(putInstrument,objectActualizar,tokenCode)
+          dispatchActualizar(putInstrument)
         }else if(dataArrayRender.nameArray === "Category"){
-          dispatchActualizar(putCategory,objectActualizar,tokenCode)
+          dispatchActualizar(putCategory)
         }else if(dataArrayRender.nameArray === "Admin"){
-          dispatchActualizar(putAdmin,objectActualizar,tokenCode)
+          dispatchActualizar(putAdmin)
         }
       }
     });
   };
 
-  const dispatchActualizar=(accion, objectActualizar, tokenCode)=>{
+  const dispatchActualizar=(accion)=>{
     dispatch(accion(objectActualizar, tokenCode))
     .then((data) => {
       exitoAndErrorAlert("success", data);

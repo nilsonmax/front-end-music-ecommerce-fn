@@ -14,6 +14,7 @@ const Categories = ({ setShowCreateComponent, showCreateComponent }) => {
     var [dataRender, setDataRender] = useState([]);
     var [valueSearch, setValueSearch] = useState("");
     var [refreshCategories, setRefreshCategories] = useState(null);
+    const token = window.localStorage.getItem("dataUser");
 
     useEffect(() => {
         if (categories.length === 0 && refreshCategories === null) {
@@ -78,9 +79,7 @@ const Categories = ({ setShowCreateComponent, showCreateComponent }) => {
 
     function activarEliminar(columnNameArray, idDelete) {
         if (columnNameArray === "Category") {
-          const token = window.localStorage.getItem("dataUser");
-          let tokenDecode = JSON.parse(token);
-          dispatch(deleteCategory(idDelete))
+          dispatch(deleteCategory(idDelete,token))
             .then((data) => {
               setRefreshCategories(true);
               Swal.fire("Deleted!", "Se ha eliminado una Category", "success");

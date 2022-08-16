@@ -1,35 +1,39 @@
 import { useState, useEffect } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Search } from "../Search/Search";
-import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
+import {
+  DivItemsCenter,
+  DivJustifyBetween,
+  NavContainer,
+  Button,
+} from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { isExpired, decodeToken } from "react-jwt";
-import { get_user } from '../../redux/action/index';
+import { get_user } from "../../redux/action/index";
 import { useStateContext } from "../../context/stateContext";
 import { HiShoppingCart } from "react-icons/hi";
 import Cart from "../Shopping/cart";
+import Logo from "../../assets/Logo.png";
 
 export default function NavBarLogin({ setCurrentPage }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const { showCart, setShowCart, totalQuantities } = useStateContext();
 
-
   //traer nombre de cuenta
-  let user = useSelector(e => e.reducer.user)
+  let user = useSelector((e) => e.reducer.user);
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
-    dispatch(get_user(token))
-  }, [])
+    dispatch(get_user(token));
+  }, []);
 
   return (
     <NavContainer>
       <DivJustifyBetween>
-
         <DivItemsCenter>
           <Link to="/">
-            <h2 className="text-2xl font-bold w-auto text-secondary">LOGO</h2>
+            <img src={Logo} className="w-14" />
           </Link>
 
           <div className="lg:hidden">
@@ -69,11 +73,13 @@ export default function NavBarLogin({ setCurrentPage }) {
 
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`}>
-
+            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${
+              navbar ? "block" : "hidden"
+            }`}
+          >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li  className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <p onClick={()=>navigate("/aboutUs")}>About US</p>
+              <li className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
+                <p onClick={() => navigate("/aboutUs")}>About US</p>
               </li>
 
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
@@ -83,7 +89,13 @@ export default function NavBarLogin({ setCurrentPage }) {
               </li>
 
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <Link onClick={() => { window.localStorage.removeItem("dataUser"); window.location.href = "/" }} to="/user/Profile">
+                <Link
+                  onClick={() => {
+                    window.localStorage.removeItem("dataUser");
+                    window.location.href = "/";
+                  }}
+                  to="/user/Profile"
+                >
                   <p>Log out</p>
                 </Link>
               </li>
@@ -93,18 +105,19 @@ export default function NavBarLogin({ setCurrentPage }) {
               <div className="inline-block w-full">
                 <Search setCurrentPage={setCurrentPage} />
               </div>
-              <div onClick={() => {
-                window.localStorage.removeItem("dataUser")
-                window.location.href = "/"
-              }}>
-              <Link to="/user/Profile">
-              <h2 className=" py-1 text-1xl text-secondary text-lg underline lg:inline-block">
-                  {`Welcome ${user.userName}`}
-                </h2>
-              </Link>
+              <div
+                onClick={() => {
+                  window.localStorage.removeItem("dataUser");
+                  window.location.href = "/";
+                }}
+              >
+                <Link to="/user/Profile">
+                  <h2 className=" py-1 text-1xl text-secondary text-lg underline lg:inline-block">
+                    {`Welcome ${user.userName}`}
+                  </h2>
+                </Link>
               </div>
             </div>
-
           </div>
         </div>
         <div className="hidden space-x-2 lg:inline-block">
@@ -117,10 +130,20 @@ export default function NavBarLogin({ setCurrentPage }) {
             {`Welcome ${user.userName}`}
           </h2>
         </Link>
-        <button type="button" onClick={() => setShowCart(true)} className=" relative link flex items-center">
-          {totalQuantities !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{totalQuantities !== 0 && totalQuantities}</span>}
+        <button
+          type="button"
+          onClick={() => setShowCart(true)}
+          className=" relative link flex items-center"
+        >
+          {totalQuantities !== 0 && (
+            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
+              {totalQuantities !== 0 && totalQuantities}
+            </span>
+          )}
           <HiShoppingCart size={20} className="h-10" />
-          <p className="hidden md:inline font-extrabold md: text-sm mt-2">Cart</p>
+          <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+            Cart
+          </p>
         </button>
         {showCart && <Cart />}
       </DivJustifyBetween>

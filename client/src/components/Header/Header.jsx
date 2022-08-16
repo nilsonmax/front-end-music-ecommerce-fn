@@ -1,7 +1,8 @@
 // import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { Search } from "../Search/Search";
-import { DivItemsCenter, DivJustifyBetween, NavContainer} from "./style";
+import { DivItemsCenter, DivJustifyBetween, NavContainer } from "./style";
+import Logo from "../../assets/Logo.png";
 
 export default function Header({ setCurrentPage }) {
   // const [navbar, setNavbar] = useState(false);
@@ -9,10 +10,9 @@ export default function Header({ setCurrentPage }) {
   return (
     <NavContainer>
       <DivJustifyBetween>
-
         <DivItemsCenter>
           <Link to="/">
-            <h2 className="text-2xl font-bold">LOGO</h2>
+            <img src={Logo} className="w-14" />
           </Link>
 
           {/* <div className="lg:hidden">
@@ -56,7 +56,7 @@ export default function Header({ setCurrentPage }) {
               }`}
           > */}
 
-            {/*  <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+        {/*  <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-[#F37042]">
                 <Link to="/">
                   <p>Home</p>
@@ -72,7 +72,7 @@ export default function Header({ setCurrentPage }) {
               </li> 
             </ul>*/}
 
-            {/* <div className="mt-3 space-y-2 lg:hidden">
+        {/* <div className="mt-3 space-y-2 lg:hidden">
               <div className="inline-block w-full">
                
               </div>
@@ -83,7 +83,7 @@ export default function Header({ setCurrentPage }) {
                 Sign up
               </div>
             </div> */}
-          {/* </div>
+        {/* </div>
         </div> */}
         {/* <div className="hidden space-x-2 lg:inline-block">
 

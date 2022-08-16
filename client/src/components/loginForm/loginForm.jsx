@@ -165,7 +165,7 @@ const LoginForm = ({ visible, onClose }) => {
                     fill="#EA4335"
                   />
                 </svg>
-                Continue with Google
+                Continue with Google.
               </button> */}
             </div>
 

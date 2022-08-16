@@ -7,6 +7,6 @@ export const ButtonStyled = styled.button([button]);
 
 export const StyledCard = styled.div`
   ${tw`
-
+    bg-primary
   `}
 `;

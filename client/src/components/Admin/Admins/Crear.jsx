@@ -8,6 +8,7 @@ import { ButtonAceptar, ButtonCancelar } from "./style";
 
 const Crear = ({ setShowCreateComponent, setRefreshAdmins }) => {
   const dispatch = useDispatch();
+  const token = window.localStorage.getItem("dataUser");
   const adminAtributos = [
     "firstName",
     "lastName",
@@ -46,7 +47,6 @@ const Crear = ({ setShowCreateComponent, setRefreshAdmins }) => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            const token = window.localStorage.getItem("dataUser");
             dispatch(postAdmin(values,token))
               .then((data) => {
                 Toast.fire({

@@ -8,7 +8,6 @@ import { ButtonAceptar, ButtonCancelar } from "./style";
 
 const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.reducer.users);
   const userAtributos = [
     "dni",
     "firstName",

@@ -10,7 +10,9 @@ import {
 } from "./style";
 import validateUserRegister from "../../utils/validateUserRegister";
 import validateInstrument from "../../utils/validateInstrument";
-import {  putUserAdmin, putInstrument, putCategory } from "../../redux/action/index";
+import validateAdmin from "../../utils/validateAdmin";
+import {  putUserAdmin, putInstrument, putCategory} from "../../redux/action/index";
+import {  putAdmin } from "../../redux/action/adminsActions";
 import Swal from "sweetalert2";
 
 const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
@@ -38,7 +40,8 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
             category: e.category.name,
           };
         })
-      : state.reducer.category
+      : dataArrayRender.nameArray === "Category" ? state.reducer.category :
+      state.admins.admins
   );
 
   useEffect(() => {
@@ -50,8 +53,6 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
           setObjectActualizar(data);
         }
       });
-    } else {
-      console.log(objectActualizar);
     }
   }, [copiaArray]);
 
@@ -74,6 +75,8 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       }else{
         returnError={};
       }
+    }else if(dataArrayRender.nameArray === "Admin"){
+      returnError =validateAdmin(objectActualizar)
     }
     if(Object.keys(returnError).length === 0){setErrors("");}
     for (const error in returnError) {
@@ -95,6 +98,8 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       }else{
         returnError={};
       }
+    }else if(dataArrayRender.nameArray === "Admin"){
+      returnError =validateAdmin(objectActualizar)
     }
     if(Object.keys(returnError).length === 0){setErrors("");}
     for (const error in returnError) {
@@ -124,6 +129,8 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
           dispatchActualizar(putInstrument,objectActualizar,tokenCode)
         }else if(dataArrayRender.nameArray === "Category"){
           dispatchActualizar(putCategory,objectActualizar,tokenCode)
+        }else if(dataArrayRender.nameArray === "Admin"){
+          dispatchActualizar(putAdmin,objectActualizar,tokenCode)
         }
       }
     });
@@ -242,9 +249,15 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
                               <option value={data} disabled>
                                 {data}
                               </option>
-                              {data === "rol" && (
+                              {data === "rol" && dataArrayRender.nameArray === "User" && (
                                 <>
                                   <option value="user">User</option>
+                                  <option value="banned">Banned</option>
+                                </>
+                              )}
+                              {data === "rol" && dataArrayRender.nameArray === "Admin" && (
+                                <>
+                                  <option value="admin">Admin</option>
                                   <option value="banned">Banned</option>
                                 </>
                               )}

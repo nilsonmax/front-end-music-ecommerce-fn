@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../../context/stateContext";
-import { addToCart } from "../../redux/action/cartActions";
+import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
 import { StyledCard } from "./style";
 // import { BsCart3 } from "react-icons/bs";
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,6 +29,7 @@ export default function Card({
     console.log('estoy en hanled aadcart')
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments))
+    dispatch(SetTotalQuanTities(cartItems, instruments))
   }
 
   // const { decQty, incQty, qty, addToCart, setShowCart } = useStateContext();

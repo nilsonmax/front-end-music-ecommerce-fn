@@ -10,6 +10,11 @@ export default function Profile() {
     const navigate = useNavigate()
     useEffect(() => {
         const token = window.localStorage.getItem("dataUser");
+        console.log(token)
+        if(token==null){ 
+            navigate("/")
+            return 
+        }
         let tokenEnObjeto = JSON.parse(token)
         dispatch(get_user(tokenEnObjeto.token))
         return function () {

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import React, { useState,useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StyledCheckout } from "./style";
@@ -43,6 +44,19 @@ function validate(userInfo) {
 }
 
 export default function Checkout() {
+
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    const token = window.localStorage.getItem("dataUser");
+    if (token === null) {
+      navigate("/")
+      return
+    }
+  }, [])
+
+
+
   const items = useSelector((state) => state.cart.items);
   console.log("items", items);
   const stripe = useStripe();

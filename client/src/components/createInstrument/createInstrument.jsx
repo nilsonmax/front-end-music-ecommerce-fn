@@ -47,8 +47,17 @@ function validate(input){
 
 
 export default function CreateInstrument() {
-    const dispatch = useDispatch();
+
     const goBack = useNavigate();
+    useEffect(() => {
+        const token = window.localStorage.getItem("dataUser");
+        if(token===null){ 
+            goBack("/")
+            return 
+        }
+    },[])
+
+    const dispatch = useDispatch();
     const categories = useSelector((state) => state.reducer.category);
     const [errors, setErrors] = useState({
         name:"",

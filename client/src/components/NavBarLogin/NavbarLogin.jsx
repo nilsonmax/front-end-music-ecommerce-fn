@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { Search } from "../Search/Search";
 import { DivItemsCenter, DivJustifyBetween, NavContainer, Button } from "./style";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import Cart from "../Shopping/cart";
 export default function NavBarLogin({ setCurrentPage }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
+  const navigate=useNavigate()
   const { showCart, setShowCart, totalQuantities } = useStateContext();
 
 
@@ -71,8 +72,8 @@ export default function NavBarLogin({ setCurrentPage }) {
             className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`}>
 
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <p>About US</p>
+              <li  className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
+                <p onClick={()=>navigate("/aboutUs")}>About US</p>
               </li>
 
               <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">

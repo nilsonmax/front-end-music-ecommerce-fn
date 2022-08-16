@@ -3,7 +3,7 @@ import React from 'react'
 export const Footer = () => {
     return (
 
-        <footer className="relative bg-cadetblue text-background px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24">
+        <footer className="relative bg-cadetblue text-gray-600 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24">
             <div className="flex flex-col md:flex-row">
                 <div className="w-full lg:w-2/6 lg:mx-4 lg:pr-8">
                     <h3 className="font-bold text-2xl">Music Pro</h3>

@@ -1,38 +1,39 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StyledCheckout } from "./style";
 import { StyledCard } from "../Card/style";
 
-function validate(userInfo){
+function validate(userInfo) {
   let errors = {};
 
-  if(!userInfo.cus_name){
+  if (!userInfo.cus_name) {
     errors.cus_name = "Input required";
 
-  } else if(!userInfo.cus_email){
+  } else if (!userInfo.cus_email) {
     errors.cus_email = "Input required";
 
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(userInfo.cus_email)) {
     errors.cus_email = 'Invalid email address';
 
-  } else if(!userInfo.cus_phone){
+  } else if (!userInfo.cus_phone) {
     errors.cus_phone = "Input required";
 
-  } else if(`${userInfo.cus_phone}`.length<10){
+  } else if (`${userInfo.cus_phone}`.length < 10) {
     errors.cus_phone = "should have 10 digits at least";
 
-  }else if(!userInfo.cus_address){
+  } else if (!userInfo.cus_address) {
     errors.cus_address = "Input required";
 
-  } else if(!userInfo.cus_city){
+  } else if (!userInfo.cus_city) {
     errors.cus_city = "Input required";
 
-  } else if(!userInfo.cus_country){
+  } else if (!userInfo.cus_country) {
     errors.cus_country = "Input required";
 
-  } else if(!userInfo.cus_zip){
+  } else if (!userInfo.cus_zip) {
     errors.cus_zip = "Input required";
   }
 
@@ -40,6 +41,19 @@ function validate(userInfo){
 }
 
 export default function Checkout() {
+
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    const token = window.localStorage.getItem("dataUser");
+    if (token === null) {
+      navigate("/")
+      return
+    }
+  }, [])
+
+
+
   const items = useSelector((state) => state.cart.items);
   console.log("items", items);
   const stripe = useStripe();
@@ -83,7 +97,7 @@ export default function Checkout() {
     });
     setErrors(validate({
       ...userInfo,
-     [e.target.name]: e.target.value
+      [e.target.name]: e.target.value
     }));
   }
 
@@ -146,7 +160,7 @@ export default function Checkout() {
               aria-label="Name"
               onChange={(e) => onChange(e)}
             />
-            {errors.cus_name && ( <p className="text-xs text-red-600">{errors.cus_name}</p> )}
+            {errors.cus_name && (<p className="text-xs text-red-600">{errors.cus_name}</p>)}
           </div>
 
           <div class="mt-2">
@@ -163,7 +177,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_email && ( <p className="text-xs text-red-600">{errors.cus_email}</p> )}
+            {errors.cus_email && (<p className="text-xs text-red-600">{errors.cus_email}</p>)}
           </div>
 
           <div class="mt-2">
@@ -180,7 +194,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_phone && ( <p className="text-xs text-red-600">{errors.cus_phone}</p> )}
+            {errors.cus_phone && (<p className="text-xs text-red-600">{errors.cus_phone}</p>)}
           </div>
 
           <div class="mt-2">
@@ -197,7 +211,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_address && ( <p className="text-xs text-red-600">{errors.cus_address}</p> )}
+            {errors.cus_address && (<p className="text-xs text-red-600">{errors.cus_address}</p>)}
           </div>
 
           <div class="mt-2">
@@ -214,7 +228,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_city && ( <p className="text-xs text-red-600">{errors.cus_city}</p> )}
+            {errors.cus_city && (<p className="text-xs text-red-600">{errors.cus_city}</p>)}
           </div>
 
           <div class="inline-block mt-2 w-1/2 pr-1">
@@ -231,7 +245,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_country && ( <p className="text-xs text-red-600">{errors.cus_country}</p> )}
+            {errors.cus_country && (<p className="text-xs text-red-600">{errors.cus_country}</p>)}
           </div>
 
           <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
@@ -248,7 +262,7 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_zip && ( <p className="text-xs text-red-600">{errors.cus_zip}</p> )}
+            {errors.cus_zip && (<p className="text-xs text-red-600">{errors.cus_zip}</p>)}
           </div>
 
           <p class="mt-4 text-gray-800 font-medium">Payment information</p>

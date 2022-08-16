@@ -8,7 +8,6 @@ import { ButtonAceptar, ButtonCancelar } from "./style";
 
 const Crear = ({ setShowCreateComponent, setRefreshCategories }) => {
         const dispatch = useDispatch();
-        const categories = useSelector((state) => state.reducer.category);
         const categoryAtributos = [
           "name"
         ];

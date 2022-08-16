@@ -1,23 +1,19 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { postUser } from "../../../redux/action";
-import validateUserRegister from "../../../utils/validateUserRegister";
+import { postAdmin } from "../../../redux/action/adminsActions";
+import validateAdmin from "../../../utils/validateAdmin";
 import Swal from "sweetalert2";
 import { ButtonAceptar, ButtonCancelar } from "./style";
 
-const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
+const Crear = ({ setShowCreateComponent, setRefreshAdmins }) => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.reducer.users);
-  const userAtributos = [
-    "dni",
+  const adminAtributos = [
     "firstName",
     "lastName",
-    "contactNumber",
     "email",
     "userName",
-    "password",
-    "buyerAddress",
+    "password"
   ];
 
   const Toast = Swal.mixin({
@@ -34,33 +30,30 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
 
   return (
     <div>
-      <h1>Registrar un nuevo User</h1>
+      <h1>Registrar un nuevo Admin</h1>
       <Formik
         initialValues={{
-          dni: "",
           firstName: "",
           lastName: "",
-          contactNumber: "",
           email: "",
           userName: "",
           password: "",
-          buyerAddress: "",
-          rol: "user",
+          rol: "admin",
         }}
         validate={(values) => {
-          var returnErrors = validateUserRegister(values);
-          delete returnErrors.confirmpassword;
+          var returnErrors = validateAdmin (values);
           return returnErrors;
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            dispatch(postUser(values))
+            const token = window.localStorage.getItem("dataUser");
+            dispatch(postAdmin(values,token))
               .then((data) => {
                 Toast.fire({
                   icon: "success",
-                  title: data.ok,
+                  title: data,
                 }).then((result) => {
-                  setRefreshUsers(true);
+                  setRefreshAdmins(true);
                   setShowCreateComponent(false);
                 });
               })
@@ -85,7 +78,7 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
         }) => (
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-3 gap-3">
-              {userAtributos.map((data) => {
+              {adminAtributos.map((data) => {
                 return (
                   <div key={data}>
                     <input
@@ -94,7 +87,7 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
                           ? "email"
                           : data === "password"
                           ? "password"
-                          : data === "dni" || data === "contactNumber"
+                          : data === "" 
                           ? "number"
                           : "text"
                       }
@@ -120,7 +113,7 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
                   <option value="rol" disabled>
                     Rol
                   </option>
-                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
                   <option value="banned">Banned</option>
                 </select>
               </div>

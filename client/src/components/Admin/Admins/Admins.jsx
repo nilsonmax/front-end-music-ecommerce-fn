@@ -12,17 +12,20 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
     const dispatch = useDispatch();
     const admins = useSelector((state) => state.admins.admins);
     var [copyAdmin, setCopyAdmin] = useState([]);
-    const columns = ["userName", "password", "firstName", "lastName","email","rol"];
+    const columns = ["Nombres y Apellidos","userName", "email","rol"];
     var [dataRender, setDataRender] = useState([]);
     var [valueSearch, setValueSearch] = useState("");
     var [refreshAdmins, setRefreshAdmins] = useState(null);
 
     
   useEffect(() => {
-    if (admins.length === 0 && refreshAdmins === null) {
+    if (
+        admins.length === 0 && 
+        refreshAdmins === null) {
       dispatch(getAdmins());
       setRefreshAdmins(false);
-    } else {
+    } 
+    else {
       if (refreshAdmins === true) {
         dispatch(getAdmins());
         setRefreshAdmins(false);
@@ -105,7 +108,7 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
         />
       </div>
       <div>
-        {/* {dataRender.length > 0 && showCreateComponent === false && (
+        {dataRender.length > 0 && showCreateComponent === false && (
           <Table
             setRefresh={setRefreshAdmins}
             dataRender={dataRender}
@@ -115,13 +118,13 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
         )}
         {dataRender.length < 1 && showCreateComponent === false && (
           <p className="w-screen text-center">No hay Admins</p>
-        )}
+        )} 
         {showCreateComponent === true && (
           <Crear
             setShowCreateComponent={setShowCreateComponent}
             setRefreshAdmins={setRefreshAdmins}
           />
-        )} */}
+        )}
       </div>
     </div>
   )

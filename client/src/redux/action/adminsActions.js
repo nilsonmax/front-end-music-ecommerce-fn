@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export const GET_ADMINS = "GET_INSTRUMENTS";
+export const GET_ADMINS = "GET_ADMINS";
 const REACT_APP_HOST = "http://localhost:4000";
 
 export const getAdmins = () => {
@@ -20,29 +20,31 @@ export const getAdmins = () => {
   };
 };
 
-export const deleteAdmin = (user_id) => {
+export const deleteAdmin = (admin_id) => {
   return async function () {
     try {
-      let userDeleted = await axios.delete(
-        `http://localhost:4000/users/${user_id}`
+      let adminDeleted = await axios.delete(
+        `http://localhost:4000/admins`,{data: {
+            id: admin_id
+          }}
       );
-      return userDeleted.data;
+      return adminDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
     }
   };
 };
 
-export const putAdmin = (objectUser, token) => {
+export const putAdmin = (objectAdmin, token) => {
   return async function () {
     try {
       let tokenJSON = JSON.parse(token);
-      let newUser = await axios.put("http://localhost:4000/users/admin", objectUser, {
+      let admin = await axios.put("http://localhost:4000/admins", objectAdmin, {
         headers: {
           Authorization: "Bearer " + tokenJSON.token,
         },
       });
-      return newUser.data;
+      return admin.data;
     } catch (error) {
       var errorRes = error.response.data.error;
       if (!errorRes) {
@@ -52,3 +54,24 @@ export const putAdmin = (objectUser, token) => {
     }
   };
 };
+
+
+export const postAdmin = (objectAdmin, token) => {
+    return async function () {
+        try {
+        let tokenJSON = JSON.parse(token);
+        let newAdmin = await axios.post("http://localhost:4000/admins/register", objectAdmin, {
+          headers: {
+            Authorization: "Bearer " + tokenJSON.token,
+          },
+        });
+        return newAdmin.data;
+      } catch (error) {
+        var errorRes = error.response.data.error;
+        if (!errorRes) {
+          errorRes = error.response.data;
+        }
+        throw new TypeError(errorRes);
+      }
+    };
+  };

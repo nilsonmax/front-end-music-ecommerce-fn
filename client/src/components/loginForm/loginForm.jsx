@@ -4,9 +4,6 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/action";
 import { isExpired, decodeToken } from "react-jwt";
 import Swal from "sweetalert2";
-import { GoogleLogin } from 'react-google-login';
-import { gapi } from 'gapi-script';
-
 
 const LoginForm = ({ visible, onClose }) => {
   const dispatch = useDispatch();
@@ -17,15 +14,6 @@ const LoginForm = ({ visible, onClose }) => {
     userName: "",
     password: "",
   });
-
-  useEffect(()=>{
-    gapi.load("client:auth2", () => {
-      gapi.auth2.init({
-        clientId:
-        "792574028129-c6pm057082v13te29d5imcal6v5jag49.apps.googleusercontent.com",
-      });
-    });
-  }, [])
 
   const handledChange = (e) => {
     e.preventDefault(e);
@@ -73,50 +61,43 @@ const LoginForm = ({ visible, onClose }) => {
     },
   });
 
-  const responseGoogle = (response) => {
-    console.log(response.profileObj)
-    dispatch(loginUser({
-    }))
-  }
-
-
   if (!visible) return null;
   return (
     <div className="fixed inset-0 bg-dark bg-opacity-25 backdrop-blur-sm flex items-center justify-center mt-3">
-      <div class=" py-6 sm:py-8 lg:py-12">
-        <div class=" bg-white rounded-lg max-w-screen-2xl px-4 md:px-8 mx-auto">
-          <form class="max-w-lg  mx-auto bg-white ">
-            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-              <h2 class="text-dark pt-2  text-2xl lg:text-2xl font-bold text-center">
+      <div className=" py-6 sm:py-8 lg:py-12">
+        <div className=" bg-white rounded-lg max-w-screen-2xl px-4 md:px-8 mx-auto">
+          <form className="max-w-lg  mx-auto bg-white ">
+            <div className="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+              <h2 className="text-dark pt-2  text-2xl lg:text-2xl font-bold text-center">
                 Sign In
               </h2>
               <button
                 onClick={onClose}
                 type="button"
-                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-toggle="defaultModal"
               >
                 <svg
                   aria-hidden="true"
-                  class="w-8 h-8 hover:bg-primary rounded-lg"
+                  className="w-8 h-8 hover:bg-primary rounded-lg"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </button>
             </div>
 
-            <div class="flex flex-col gap-4 p-4 md:p-8">
+            <div className="flex flex-col gap-4 p-4 md:p-8">
               <div>
                 <label
-                  for="email"
-                  class="inline-block text-dark  text-sm sm:text-base mb-2"
+                  htmlFor="email"
+                  className="inline-block text-dark  text-sm sm:text-base mb-2"
                 >
                   userName
                 </label>
@@ -127,14 +108,14 @@ const LoginForm = ({ visible, onClose }) => {
                   placeholder="userName..."
                   type="text"
                   name="userName"
-                  class="border w-full bg-slate-300  text-dark  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                  className="border w-full bg-slate-300  text-dark  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                 />
               </div>
 
               <div className="">
                 <label
-                  for="password"
-                  class="inline-block text-dark  text-sm sm:text-base mb-2"
+                  htmlFor="password"
+                  className="inline-block text-dark  text-sm sm:text-base mb-2"
                 >
                   Password
                 </label>
@@ -145,30 +126,22 @@ const LoginForm = ({ visible, onClose }) => {
                     handledChange(e);
                   }}
                   name="password"
-                  class="border w-full bg-slate-300  text-dark  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                  className="border w-full bg-slate-300  text-dark  focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                 />
               </div>
               <button
                 onClick={(e) => onClickLogin(e)}
-                class="block mb-16 bg-primary  hover:bg-tertiary  active:bg-tertiary  focus-visible:ring ring-tertiary  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+                className="block mb-16 bg-primary  hover:bg-tertiary  active:bg-tertiary  focus-visible:ring ring-tertiary  text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
               >
                 Log in
               </button>
 
-            <GoogleLogin
-             clientId="792574028129-c6pm057082v13te29d5imcal6v5jag49.apps.googleusercontent.com"
-             buttonText="Login with Google"
-             onSuccess={responseGoogle}
-             onFailure={responseGoogle}
-             cookiePolicy={'single_host_origin'}
-            />
-
-              {/*               <div class="flex justify-center items-center relative">
-                <span class="bg-background text-dark underline  text-sm relative px-4">Log in with social</span>
+              {/*               <div className="flex justify-center items-center relative">
+                <span className="bg-background text-dark underline  text-sm relative px-4">Log in with social</span>
               </div> */}
-              {/*               <button class="flex justify-center items-center bg-background hover:bg-primary  active:bg-tertiary  border border-tertiary  focus-visible:ring ring-tertiary  text-dark  text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
+              {/*               <button className="flex justify-center items-center bg-background hover:bg-primary  active:bg-tertiary  border border-tertiary  focus-visible:ring ring-tertiary  text-dark  text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
                 <svg
-                  class="w-5 h-5 shrink-0"
+                  className="w-5 h-5 shrink-0"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -196,12 +169,13 @@ const LoginForm = ({ visible, onClose }) => {
               </button> */}
             </div>
 
-            <div class="flex justify-center items-center bg-white   pb-14 ">
-              <p class="text-dark font-bold  text-md text-center">
+            <div className="flex justify-center items-center bg-white   pb-14 ">
+              <p className="text-dark font-bold  text-md text-center">
                 Don't have an account?{" "}
+              </p>
                 <div
                   to="/signup"
-                  class="text-darkcornflower hover:text-dark active:text-darkcornflower transition underline duration-100"
+                  className="text-darkcornflower hover:text-dark active:text-darkcornflower transition underline duration-100"
                   onClick={() => {
                     window.location.href = "/signup";
                     setTimeout(() => {
@@ -211,7 +185,7 @@ const LoginForm = ({ visible, onClose }) => {
                 >
                   Sign Up
                 </div>
-              </p>
+              
             </div>
           </form>
         </div>

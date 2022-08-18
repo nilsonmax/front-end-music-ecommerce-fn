@@ -74,6 +74,9 @@ const Table = ({ dataRender, columnsRender, activarEliminar, setRefresh }) => {
                 {data.column4 && (
                   <td className="text-center  border-b ">{data.column4}</td>
                 )}
+                {data.column5 && (
+                  <td className="text-center  border-b ">{data.column5}</td>
+                )}
                 <td className="  content-center w-1  border-b ">
                   <GoTrashcan
                     className=" mx-auto h-6"

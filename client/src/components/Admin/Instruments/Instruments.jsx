@@ -10,7 +10,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
   const instruments = useSelector((state) => state.reducer.instruments);
   var [copyInstruments, setCopyInstruments] = useState([]);
-  const columns = ["idInstrument", "Image", "Name", "Stock"];
+  const columns = ["idInstrument", "Image", "Name", "Stock","isBanned"];
   var [dataRender, setDataRender] = useState([]);
   var [refreshInstruments, setRefreshInstruments] = useState(null);
   var [valueSearch, setValueSearch] = useState("");
@@ -24,6 +24,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
           column2: instrument.img,
           column3: instrument.name,
           column4: instrument.stock,
+          column5: `${instrument.isBanned}`,
           columnNameArray: "Instrument",
         },
       ]);
@@ -69,7 +70,6 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
 
       setDataRender([]);
       if (copyInstruments.length > 0) {
-        console.log(copyInstruments);
         setearDatarender(copyInstruments);
         setCopyInstruments([]);
       } else {

@@ -11,6 +11,7 @@ import {
 import validateUserRegister from "../../utils/validateUserRegister";
 import validateInstrument from "../../utils/validateInstrument";
 import validateAdmin from "../../utils/validateAdmin";
+import {mapearArrayInstruments,mapearArrayUser} from "../../utils/mapearArray";
 import {  putUserAdmin, putInstrument, putCategory} from "../../redux/action/index";
 import {  putAdmin } from "../../redux/action/adminsActions";
 import Swal from "sweetalert2";
@@ -25,22 +26,9 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
   const dispatch = useDispatch();
   var reduxArray = useSelector((state) =>
     dataArrayRender.nameArray === "User"
-      ? state.reducer.users
-      : dataArrayRender.nameArray === "Instrument" ?
-        state.reducer.instruments.map((e) => {
-          return {
-            id: e.id,
-            name: e.name,
-            brand: e.brand,
-            price: e.price,
-            img: e.img,
-            description: e.description,
-            stock: e.stock,
-            status: e.status,
-            adminId: e.adminId,
-            category: e.category.name,
-          };
-        })
+      ? mapearArrayUser(state.reducer.users)
+      : dataArrayRender.nameArray === "Instrument" ? 
+        mapearArrayInstruments(state.reducer.instruments)
       : dataArrayRender.nameArray === "Category" ? state.reducer.category :
       state.admins.admins
   );
@@ -64,37 +52,21 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       [name]: value,
     });
 
-    var returnError = null;
-    if (dataArrayRender.nameArray === "User") {
-      returnError = validateUserRegister(objectActualizar);
-      if(returnError.hasOwnProperty("confirmpassword")){returnError={};}
-    } else if(dataArrayRender.nameArray === "Instrument") {
-      returnError = validateInstrument(objectActualizar);
-    }else if(dataArrayRender.nameArray === "Category"){
-      if(value===""){
-        returnError={name:"Required"}
-      }else{
-        returnError={};
-      }
-    }else if(dataArrayRender.nameArray === "Admin"){
-      returnError =validateAdmin(objectActualizar)
-    }
+    var returnError = validarInputs();
     if(Object.keys(returnError).length === 0){setErrors("");}
     for (const error in returnError) {
         setErrors(`${error} : ${returnError[error]}`);
     }
   };
-
-  const onClickActulizar = () => {
-    let returnError = null;
-    let errorActual=false;
+  const validarInputs=()=>{
+    var returnError=null;
     if (dataArrayRender.nameArray === "User") {
       returnError = validateUserRegister(objectActualizar);
       if(returnError.hasOwnProperty("confirmpassword")){returnError={};}
     } else if(dataArrayRender.nameArray === "Instrument"){
       returnError = validateInstrument(objectActualizar);
     }else if(dataArrayRender.nameArray === "Category"){
-      if(objectActualizar.name===""){
+      if(objectActualizar.name.length<1){
         returnError={name:"Required"}
       }else{
         returnError={};
@@ -102,6 +74,11 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
     }else if(dataArrayRender.nameArray === "Admin"){
       returnError =validateAdmin(objectActualizar)
     }
+    return returnError;
+  }
+  const onClickActulizar = () => {
+    let returnError = validarInputs();
+    let errorActual=false;
     if(Object.keys(returnError).length === 0){setErrors("");}
     for (const error in returnError) {
       errorActual=true;
@@ -211,7 +188,8 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
                         <div key={key + 1}>
                           {data !== "rol" &&
                           data !== "category" &&
-                          data !== "status" ? (
+                          data !== "status" &&
+                          data !== "isBanned" ? (
                             <Input
                               type={
                                 data === "email"
@@ -274,13 +252,19 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
                                   <option value="Used">Used</option>
                                 </>
                               )}
+                              {data === "isBanned" && (
+                                <>
+                                  <option value="false">False</option>
+                                  <option value="true">True</option>
+                                </>
+                              )}
                             </Select>
                           )}
                         </div>
                       );
                     })}
                   </div>
-                  <div>{errors.length > 0 && <p className>{errors}</p>}</div>
+                  <div>{errors.length > 0 && <p>{errors}</p>}</div>
                   <div className="mt-10 grid grid-cols-4 gap-x-4">
                     <BotonAceptar
                       type="submit"

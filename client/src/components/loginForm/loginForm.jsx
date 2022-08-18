@@ -5,6 +5,10 @@ import { loginUser } from "../../redux/action";
 import { isExpired, decodeToken } from "react-jwt";
 import Swal from "sweetalert2";
 
+import LoginGoogle from "../loginGoogle";
+
+
+
 const LoginForm = ({ visible, onClose }) => {
   const dispatch = useDispatch();
 
@@ -60,6 +64,7 @@ const LoginForm = ({ visible, onClose }) => {
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
+
 
   if (!visible) return null;
   return (
@@ -168,6 +173,10 @@ const LoginForm = ({ visible, onClose }) => {
                 Continue with Google.
               </button> */}
             </div>
+
+
+            <LoginGoogle/>
+
 
             <div className="flex justify-center items-center bg-white   pb-14 ">
               <p className="text-dark font-bold  text-md text-center">

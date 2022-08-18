@@ -10,7 +10,7 @@ const Categories = ({ setShowCreateComponent, showCreateComponent }) => {
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.reducer.category);
     var [copyCategories, setCopyCategories] = useState([]);
-    const columns = ["Category_id", "name"];
+    const columns = ["Category_id", "name", "isBanned"];
     var [dataRender, setDataRender] = useState([]);
     var [valueSearch, setValueSearch] = useState("");
     var [refreshCategories, setRefreshCategories] = useState(null);
@@ -59,6 +59,7 @@ const Categories = ({ setShowCreateComponent, showCreateComponent }) => {
               column0: category.id,
               column1: category.id,
               column2: category.name,
+              column3: `${category.isBanned}`,
               columnNameArray: "Category",
             },
           ]);

@@ -5,6 +5,8 @@ import { getUsers, deleteUser } from "../../../redux/action";
 import Swal from "sweetalert2";
 import Aside from "../Aside/Aside";
 import Crear from "./Crear";
+import { setearDataRenderUser } from "../../../utils/setearDataRenderColumns";
+import { Toast } from "../../../utils/Toast";
 
 const Users = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
@@ -42,46 +44,18 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
       }
         setDataRender([]);
         if(copyUser.length>0){
-          setearDataRender(copyUser)
+          setearDataRenderUser(copyUser,setDataRender)
           setCopyUser([])
         }else{
-          setearDataRender(users)
+          setearDataRenderUser(users,setDataRender)
         }
     }
   }, [users, refreshUsers]);
 
-  const setearDataRender=(array)=>{
-    array.map((user) => {
-      setDataRender((data) => [
-        ...data,
-        {
-          column0: user.id,
-          column1: user.firstName + " " + user.lastName,
-          column2: user.userName,
-          column3: user.email,
-          column4: user.rol,
-          columnNameArray: "User",
-        },
-      ]);
-    });
-  }
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
 
   function activarEliminar(columnNameArray, idDelete) {
     if (columnNameArray === "User") {
       const token = window.localStorage.getItem("dataUser");
-      let tokenDecode = JSON.parse(token);
       dispatch(deleteUser(idDelete))
         .then((data) => {
           setRefreshUsers(true);

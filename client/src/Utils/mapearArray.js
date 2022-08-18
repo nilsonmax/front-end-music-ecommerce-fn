@@ -27,11 +27,25 @@ function mapearArrayUser(usersArray){
         email: e.email,
         contactNumber: e.contactNumber,
         userName: e.userName,
-        password: e.password,
         buyerAddress: e.buyerAddress,
         rol: e.rol,
       };
   })
   return usersMapeado
 }
-module.exports={mapearArrayInstruments,mapearArrayUser}
+
+function mapearArrayAdmins(usersArray){
+  var usersMapeado=usersArray.map((e) => {
+      return {
+        id: e.id,
+        firstName: e.firstName,
+        lastName: e.lastName,
+        email: e.email,
+        userName: e.userName,
+        rol: e.rol,
+      };
+  })
+  return usersMapeado
+}
+
+module.exports={mapearArrayInstruments,mapearArrayUser,mapearArrayAdmins}

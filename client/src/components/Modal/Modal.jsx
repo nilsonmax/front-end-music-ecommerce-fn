@@ -5,16 +5,16 @@ import {
   Input,
   BotonAceptar,
   BotonCancelar,
-  Label,
   Select,
 } from "./style";
 import validateUserRegister from "../../utils/validateUserRegister";
 import validateInstrument from "../../utils/validateInstrument";
 import validateAdmin from "../../utils/validateAdmin";
-import {mapearArrayInstruments,mapearArrayUser} from "../../utils/mapearArray";
+import {mapearArrayInstruments,mapearArrayUser,mapearArrayAdmins} from "../../utils/mapearArray";
 import {  putUserAdmin, putInstrument, putCategory} from "../../redux/action/index";
 import {  putAdmin } from "../../redux/action/adminsActions";
 import Swal from "sweetalert2";
+import { Toast } from "../../utils/Toast";
 
 const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
   const [copiaArray, setCopiaArray] = useState([]);
@@ -30,7 +30,7 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       : dataArrayRender.nameArray === "Instrument" ? 
         mapearArrayInstruments(state.reducer.instruments)
       : dataArrayRender.nameArray === "Category" ? state.reducer.category :
-      state.admins.admins
+      mapearArrayAdmins(state.admins.admins)
   );
 
   useEffect(() => {
@@ -58,11 +58,11 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
         setErrors(`${error} : ${returnError[error]}`);
     }
   };
+
   const validarInputs=()=>{
     var returnError=null;
     if (dataArrayRender.nameArray === "User") {
       returnError = validateUserRegister(objectActualizar);
-      if(returnError.hasOwnProperty("confirmpassword")){returnError={};}
     } else if(dataArrayRender.nameArray === "Instrument"){
       returnError = validateInstrument(objectActualizar);
     }else if(dataArrayRender.nameArray === "Category"){
@@ -74,8 +74,12 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
     }else if(dataArrayRender.nameArray === "Admin"){
       returnError =validateAdmin(objectActualizar)
     }
+    if(returnError.hasOwnProperty("confirmpassword") || returnError.hasOwnProperty("password")){
+      returnError={};
+    }
     return returnError;
   }
+
   const onClickActulizar = () => {
     let returnError = validarInputs();
     let errorActual=false;
@@ -122,18 +126,6 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       exitoAndErrorAlert("error", error);
     });
   }
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
 
   const exitoAndErrorAlert = (typeAlert, message) => {
     Toast.fire({
@@ -200,13 +192,11 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
                                     data === "stock" ||
                                     data === "adminId"
                                   ? "number"
-                                  : data === "password"
-                                  ? "password"
                                   : "text"
                               }
                               name={data}
                               placeholder={data}
-                              disabled={data === "id" ? true : false}
+                              disabled={(data === "id" || data === "dni" || data === "email" || data === "userName") ? true : false}
                               value={
                                 objectActualizar[data] === null
                                   ? ""

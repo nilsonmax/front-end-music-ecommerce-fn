@@ -5,6 +5,8 @@ import { getInstruments, deleteInstrument } from "../../../redux/action/index";
 import Crear from "./Crear";
 import Swal from "sweetalert2";
 import Aside from "../Aside/Aside";
+import { setearDatarenderInstruments } from "../../../utils/setearDataRenderColumns";
+import { Toast } from "../../../utils/Toast";
 
 const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
@@ -14,33 +16,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
   var [dataRender, setDataRender] = useState([]);
   var [refreshInstruments, setRefreshInstruments] = useState(null);
   var [valueSearch, setValueSearch] = useState("");
-  const setearDatarender = (array) => {
-    array.map((instrument) => {
-      setDataRender((data) => [
-        ...data,
-        {
-          column0: instrument.id,
-          column1: instrument.id,
-          column2: instrument.img,
-          column3: instrument.name,
-          column4: instrument.stock,
-          column5: `${instrument.isBanned}`,
-          columnNameArray: "Instrument",
-        },
-      ]);
-    });
-  };
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
+ 
   useEffect(() => {
     if (instruments.length === 0 && refreshInstruments === null) {
       dispatch(getInstruments());
@@ -70,10 +46,10 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
 
       setDataRender([]);
       if (copyInstruments.length > 0) {
-        setearDatarender(copyInstruments);
+        setearDatarenderInstruments(copyInstruments,setDataRender);
         setCopyInstruments([]);
       } else {
-        setearDatarender(instruments);
+        setearDatarenderInstruments(instruments,setDataRender);
       }
     }
   }, [instruments, refreshInstruments]);

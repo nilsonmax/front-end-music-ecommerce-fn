@@ -55,6 +55,8 @@ const Cart = () => {
   const { setShowCart } = useStateContext();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const quanTities = useSelector((state) => state.cart.quanTities);
+  let quanTitie = window.localStorage.getItem("quanTities")
 
   const hanledDelete = (e, item) => {
     console.log("estoy en hanled aadcart");
@@ -137,12 +139,12 @@ const Cart = () => {
           {cartItems.length >= 1 ? (
             <div>
               <CartHeading>Your Cart</CartHeading>
-              <CartNumItems>({cartItems.length} items)</CartNumItems>
+              <CartNumItems>({quanTities?quanTities:quanTitie} items)</CartNumItems>
             </div>
           ) : (
             <Hidden>
               <CartHeading>Your Cart</CartHeading>
-              <CartNumItems>({cartItems.length} items)</CartNumItems>
+              <CartNumItems>({quanTities?quanTities:quanTitie} items)</CartNumItems>
             </Hidden>
           )}
 
@@ -165,7 +167,7 @@ const Cart = () => {
 
                       <QuantityDescNumCart>
                         {item.count}
-                        {/* {item.quantity} */}
+                       
                       </QuantityDescNumCart>
 
                       <QuantityDescPlus onClick={(e) => hanledAdd(e, item)}>

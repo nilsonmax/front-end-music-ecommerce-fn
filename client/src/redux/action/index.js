@@ -96,7 +96,8 @@ export const postInstrument = (payload, token) => {
       let tokenJSON = JSON.parse(token);
       let newInstrument = await axios.post(
         `${REACT_APP_HOST}/instruments`,
-        payload,{
+        payload,
+        {
           headers: {
             Authorization: `Bearer ${tokenJSON.token}`,
           },
@@ -189,15 +190,11 @@ export const updateUserInfo = (payload) => {
     let token = window.localStorage.getItem("dataUser");
     let tokenJSON = JSON.parse(token);
     try {
-      let userUpdated = await axios.put(
-        `${REACT_APP_HOST}/users`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${tokenJSON.token}`,
-          },
-        }
-      );
+      let userUpdated = await axios.put(`${REACT_APP_HOST}/users`, payload, {
+        headers: {
+          Authorization: `Bearer ${tokenJSON.token}`,
+        },
+      });
       console.log("TOKEN: ", window.localStorage.getItem("token"));
       console.log("USERUPDATED", userUpdated);
       return userUpdated.data;
@@ -258,15 +255,14 @@ export const deleteCategory = (category_id, token) => {
   return async function () {
     try {
       let tokenJSON = JSON.parse(token);
-      let categoryDeleted = await axios.delete(
-        `${REACT_APP_HOST}/category`,{data: {
-          id: category_id
+      let categoryDeleted = await axios.delete(`${REACT_APP_HOST}/category`, {
+        data: {
+          id: category_id,
         },
-          headers: {
-            Authorization: "Bearer " + tokenJSON.token,
-          },
-        }
-      );
+        headers: {
+          Authorization: "Bearer " + tokenJSON.token,
+        },
+      });
       return categoryDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
@@ -279,9 +275,11 @@ export const deleteInstrument = (id, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       let instrumentDeleted = await axios.delete(
-        `${REACT_APP_HOST}/instruments`,{data: {
-          id: id
-        },
+        `${REACT_APP_HOST}/instruments`,
+        {
+          data: {
+            id: id,
+          },
           headers: {
             Authorization: "Bearer " + tokenJSON.token,
           },
@@ -299,11 +297,15 @@ export const putUser = (objectUser, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
-      let newUser = await axios.put(`${REACT_APP_HOST}/users/admin`, objectUser, {
-        headers: {
-          Authorization: "Bearer " + tokenJSON.token,
-        },
-      });
+      let newUser = await axios.put(
+        `${REACT_APP_HOST}/users/admin`,
+        objectUser,
+        {
+          headers: {
+            Authorization: "Bearer " + tokenJSON.token,
+          },
+        }
+      );
       return newUser.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -320,11 +322,15 @@ export const putUserAdmin = (objectUser, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
-      let newUser = await axios.put(`${REACT_APP_HOST}/users/admin`, objectUser, {
-        headers: {
-          Authorization: "Bearer " + tokenJSON.token,
-        },
-      });
+      let newUser = await axios.put(
+        `${REACT_APP_HOST}/users/admin`,
+        objectUser,
+        {
+          headers: {
+            Authorization: "Bearer " + tokenJSON.token,
+          },
+        }
+      );
       return newUser.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -369,9 +375,15 @@ export const postCategory = (objectCategory, token) => {
   return async function () {
     try {
       let tokenJSON = JSON.parse(token);
-      let newCategory = await axios.post(`${REACT_APP_HOST}/category`, objectCategory,{headers: {
-        Authorization: "Bearer " + tokenJSON.token,
-      }});
+      let newCategory = await axios.post(
+        `${REACT_APP_HOST}/category`,
+        objectCategory,
+        {
+          headers: {
+            Authorization: "Bearer " + tokenJSON.token,
+          },
+        }
+      );
       return newCategory.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -437,6 +449,25 @@ export const mailSignUp = (objectUser) => {
       objectUser = camposNullUser(objectUser);
       let newMail = await axios.post(
         "http://localhost:4000/mail/sign",
+        objectUser
+      );
+      return newMail.data;
+    } catch (error) {
+      var errorRes = error.response.data.error;
+      if (!errorRes) {
+        errorRes = error.response.data;
+      }
+      throw new TypeError(errorRes);
+    }
+  };
+};
+
+export const mailUpdateProfile = (objectUser) => {
+  return async function () {
+    try {
+      objectUser = camposNullUser(objectUser);
+      let newMail = await axios.post(
+        "http://localhost:4000/mail/profile",
         objectUser
       );
       return newMail.data;

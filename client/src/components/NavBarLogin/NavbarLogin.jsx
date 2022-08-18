@@ -20,24 +20,15 @@ export default function NavBarLogin({ setCurrentPage }) {
   // const [quanties, setQuatities] = useState('')
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { showCart, setShowCart, totalQuantities } = useStateContext();
+  const { showCart, setShowCart } = useStateContext();
   const quanTities = useSelector((state) => state.cart.quanTities);
-  
-  // if (!quanTities) {
-   let quanTitie = window.localStorage.getItem("quanTities")
-    
-  // }
-  // window.localStorage.setItem("quanTities", JSON.stringify(quanTities));
-  // const quanTities = window.localStorage.getItem('quanTities')
+  let quanTitie = window.localStorage.getItem("quanTities")
 
   //traer nombre de cuenta
   let user = useSelector((e) => e.reducer.user);
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
-    // setQuatities(quanTities)
-    // console.log(quanties,'quanties')
-   
-
+ 
     dispatch(get_user(token));
   }, []);
 

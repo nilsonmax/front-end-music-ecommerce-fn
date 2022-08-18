@@ -17,7 +17,6 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
     var [valueSearch, setValueSearch] = useState("");
     var [refreshAdmins, setRefreshAdmins] = useState(null);
     const token = window.localStorage.getItem("dataUser");
-
     
   useEffect(() => {
     if (
@@ -56,18 +55,6 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
         }
     }
   }, [admins, refreshAdmins]);
-
-  // const Toast = Swal.mixin({
-  //   toast: true,
-  //   position: "top-end",
-  //   showConfirmButton: false,
-  //   timer: 3000,
-  //   timerProgressBar: true,
-  //   didOpen: (toast) => {
-  //     toast.addEventListener("mouseenter", Swal.stopTimer);
-  //     toast.addEventListener("mouseleave", Swal.resumeTimer);
-  //   },
-  // });
 
   function activarEliminar(columnNameArray, idDelete) {
     if (columnNameArray === "Admin") {

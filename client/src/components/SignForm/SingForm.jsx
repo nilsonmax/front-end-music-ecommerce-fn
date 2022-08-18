@@ -53,8 +53,8 @@ const SingForm = () => {
               }}
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
-                  dispatch(registerUser(values));
-                  dispatch(mailSignUp(values))
+                  dispatch(mailSignUp(values));
+                  dispatch(registerUser(values))
                     .then((data) => {
                       Toast.fire({
                         icon: "success",

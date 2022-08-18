@@ -24,6 +24,7 @@ export default function Card({
   // const instruments = useSelector((state) => state.reducer.instruments);
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems, 'cartitems en card')
   const navigate=useNavigate()
   const hanledSummit = (e) => {
     console.log('estoy en hanled aadcart')

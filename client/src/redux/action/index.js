@@ -15,8 +15,8 @@ export const SHOW_LOGIN = "SHOW_LOGIN";
 export const GET_USERS = "GET_USERS";
 export const DELETE_INSTRUMENT = "DELETE_INSTRUMENT";
 
-// const { REACT_APP_HOST } = process.env;
-const REACT_APP_HOST = "http://localhost:4000";
+const { REACT_APP_HOST } = process.env;
+// const REACT_APP_HOST = "${REACT_APP_HOST}";
 console.log(REACT_APP_HOST, "url");
 
 export const getByName = (name) => {
@@ -24,7 +24,7 @@ export const getByName = (name) => {
     try {
       // const resp = await axios.get(`${REACT_APP_HOST}/instruments?name=${name}`)
       const resp = await axios.get(
-        `http://localhost:4000/instruments?name=${name}`
+        `${REACT_APP_HOST}/instruments?name=${name}`
       );
       return dispatch({
         type: GET_BY_NAME,
@@ -46,7 +46,7 @@ export const getDataClear = (payload) => {
 export const get_instrumentID = (id) => {
   return async function (dispatch) {
     try {
-      let api = await axios.get("http://localhost:4000/instruments/" + id);
+      let api = await axios.get(`${REACT_APP_HOST}/instruments/` + id);
 
       return dispatch({
         type: GET_DETAILS_INSTRUMENTS,
@@ -62,7 +62,7 @@ export const get_instrumentID = (id) => {
 export const getInstruments = () => {
   return async function (dispatch) {
     return await axios
-      .get(`http://localhost:4000/instruments`)
+      .get(`${REACT_APP_HOST}/instruments`)
       .then((rAxios) => {
         dispatch({
           type: GET_INSTRUMENTS,
@@ -79,7 +79,7 @@ export const getInstruments = () => {
 export const getAllCategories = () => {
   return async function (dispatch) {
     try {
-      let categories = await axios.get("http://localhost:4000/category/all");
+      let categories = await axios.get(`${REACT_APP_HOST}/category/all`);
       return dispatch({
         type: "GET_ALL_CATEGORIES",
         payload: categories.data,
@@ -95,9 +95,8 @@ export const postInstrument = (payload, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       let newInstrument = await axios.post(
-        "http://localhost:4000/instruments",
-        payload,
-        {
+        `${REACT_APP_HOST}/instruments`,
+        payload,{
           headers: {
             Authorization: `Bearer ${tokenJSON.token}`,
           },
@@ -139,7 +138,7 @@ export const registerUser = (objectUser) => {
   return async function () {
     try {
       let newUser = await axios.post(
-        "http://localhost:4000/auth/register",
+        `${REACT_APP_HOST}/auth/register`,
         objectUser
       );
       return newUser.data;
@@ -157,7 +156,7 @@ export const loginUser = (objectUser) => {
   return async function () {
     try {
       let newUser = await axios.post(
-        "http://localhost:4000/auth/login",
+        `${REACT_APP_HOST}/auth/login`,
         objectUser
       );
       window.localStorage.setItem("dataUser", JSON.stringify(newUser.data));
@@ -191,7 +190,7 @@ export const updateUserInfo = (payload) => {
     let tokenJSON = JSON.parse(token);
     try {
       let userUpdated = await axios.put(
-        "http://localhost:4000/users",
+        `${REACT_APP_HOST}/users`,
         payload,
         {
           headers: {
@@ -213,7 +212,7 @@ export const get_user = (token) => {
     //let token = window.localStorage.getItem("dataUser")
     let tokenJSON = JSON.parse(token);
     try {
-      let usuario = await axios.get("http://localhost:4000/users/token", {
+      let usuario = await axios.get(`${REACT_APP_HOST}/users/token`, {
         headers: {
           Authorization: "Bearer " + tokenJSON.token,
         },
@@ -229,7 +228,7 @@ export const get_user = (token) => {
 export const getUsers = () => {
   return async function (dispatch) {
     return await axios
-      .get(`http://localhost:4000/users`)
+      .get(`${REACT_APP_HOST}/users`)
       .then((resp) => {
         dispatch({
           type: GET_USERS,
@@ -246,7 +245,7 @@ export const deleteUser = (user_id) => {
   return async function () {
     try {
       let userDeleted = await axios.delete(
-        `http://localhost:4000/users/${user_id}`
+        `${REACT_APP_HOST}/users/${user_id}`
       );
       return userDeleted.data;
     } catch (error) {
@@ -260,11 +259,9 @@ export const deleteCategory = (category_id, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       let categoryDeleted = await axios.delete(
-        `http://localhost:4000/category`,
-        {
-          data: {
-            id: category_id,
-          },
+        `${REACT_APP_HOST}/category`,{data: {
+          id: category_id
+        },
           headers: {
             Authorization: "Bearer " + tokenJSON.token,
           },
@@ -282,11 +279,9 @@ export const deleteInstrument = (id, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       let instrumentDeleted = await axios.delete(
-        `http://localhost:4000/instruments`,
-        {
-          data: {
-            id: id,
-          },
+        `${REACT_APP_HOST}/instruments`,{data: {
+          id: id
+        },
           headers: {
             Authorization: "Bearer " + tokenJSON.token,
           },
@@ -304,15 +299,11 @@ export const putUser = (objectUser, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
-      let newUser = await axios.put(
-        "http://localhost:4000/users/admin",
-        objectUser,
-        {
-          headers: {
-            Authorization: "Bearer " + tokenJSON.token,
-          },
-        }
-      );
+      let newUser = await axios.put(`${REACT_APP_HOST}/users/admin`, objectUser, {
+        headers: {
+          Authorization: "Bearer " + tokenJSON.token,
+        },
+      });
       return newUser.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -329,15 +320,11 @@ export const putUserAdmin = (objectUser, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
-      let newUser = await axios.put(
-        "http://localhost:4000/users/admin",
-        objectUser,
-        {
-          headers: {
-            Authorization: "Bearer " + tokenJSON.token,
-          },
-        }
-      );
+      let newUser = await axios.put(`${REACT_APP_HOST}/users/admin`, objectUser, {
+        headers: {
+          Authorization: "Bearer " + tokenJSON.token,
+        },
+      });
       return newUser.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -366,7 +353,7 @@ export const postUser = (objectUser) => {
   return async function () {
     try {
       objectUser = camposNullUser(objectUser);
-      let newUser = await axios.post("http://localhost:4000/users", objectUser);
+      let newUser = await axios.post(`${REACT_APP_HOST}/users`, objectUser);
       return newUser.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -382,15 +369,9 @@ export const postCategory = (objectCategory, token) => {
   return async function () {
     try {
       let tokenJSON = JSON.parse(token);
-      let newCategory = await axios.post(
-        "http://localhost:4000/category",
-        objectCategory,
-        {
-          headers: {
-            Authorization: "Bearer " + tokenJSON.token,
-          },
-        }
-      );
+      let newCategory = await axios.post(`${REACT_APP_HOST}/category`, objectCategory,{headers: {
+        Authorization: "Bearer " + tokenJSON.token,
+      }});
       return newCategory.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -407,7 +388,7 @@ export const putInstrument = (objectInstrument, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       let newInstrument = await axios.put(
-        "http://localhost:4000/instruments",
+        `${REACT_APP_HOST}/instruments`,
         objectInstrument,
         {
           headers: {
@@ -431,7 +412,7 @@ export const putCategory = (objectCategory, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       let newCategory = await axios.put(
-        "http://localhost:4000/category",
+        `${REACT_APP_HOST}/category`,
         objectCategory,
         {
           headers: {

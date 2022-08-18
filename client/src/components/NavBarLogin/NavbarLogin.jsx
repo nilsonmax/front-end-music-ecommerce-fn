@@ -17,15 +17,27 @@ import Logo from "../../assets/Logo.png";
 
 export default function NavBarLogin({ setCurrentPage }) {
   const [navbar, setNavbar] = useState(false);
+  // const [quanties, setQuatities] = useState('')
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { showCart, setShowCart, totalQuantities } = useStateContext();
   const quanTities = useSelector((state) => state.cart.quanTities);
+  
+  // if (!quanTities) {
+   let quanTitie = window.localStorage.getItem("quanTities")
+    
+  // }
+  // window.localStorage.setItem("quanTities", JSON.stringify(quanTities));
+  // const quanTities = window.localStorage.getItem('quanTities')
 
   //traer nombre de cuenta
   let user = useSelector((e) => e.reducer.user);
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
+    // setQuatities(quanTities)
+    // console.log(quanties,'quanties')
+   
+
     dispatch(get_user(token));
   }, []);
 
@@ -74,9 +86,8 @@ export default function NavBarLogin({ setCurrentPage }) {
 
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${
-              navbar ? "block" : "hidden"
-            }`}
+            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
+              }`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
@@ -133,7 +144,7 @@ export default function NavBarLogin({ setCurrentPage }) {
         </Link>
 
         <button type="button" onClick={() => setShowCart(true)} className=" relative link flex items-center">
-          {quanTities !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{quanTities !== 0 && quanTities}</span>}
+          {(quanTities?quanTities:quanTitie) !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{quanTities?quanTities:quanTitie !== 0 && quanTities?quanTities:quanTitie}</span>}
 
           <HiShoppingCart size={20} className="h-10" />
           <p className="hidden md:inline font-extrabold md: text-sm mt-2">

@@ -21,19 +21,30 @@ const cartReducers = (state = initialState, action) => {
       return { ...state, items: action.payload.cartItems };
 
     case DATA_CLEAR_CAR:
-      return { ...state, items: action.payload.cartItems};
+      return { ...state, items: action.payload.cartItems };
 
     case REMOVE_ONE_FROM_CART: {
       return { ...state, items: action.payload.cartItems };
     }
 
     case SET_SHOW_CART: {
-         return { ...state, items: action.payload.cartItems };
+      return { ...state, items: action.payload.cartItems };
     }
 
     case SET_TOTAL_QUANTITIES: {
       console.log(action.payload, 'action.payload quanTities')
-      return { ...state, quanTities: action.payload };
+      let quanTities = 0;
+
+      state.items.forEach((cp) => {
+        quanTities += cp.count;
+        console.log(cp, 'items dentro reducer')
+      });
+      localStorage.setItem("quanTities", JSON.stringify(quanTities));
+      console.log(quanTities, 'quanti reducer')
+      return {
+        ...state,
+        quanTities: quanTities
+      };
     }
 
     default:

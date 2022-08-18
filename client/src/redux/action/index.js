@@ -168,6 +168,23 @@ export const loginUser = (objectUser) => {
   };
 };
 
+export const loginUserGoogle = (objectUser) => {
+  return async function () {
+    try {
+      let newUser = await axios.post(
+        "http://localhost:4000/auth/login/google",
+        objectUser
+      );
+      window.localStorage.setItem("dataUser", JSON.stringify(newUser.data));
+      console.log("tu token: " + newUser.data);
+      return newUser.data;
+      
+    } catch (error) {
+      throw new TypeError(error.response.data);
+    }
+  };
+};
+
 export const updateUserInfo = (payload) => {
   return async function () {
     let token = window.localStorage.getItem("dataUser");

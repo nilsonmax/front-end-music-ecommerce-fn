@@ -60,7 +60,7 @@ const Cart = () => {
     console.log("estoy en hanled aadcart");
     e.preventDefault();
     dispatch(removeFromCart(cartItems, item));
-    dispatch(SetTotalQuanTities(cartItems, item))
+    dispatch(SetTotalQuanTities())
   };
 
   const hanledDel = (e, item) => {
@@ -68,10 +68,10 @@ const Cart = () => {
     e.preventDefault();
     if(item.count>1){
       dispatch(removeOneFromCart(cartItems, item));
-      dispatch(SetTotalQuanTities(cartItems, item))
+      dispatch(SetTotalQuanTities())
     }else{
       dispatch(removeFromCart(cartItems, item));
-      dispatch(SetTotalQuanTities(cartItems, item))
+      dispatch(SetTotalQuanTities())
     }
     
   };

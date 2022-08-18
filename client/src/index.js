@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store/index";
 import { StateContext } from "./context/stateContext";
+//import { auth0Provider } from "@auth0/auth0-react";
 // import dotenv from 'dotenv'
 // dotenv.config
 // axios.defaults.baseURL=process.env.REACT_APP_API || 'http://localhost:3001'

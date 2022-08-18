@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/action";
 import { isExpired, decodeToken } from "react-jwt";
 import Swal from "sweetalert2";
+
 import LoginGoogle from "../loginGoogle";
+
 
 
 const LoginForm = ({ visible, onClose }) => {
@@ -172,7 +174,9 @@ const LoginForm = ({ visible, onClose }) => {
               </button> */}
             </div>
 
+
             <LoginGoogle/>
+
 
             <div className="flex justify-center items-center bg-white   pb-14 ">
               <p className="text-dark font-bold  text-md text-center">

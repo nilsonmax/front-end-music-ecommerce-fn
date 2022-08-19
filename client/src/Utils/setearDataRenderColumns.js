@@ -77,7 +77,7 @@ const setearDataRenderCategory=(array,setDataRender)=>{
       ]);
     });
   }
-  const getDataTablePrincipal=(setDataTablePrincipal,dataRender)=>{
+  const getDataTableEspecific=(setDataTablePrincipal,dataRender)=>{
     var total_shops=1;
     var saldo_caja=0;
     var ultima_shop=""
@@ -90,12 +90,12 @@ const setearDataRenderCategory=(array,setDataRender)=>{
             productos_vendidos+=instrument.count;
         })
     })
-    setDataTablePrincipal({
+    setDataTablePrincipal([{
         saldo_caja,
         total_shops,
         productos_vendidos,
         ultima_shop,
-    })
+    }])
 }
 
 module.exports={setearDataRenderAdmins,
@@ -103,4 +103,4 @@ module.exports={setearDataRenderAdmins,
     setearDatarenderInstruments,
     setearDataRenderUser,
     setearDatarenderHistoryshop,
-    getDataTablePrincipal};
+    getDataTableEspecific};

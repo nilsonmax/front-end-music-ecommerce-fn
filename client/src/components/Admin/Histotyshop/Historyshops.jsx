@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getHistoryShops} from "../../../redux/action/Historyshop";
 import Aside from "../Aside/Aside";
-import { setearDatarenderHistoryshop,getDataTablePrincipal } from "../../../utils/setearDataRenderColumns";
+import { setearDatarenderHistoryshop,getDataTableEspecific } from "../../../utils/setearDataRenderColumns";
 import { Toast } from "../../../utils/Toast";
 import TableEspecific from "./TableEspecific";
 import TableGeneral from "./TableGeneral";
@@ -17,25 +17,28 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
   var [refreshHistoryshops, setRefreshHistoryshops] = useState(null);
   var [valueSearch, setValueSearch] = useState("");
   const token = window.localStorage.getItem("dataUser");
-  var [dataTablePrincipal,setDataTablePrincipal]=useState({total_compras:"", saldo_total:"",ultima_shop:"", productos_vendidos:""});
+  var [dataTableEspecific,setDataTableEspecific]=useState([]);
 
   useEffect(() => {
     if (historyshops.length === 0 && refreshHistoryshops === null) {
       dispatch(getHistoryShops(token));
       setRefreshHistoryshops(false);
     } else {
-      getDataTablePrincipal(setDataTablePrincipal,historyshops)
       if (refreshHistoryshops === true) {
         dispatch(getHistoryShops(token));
         setRefreshHistoryshops(false);
       }else if(refreshHistoryshops === "search"){
         var historyshopNoFound=true;
         setShowCreateComponent(false)
+        var encontrado=false;
         historyshops.map((historyshop) => {
-          if(historyshop.cus_name.toLowerCase().includes(valueSearch.toLowerCase())){
-            setCopyHistoryshops((data)=>[...data,historyshop])
-            historyshopNoFound=false
-          }
+          historyshop.instrument.map((instrument)=>{
+            if(valueSearch.length>0 && instrument.name.toLowerCase().includes(valueSearch.toLowerCase()) && encontrado==false){  
+              setCopyHistoryshops((data)=>[...data,historyshop])
+              historyshopNoFound=false
+              encontrado=true
+            }
+          })
         })
         if(valueSearch!=="" && historyshopNoFound===true){
           Toast.fire({
@@ -45,13 +48,14 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
         }
         setRefreshHistoryshops(false);
       }
-        setDataRender([]);
-        if(copyHistoryshops.length>0){
-          setearDatarenderHistoryshop(copyHistoryshops,setDataRender)
-          setCopyHistoryshops([])
-        }else{
-          setearDatarenderHistoryshop(historyshops,setDataRender)
-        }
+      setDataRender([]);
+      if(copyHistoryshops.length>0){
+        setearDatarenderHistoryshop(copyHistoryshops,setDataRender)
+        setCopyHistoryshops([])
+      }else{
+        setearDatarenderHistoryshop(historyshops,setDataRender)
+      }
+      getDataTableEspecific(setDataTableEspecific,historyshops)
     }
   }, [historyshops, refreshHistoryshops]);
 
@@ -68,7 +72,7 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
         {dataRender.length > 0 && showCreateComponent === false && (
           <>
             <TableEspecific 
-              dataRender={dataTablePrincipal}
+              dataRender={dataTableEspecific}
               columnsRender={columnsEspecific}
             />
             <TableGeneral

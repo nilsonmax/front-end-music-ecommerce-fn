@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
 import { addToFavorites, removeFromFavorites, removeOneFromFavorites } from "../../redux/action/FavoritesActions";
 import { StyledCard } from "./style";
-import { HiHeart, HiOutlineHeart, HiStar } from "react-icons/hi";
+import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Card({
@@ -13,7 +13,6 @@ export default function Card({
   brand,
   price,
   img,
-  rating,
   description,
   stock,
   status,
@@ -49,17 +48,6 @@ export default function Card({
     dispatch(addToCart(cartItems, instruments))
     dispatch(SetTotalQuanTities(cartItems, instruments))
   }
-  const ratingStars = (star) => {
-    let stars = [];
-    for (let i = 0; i < Math.floor(star); i++) {
-      stars.push(
-        <span>
-          <HiStar className="h-5 text-red-400 cursor-pointer" />
-        </span>
-      );
-    }
-    return stars;
-  };
 
   // const { decQty, incQty, qty, addToCart, setShowCart } = useStateContext();
   const formattedMoney = price.toLocaleString("es-us", {
@@ -99,8 +87,6 @@ export default function Card({
       <br></br>
       {/* <b>{`Status:`}</b> <span>{`${status}`}</span> */}
       <b>{`Type:`}</b> <span onClick={e => navigate("/instruments/" + id)}>{`${categoryName}`}</span>
-      <p>{ratingStars(rating)}</p>
-
       {/*         <span " text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
       {/* <a
             href={`#${product.id}`}

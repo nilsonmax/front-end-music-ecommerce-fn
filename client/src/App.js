@@ -19,6 +19,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import NotFound from "./components/NotFound/notFound";
 import AboutUs from "./components/AboutUs/AboutUs"
+import FavoritesPage from "./pages/favorites/Favorites";
 
 
 
@@ -95,6 +96,7 @@ const App = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/success" element={<SuccessPayment />} />
         <Route path="/aboutUs" element={<><AboutUs/></>}/>
+        <Route path="/favorites" element={<FavoritesPage/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <LoginForm onClose={handleOnClose} visible={visible} />

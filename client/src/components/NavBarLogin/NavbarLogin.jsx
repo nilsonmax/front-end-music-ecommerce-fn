@@ -11,16 +11,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { isExpired, decodeToken } from "react-jwt";
 import { get_user } from "../../redux/action/index";
 import { useStateContext } from "../../context/stateContext";
-import { HiShoppingCart } from "react-icons/hi";
+import { HiOutlineHeart, HiShoppingCart } from "react-icons/hi";
 import Cart from "../Shopping/cart";
 import Logo from "../../assets/Logo.png";
+import FavoritesPreview from "../Favorites/FavoritesPreview";
 
 export default function NavBarLogin({ setCurrentPage }) {
   const [navbar, setNavbar] = useState(false);
   // const [quanties, setQuatities] = useState('')
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { showCart, setShowCart } = useStateContext();
+  const { showCart, setShowCart, showFavorites, setShowFavorites } = useStateContext();
   const quanTities = useSelector((state) => state.cart.quanTities);
   let quanTitie = window.localStorage.getItem("quanTities")
 
@@ -28,7 +29,7 @@ export default function NavBarLogin({ setCurrentPage }) {
   let user = useSelector((e) => e.reducer.user);
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
- 
+
     dispatch(get_user(token));
   }, []);
 
@@ -133,9 +134,15 @@ export default function NavBarLogin({ setCurrentPage }) {
             {`Welcome ${user.userName}`}
           </h2>
         </Link>
-
+        <button type="button" onClick={() => setShowFavorites(true)} className=" relative link flex items-center">
+          <HiOutlineHeart size={20} className="h-10" />
+          <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+            Favoritos
+          </p>
+        </button>
+        {showFavorites && <FavoritesPreview />}
         <button type="button" onClick={() => setShowCart(true)} className=" relative link flex items-center">
-          {(quanTities?quanTities:quanTitie) !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{quanTities?quanTities:quanTitie !== 0 && quanTities?quanTities:quanTitie}</span>}
+          {(quanTities ? quanTities : quanTitie) !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{quanTities ? quanTities : quanTitie !== 0 && quanTities ? quanTities : quanTitie}</span>}
 
           <HiShoppingCart size={20} className="h-10" />
           <p className="hidden md:inline font-extrabold md: text-sm mt-2">
@@ -143,6 +150,7 @@ export default function NavBarLogin({ setCurrentPage }) {
           </p>
         </button>
         {showCart && <Cart />}
+
       </DivJustifyBetween>
     </NavContainer>
   );

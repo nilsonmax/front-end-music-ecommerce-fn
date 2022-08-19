@@ -1,10 +1,12 @@
 import {
-  GET_HISTORYSHOPS
+  GET_HISTORYSHOPS,
+  GET_USER_HISTORYSHOP
 } from "../action/Historyshop";
 
 
 const initialState = {
-  historyshops: []
+  historyshops: [],
+  userHistoryShop: []
 };
 
 const historyshopsReducer = (state = initialState, action) => {
@@ -14,6 +16,12 @@ const historyshopsReducer = (state = initialState, action) => {
         ...state,
         historyshops: action.payload,
       };
+
+    case GET_USER_HISTORYSHOP:
+      return{
+        ...state,
+        userHistoryShop: action.payload
+      }
 
     default:
       return state;

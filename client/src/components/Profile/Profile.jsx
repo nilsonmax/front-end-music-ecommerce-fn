@@ -4,6 +4,8 @@ import { getDataClear, get_user, deleteUserAccount } from "../../redux/action/in
 import Loader from "../Loader/loader"
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import UserHistoryShop from "../UserHistoryShop/userHistoryShop";
+
 
 export default function Profile() {
 
@@ -159,9 +161,7 @@ export default function Profile() {
                         <button className="text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick={e => navigate("/user/info")}>Edit my information</button>
                         <button className=" text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick = {e => handleDelete(e)}>Delete my account</button>
                         
-                    <div className="text-center">
-                        historial de compras:
-                    </div>
+                        <UserHistoryShop/>
                     </div>
                 </div>
                

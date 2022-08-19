@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { isExpired, decodeToken } from "react-jwt";
 import { useDispatch } from "react-redux";
-import { loginUserGoogle } from "../redux/action";
+import { loginUserGoogle } from "../../redux/action";
 
 
 export default function LoginGoogle() {

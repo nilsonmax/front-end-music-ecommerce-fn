@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getDataClear, get_user } from "../../redux/action/index"
+import { getDataClear, get_user, deleteUserAccount } from "../../redux/action/index"
 import Loader from "../Loader/loader"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function Profile() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    //const toast = Toast()
+
+
     useEffect(() => {
         const token = window.localStorage.getItem("dataUser");
         console.log(token)
@@ -22,6 +26,33 @@ export default function Profile() {
         }
     }, [])
     let user = useSelector(e => e.reducer.user)
+
+    function handleDelete(e){
+        e.preventDefault()
+        Swal.fire({
+            title: "Are you sure you want to delete your account?",
+            text: "It will be deleted permanently!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#2B4570",
+            cancelButtonColor: "#2B4570",
+            confirmButtonText: "Eliminar",
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteUserAccount())
+                .then((result) => {
+                    window.localStorage.removeItem("dataUser");
+                    navigate("/");
+                })
+            }else {
+                navigate("/user/profile"); 
+            }
+        })
+        
+        
+            
+    }
 
     // {
     //     "id": 4,
@@ -125,7 +156,9 @@ export default function Profile() {
                               {user.rol ? user.rol : "unknown"}
                             </div>
                         </div>
-                        <button class="text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick={e => navigate("/user/info")}>Edit my information</button>
+                        <button className="text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick={e => navigate("/user/info")}>Edit my information</button>
+                        <button className=" text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick = {e => handleDelete(e)}>Delete my account</button>
+                        
                     <div className="text-center">
                         historial de compras:
                     </div>

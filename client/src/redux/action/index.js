@@ -242,11 +242,30 @@ export const deleteUser = (user_id) => {
   return async function () {
     try {
       let userDeleted = await axios.delete(
-        `${REACT_APP_HOST}/users/${user_id}`
+        `${REACT_APP_HOST}/users/`
       );
       return userDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
+    }
+  };
+};
+
+export const deleteUserAccount = () => {
+  return async function () {
+    let token = window.localStorage.getItem("dataUser");
+    let tokenJSON = JSON.parse(token);
+    try {
+      let userDeleted = await axios.delete(`${REACT_APP_HOST}/users`, {
+        headers: {
+          Authorization: `Bearer ${tokenJSON.token}`,
+        },
+      });
+
+      return userDeleted.data;
+      
+    } catch (error) {
+      console.log(error);
     }
   };
 };

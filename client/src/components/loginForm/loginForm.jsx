@@ -5,7 +5,7 @@ import { loginUser } from "../../redux/action";
 import { isExpired, decodeToken } from "react-jwt";
 import Swal from "sweetalert2";
 
-import LoginGoogle from "../loginGoogle";
+import LoginGoogle from "../LoginGoogle/loginGoogle";
 
 
 

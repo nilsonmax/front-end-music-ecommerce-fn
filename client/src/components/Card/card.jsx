@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useStateContext } from "../../context/stateContext";
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
+import { addToFavorites, removeFromFavorites, removeOneFromFavorites } from "../../redux/action/FavoritesActions";
 import { StyledCard } from "./style";
-// import { BsCart3 } from "react-icons/bs";
+import { HiHeart, HiOutlineHeart, HiStar } from "react-icons/hi";
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Card({
@@ -13,6 +13,7 @@ export default function Card({
   brand,
   price,
   img,
+  rating,
   description,
   stock,
   status,
@@ -22,16 +23,43 @@ export default function Card({
 }) {
 
   // const instruments = useSelector((state) => state.reducer.instruments);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   console.log(cartItems, 'cartitems en card')
-  const navigate=useNavigate()
+  const favoriteItems = useSelector((state) => state.favorites.items);
+  const favoriteItemsActive = useSelector((state) => state.favorites.items.active);
+  console.log(favoriteItems, 'favoriteItems en card');
+  const navigate = useNavigate();
+  const active= window.localStorage.getItem('favoriteItemsActive');
+
+  const [isFavorite, setIsFavorite] = useState(false);
+  const favoriteAddHandle = ()=>{
+    dispatch(addToFavorites(favoriteItems, instruments));
+    setIsFavorite((prevState) => !prevState);
+
+  }
+  const favoriteRemoveHandle = ()=>{
+    setIsFavorite((prevState) => !prevState);
+    dispatch(removeFromFavorites(favoriteItems, instruments));
+  }
+
   const hanledSummit = (e) => {
     console.log('estoy en hanled aadcart')
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments))
     dispatch(SetTotalQuanTities(cartItems, instruments))
   }
+  const ratingStars = (star) => {
+    let stars = [];
+    for (let i = 0; i < Math.floor(star); i++) {
+      stars.push(
+        <span>
+          <HiStar className="h-5 text-red-400 cursor-pointer" />
+        </span>
+      );
+    }
+    return stars;
+  };
 
   // const { decQty, incQty, qty, addToCart, setShowCart } = useStateContext();
   const formattedMoney = price.toLocaleString("es-us", {
@@ -43,16 +71,36 @@ export default function Card({
 
   return (
     <StyledCard>
-      
-      <img src={img} alt={name} onClick={e=>navigate("/instruments/"+id)}/>
-      <p>{brand}</p>
-      <h2 onClick={e=>navigate("/instruments/"+id)}>{name}</h2>
-      <h3 onClick={e=>navigate("/instruments/"+id)}>{`${colMoney}`}</h3>
+
+      <img src={img} alt={name} onClick={e => navigate("/instruments/" + id)} />
+
+      <div className="flex justify-between">
+        <p>{brand}</p>
+        
+        {/* <HiOutlineHeart className="h-7 cursor-pointer" onClick={favoriteAddHandle} />
+
+        <HiHeart className="h-7 cursor-pointer" onClick={favoriteRemoveHandle} /> */}
+
+        { !isFavorite ? 
+          (
+            <HiOutlineHeart className="h-7 cursor-pointer" onClick={favoriteAddHandle} />
+          ) : (
+            <HiHeart className="h-7 cursor-pointer" onClick={favoriteRemoveHandle} />
+          )
+            
+        }
+      </div>
+
+
+      <h2 onClick={e => navigate("/instruments/" + id)}>{name}</h2>
+      <h3 onClick={e => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
       {/* <span>{`USD${price/4500}`}</span> */}
       <br></br>
       <br></br>
       {/* <b>{`Status:`}</b> <span>{`${status}`}</span> */}
-      <b>{`Type:`}</b> <span onClick={e=>navigate("/instruments/"+id)}>{`${categoryName}`}</span>
+      <b>{`Type:`}</b> <span onClick={e => navigate("/instruments/" + id)}>{`${categoryName}`}</span>
+      <p>{ratingStars(rating)}</p>
+
       {/*         <span " text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
       {/* <a
             href={`#${product.id}`}
@@ -76,7 +124,6 @@ export default function Card({
           />
         </svg>
       </button>
-    
     </StyledCard>
   );
 }

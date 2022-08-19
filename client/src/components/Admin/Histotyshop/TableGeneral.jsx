@@ -38,11 +38,7 @@ const TableGeneral = ({ dataRender, columnsRender}) => {
               <tr className=" content-center " key={key + 1}>
                 <td className="text-center border-b ">{key + 1}</td>
                 <td className="text-center  border-b ">{data.column1}</td>
-                <td className="text-center  border-b ">
-                  {
-                    data.column2
-                  }
-                </td>
+                <td className="text-center  border-b ">{data.column2}</td>
                 {data.column3 && (
                   <td className="text-center w-1/3  border-b ">
                     {data.column3}

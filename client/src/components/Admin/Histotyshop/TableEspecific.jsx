@@ -1,11 +1,8 @@
 import React,{useState, useEffect} from 'react'
 
 const TableEspecific = ({dataRender, columnsRender}) => {
-    const [keysArray,setKeyArray]=useState([])
 
     useEffect(() => {
-        setKeyArray(Object.keys(dataRender));
-        console.log(dataRender)
     },[])
 
 
@@ -22,15 +19,18 @@ const TableEspecific = ({dataRender, columnsRender}) => {
                 </tr>
               </thead>
               <tbody>
-                <tr className=" content-center ">
-                    {
-                        columnsRender.map((keyArray,key)=>{
+                {
+                    dataRender.map((data,key)=>{
+                        return <tr className=" content-center " key={key*10}>
+                            {columnsRender.map((column,key)=>{
                             return <td className="text-center border-b " key={key+1}>
-                                {keyArray==="saldo_caja"&&"$"} {dataRender[keyArray]}
+                                {(column==="saldo_caja" || column==="price") && "$"}{data[column]}
                             </td>
-                        })
-                    }
-                </tr>
+                        })}
+                        </tr>
+
+                    })
+                }
               </tbody>
           </table>
   )

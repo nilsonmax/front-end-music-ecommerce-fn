@@ -8,7 +8,7 @@ import TableEspecific from "./TableEspecific";
 const Modal = ({ setModal, idHistoryshop }) => {
   const [copiaArray, setCopiaArray] = useState([]);
   const [keysArray, setKeyArray] = useState([]);
-  var columnsInstrument=["name","price","count","brand"]
+  var columnsInstrument=["id","name","price","count","brand"]
   var reduxArray = useSelector((state) =>
       state.historyshops.historyshops
   );
@@ -32,7 +32,7 @@ const Modal = ({ setModal, idHistoryshop }) => {
         <div className="w-screen h-screen top-0 fixed z-10 left-0">
           <div className="absolute w-screen h-screen top-0 left-0 bg-gray-400 opacity-50"></div>
           <div className="absolute w-screen h-screen flex items-center justify-center">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-[750px]">
+          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-[750px] max-h-[500px] overflow-y-auto">
               <BotonCerrar
                 type="button"
                 data-modal-toggle="authentication-modal"
@@ -76,7 +76,7 @@ const Modal = ({ setModal, idHistoryshop }) => {
                       Instruments Shops
                     </h3>
                     <TableEspecific 
-                      dataRender={copiaArray[0].instrument[0]}
+                      dataRender={copiaArray[0].instrument}
                       columnsRender={columnsInstrument}
                     />
                   </div>

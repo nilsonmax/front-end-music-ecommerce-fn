@@ -1,4 +1,13 @@
-import { ADD_TO_CART, REMOVE_ALL_FROM_CART, REMOVE_ONE_FROM_CART, DATA_CLEAR_CAR, SET_CART_ITEMS, SET_SHOW_CART, SET_TOTAL_QUANTITIES } from "./types";
+import axios from "axios";
+import {
+  ADD_TO_CART,
+  REMOVE_ALL_FROM_CART,
+  REMOVE_ONE_FROM_CART,
+  DATA_CLEAR_CAR,
+  SET_CART_ITEMS,
+  SET_SHOW_CART,
+  SET_TOTAL_QUANTITIES,
+} from "./types";
 
 export const addToCart = (items, instruments) => (dispatch) => {
   const cartItems = items.slice();
@@ -46,7 +55,7 @@ export const setShowCart = (items, instruments) => (dispatch) => {
   const cartItems = items.slice();
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
   dispatch({ type: SET_SHOW_CART, payload: { cartItems } });
-}
+};
 
 export const getDataClearCar = (payload) => (dispatch) => {
   const cartItems = [];
@@ -58,4 +67,18 @@ export const SetTotalQuanTities = () => (dispatch) => {
   let quanTities = 0;
   // localStorage.setItem("quanTities", JSON.stringify(quanTities));
   dispatch({ type: SET_TOTAL_QUANTITIES, payload: quanTities });
+};
+
+export const mailPurchase = (mailInfo) => {
+  return async function () {
+    try {
+      let newMail = await axios.post(
+        "http://localhost:4000/mail/purchase",
+        mailInfo
+      );
+      return newMail.data;
+    } catch (error) {
+      throw error;
+    }
+  };
 };

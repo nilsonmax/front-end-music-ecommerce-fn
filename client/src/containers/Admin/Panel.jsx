@@ -35,7 +35,7 @@ const Panel = () => {
     <>
       {validateAdmin !== false && (
         <>
-          <nav className="flex flex-row py-5 px-8 justify-between shadow-md mb-10">
+           <nav className="flex flex-row justify-evenly shadow-md mb-10">
             <Button type="button" text={"Logo"} />
             <p
               onClick={() => {
@@ -70,6 +70,14 @@ const Panel = () => {
               }}
             >
               Admins
+            </p>
+
+            <p
+              onClick={() => {
+                setearStates("Historyshops");
+              }}
+            >
+              Historyshops
             </p>
           </nav>
 

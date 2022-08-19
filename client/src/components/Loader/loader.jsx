@@ -1,6 +1,6 @@
 export default function Loader() {
   return (
-    <div className="text-center py-72">
+    <div className="text-center py-2">
       <div role="status">
         <svg
           className="inline mr-2 w-8 h-8 text-secondary animate-spin background:text-tertiary fill-white"

@@ -58,6 +58,10 @@ const FavoritesPreview = () => {
     e.preventDefault();
     dispatch(removeFromFavorites(favoriteItems, item));
   };
+  const navigateHandle = (e) => {
+    window.location.href = "/";
+
+    };
   return (
     <FavoriteWrapper>
       <FavoriteContainer>
@@ -129,7 +133,7 @@ const FavoritesPreview = () => {
           <FavoriteBottom>
             <BtnContainer>
               <Link to="/favorites">
-                <Buttons type="button" text="Ver Lista Completa" onClick={() => setShowFavorites(false)}/>
+                <Buttons type="button" text="Ver Lista Completa" onClick={navigateHandle}/>
               </Link>
             </BtnContainer>
           </FavoriteBottom>

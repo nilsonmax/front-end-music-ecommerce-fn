@@ -6,8 +6,8 @@ import Profile from "../../components/Profile/Profile"
 export default function ProfileContainer(){
     return(
         <>
-        <NavBarLogin/>
-        <Profile/>
+            <NavBarLogin/>
+            <Profile/>
         </>
     )
 }

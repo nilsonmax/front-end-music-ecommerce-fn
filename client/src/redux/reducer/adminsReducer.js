@@ -1,10 +1,12 @@
 import {
-    GET_ADMINS
+  GET_ADMINS,
+  GET_ADMINS_ID
   } from "../action/adminsActions";
   
   
   const initialState = {
-    admins: []
+    admins: [],
+    admin:[]
   };
   
   const adminsReducer = (state = initialState, action) => {
@@ -13,6 +15,11 @@ import {
         return {
           ...state,
           admins: action.payload,
+        };
+      case GET_ADMINS_ID:
+        return {
+          ...state,
+          admin: [action.payload]
         };
 
       default:

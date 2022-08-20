@@ -86,7 +86,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
           />
         )}
         {dataRender.length < 1 && showCreateComponent === false && (
-          <p className="w-screen text-center">No hay users</p>
+          <p className="text-center">No hay users</p>
         )}
         {showCreateComponent === true && (
           <Crear

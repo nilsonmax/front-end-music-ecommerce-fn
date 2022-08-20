@@ -28,9 +28,10 @@ export default function Card({
   const navigate=useNavigate()
   const hanledSummit = (e) => {
     console.log('estoy en hanled aadcart')
+    console.log(instruments);
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments))
-    dispatch(SetTotalQuanTities(cartItems, instruments))
+    dispatch(SetTotalQuanTities(cartItems, instruments)) 
   }
 
   // const { decQty, incQty, qty, addToCart, setShowCart } = useStateContext();

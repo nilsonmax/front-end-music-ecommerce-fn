@@ -378,7 +378,6 @@ export default function Checkout() {
               <h2>{item.name}</h2>
               <p>{`$${item.price}`}</p>
               <b>{`Status:`}</b> <span>{`${item.status}`}</span>
-              <b>{`Type:`}</b> <span>{`${item.category.name}`}</span>
             </StyledCard>
           );
         })}

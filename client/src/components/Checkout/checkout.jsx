@@ -7,7 +7,7 @@ import { StyledCard } from "../Card/style";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { getDataClearCar } from "../../redux/action/cartActions";
-import Loader from "../Loader/loader";
+import LoaderButton from "../Loader/loaderButton";
 
 function validate(userInfo) {
   let errors = {};
@@ -319,7 +319,7 @@ export default function Checkout() {
           <div class="mt-4">
             <h2>Total:</h2>
             <button
-              class="px-4 py-1 text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
+              class="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
               type="submit"
               onSubmit={handleSubmit}
               disabled={
@@ -331,7 +331,7 @@ export default function Checkout() {
                 || errors.cus_country
                 || errors.cus_zip
                 || !stripe}>
-              {loading ? (<Loader/>):`$${items.reduce((a, b) => a + b.price, 0)}`}
+              {loading ? (<LoaderButton/>):`$${items.reduce((a, b) => a + b.price * b.count, 0)}`}
             </button>
           </div>
         </form>

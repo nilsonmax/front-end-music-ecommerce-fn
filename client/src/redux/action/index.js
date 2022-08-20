@@ -496,6 +496,30 @@ export const mailUpdateProfile = (objectUser) => {
   };
 };
 
+
+export const Create_Raiting=(rating)=>{
+  return async function(dispatch){
+    let tokenJson = window.localStorage.getItem("dataUser");
+    let token= JSON.parse(tokenJson)
+      const ObjetRaiting={
+        instrumentId:rating.instrumentId,
+        comment:rating.comment,
+        star: parseInt(rating.star)
+      } 
+      try {
+        let {data}=await axios.post(`${REACT_APP_HOST}/raiting`,ObjetRaiting,{
+            headers: {
+              Authorization: "Bearer " + token.token,
+            },
+        })
+        return data
+      } catch (error) {
+          console.log(error)
+          return error
+      }
+  }
+}
+
 export const mailNews = (email) => {
   return async function () {
     try {
@@ -506,3 +530,4 @@ export const mailNews = (email) => {
     }
   };
 };
+

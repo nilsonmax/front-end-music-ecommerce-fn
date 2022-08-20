@@ -29,7 +29,7 @@ export const getUserHistoryShop = (token) => {
   return async function (dispatch) {
     let tokenJSON = JSON.parse(token);
     return await axios
-      .get(`http://localhost:4000/transactions`, {
+      .get(`http://localhost:4000/transactions/user`, {
         headers: {
           Authorization: "Bearer " + tokenJSON.token,
         }})

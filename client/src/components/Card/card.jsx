@@ -36,7 +36,7 @@ export default function Card({
   const hanledSummit = (e) => {
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments))
-    dispatch(SetTotalQuanTities(cartItems, instruments))
+    dispatch(SetTotalQuanTities(cartItems, instruments)) 
   }
   const [isFavorite, setIsFavorite] = useState(false);
 

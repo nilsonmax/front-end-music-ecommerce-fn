@@ -6,7 +6,6 @@ import DetailsPage from "./pages/Details/details";
 import Signup from "./pages/Signup/Signup";
 import UserInfo from "./components/UserInfo/userInfo";
 import { Footer } from "./components/Footer/Footer";
-import CreateInstrumentContainer from "./containers/createInstrument/createInstrumentContainer";
 import LoginForm from "./components/loginForm/loginForm";
 import { useSelector } from "react-redux";
 import { showLogin } from "./redux/action/index";
@@ -19,6 +18,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import NotFound from "./components/NotFound/notFound";
 import AboutUs from "./components/AboutUs/AboutUs"
+import FavoritesPage from "./pages/favorites/Favorites";
 
 
 
@@ -80,21 +80,10 @@ const App = () => {
               <Footer />
             </>
           }
-        />
-        *
-        <Route
-          path="/instruments/create"
-          element={
-            <>
-              <CreateInstrumentContainer />
-              <Footer />
-            </>
-          }
-        />
-        {/* <Route path="*" element={<NotFound />} /> */}
-        <Route path="/checkout" element={<Checkout />} />
+        /><Route path="/checkout" element={<Checkout />} />
         <Route path="/success" element={<SuccessPayment />} />
         <Route path="/aboutUs" element={<><AboutUs/></>}/>
+        <Route path="/favorites" element={<FavoritesPage/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <LoginForm onClose={handleOnClose} visible={visible} />

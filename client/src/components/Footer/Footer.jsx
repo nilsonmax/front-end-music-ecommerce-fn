@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Logo from "../../assets/Logo.png";
+import { mailNews } from "../../redux/action/index";
 
 export const Footer = () => {
+  const dispatch = useDispatch();
+  let [email, setMail] = useState({});
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setMail({
+      ...email,
+      email: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email);
+    dispatch(mailNews(email));
+    window.location.href = "/";
+  };
+
   return (
     <footer className="relative bg-gradient-to-r from-primary via-secondary to-primary text-white px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 py-12 lg:py-24">
       <div className="flex flex-col md:flex-row">
@@ -23,11 +43,15 @@ export const Footer = () => {
                   className="appearance-none block w-full bg-white  text-cadetblue  border border-cadetblue  rounded py-4 px-4 leading-tight focus:outline-none focus:bg-background focus:border-cadetblue "
                   type="email"
                   placeholder="Enter Your Email"
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
                 />
 
                 <button
                   type="submit"
                   className="bg-teal-500 hover:bg-teal-400 text-background px-4 py-2 text-sm  rounded absolute top-0 right-0 my-2 mr-2"
+                  onClick={(e) => handleSubmit(e)}
                 >
                   Subscribe
                 </button>

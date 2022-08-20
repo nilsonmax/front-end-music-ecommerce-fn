@@ -14,10 +14,13 @@ import thunk from 'redux-thunk'
 
 import rootReducers from "../reducer";
 
-const cartItems = localStorage.getItem("cartItems")
-    ? JSON.parse(localStorage.getItem("cartItems"))
+const cartItems = localStorage.getItem("cartItems") ?
+    JSON.parse(localStorage.getItem("cartItems"))
     : [];
-const initState = { cart: { items: cartItems } };
+const favoriteItems = localStorage.getItem("favoriteItems") ?
+    JSON.parse(localStorage.getItem("favoriteItems"))
+    : [];
+const initState = { cart: { items: cartItems }, favorites: { items: favoriteItems } };
 // const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 let store = createStore(
     rootReducers,

@@ -89,7 +89,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
         />
       )}
       {dataRender.length < 1 && showCreateComponent === false && (
-        <p className="w-screen text-center">No hay Instrumentos</p>
+        <p className="text-center">No hay Instrumentos</p>
       )}
       {showCreateComponent === true && (
         <Crear

@@ -173,7 +173,7 @@ export const loginUserGoogle = (objectUser) => {
   return async function () {
     try {
       let newUser = await axios.post(
-        "http://localhost:4000/auth/login/google",
+        `${REACT_APP_HOST}/auth/login/google`,
         objectUser
       );
       window.localStorage.setItem("dataUser", JSON.stringify(newUser.data));
@@ -241,9 +241,7 @@ export const getUsers = () => {
 export const deleteUser = (user_id) => {
   return async function () {
     try {
-      let userDeleted = await axios.delete(
-        `${REACT_APP_HOST}/users/`
-      );
+      let userDeleted = await axios.delete(`${REACT_APP_HOST}/users/`);
       return userDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
@@ -263,7 +261,6 @@ export const deleteUserAccount = () => {
       });
 
       return userDeleted.data;
-      
     } catch (error) {
       console.log(error);
     }
@@ -317,8 +314,7 @@ export const putUser = (objectUser, token) => {
       let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
       let newUser = await axios.put(
-        `${REACT_APP_HOST}/users/admin`,
-        objectUser,
+        `${REACT_APP_HOST}/users/admin`, objectUser,
         {
           headers: {
             Authorization: "Bearer " + tokenJSON.token,
@@ -467,7 +463,7 @@ export const mailSignUp = (objectUser) => {
     try {
       objectUser = camposNullUser(objectUser);
       let newMail = await axios.post(
-        "http://localhost:4000/mail/sign",
+        `${REACT_APP_HOST}/mail/sign`,
         objectUser
       );
       return newMail.data;
@@ -486,7 +482,7 @@ export const mailUpdateProfile = (objectUser) => {
     try {
       objectUser = camposNullUser(objectUser);
       let newMail = await axios.post(
-        "http://localhost:4000/mail/profile",
+        `${REACT_APP_HOST}/mail/profile`,
         objectUser
       );
       return newMail.data;
@@ -500,6 +496,7 @@ export const mailUpdateProfile = (objectUser) => {
   };
 };
 
+
 export const Create_Raiting=(rating)=>{
   return async function(dispatch){
     let tokenJson = window.localStorage.getItem("dataUser");
@@ -508,21 +505,29 @@ export const Create_Raiting=(rating)=>{
         instrumentId:rating.instrumentId,
         comment:rating.comment,
         star: parseInt(rating.star)
-      }
-      console.log("11111")
-      console.log(ObjetRaiting);
+      } 
       try {
         let {data}=await axios.post(`${REACT_APP_HOST}/raiting`,ObjetRaiting,{
             headers: {
               Authorization: "Bearer " + token.token,
             },
         })
-
         return data
-        
       } catch (error) {
           console.log(error)
           return error
       }
   }
 }
+
+export const mailNews = (email) => {
+  return async function () {
+    try {
+      let newMail = await axios.post("http://localhost:4000/mail/news", email);
+      return newMail.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+

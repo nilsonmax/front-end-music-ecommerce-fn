@@ -116,7 +116,6 @@ export default function CreateInstrument({
             title: error.message,
           });
         });
-      //alert("Instrument succesfullly created :)");
       setInput({
         name: "",
         brand: "",
@@ -128,7 +127,6 @@ export default function CreateInstrument({
         category: "",
       });
 
-      //goBack("/");
     }
   }
 

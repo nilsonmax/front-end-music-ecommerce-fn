@@ -6,8 +6,10 @@ import { StyledCheckout } from "./style";
 import { StyledCard } from "../Card/style";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+
+import LoaderButton from "../Loader/loaderButton";
+
 import { getDataClearCar, mailPurchase } from "../../redux/action/cartActions";
-import Loader from "../Loader/loader";
 
 function validate(userInfo) {
   let errors = {};
@@ -345,25 +347,20 @@ export default function Checkout() {
           <div class="mt-4">
             <h2>Total:</h2>
             <button
-              class="px-4 py-1 text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
+              class="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
               type="submit"
               onSubmit={handleSubmit}
               disabled={
-                errors.cus_name ||
-                errors.cus_email ||
-                errors.cus_phone ||
-                errors.cus_address ||
-                errors.cus_city ||
-                errors.cus_country ||
-                errors.cus_zip ||
-                !stripe
-              }
-            >
-              {loading ? (
-                <Loader />
-              ) : (
-                `$${items.reduce((a, b) => a + b.price, 0)}`
-              )}
+                errors.cus_name
+                || errors.cus_email
+                || errors.cus_phone
+                || errors.cus_address
+                || errors.cus_city
+                || errors.cus_country
+                || errors.cus_zip
+                || !stripe}>
+              {loading ? (<LoaderButton/>):`$${items.reduce((a, b) => a + b.price * b.count, 0)}`}
+
             </button>
           </div>
         </form>

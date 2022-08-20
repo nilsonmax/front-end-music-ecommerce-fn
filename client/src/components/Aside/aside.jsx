@@ -264,6 +264,7 @@ export default function Aside({
                       img={inst.img}
                       description={inst.description}
                       stock={inst.stock}
+                      count={inst.count}
                       status={inst.status}
                       categoryId={inst.categoryId}
                       categoryName={inst.category.name}

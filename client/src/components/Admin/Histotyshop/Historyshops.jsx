@@ -6,6 +6,7 @@ import { setearDatarenderHistoryshop,getDataTableEspecific } from "../../../util
 import { Toast } from "../../../utils/Toast";
 import TableEspecific from "./TableEspecific";
 import TableGeneral from "./TableGeneral";
+import Estadistics from "../Estadistics/Estadistics";
 
 const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
   var [valueSearch, setValueSearch] = useState("");
   const token = window.localStorage.getItem("dataUser");
   var [dataTableEspecific,setDataTableEspecific]=useState([]);
-
+  var [visibleGrafica,setVisibleGrafica]=useState(false);
   useEffect(() => {
     if (historyshops.length === 0 && refreshHistoryshops === null) {
       dispatch(getHistoryShops(token));
@@ -71,18 +72,27 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
       <div>
         {dataRender.length > 0 && showCreateComponent === false && (
           <>
-            <TableEspecific 
-              dataRender={dataTableEspecific}
-              columnsRender={columnsEspecific}
-            />
-            <TableGeneral
-              dataRender={dataRender}
-              columnsRender={columnsGeneral}
-            />
+            <div className="text-right">
+              <TableEspecific 
+                dataRender={dataTableEspecific}
+                columnsRender={columnsEspecific}
+              />
+              <button type="button" className="bg-blue-300 px-4 py-2 rounded-md mt-3 mb-6"
+                onClick={() =>{setVisibleGrafica(!visibleGrafica)}}>
+                {visibleGrafica===true?"Tabla":"Estadistica"}
+              </button>
+            </div>
+            <>
+              {visibleGrafica===false ? <TableGeneral
+                dataRender={dataRender}
+                columnsRender={columnsGeneral}
+              />:
+              <Estadistics />}
+            </>
           </>
         )}
         {dataRender.length < 1 && showCreateComponent === false && (
-          <p className="w-screen text-center">No hay Historyshops</p>
+          <p className="text-center">No hay Historyshops</p>
         )}
       </div>
     </div>

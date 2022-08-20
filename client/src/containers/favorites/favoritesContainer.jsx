@@ -1,0 +1,61 @@
+import React from 'react'
+import { HiHeart } from 'react-icons/hi';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Favorites from '../../components/Favorites/Favorites'
+import { ContinueShopping, EmptyFavorite } from '../../components/Favorites/style';
+import NavBarLogin from '../../components/NavBarLogin/NavbarLogin'
+import { setShowFavorites } from '../../redux/action/FavoritesActions';
+
+const FavoritesContainer = () => {
+  const favoriteItems = useSelector((state) => state.favorites.items);
+  const navigate = useNavigate();
+  return (
+    <>
+      <NavBarLogin />
+      <div className="relative py-10 px-40">
+        { favoriteItems.length ? favoriteItems.map((item) => {
+          return (
+            <Favorites
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              brand={item.brand}
+              price={item.price}
+              img={item.img}
+              description={item.description}
+              stock={item.stock}
+              status={item.status}
+              categoryId={item.categoryId}
+              categoryName={item.category.name}
+              instruments={item}
+            />
+          );
+        })
+        : 
+          <EmptyFavorite>
+            <h3>Your Favorite List is empty</h3>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <ContinueShopping
+              type="button"
+              // ShowFavorite={true}
+              onClick={() => navigate("/")}
+            >
+              Continue Shopping
+            </ContinueShopping>
+          </EmptyFavorite>
+        
+      }
+      </div>
+    </>
+
+  )
+}
+
+export default FavoritesContainer

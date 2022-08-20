@@ -60,21 +60,7 @@ export default function Favorites({
 
   return (
     <>
-      {favoriteItems.length < 1 && (
-        <EmptyFavorite>
-          <HiHeart size={150} />
-          <h3>Your Favorite List is empty</h3>
 
-          <ContinueShopping
-            type="button"
-            // ShowFavorite={true}
-            onClick={() => setShowFavorites(false)}
-          // isSidebarOpen={isSidebarOpen} closeSidebar={() => setSidebarOpen(false)}
-          >
-            Continue Shopping
-          </ContinueShopping>
-        </EmptyFavorite>
-      )}
       {favoriteItems.length >= 1 && (
         <div className="flex py-7 px-2 pr-4 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out first:border-t">
           <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0">

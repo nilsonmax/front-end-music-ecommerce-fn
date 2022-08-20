@@ -6,7 +6,6 @@ import DetailsPage from "./pages/Details/details";
 import Signup from "./pages/Signup/Signup";
 import UserInfo from "./components/UserInfo/userInfo";
 import { Footer } from "./components/Footer/Footer";
-import CreateInstrumentContainer from "./containers/createInstrument/createInstrumentContainer";
 import LoginForm from "./components/loginForm/loginForm";
 import { useSelector } from "react-redux";
 import { showLogin } from "./redux/action/index";
@@ -81,19 +80,7 @@ const App = () => {
               <Footer />
             </>
           }
-        />
-        *
-        <Route
-          path="/instruments/create"
-          element={
-            <>
-              <CreateInstrumentContainer />
-              <Footer />
-            </>
-          }
-        />
-        {/* <Route path="*" element={<NotFound />} /> */}
-        <Route path="/checkout" element={<Checkout />} />
+        /><Route path="/checkout" element={<Checkout />} />
         <Route path="/success" element={<SuccessPayment />} />
         <Route path="/aboutUs" element={<><AboutUs/></>}/>
         <Route path="/favorites" element={<FavoritesPage/>}/>

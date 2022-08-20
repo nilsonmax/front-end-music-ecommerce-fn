@@ -2,11 +2,11 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const Container = styled.div`
-  ${tw`flex flex-col items-center w-screen h-auto my-8`}
+  ${tw`flex flex-col items-center h-auto my-8`}
 `;
 
 export const MainContainer = styled.div`
-  ${tw`flex flex-col items-center w-2/4 p-2`}
+  ${tw`flex flex-col items-center p-2`}
 `;
 
 export const Title = styled.h2`
@@ -14,7 +14,7 @@ export const Title = styled.h2`
 `;
 
 export const Required = styled.div`
-  ${tw`flex items-start w-full`}
+  ${tw`flex items-start`}
 `;
 
 export const FormContainer = styled.form`

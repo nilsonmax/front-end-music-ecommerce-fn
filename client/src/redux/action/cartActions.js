@@ -1,4 +1,14 @@
-import { ADD_TO_CART,SET_SHOW_ALERT_STOCK, REMOVE_ALL_FROM_CART, REMOVE_ONE_FROM_CART, DATA_CLEAR_CAR, SET_CART_ITEMS, SET_SHOW_CART, SET_TOTAL_QUANTITIES } from "./types";
+import axios from "axios";
+import {
+  ADD_TO_CART,
+  SET_SHOW_ALERT_STOCK,
+  REMOVE_ALL_FROM_CART,
+  REMOVE_ONE_FROM_CART,
+  DATA_CLEAR_CAR,
+  SET_CART_ITEMS,
+  SET_SHOW_CART,
+  SET_TOTAL_QUANTITIES,
+} from "./types";
 
 export const addToCart = (items, instruments) => (dispatch) => {
   const cartItems = items.slice();
@@ -55,10 +65,9 @@ export const SetTotalQuanTities = () => (dispatch) => {
   dispatch({ type: SET_TOTAL_QUANTITIES, payload: quanTities });
 };
 
-
 export const SetShowAlertStock = () => (dispatch) => {
   let alert = false;
-  dispatch({ type: SET_SHOW_ALERT_STOCK , payload: alert });
+  dispatch({ type: SET_SHOW_ALERT_STOCK, payload: alert });
 };
 
 export const mailPurchase = (mailInfo) => {
@@ -74,4 +83,3 @@ export const mailPurchase = (mailInfo) => {
     }
   };
 };
-

@@ -23,13 +23,13 @@ export default function NavBarLogin({ setCurrentPage }) {
   const navigate = useNavigate();
   const { showCart, setShowCart, showFavorites, setShowFavorites } = useStateContext();
   const quanTities = useSelector((state) => state.cart.quanTities);
-  let quanTitie = window.localStorage.getItem("quanTities")
+  const quanTitie = window.localStorage.getItem("quanTities")
 
   //traer nombre de cuenta
   let user = useSelector((e) => e.reducer.user);
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
-
+ 
     dispatch(get_user(token));
   }, []);
 

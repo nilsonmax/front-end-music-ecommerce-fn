@@ -173,7 +173,7 @@ export const loginUserGoogle = (objectUser) => {
   return async function () {
     try {
       let newUser = await axios.post(
-        "http://localhost:4000/auth/login/google",
+        `${REACT_APP_HOST}/auth/login/google`,
         objectUser
       );
       window.localStorage.setItem("dataUser", JSON.stringify(newUser.data));
@@ -241,12 +241,28 @@ export const getUsers = () => {
 export const deleteUser = (user_id) => {
   return async function () {
     try {
-      let userDeleted = await axios.delete(
-        `${REACT_APP_HOST}/users/${user_id}`
-      );
+      let userDeleted = await axios.delete(`${REACT_APP_HOST}/users/`);
       return userDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
+    }
+  };
+};
+
+export const deleteUserAccount = () => {
+  return async function () {
+    let token = window.localStorage.getItem("dataUser");
+    let tokenJSON = JSON.parse(token);
+    try {
+      let userDeleted = await axios.delete(`${REACT_APP_HOST}/users`, {
+        headers: {
+          Authorization: `Bearer ${tokenJSON.token}`,
+        },
+      });
+
+      return userDeleted.data;
+    } catch (error) {
+      console.log(error);
     }
   };
 };
@@ -298,8 +314,7 @@ export const putUser = (objectUser, token) => {
       let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
       let newUser = await axios.put(
-        `${REACT_APP_HOST}/users/admin`,
-        objectUser,
+        `${REACT_APP_HOST}/users/admin`, objectUser,
         {
           headers: {
             Authorization: "Bearer " + tokenJSON.token,
@@ -448,7 +463,7 @@ export const mailSignUp = (objectUser) => {
     try {
       objectUser = camposNullUser(objectUser);
       let newMail = await axios.post(
-        "http://localhost:4000/mail/sign",
+        `${REACT_APP_HOST}/mail/sign`,
         objectUser
       );
       return newMail.data;
@@ -467,7 +482,7 @@ export const mailUpdateProfile = (objectUser) => {
     try {
       objectUser = camposNullUser(objectUser);
       let newMail = await axios.post(
-        "http://localhost:4000/mail/profile",
+        `${REACT_APP_HOST}/mail/profile`,
         objectUser
       );
       return newMail.data;
@@ -477,6 +492,17 @@ export const mailUpdateProfile = (objectUser) => {
         errorRes = error.response.data;
       }
       throw new TypeError(errorRes);
+    }
+  };
+};
+
+export const mailNews = (email) => {
+  return async function () {
+    try {
+      let newMail = await axios.post("http://localhost:4000/mail/news", email);
+      return newMail.data;
+    } catch (error) {
+      throw error;
     }
   };
 };

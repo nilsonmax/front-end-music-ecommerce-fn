@@ -7,7 +7,7 @@ export const StyledNav = styled.nav`
   `}
 `;
 
-export const StyledButton= styled.button`
+export const StyledLi= styled.li`
   ${tw`
   py-1
   px-3
@@ -19,7 +19,7 @@ export const StyledButton= styled.button`
   
   hover:border-b-2
   hover:border-bluemunsell
-
+  cursor-pointer
   active:rounded-md
   active:bg-bluemunsell
   active:px-4

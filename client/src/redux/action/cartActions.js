@@ -40,7 +40,7 @@ export const setShowCart = (items, instruments) => (dispatch) => {
   const cartItems = items.slice();
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
   dispatch({ type: SET_SHOW_CART, payload: { cartItems } });
-}
+};
 
 export const getDataClearCar = (payload) => (dispatch) => {
   const cartItems = [];
@@ -55,7 +55,23 @@ export const SetTotalQuanTities = () => (dispatch) => {
   dispatch({ type: SET_TOTAL_QUANTITIES, payload: quanTities });
 };
 
+
 export const SetShowAlertStock = () => (dispatch) => {
   let alert = false;
   dispatch({ type: SET_SHOW_ALERT_STOCK , payload: alert });
 };
+
+export const mailPurchase = (mailInfo) => {
+  return async function () {
+    try {
+      let newMail = await axios.post(
+        "http://localhost:4000/mail/purchase",
+        mailInfo
+      );
+      return newMail.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+

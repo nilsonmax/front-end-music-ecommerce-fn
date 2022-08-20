@@ -241,9 +241,7 @@ export const getUsers = () => {
 export const deleteUser = (user_id) => {
   return async function () {
     try {
-      let userDeleted = await axios.delete(
-        `${REACT_APP_HOST}/users/`
-      );
+      let userDeleted = await axios.delete(`${REACT_APP_HOST}/users/`);
       return userDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
@@ -263,7 +261,6 @@ export const deleteUserAccount = () => {
       });
 
       return userDeleted.data;
-      
     } catch (error) {
       console.log(error);
     }
@@ -495,6 +492,17 @@ export const mailUpdateProfile = (objectUser) => {
         errorRes = error.response.data;
       }
       throw new TypeError(errorRes);
+    }
+  };
+};
+
+export const mailNews = (email) => {
+  return async function () {
+    try {
+      let newMail = await axios.post("http://localhost:4000/mail/news", email);
+      return newMail.data;
+    } catch (error) {
+      throw error;
     }
   };
 };

@@ -1,41 +1,37 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StyledCheckout } from "./style";
 import { StyledCard } from "../Card/style";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { getDataClearCar } from "../../redux/action/cartActions";
+
 import LoaderButton from "../Loader/loaderButton";
+
+import { getDataClearCar, mailPurchase } from "../../redux/action/cartActions";
 
 function validate(userInfo) {
   let errors = {};
 
   if (!userInfo.cus_name) {
     errors.cus_name = "Input required";
-
   } else if (!userInfo.cus_email) {
     errors.cus_email = "Input required";
-
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(userInfo.cus_email)) {
-    errors.cus_email = 'Invalid email address';
-
+  } else if (
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(userInfo.cus_email)
+  ) {
+    errors.cus_email = "Invalid email address";
   } else if (!userInfo.cus_phone) {
     errors.cus_phone = "Input required";
-
   } else if (`${userInfo.cus_phone}`.length < 10) {
     errors.cus_phone = "should have 10 digits at least";
-
   } else if (!userInfo.cus_address) {
     errors.cus_address = "Input required";
-
   } else if (!userInfo.cus_city) {
     errors.cus_city = "Input required";
-
   } else if (!userInfo.cus_country) {
     errors.cus_country = "Input required";
-
   } else if (!userInfo.cus_zip) {
     errors.cus_zip = "Input required";
   }
@@ -44,19 +40,16 @@ function validate(userInfo) {
 }
 
 export default function Checkout() {
-
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
     if (token === null) {
-      navigate("/")
-      return
+      navigate("/");
+      return;
     }
-  }, [])
-
-
+  }, []);
 
   const items = useSelector((state) => state.cart.items);
   console.log("items", items);
@@ -106,17 +99,19 @@ export default function Checkout() {
     cus_city: "",
     cus_country: "",
     cus_zip: "",
-  })
+  });
 
   function onChange(e) {
     setUserInfo({
       ...userInfo,
       [e.target.name]: e.target.value,
     });
-    setErrors(validate({
-      ...userInfo,
-      [e.target.name]: e.target.value
-    }));
+    setErrors(
+      validate({
+        ...userInfo,
+        [e.target.name]: e.target.value,
+      })
+    );
   }
 
   console.log("userInfo", userInfo);
@@ -124,13 +119,13 @@ export default function Checkout() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    setErrors(validate(userInfo))
+    setErrors(validate(userInfo));
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement), // Element capture input
     });
-    setLoading(true)
+    setLoading(true);
 
     const total = items.reduce((a, b) => a + b.price, 0);
 
@@ -146,6 +141,26 @@ export default function Checkout() {
           userInfo,
         });
 
+        let mailInfo = {
+          name: userInfo.cus_name,
+          email: userInfo.cus_email,
+          phone: userInfo.cus_phone,
+          address: userInfo.cus_address,
+          city: userInfo.cus_city,
+          country: userInfo.cus_country,
+          zip: userInfo.cus_zip,
+          total: total,
+          items: items.map((item) => {
+            return {
+              name: item.name,
+              price: item.price,
+              count: item.count,
+              img: item.img,
+            };
+          }),
+        };
+        dispatch(mailPurchase(mailInfo));
+
         elements.getElement(CardElement).clear();
         setUserInfo({
           cus_name: "",
@@ -154,29 +169,28 @@ export default function Checkout() {
           cus_address: "",
           cus_city: "",
           cus_country: "",
-          cus_zip: ""
-        })
-         
+          cus_zip: "",
+        });
+
         setTimeout(() => {
           Toast.fire({
             icon: "success",
             title: "We have sent you an email with your order details.",
           }).then((result) => {
-            dispatch(getDataClearCar())
+            dispatch(getDataClearCar());
             goBack("/");
           });
           // setSubmitting(false);
         }, 400);
-        
       } catch (error) {
         console.log(error);
         setTimeout(() => {
-        Toast.fire({
-          icon: "error",
-          title: error.message,
-        });
-      }, 400);
-      setLoading(false)
+          Toast.fire({
+            icon: "error",
+            title: error.message,
+          });
+        }, 400);
+        setLoading(false);
       }
     }
   }
@@ -207,7 +221,9 @@ export default function Checkout() {
               aria-label="Name"
               onChange={(e) => onChange(e)}
             />
-            {errors.cus_name && (<p className="text-xs text-red-600">{errors.cus_name}</p>)}
+            {errors.cus_name && (
+              <p className="text-xs text-red-600">{errors.cus_name}</p>
+            )}
           </div>
 
           <div class="mt-2">
@@ -224,7 +240,9 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_email && (<p className="text-xs text-red-600">{errors.cus_email}</p>)}
+            {errors.cus_email && (
+              <p className="text-xs text-red-600">{errors.cus_email}</p>
+            )}
           </div>
 
           <div class="mt-2">
@@ -241,7 +259,9 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_phone && (<p className="text-xs text-red-600">{errors.cus_phone}</p>)}
+            {errors.cus_phone && (
+              <p className="text-xs text-red-600">{errors.cus_phone}</p>
+            )}
           </div>
 
           <div class="mt-2">
@@ -258,7 +278,9 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_address && (<p className="text-xs text-red-600">{errors.cus_address}</p>)}
+            {errors.cus_address && (
+              <p className="text-xs text-red-600">{errors.cus_address}</p>
+            )}
           </div>
 
           <div class="mt-2">
@@ -275,7 +297,9 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_city && (<p className="text-xs text-red-600">{errors.cus_city}</p>)}
+            {errors.cus_city && (
+              <p className="text-xs text-red-600">{errors.cus_city}</p>
+            )}
           </div>
 
           <div class="inline-block mt-2 w-1/2 pr-1">
@@ -292,7 +316,9 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_country && (<p className="text-xs text-red-600">{errors.cus_country}</p>)}
+            {errors.cus_country && (
+              <p className="text-xs text-red-600">{errors.cus_country}</p>
+            )}
           </div>
 
           <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
@@ -309,7 +335,9 @@ export default function Checkout() {
               onChange={(e) => onChange(e)}
               aria-label="Email"
             />
-            {errors.cus_zip && (<p className="text-xs text-red-600">{errors.cus_zip}</p>)}
+            {errors.cus_zip && (
+              <p className="text-xs text-red-600">{errors.cus_zip}</p>
+            )}
           </div>
 
           <p class="mt-4 text-gray-800 font-medium">Payment information</p>
@@ -332,6 +360,7 @@ export default function Checkout() {
                 || errors.cus_zip
                 || !stripe}>
               {loading ? (<LoaderButton/>):`$${items.reduce((a, b) => a + b.price * b.count, 0)}`}
+
             </button>
           </div>
         </form>

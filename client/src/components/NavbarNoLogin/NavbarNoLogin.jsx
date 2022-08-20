@@ -10,12 +10,13 @@ import {
 import { useDispatch } from "react-redux";
 import { showLogin } from "../../redux/action/index";
 import { useStateContext } from "../../context/stateContext";
-import { HiShoppingCart } from "react-icons/hi";
+import { HiOutlineHeart, HiShoppingCart } from "react-icons/hi";
 import Cart from "../Shopping/cart";
 import Logo from "../../assets/Logo.png";
+import FavoritesPreview from "../Favorites/FavoritesPreview";
 
 export default function NavBarNoLogin({ setCurrentPage }) {
-  const { showCart, setShowCart, totalQuantities } = useStateContext();
+  const { showCart, showFavorites, totalQuantities } = useStateContext();
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -65,9 +66,8 @@ export default function NavBarNoLogin({ setCurrentPage }) {
 
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${
-              navbar ? "block" : "hidden"
-            }`}
+            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
+              }`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="font-bold transition cursor-pointer duration-150 border-b-2 border-transparent hover:border-bluemunsell">
@@ -116,6 +116,16 @@ export default function NavBarNoLogin({ setCurrentPage }) {
           onClick={() => dispatch(showLogin(true))}
           className=" relative link flex items-center"
         >
+          <HiOutlineHeart size={20} className="h-10" />
+          <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+            Favoritos
+          </p>
+        </button>
+        <button
+          type="button"
+          onClick={() => dispatch(showLogin(true))}
+          className=" relative link flex items-center"
+        >
           {totalQuantities !== 0 && (
             <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
               {totalQuantities !== 0 && totalQuantities}
@@ -127,6 +137,7 @@ export default function NavBarNoLogin({ setCurrentPage }) {
           </p>
         </button>
         {showCart && <Cart />}
+        {showFavorites && <FavoritesPreview />}
       </DivJustifyBetween>
     </NavContainer>
   );

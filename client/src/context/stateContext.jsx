@@ -7,6 +7,7 @@ export const StateContext = ({ children }) => {
 
   const [qty, setQty] = useState(1);
   const [showCart, setShowCart] = useState(false);
+  const [showFavorites, setShowFavorites] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
@@ -76,6 +77,7 @@ export const StateContext = ({ children }) => {
       value={{
         qty,
         showCart,
+        showFavorites,
         cartItems,
         totalPrice,
         totalQuantities,
@@ -84,6 +86,7 @@ export const StateContext = ({ children }) => {
         incQty,
         decQty,
         setShowCart,
+        setShowFavorites,
         toogleCartItemQuantity,
         setCartItems,
         setTotalPrice,

@@ -3,10 +3,10 @@ import { combineReducers } from "redux";
 import cartReducers from "./cartReducers";
 import reducer from "./instrumentsReducers";
 import adminsReducer from "./adminsReducer"
-import historyshopsReducer from "./Historyshops";
 
 const rootReducers = combineReducers({
     reducer,
+    favorites: favoritesReducers,
     cart: cartReducers,
     admins: adminsReducer,
     admins: adminsReducer,

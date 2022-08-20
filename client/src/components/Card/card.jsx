@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-// import { useStateContext } from "../../context/stateContext";
+import { useStateContext } from "../../context/stateContext";
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
+import { addToFavorites, removeFromFavorites, removeOneFromFavorites } from "../../redux/action/FavoritesActions";
 import { StyledCard } from "./style";
+// import { BsCart3 } from "react-icons/bs";
 import { useSelector, useDispatch } from 'react-redux';
 // import Toast from "react-hot-toast";
 import Swal from "sweetalert2";
@@ -24,10 +26,10 @@ export default function Card({
 }) {
 
   // const instruments = useSelector((state) => state.reducer.instruments);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-  // const [stockShow, setStockShow2] = useState(false)
-  const navigate = useNavigate()
+  console.log(cartItems, 'cartitems en card')
+  const navigate=useNavigate()
   const hanledSummit = (e) => {
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments))
@@ -74,16 +76,22 @@ export default function Card({
   }
   return (
     <StyledCard>
-
-      <img src={img} alt={name} onClick={e => navigate("/instruments/" + id)} />
+      
+      <img src={img} alt={name} onClick={e=>navigate("/instruments/"+id)}/>
       <p>{brand}</p>
-      <h2 onClick={e => navigate("/instruments/" + id)}>{name}{stock<=0 ? <p className="text-[#d72a1e]"> Stock sold out</p> : <p>Stock {stock}</p>}</h2>
-      <h3 onClick={e => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
+      <h2 onClick={e=>navigate("/instruments/"+id)}>{name}</h2>
+      <h3 onClick={e=>navigate("/instruments/"+id)}>{`${colMoney}`}</h3>
+      {/* <span>{`USD${price/4500}`}</span> */}
       <br></br>
       <br></br>
-      <b>{`Type:`}</b> <span onClick={e => navigate("/instruments/" + id)}>{`${categoryName}`}</span>
-
-      <button onClick={(e) => stock<=0 || activaShow ? alert() : hanledSummit(e)}
+      {/* <b>{`Status:`}</b> <span>{`${status}`}</span> */}
+      <b>{`Type:`}</b> <span onClick={e=>navigate("/instruments/"+id)}>{`${categoryName}`}</span>
+      {/*         <span " text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
+      {/* <a
+            href={`#${product.id}`}
+            onClick={(e) => this.props.addToCart(this.props.cartItems, product)}
+          ></a> */}
+      <button onClick={(e) => hanledSummit(e)}
         className="inline-flex items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1"
       >
         <span className="">{`➕`}</span>
@@ -101,8 +109,7 @@ export default function Card({
           />
         </svg>
       </button>
-
-
+    
     </StyledCard>
   );
 }

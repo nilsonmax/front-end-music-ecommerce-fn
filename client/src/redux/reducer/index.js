@@ -11,7 +11,7 @@ const rootReducers = combineReducers({
     favorites: favoritesReducers,
     cart: cartReducers,
     admins: adminsReducer,
-    historyshops:historyshopsReducer
+    historyshops: historyshopsReducer
 });
 
 export default rootReducers

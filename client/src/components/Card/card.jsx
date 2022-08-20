@@ -5,10 +5,11 @@ import { useStateContext } from "../../context/stateContext";
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
 import { addToFavorites, removeFromFavorites, removeOneFromFavorites } from "../../redux/action/FavoritesActions";
 import { StyledCard } from "./style";
-// import { BsCart3 } from "react-icons/bs";
+import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import { useSelector, useDispatch } from 'react-redux';
 // import Toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 export default function Card({
   id,
@@ -29,12 +30,26 @@ export default function Card({
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   console.log(cartItems, 'cartitems en card')
+  const favoriteItems = useSelector((state) => state.favorites.items);
+  console.log(favoriteItems, 'favoriteItems en card')
   const navigate=useNavigate()
   const hanledSummit = (e) => {
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments))
     dispatch(SetTotalQuanTities(cartItems, instruments))
   }
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const toogleFavoriteAddHandler = () => {
+      setIsFavorite(prevState=>!prevState);
+      dispatch(addToFavorites(favoriteItems,instruments));
+    }
+
+    const toogleFavoriteRemoveHandler = () => {
+      setIsFavorite(prevState=>!prevState);
+      dispatch(removeFromFavorites(favoriteItems,instruments));
+    }  
+  
 
   const Toast = Swal.mixin({
     toast: true,
@@ -79,6 +94,15 @@ export default function Card({
       
       <img src={img} alt={name} onClick={e=>navigate("/instruments/"+id)}/>
       <p>{brand}</p>
+      {
+            !isFavorite ?
+              (
+                <HiOutlineHeart className="h-10 cursor-pointer" onClick={toogleFavoriteAddHandler} />
+              ) : (
+                <HiHeart className="h-10 cursor-pointer" onClick={toogleFavoriteRemoveHandler} />
+              )
+
+          }
       <h2 onClick={e=>navigate("/instruments/"+id)}>{name}</h2>
       <h3 onClick={e=>navigate("/instruments/"+id)}>{`${colMoney}`}</h3>
       {/* <span>{`USD${price/4500}`}</span> */}

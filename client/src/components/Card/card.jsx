@@ -32,7 +32,7 @@ export default function Card({
   console.log(cartItems, 'cartitems en card')
   const favoriteItems = useSelector((state) => state.favorites.items);
   console.log(favoriteItems, 'favoriteItems en card')
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const hanledSummit = (e) => {
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments))
@@ -41,15 +41,15 @@ export default function Card({
   const [isFavorite, setIsFavorite] = useState(false);
 
   const toogleFavoriteAddHandler = () => {
-      setIsFavorite(prevState=>!prevState);
-      dispatch(addToFavorites(favoriteItems,instruments));
-    }
+    setIsFavorite(prevState => !prevState);
+    dispatch(addToFavorites(favoriteItems, instruments));
+  }
 
-    const toogleFavoriteRemoveHandler = () => {
-      setIsFavorite(prevState=>!prevState);
-      dispatch(removeFromFavorites(favoriteItems,instruments));
-    }  
-  
+  const toogleFavoriteRemoveHandler = () => {
+    setIsFavorite(prevState => !prevState);
+    dispatch(removeFromFavorites(favoriteItems, instruments));
+  }
+
 
   const Toast = Swal.mixin({
     toast: true,
@@ -76,10 +76,10 @@ export default function Card({
     if (e.id === id) {
       if (e.stock <= e.count) {
         activaShow = true
-      }else{
+      } else {
         activaShow = false
       }
-      
+
     }
   });
 
@@ -91,25 +91,28 @@ export default function Card({
   }
   return (
     <StyledCard>
-      
-      <img src={img} alt={name} onClick={e=>navigate("/instruments/"+id)}/>
-      <p>{brand}</p>
-      {
-            !isFavorite ?
-              (
-                <HiOutlineHeart className="h-10 cursor-pointer" onClick={toogleFavoriteAddHandler} />
-              ) : (
-                <HiHeart className="h-10 cursor-pointer" onClick={toogleFavoriteRemoveHandler} />
-              )
 
-          }
-      <h2 onClick={e=>navigate("/instruments/"+id)}>{name}</h2>
-      <h3 onClick={e=>navigate("/instruments/"+id)}>{`${colMoney}`}</h3>
+      <img src={img} alt={name} onClick={e => navigate("/instruments/" + id)} />
+      <div className="flex justify-between">
+
+        <p>{brand}</p>
+        {
+          !isFavorite ?
+            (
+              <HiOutlineHeart className="h-10 cursor-pointer" onClick={toogleFavoriteAddHandler} />
+            ) : (
+              <HiHeart className="h-10 cursor-pointer" onClick={toogleFavoriteRemoveHandler} />
+            )
+
+        }
+      </div>
+      <h2 onClick={e => navigate("/instruments/" + id)}>{name}</h2>
+      <h3 onClick={e => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
       {/* <span>{`USD${price/4500}`}</span> */}
       <br></br>
       <br></br>
       {/* <b>{`Status:`}</b> <span>{`${status}`}</span> */}
-      <b>{`Type:`}</b> <span onClick={e=>navigate("/instruments/"+id)}>{`${categoryName}`}</span>
+      <b>{`Type:`}</b> <span onClick={e => navigate("/instruments/" + id)}>{`${categoryName}`}</span>
       {/*         <span " text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
       {/* <a
             href={`#${product.id}`}
@@ -133,7 +136,7 @@ export default function Card({
           />
         </svg>
       </button>
-    
+
     </StyledCard>
   );
 }

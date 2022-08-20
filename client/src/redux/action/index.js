@@ -173,7 +173,7 @@ export const loginUserGoogle = (objectUser) => {
   return async function () {
     try {
       let newUser = await axios.post(
-        "http://localhost:4000/auth/login/google",
+        `${REACT_APP_HOST}/auth/login/google`,
         objectUser
       );
       window.localStorage.setItem("dataUser", JSON.stringify(newUser.data));
@@ -314,8 +314,7 @@ export const putUser = (objectUser, token) => {
       let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
       let newUser = await axios.put(
-        `${REACT_APP_HOST}/users/admin`,
-        objectUser,
+        `${REACT_APP_HOST}/users/admin`, objectUser,
         {
           headers: {
             Authorization: "Bearer " + tokenJSON.token,
@@ -464,7 +463,7 @@ export const mailSignUp = (objectUser) => {
     try {
       objectUser = camposNullUser(objectUser);
       let newMail = await axios.post(
-        "http://localhost:4000/mail/sign",
+        `${REACT_APP_HOST}/mail/sign`,
         objectUser
       );
       return newMail.data;
@@ -483,7 +482,7 @@ export const mailUpdateProfile = (objectUser) => {
     try {
       objectUser = camposNullUser(objectUser);
       let newMail = await axios.post(
-        "http://localhost:4000/mail/profile",
+        `${REACT_APP_HOST}/mail/profile`,
         objectUser
       );
       return newMail.data;

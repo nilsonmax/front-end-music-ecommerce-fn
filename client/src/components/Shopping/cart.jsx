@@ -8,7 +8,7 @@ import {
   AiOutlineLeft,
 } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
-import toast from "react-hot-toast";
+// import Toast from "react-hot-toast";
 import { useStateContext } from "../../context/stateContext";
 import getStripe from "../../lib/getStripe";
 import { loadStripe } from "@stripe/stripe-js";
@@ -48,7 +48,8 @@ import {
   SetTotalQuanTities,
   toogleCartItemQuantity,
 } from "../../redux/action/cartActions";
-import e from "cors";
+// import e from "cors";
+import Swal from "sweetalert2";
 
 const Cart = () => {
 
@@ -58,53 +59,55 @@ const Cart = () => {
   const quanTities = useSelector((state) => state.cart.quanTities);
   let quanTitie = window.localStorage.getItem("quanTities")
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
   const hanledDelete = (e, item) => {
-    console.log("estoy en hanled aadcart");
     e.preventDefault();
     dispatch(removeFromCart(cartItems, item));
     dispatch(SetTotalQuanTities())
   };
 
   const hanledDel = (e, item) => {
-    console.log(item, "estoy en hanled removeaadcart");
     e.preventDefault();
-    if(item.count>1){
+    if (item.count > 1) {
       dispatch(removeOneFromCart(cartItems, item));
       dispatch(SetTotalQuanTities())
-    }else{
+    } else {
       dispatch(removeFromCart(cartItems, item));
       dispatch(SetTotalQuanTities())
     }
-    
+
   };
 
   const hanledAdd = (e, item) => {
-    console.log("estoy en hanled aadcart");
     e.preventDefault();
+    // alert(item)
     dispatch(addToCart(cartItems, item));
     dispatch(SetTotalQuanTities(cartItems, item))
   };
 
-
-  /*   const handleCheckout = async () => {
-    const stripe = await getStripe();
-    console.log(stripe, 'stripe data');
-    const response = await fetch("http://localhost:4000/payment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cartItems),
-    });
-    if (response.statusCode === 500) return;
-    const data = await response.json();
-    toast.loading("Redirecting...");
-    stripe.redirectToCheckout({ sessionId: data.id });
-  }; */
-
   function handleCheckout(e) {
     e.preventDefault();
     window.location = "/checkout";
+  }
+
+
+
+  const alert = () => {
+    Toast.fire({
+      icon: "warning",
+      title: "Stock sold out",
+    })
   }
 
   return (
@@ -139,12 +142,12 @@ const Cart = () => {
           {cartItems.length >= 1 ? (
             <div>
               <CartHeading>Your Cart</CartHeading>
-              <CartNumItems>({quanTities?quanTities:quanTitie} items)</CartNumItems>
+              <CartNumItems>({quanTities ? quanTities : quanTitie} items)</CartNumItems>
             </div>
           ) : (
             <Hidden>
               <CartHeading>Your Cart</CartHeading>
-              <CartNumItems>({quanTities?quanTities:quanTitie} items)</CartNumItems>
+              <CartNumItems>({quanTities ? quanTities : quanTitie} items)</CartNumItems>
             </Hidden>
           )}
 
@@ -166,11 +169,11 @@ const Cart = () => {
                       </QuantityDescMinus>
 
                       <QuantityDescNumCart>
-                        {item.count}
-                       
+                        {item.count <= item.stock - 1 ? item.count : item.stock}
+
                       </QuantityDescNumCart>
 
-                      <QuantityDescPlus onClick={(e) => hanledAdd(e, item)}>
+                      <QuantityDescPlus onClick={(e) => item.count <= item.stock - 1 ? hanledAdd(e, item) : alert()}>
                         <AiOutlinePlus />
                       </QuantityDescPlus>
 
@@ -185,6 +188,7 @@ const Cart = () => {
                   </Bottom>
                 </ItemDescription>
               </Product>
+
             ))}
         </ProductContainer>
         {cartItems.length >= 1 && (

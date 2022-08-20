@@ -27,7 +27,7 @@ export default function HomeContainer() {
 
   useEffect(() => {
     dispatch(getInstruments());
-    console.log(localStore);
+    // console.log(localStore);
   }, [dispatch]);
 
   if (elementsToShow.length === 0) {

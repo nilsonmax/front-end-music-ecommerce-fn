@@ -29,9 +29,9 @@ export default function Card({
   // const instruments = useSelector((state) => state.reducer.instruments);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems, 'cartitems en card')
+  // console.log(cartItems, 'cartitems en card')
   const favoriteItems = useSelector((state) => state.favorites.items);
-  console.log(favoriteItems, 'favoriteItems en card')
+  // console.log(favoriteItems, 'favoriteItems en card')
   const navigate = useNavigate()
   const hanledSummit = (e) => {
     e.preventDefault();

@@ -1,17 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getDataClear, get_user, deleteUserAccount,Create_Raiting } from "../../redux/action/index"
+import { getDataClear, get_user, deleteUserAccount, Create_Raiting } from "../../redux/action/index"
 import Loader from "../Loader/loader"
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UserHistoryShop from "../UserHistoryShop/userHistoryShop";
 import { getUserHistoryShop } from "../../redux/action/Historyshop";
-
+import { FaStar } from "react-icons/fa"
 
 export default function Profile() {
 
+
+
+    //estrellas:
+    const stars = Array(5).fill(0)
+    const [currentValue, setCurrentValue] = useState(1)
+    const [hoverValue, setHoverValue] = useState(undefined)
+
+    const handledStar = (value) => {
+        setCurrentValue(value)
+    }
+    const handelMouseOver = (value) => {
+        setHoverValue(value)
+    }
+    const handledMauseLeave = () => {
+        setHoverValue(undefined)
+    }
+
+    const colors = {
+        orange: "#FFBA5A",
+        grey: "#a9a9a9"
+    }
+
+    /////////////////
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [error, setError] = useState("")
     const [raiting, setRaiting] = useState(false)
     const [instrument, setInstrument] = useState({
         id: "",
@@ -21,7 +45,7 @@ export default function Profile() {
     const [RaitingForm, setRaitingForm] = useState({
         instrumentId: "",
         comment: "",
-        star: "",
+        star: 1,
     })
 
     function obtenerId(id, name, price) {
@@ -32,7 +56,7 @@ export default function Profile() {
         })
         setRaitingForm({
             ...RaitingForm,
-            instrumentId:id
+            instrumentId: id
         })
         setRaiting(true)
     }
@@ -81,19 +105,55 @@ export default function Profile() {
     }
 
     function handledChange(e) {
+        e.preventDefault()
+        setError("")
         setRaitingForm({
             ...RaitingForm,
-            [e.target.name]:e.target.value,
-            
+            [e.target.name]: e.target.value,
+            star: currentValue
+
         })
     }
 
 
     function handledSubmit(e) {
         e.preventDefault()
-       dispatch(Create_Raiting(RaitingForm))
-       setRaiting(false)
+
+        if (RaitingForm.comment.length < 30 || RaitingForm.comment.length > 300) {
+            setError("The comment must have more than 30 characters and less than 300")
+            return
+        }
+
+        dispatch(Create_Raiting(RaitingForm))
+            .then((retorno) => {
+                if (retorno != "You already rated this purchase") {
+                    setRaiting(false)
+                    Toast.fire({
+                        icon: "success",
+                        title: retorno,
+                    })
+
+                } else {
+                    Toast.fire({
+                        icon: "error",
+                        title: retorno,
+                    })
+                }
+            })
     }
+
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
     return (
         <>
@@ -187,23 +247,31 @@ export default function Profile() {
                         <button className=" text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick={e => handleDelete(e)}>Delete my account</button>
 
                         <UserHistoryShop obtenerId={obtenerId} />
-                    <>
-                        {raiting &&
-                            <div className="m-20 bg-red-500 text-center flex flex-col">
-                                <p>insturmento a calificar: {instrument.name}</p>
-                                <p>{instrument.price}</p>
-                                <select onChange={e=>handledChange(e)} className="text-center" name="star" >
-                                    <option  value="1">1</option>
-                                    <option  value="2">2</option>
-                                    <option  value="3">3</option>
-                                    <option  value="4">4</option>
-                                    <option  value="5">5</option>
-                                </select>
-                                <input onChange={e=>handledChange(e)} className=""  type="text" name="comment"/>
-                                <button onClick={e=>handledSubmit(e)} >Enviar</button>
-                            </div>
-                        }
-                    </>
+                        <>
+                            {raiting &&
+                                <div className=" flex flex-col p-16 border-2 border-secondary m-3 rounded-md" >
+                                    <div className="flex justify-between m-2 border">
+                                        <p className="text-center text-xl">{instrument.name}</p>
+                                        <p className="text-center text-xl">{"$" + instrument.price}</p>
+                                    </div>
+                                    <div className="flex justify-center  text-yellow-500 text-2xl my-4">
+                                        {stars.map((_, index) => {
+                                            return (
+                                                <FaStar
+                                                    key={index}
+                                                    color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
+                                                    onClick={() => handledStar(index + 1)}
+                                                />)
+                                        })}
+
+                                    </div>
+
+                                    <textarea name="comment" className="py-1 mx-44 bg-gray-200" placeholder="Leave a comment about this product..." onChange={e => handledChange(e)} />
+                                    {error && <p className="text-red-400 text-center text-sm underline">{error}</p>}
+                                    <button className="bg-primary text-2xl hover:bg-secondary text-white mx-80 rounded-lg my-3" onClick={e => handledSubmit(e)} >Send</button>
+                                </div>
+                            }
+                        </>
                     </div>
                 </div>
 

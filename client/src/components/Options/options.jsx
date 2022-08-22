@@ -17,7 +17,7 @@ function Options({ setCurrentPage }) {
         htmlFor="options"
         className="mb-2 text-sm font-medium text-dark dark:text-primary flex"
       >
-        <p className="text-xl mt-1 font-extralight text-stone-700">Ordering:</p>
+        <p className="text-xl mt-1 font-extralight text-stone-700">Sort by:</p>
         <select
           id="options"
           onChange={(e) => handleOrder(e)}

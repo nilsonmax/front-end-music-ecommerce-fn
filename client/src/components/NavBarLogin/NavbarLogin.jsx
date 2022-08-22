@@ -137,7 +137,7 @@ export default function NavBarLogin({ setCurrentPage }) {
         <button type="button" onClick={() => setShowFavorites(true)} className=" relative link flex items-center">
           <HiOutlineHeart size={20} className="h-10" />
           <p className="hidden md:inline font-extrabold md: text-sm mt-2">
-            Favoritos
+            Favorites
           </p>
         </button>
         {showFavorites && <FavoritesPreview />}

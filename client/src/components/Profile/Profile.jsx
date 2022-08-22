@@ -207,68 +207,39 @@ export default function Profile() {
                                 {user.dni ? user.dni : "unknown"}
                             </div>
                     </div>*/}
-
-                        {////datos
-                        }
-                        <div class="flex flex-col md:flex-row justify-between items-center  border-b gap-4 py-4 text-slate-600">
-                            <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
-                                Contact Number:
-                            </div>
-                            <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
-                                {user.contactNumber ? user.contactNumber : "unknown"}
-                            </div>
-                        </div>
-                        {////datos
-                        }
-                        <div class="flex flex-col md:flex-row justify-between items-center border-b  gap-4 py-4 text-slate-600">
-                            <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
-                                Address:
-                            </div>
-                            <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
-                                {user.buyerAddress ? user.buyerAddress : "unknown"}
-                            </div>
-                        </div>
-                        {////datos
-                        }
-                        <div class="flex flex-col md:flex-row justify-between items-center border-b  gap-4 py-4 text-slate-600">
-                            <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
-                                Rating:
-                            </div>
-                            <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
-                                {user.rating ? user.rating : "unknown"}
-                            </div>
-                        </div>
-
-                        {////datos
-                        }
-                        <div class="flex flex-col md:flex-row justify-between items-center  border-b gap-4 py-4 text-slate-600">
-                            <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
-                                Role:
-                            </div>
-                            <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
-                                {user.rol ? user.rol : "unknown"}
-                            </div>
-                        </div>
-                        <button className="text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick={e => navigate("/user/info")}>Edit my information</button>
-                        <button className=" text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick={e => handleDelete(e)}>Delete my account</button>
-
-                        <UserHistoryShop obtenerId={obtenerId} />
-                        <>
-                            {raiting &&
-                                <div className=" flex flex-col p-16 border-2 border-secondary m-3 rounded-md" >
-                                    <div className="flex justify-between m-2 border">
-                                        <p className="text-center text-xl">{instrument.name}</p>
-                                        <p className="text-center text-xl">{"$" + instrument.price}</p>
-                                    </div>
-                                    <div className="flex justify-center  text-yellow-500 text-2xl my-4">
-                                        {stars.map((_, index) => {
-                                            return (
-                                                <FaStar
-                                                    key={index}
-                                                    color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
-                                                    onClick={() => handledStar(index + 1)}
-                                                />)
-                                        })}
+            {
+              ////datos
+            }
+            <div class="flex flex-col md:flex-row justify-between items-center  border-b gap-4 py-4 text-slate-600">
+              <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
+                Contact Number:
+              </div>
+              <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
+                {user.contactNumber ? user.contactNumber : "unknown"}
+              </div>
+            </div>
+            {
+              ////datos
+            }
+            <div class="flex flex-col md:flex-row justify-between items-center border-b  gap-4 py-4 text-slate-600">
+              <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
+                Address:
+              </div>
+              <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
+                {user.buyerAddress ? user.buyerAddress : "unknown"}
+              </div>
+            </div>
+            {
+              ////datos
+            }
+            <div class="flex flex-col md:flex-row justify-between items-center border-b  gap-4 py-4 text-slate-600">
+              <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
+                Rating:
+              </div>
+              <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
+                {user.rating ? user.rating : "unknown"}
+              </div>
+            </div>
 
             {
               ////datos

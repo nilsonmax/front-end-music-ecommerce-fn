@@ -118,7 +118,7 @@ export default function NavBarNoLogin({ setCurrentPage }) {
         >
           <HiOutlineHeart size={20} className="h-10" />
           <p className="hidden md:inline font-extrabold md: text-sm mt-2">
-            Favorites
+            Favoritos
           </p>
         </button>
         <button

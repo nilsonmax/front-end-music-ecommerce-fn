@@ -112,6 +112,11 @@ export default function Profile() {
     });
   }
 
+  function handlePassword(e) {
+    e.preventDefault();
+    navigate("/user/Profile/resetpassword");
+  }
+
   function handledSubmit(e) {
     e.preventDefault();
 
@@ -152,7 +157,7 @@ export default function Profile() {
 
   return (
     <>
-      {user ?
+      {user ? (
         <div class="bg-white mt-4 max-w-7xl sm:pt-10 lg:pt-12 mx-auto flex flex-col">
           <p className="text-center text-gray-600 underline text-6xl font-bold font-sans">
             {user.userName}
@@ -205,7 +210,8 @@ export default function Profile() {
               </div>
             </div>
 
-            {////datos
+            {
+              ////datos
             }
             <div class="flex flex-col md:flex-row justify-between items-center  border-b gap-4 py-4 text-slate-600">
               <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
@@ -215,7 +221,8 @@ export default function Profile() {
                 {user.contactNumber ? user.contactNumber : "unknown"}
               </div>
             </div>
-            {////datos
+            {
+              ////datos
             }
             <div class="flex flex-col md:flex-row justify-between items-center border-b  gap-4 py-4 text-slate-600">
               <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
@@ -225,7 +232,8 @@ export default function Profile() {
                 {user.buyerAddress ? user.buyerAddress : "unknown"}
               </div>
             </div>
-            {////datos
+            {
+              ////datos
             }
             <div class="flex flex-col md:flex-row justify-between items-center border-b  gap-4 py-4 text-slate-600">
               <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
@@ -236,7 +244,8 @@ export default function Profile() {
               </div>
             </div>
 
-            {////datos
+            {
+              ////datos
             }
             <div class="flex flex-col md:flex-row justify-between items-center  border-b gap-4 py-4 text-slate-600">
               <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
@@ -257,8 +266,25 @@ export default function Profile() {
                 {user.rol ? user.rol : "unknown"}
               </div>
             </div>
-            <button className="text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick={e => navigate("/user/info")}>Edit my information</button>
-            <button className=" text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 " onClick={e => handleDelete(e)}>Delete my account</button>
+            <button
+              className="text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 "
+              onClick={(e) => navigate("/user/info")}
+            >
+              Edit my information
+            </button>
+            <button
+              className=" text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 "
+              onClick={(e) => handleDelete(e)}
+            >
+              Delete my account
+            </button>
+            <button
+              className=" text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 "
+              onClick={(e) => handlePassword(e)}
+            >
+              Change Password
+            </button>
+
             <UserHistoryShop obtenerId={obtenerId} />
             <>
               {raiting && (
@@ -307,9 +333,9 @@ export default function Profile() {
             </>
           </div>
         </div>
-        : (
-          <Loader />
-        )}
+      ) : (
+        <Loader />
+      )}
     </>
   );
 }

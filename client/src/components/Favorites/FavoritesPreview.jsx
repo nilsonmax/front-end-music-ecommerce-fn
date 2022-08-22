@@ -77,7 +77,7 @@ const FavoritesPreview = () => {
         {favoriteItems.length < 1 && (
           <EmptyFavorite>
             <HiHeart size={150} />
-            <h3>Your favorites list is empty</h3>
+            <h3>Your Favorite List is empty</h3>
 
             <ContinueShopping
               type="button"
@@ -93,12 +93,12 @@ const FavoritesPreview = () => {
         <ProductContainer>
           {favoriteItems.length >= 1 ? (
             <div>
-              <FavoriteHeading>Your favorites</FavoriteHeading>
+              <FavoriteHeading>Your Favorite List</FavoriteHeading>
               {/* <FavoriteNumItems>({quanTities?quanTities:quanTitie} items)</FavoriteNumItems> */}
             </div>
           ) : (
             <Hidden>
-              <FavoriteHeading>Your favorites</FavoriteHeading>
+              <FavoriteHeading>Your Favorite List</FavoriteHeading>
               {/* <FavoriteNumItems>({quanTities?quanTities:quanTitie} items)</FavoriteNumItems> */}
             </Hidden>
           )}
@@ -133,7 +133,7 @@ const FavoritesPreview = () => {
           <FavoriteBottom>
             <BtnContainer>
               <Link to="/favorites">
-                <Buttons type="button" text="View full list" onClick={navigateHandle}/>
+                <Buttons type="button" text="Ver Lista Completa" onClick={navigateHandle}/>
               </Link>
             </BtnContainer>
           </FavoriteBottom>

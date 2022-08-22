@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import tw from 'twin.macro'
+import styled from "styled-components";
+import tw from "twin.macro";
 
 export const NavContainer = styled.nav`
-  ${tw`w-full shadow-lg sticky top-0 bg-white z-40`};
+  ${tw`shadow-lg sticky top-0 z-40 bg-black text-white h-20 pt-0 m-0`};
 `;
 
 export const Button = styled.button`
@@ -15,7 +15,7 @@ export const DivJustifyBetween = styled.div`
   ${tw`
   justify-between px-4 mx-auto lg:max-w-7xl md:items-center lg:flex md:px-8
   `}
-`; 
+`;
 
 export const DivItemsCenter = styled.div`
   ${tw`
@@ -23,7 +23,6 @@ export const DivItemsCenter = styled.div`
   `}
 `;
 
-export const Li= styled.li`
-    ${tw` font-bold transition duration-150 border-b-2 border-transparent hover:border-secondary`}
- 
+export const Li = styled.li`
+  ${tw` font-bold transition duration-150 border-b-2 border-transparent hover:border-secondary`}
 `;

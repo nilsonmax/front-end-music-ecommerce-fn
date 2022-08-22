@@ -514,8 +514,7 @@ export const Create_Raiting=(rating)=>{
         })
         return data
       } catch (error) {
-          console.log(error)
-          return error
+          return error.response.data
       }
   }
 }

@@ -5,6 +5,8 @@ import { getDataClear, get_instrumentID } from "../../redux/action";
 import Loader from "../Loader/loader"
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
 import { showLogin } from "../../redux/action/index";
+import { FaStar } from "react-icons/fa"
+
 
 export default function Details() {
     const { id } = useParams()
@@ -20,21 +22,27 @@ export default function Details() {
         // }
     }, [dispatch, id])
 
-
+    //estrelas
+    const stars = Array(5).fill(0)
+    const colors = {
+        orange: "#FFBA5A",
+        grey: "#a9a9a9"
+    }
+    ///
 
 
     const hanledSummit = (e) => {
         e.preventDefault();
         console.log("se preciono el boton add to cart");
-        
+
         const token = window.localStorage.getItem("dataUser");
-        if(!token){
+        if (!token) {
             dispatch(showLogin(true))
-            return 
+            return
         }
         dispatch(addToCart(cartItems, reduxDetail))
         dispatch(SetTotalQuanTities(cartItems, reduxDetail))
-      }
+    }
 
 
 
@@ -99,7 +107,7 @@ export default function Details() {
                                         </div>
                                     </div>
                                     <div class="flex gap-2.5 mt-12">
-                                        <p onClick={e=>hanledSummit(e)} class="inline-block flex-1 sm:flex-none bg-primary hover:bg-secondary active:bg-sky-600 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Add to cart</p>
+                                        <p onClick={e => hanledSummit(e)} class="inline-block flex-1 sm:flex-none bg-primary hover:bg-secondary active:bg-sky-600 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Add to cart</p>
 
                                     </div>
                                 </div>
@@ -151,19 +159,31 @@ export default function Details() {
                         </div>
                     </div>
                     <div class="flex flex-col gap-0.5 my-11 mx-40 ">
+                        <p className="block  font-bold text-center text-xl underline">Raiting</p>
                         {reduxDetail.Raitings.length ?
                             reduxDetail.Raitings.map(e => {
                                 return <div className="my-9 border py-4 mx-7 ">
+
                                     <div className="mb-7 mx-7">
-                                        <span class="block font-bold text-secondary mb-1">{e.userName}</span>
-                                        <p class="text-gray-900">{"rating: "+e.star}</p>
-                                        <span class="block text-gray-500 ">{e.createdAt.substr(0,10)}</span>
+                                        <span class="block font-bold text-secondary mb-1 ml-1 underline">{e.userName}</span>
+                                        <span class="block text-gray-500 ">{e.createdAt.substr(0, 10)}</span>
+                                        <div className="flex   text-yellow-500 text-2xl my-4">
+                                            {stars.map((_, index) => {
+                                                return (
+                                                    <FaStar
+                                                        key={index}
+                                                        color={e.star > index ? colors.orange : colors.grey}
+
+                                                    />)
+                                            })}
+
+                                        </div>
                                     </div>
                                     <p class="text-gray-900 mx-7">{e.comment}</p>
                                 </div>
                             }) :
                             <>
-                                    <div class="block  font-bold text-center text-xl underline">This instrument has not been rated</div>
+                                <div class="block  font-bold text-center text-xl underline">This instrument has not been rated</div>
                             </>
                         }
                     </div>

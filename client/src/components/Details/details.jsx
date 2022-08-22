@@ -6,7 +6,7 @@ import Loader from "../Loader/loader"
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
 import { showLogin } from "../../redux/action/index";
 import { FaStar } from "react-icons/fa"
-
+import Swal from "sweetalert2";
 
 export default function Details() {
     const { id } = useParams()
@@ -42,9 +42,23 @@ export default function Details() {
         }
         dispatch(addToCart(cartItems, reduxDetail))
         dispatch(SetTotalQuanTities(cartItems, reduxDetail))
+        Toast.fire({
+            icon: "success",
+            title: "Added to cart",
+        })
     }
 
-
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
 
 
@@ -67,41 +81,25 @@ export default function Details() {
       <!-- content - start --> */}
                                 <div class="md:py-8">
                                     {/* <!-- name - start --> */}
-                                    <div class="mb-2 md:mb-3 my-20">
+                                    <div class="mb-0 md:mb-3 my-20">
                                         <span class="inline-block text-gray-500 mb-0.5">{reduxDetail.brand}</span>
                                         <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold">{reduxDetail.name}</h2>
                                     </div>
+                                    {reduxDetail.raiting!==null?<div className="flex   text-yellow-500 text-4xl my-4">
+                                            {stars.map((_, index) => {
+                                                return (
+                                                    <FaStar
+                                                        key={index}
+                                                        color={reduxDetail.raiting > index ? colors.orange : colors.grey}
 
-                                    {/* <div class="flex items-center mb-6 md:mb-10">
-                                        <div class="flex gap-0.5 -ml-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
+                                                    />)
+                                            })}
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
+                                        </div>:<p className=" text-slate-400 my-4">This instrument has not been rated yet</p>
+                                        }
+                                    
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                            </svg>
-                                        </div>
-
-                                        <span class="text-gray-500 text-sm ml-2">4.2</span>
-
-                                        <a href="#" class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 text-sm font-semibold transition duration-100 ml-4">view all 47 reviews</a>
-                                    </div>
-                                    {/* <!-- rating - end --> */}
-
-                                    <div class="mb-4 my-28">
+                                    <div class="mb-4 my-4">
                                         <div class="flex items-end gap-2">
                                             <span class="text-sky-900 text-xl md:text-2xl font-bold">{"$" + reduxDetail.price}</span>
                                         </div>
@@ -159,7 +157,7 @@ export default function Details() {
                         </div>
                     </div>
                     <div class="flex flex-col gap-0.5 my-11 mx-40 ">
-                        <p className="block  font-bold text-center text-xl underline">Raiting</p>
+                        <p className="block  font-bold text-center text-xl underline">Raiting:</p>
                         {reduxDetail.Raitings.length ?
                             reduxDetail.Raitings.map(e => {
                                 return <div className="my-9 border py-4 mx-7 ">
@@ -183,7 +181,7 @@ export default function Details() {
                                 </div>
                             }) :
                             <>
-                                <div class="block  font-bold text-center text-xl underline">This instrument has not been rated</div>
+                                <div className="block font-bold text-center text-base text-gray-400">This instrument has not been rated</div>
                             </>
                         }
                     </div>

@@ -177,7 +177,7 @@ export const loginUserGoogle = (objectUser) => {
         objectUser
       );
       window.localStorage.setItem("dataUser", JSON.stringify(newUser.data));
-      console.log("tu token: " + newUser.data);
+      console.log(newUser.data);
       return newUser.data;
     } catch (error) {
       throw new TypeError(error.response.data);

@@ -157,7 +157,7 @@ export default function Details() {
                         </div>
                     </div>
                     <div class="flex flex-col gap-0.5 my-11 mx-40 ">
-                        <p className="block  font-bold text-center text-xl underline">Raiting:</p>
+                        <p className="block  font-bold text-center text-xl underline">Rating:</p>
                         {reduxDetail.Raitings.length ?
                             reduxDetail.Raitings.map(e => {
                                 return <div className="my-9 border py-4 mx-7 ">

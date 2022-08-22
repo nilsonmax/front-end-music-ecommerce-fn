@@ -237,7 +237,7 @@ export default function Profile() {
                         }
                         <div class="flex flex-col md:flex-row justify-between items-center  border-b gap-4 py-4 text-slate-600">
                             <div class=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
-                                Rol:
+                                Role:
                             </div>
                             <div class="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
                                 {user.rol ? user.rol : "unknown"}

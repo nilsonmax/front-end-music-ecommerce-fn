@@ -17,19 +17,17 @@ import Checkout from "./components/Checkout/checkout";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import NotFound from "./components/NotFound/notFound";
-import AboutUs from "./components/AboutUs/AboutUs"
+import AboutUs from "./components/AboutUs/AboutUs";
 import FavoritesPage from "./pages/favorites/Favorites";
-
-
-
+import ResetPassword from "./components/Profile/ResetPassword/ResetPassword";
+import ConfirmResetPass from "./components/Profile/ResetPassword/ConfirmResetPass";
 
 const stripePromise = loadStripe(
   "pk_test_51LVhuNGZCoUhdempeuLZScU9BSjym86ji19YjkpFBaBMuACGX5anJToeQpMH4ksNFSyeGshaX83d9AVMXnShe0KY00xHD6MAe6"
 );
 
 const App = () => {
-
-  let visible = useSelector(e => e.reducer.visible)
+  let visible = useSelector((e) => e.reducer.visible);
 
   const dispatch = useDispatch();
   const handleOnClose = () => dispatch(showLogin(false));
@@ -65,11 +63,29 @@ const App = () => {
             </>
           }
         />
+        <Route path="/user/profile/resetpassword" element={<ResetPassword />} />
+        <Route path="user/resetpassword" element={<ConfirmResetPass />} />
+
         <Route path="/signup" element={<Signup />} />
 
-
-        <Route path="/user/info" element={<><UserInfo /><Footer/></>} />
-        <Route path="/user/Profile" element={<><Profile /><Footer/></>} />
+        <Route
+          path="/user/info"
+          element={
+            <>
+              <UserInfo />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/user/Profile"
+          element={
+            <>
+              <Profile />
+              <Footer />
+            </>
+          }
+        />
 
         {/* <Route path="/instruments" element={<instruments />} /> */}
         <Route
@@ -80,10 +96,18 @@ const App = () => {
               <Footer />
             </>
           }
-        /><Route path="/checkout" element={<Checkout />} />
+        />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/success" element={<SuccessPayment />} />
-        <Route path="/aboutUs" element={<><AboutUs/></>}/>
-        <Route path="/favorites" element={<FavoritesPage/>}/>
+        <Route
+          path="/aboutUs"
+          element={
+            <>
+              <AboutUs />
+            </>
+          }
+        />
+        <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <LoginForm onClose={handleOnClose} visible={visible} />

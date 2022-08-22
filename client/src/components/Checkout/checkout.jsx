@@ -114,8 +114,6 @@ export default function Checkout() {
     );
   }
 
-  console.log("userInfo", userInfo);
-
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -340,28 +338,43 @@ export default function Checkout() {
             )}
           </div>
 
-          <p class="mt-4 text-gray-800 font-medium">Payment information</p>
-          <div class="">
-            <CardElement class="w-full px-5 py-2 text-gray-700 bg-gray-200 rounded" />
+          <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+            <label class="block text-sm text-gray-600">
+              Payment information
+            </label>
+            <CardElement class="w-full px-5  py-0 text-gray-700 bg-gray-200 rounded" />
           </div>
-          <div class="mt-4">
-            <h2>Total:</h2>
-            <button
-              class="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
-              type="submit"
-              onSubmit={handleSubmit}
-              disabled={
-                errors.cus_name
-                || errors.cus_email
-                || errors.cus_phone
-                || errors.cus_address
-                || errors.cus_city
-                || errors.cus_country
-                || errors.cus_zip
-                || !stripe}>
-              {loading ? (<LoaderButton/>):`$${items.reduce((a, b) => a + b.price * b.count, 0)}`}
 
-            </button>
+          <div class="mt-4">
+            {userInfo.cus_name &&
+            userInfo.cus_email &&
+            userInfo.cus_phone &&
+            userInfo.cus_address &&
+            userInfo.cus_city &&
+            userInfo.cus_country &&
+            userInfo.cus_zip != "" &&
+            elements.getElement(CardElement).length != 0 &&
+            Object.keys(errors).length === 0 ? (
+              <button
+                class="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
+                type="submit"
+                onSubmit={handleSubmit}
+                disabled={!stripe}
+              >
+                {loading ? (
+                  <LoaderButton />
+                ) : (
+                  <span className="font-semibold">
+                    Pay with Stripe{" $"}
+                    {items.reduce((a, b) => a + b.price * b.count, 0)}
+                  </span>
+                )}
+              </button>
+            ) : (
+              <span className="font-bold text-xl">
+                Total: ${items.reduce((a, b) => a + b.price * b.count, 0)}
+              </span>
+            )}
           </div>
         </form>
       </div>

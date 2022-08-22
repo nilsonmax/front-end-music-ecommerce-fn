@@ -314,7 +314,8 @@ export const putUser = (objectUser, token) => {
       let tokenJSON = JSON.parse(token);
       objectUser = camposNullUser(objectUser);
       let newUser = await axios.put(
-        `${REACT_APP_HOST}/users/admin`, objectUser,
+        `${REACT_APP_HOST}/users/admin`,
+        objectUser,
         {
           headers: {
             Authorization: "Bearer " + tokenJSON.token,
@@ -462,10 +463,7 @@ export const mailSignUp = (objectUser) => {
   return async function () {
     try {
       objectUser = camposNullUser(objectUser);
-      let newMail = await axios.post(
-        `${REACT_APP_HOST}/mail/sign`,
-        objectUser
-      );
+      let newMail = await axios.post(`${REACT_APP_HOST}/mail/sign`, objectUser);
       return newMail.data;
     } catch (error) {
       var errorRes = error.response.data.error;
@@ -496,28 +494,31 @@ export const mailUpdateProfile = (objectUser) => {
   };
 };
 
-
-export const Create_Raiting=(rating)=>{
-  return async function(dispatch){
+export const Create_Raiting = (rating) => {
+  return async function (dispatch) {
     let tokenJson = window.localStorage.getItem("dataUser");
-    let token= JSON.parse(tokenJson)
-      const ObjetRaiting={
-        instrumentId:rating.instrumentId,
-        comment:rating.comment,
-        star: parseInt(rating.star)
-      } 
-      try {
-        let {data}=await axios.post(`${REACT_APP_HOST}/raiting`,ObjetRaiting,{
-            headers: {
-              Authorization: "Bearer " + token.token,
-            },
-        })
-        return data
-      } catch (error) {
-          return error.response.data
-      }
-  }
-}
+    let token = JSON.parse(tokenJson);
+    const ObjetRaiting = {
+      instrumentId: rating.instrumentId,
+      comment: rating.comment,
+      star: parseInt(rating.star),
+    };
+    try {
+      let { data } = await axios.post(
+        `${REACT_APP_HOST}/raiting`,
+        ObjetRaiting,
+        {
+          headers: {
+            Authorization: "Bearer " + token.token,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  };
+};
 
 export const mailNews = (email) => {
   return async function () {
@@ -530,3 +531,45 @@ export const mailNews = (email) => {
   };
 };
 
+export const mailPassword = (email, token) => {
+  return async function () {
+    try {
+      let newMail = await axios.post(
+        "http://localhost:4000/mail/resetpassword",
+        email,
+        token
+      );
+      return newMail.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const postResetPassowrd = (infoBody) => {
+  return async function () {
+    try {
+      let newMail = await axios.post(
+        "http://localhost:4000/user/resetpass",
+        infoBody
+      );
+      return newMail.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const mailPasswordReseted = (infoBody) => {
+  return async function () {
+    try {
+      let newMail = await axios.post(
+        "http://localhost:4000/mail/passwordreseted",
+        infoBody
+      );
+      return newMail.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+};

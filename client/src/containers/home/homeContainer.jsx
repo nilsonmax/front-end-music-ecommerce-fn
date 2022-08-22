@@ -5,7 +5,8 @@ import Loader from "../../components/Loader/loader.jsx";
 import NavBarNoLogin from "../../components/NavbarNoLogin/NavbarNoLogin.jsx";
 import NavBarLogin from "../../components/NavBarLogin/NavbarLogin.jsx";
 import Aside from "../../components/Aside/aside.jsx";
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
+import { Whatsapp } from "../../components/Whatsapp/whatsapp.jsx";
 
 export default function HomeContainer() {
   const localStore = window.localStorage.getItem("dataUser");
@@ -50,6 +51,7 @@ export default function HomeContainer() {
             currentElements={currentElements}
           />
         </div>
+        <Whatsapp />
       </div>
     );
 }

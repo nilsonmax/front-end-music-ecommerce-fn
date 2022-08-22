@@ -27,7 +27,7 @@ export default function UserHistoryShop({obtenerId}) {
 
     return (
         <div className="flex flex-col items-center my-10 border">
-            <div className="items-center text-lg text-center text-darkconrflower">
+            <div className="my-2 items-center font-semibold text-2xl text-center text-darkconrflower">
                 <h2>User HistoryShop:</h2>
             </div>
 
@@ -42,7 +42,7 @@ export default function UserHistoryShop({obtenerId}) {
                         <th className="content-center font-raleway  text-white border">Instrument cost</th>
                         <th className="content-center font-raleway  text-white border">Total cost</th>
                         <th className="content-center font-raleway  text-white border">Sale status</th>
-                        <th className="content-center font-raleway   text-white border">Raiting</th>
+                        <th className="content-center font-raleway   text-white border">Rating</th>
                     </tr>
                 </thead>
 
@@ -59,13 +59,13 @@ export default function UserHistoryShop({obtenerId}) {
                                             <td className="border-2">{instrument.price}</td>
                                             <td className="border-2">{compra.cost}</td>
                                             <td className="border-2">{compra.status}</td>
-                                            <button  onClick={e=>obtenerId(instrument.id,instrument.name,instrument.price)} className="bg-secondary m-1 cursor-pointer p-1 rounded-sm">qualify instrument</button>
+                                            <button  onClick={e=>obtenerId(instrument.id,instrument.name,instrument.price)} className="bg-secondary m-1 cursor-pointer p-1 rounded-sm">Rate instrument</button>
                                         </tr>
                                     )
                                 })
                             )
                         }) :
-                        <tr className="text-center border-b" colSpan="1" scope="rowgroup"> You haven't bought any products yet </tr>
+                        <th className="text-center text-xl text-darkconrflower border-b" colspan="7" scope="rowgroup"> You haven't bought any products yet </th>
                     }
                 </tbody>
             </table>

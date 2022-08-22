@@ -198,8 +198,7 @@ export default function Checkout() {
       <div class="leading-loose ">
         <form
           onSubmit={handleSubmit}
-          class="max-w-xl m-4 p-10 bg-white rounded shadow-xl"
-        >
+          class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
           <h1 className="text-center font-bold text-4xl border-b-2 pb-4">
             Checkout
           </h1>
@@ -338,7 +337,7 @@ export default function Checkout() {
             )}
           </div>
 
-          <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+          <div class="mt-2">
             <label class="block text-sm text-gray-600">
               Payment information
             </label>
@@ -359,8 +358,7 @@ export default function Checkout() {
                 class="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
                 type="submit"
                 onSubmit={handleSubmit}
-                disabled={!stripe}
-              >
+                disabled={!stripe}>
                 {loading ? (
                   <LoaderButton />
                 ) : (

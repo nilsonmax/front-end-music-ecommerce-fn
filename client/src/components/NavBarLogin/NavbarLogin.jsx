@@ -21,15 +21,16 @@ export default function NavBarLogin({ setCurrentPage }) {
   // const [quanties, setQuatities] = useState('')
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { showCart, setShowCart, showFavorites, setShowFavorites } = useStateContext();
+  const { showCart, setShowCart, showFavorites, setShowFavorites } =
+    useStateContext();
   const quanTities = useSelector((state) => state.cart.quanTities);
-  const quanTitie = window.localStorage.getItem("quanTities")
+  const quanTitie = window.localStorage.getItem("quanTities");
 
   //traer nombre de cuenta
   let user = useSelector((e) => e.reducer.user);
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
- 
+
     dispatch(get_user(token));
   }, []);
 
@@ -48,8 +49,7 @@ export default function NavBarLogin({ setCurrentPage }) {
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-6 h-6"
                   viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
+                  fill="currentColor">
                   <path
                     fillRule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -63,8 +63,7 @@ export default function NavBarLogin({ setCurrentPage }) {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
-                >
+                  strokeWidth={2}>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -78,9 +77,9 @@ export default function NavBarLogin({ setCurrentPage }) {
 
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
-              }`}
-          >
+            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${
+              navbar ? "block" : "hidden"
+            }`}>
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               <li className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
                 <p onClick={() => navigate("/aboutUs")}>About US</p>
@@ -98,8 +97,7 @@ export default function NavBarLogin({ setCurrentPage }) {
                     window.localStorage.removeItem("dataUser");
                     window.location.href = "/";
                   }}
-                  to="/user/Profile"
-                >
+                  to="/user/Profile">
                   <p>Log out</p>
                 </Link>
               </li>
@@ -110,16 +108,14 @@ export default function NavBarLogin({ setCurrentPage }) {
                 <Search setCurrentPage={setCurrentPage} />
               </div>
               <div
+                className="box-decoration-slice bg-gradient-to-r from-primary to-secondary px- rounded-sm"
                 onClick={() => {
                   window.localStorage.removeItem("dataUser");
                   window.location.href = "/";
-                }}
-              >
-                <Link to="/user/Profile">
-                  <h2 className=" py-1 text-1xl text-secondary text-lg underline lg:inline-block">
-                    {`Welcome ${user.userName}`}
-                  </h2>
-                </Link>
+                }}>
+                <a to="/user/Profile">
+                  <h2>{`Welcome ${user.userName}`}</h2>
+                </a>
               </div>
             </div>
           </div>
@@ -129,20 +125,34 @@ export default function NavBarLogin({ setCurrentPage }) {
             <Search setCurrentPage={setCurrentPage} />
           </div>
         </div>
-        <Link to="/user/Profile">
-          <h2 className="hidden lg: py-1 text-1xl text-secondary text-lg underline lg:inline-block">
+        <a to="/user/Profile">
+          <h2 className="box-decoration-slice bg-gradient-to-r from-primary to-secondary px-2 rounded-sm">
             {`Welcome ${user.userName}`}
           </h2>
-        </Link>
-        <button type="button" onClick={() => setShowFavorites(true)} className=" relative link flex items-center">
+        </a>
+        <button
+          type="button"
+          onClick={() => setShowFavorites(true)}
+          className=" relative link flex items-center">
           <HiOutlineHeart size={20} className="h-10" />
           <p className="hidden md:inline font-extrabold md: text-sm mt-2">
             Favorites
           </p>
         </button>
         {showFavorites && <FavoritesPreview />}
-        <button type="button" onClick={() => setShowCart(true)} className=" relative link flex items-center">
-          {(quanTities ? quanTities : quanTitie) !== 0 && <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">{quanTities ? quanTities : quanTitie !== 0 && quanTities ? quanTities : quanTitie}</span>}
+        <button
+          type="button"
+          onClick={() => setShowCart(true)}
+          className=" relative link flex items-center">
+          {(quanTities ? quanTities : quanTitie) !== 0 && (
+            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
+              {quanTities
+                ? quanTities
+                : quanTitie !== 0 && quanTities
+                ? quanTities
+                : quanTitie}
+            </span>
+          )}
 
           <HiShoppingCart size={20} className="h-10" />
           <p className="hidden md:inline font-extrabold md: text-sm mt-2">
@@ -150,7 +160,6 @@ export default function NavBarLogin({ setCurrentPage }) {
           </p>
         </button>
         {showCart && <Cart />}
-
       </DivJustifyBetween>
     </NavContainer>
   );

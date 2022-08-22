@@ -32,3 +32,9 @@ body {
     @apply w-full max-w-[400px] py-[10px] px-3 rounded-[15px] border-none text-xl mt-[10px] uppercase bg-secondary text-white cursor-pointer scale-100 transform ease-in duration-500
   }
 }
+
+/* * {
+  border: 3px solid red;
+} 
+ para validar el desbordamiento de cajas
+*/

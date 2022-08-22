@@ -1,3 +1,18 @@
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getDataClear,
+  get_user,
+  deleteUserAccount,
+  Create_Raiting,
+} from "../../redux/action/index";
+import Loader from "../Loader/loader";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import UserHistoryShop from "../UserHistoryShop/userHistoryShop";
+import { getUserHistoryShop } from "../../redux/action/Historyshop";
+import { FaStar } from "react-icons/fa";
+
 export default function Profile() {
   //estrellas:
   const stars = Array(5).fill(0);

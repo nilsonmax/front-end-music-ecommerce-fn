@@ -33,6 +33,7 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
         setShowCreateComponent(false)
         var encontrado=false;
         historyshops.map((historyshop) => {
+          encontrado=false;
           historyshop.instrument.map((instrument)=>{
             if(valueSearch.length>0 && instrument.name.toLowerCase().includes(valueSearch.toLowerCase()) && encontrado==false){  
               setCopyHistoryshops((data)=>[...data,historyshop])

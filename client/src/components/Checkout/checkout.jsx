@@ -180,7 +180,7 @@ export default function Checkout() {
         setTimeout(() => {
           Toast.fire({
             icon: "error",
-            title: error.message,
+            title: error.response.data,
           });
         }, 400);
         setLoading(false);
@@ -206,7 +206,6 @@ export default function Checkout() {
 
   return (
     <StyledCheckout>
-      <p onClick={() =>{console.log(userInfo)}}>Ver</p>
       <div class="leading-loose ">
         <form
           onSubmit={handleSubmit}

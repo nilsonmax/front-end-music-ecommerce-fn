@@ -52,7 +52,7 @@ export const ImageProfileCardContainer = styled.div`
     w-full
     h-full
     duration-[0.6s]
-    z-[99]
+    z-[1]
   `}
   img{
     ${tw` 

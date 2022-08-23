@@ -8,9 +8,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getDataClearCar, mailPurchase } from "../../redux/action/cartActions";
 import LoaderButton from "../Loader/loaderButton";
+
+
+const { REACT_APP_HOST } = process.env;
+
 import stripe_secure from "../../assets/stripe_secure.webp";
 import secure from "../../assets/secure.png";
 import { BsBoxSeam } from "react-icons/bs";
+
 
 function validate(userInfo) {
   let errors = {};
@@ -130,7 +135,7 @@ export default function Checkout() {
       console.log("paymentMethod---------", paymentMethod);
       const { id } = paymentMethod;
       try {
-        const { data } = await axios.post("http://localhost:4000/payment", {
+        const { data } = await axios.post(`${REACT_APP_HOST}/payment`, {
           id,
           items,
           amount: total,

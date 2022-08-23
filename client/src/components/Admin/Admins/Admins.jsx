@@ -5,7 +5,7 @@ import { getAdmins, deleteAdmin } from "../../../redux/action/adminsActions";
 import Swal from "sweetalert2";
 import Aside from "../Aside/Aside";
 import Crear from "./Crear";
-import { setearDataRenderAdmins } from "../../../utils/setearDataRenderColumns";
+import  setearDataRenderAdmins  from "../../../utils/setearDataRenderColumns";
 import { Toast } from "../../../utils/Toast";
 
 const Admins = ({ setShowCreateComponent, showCreateComponent }) => {

@@ -3,6 +3,7 @@ import Admins from "../../components/Admin/Admins/Admins";
 import Categories from "../../components/Admin/Categories/Categories";
 import Historyshops from "../../components/Admin/Histotyshop/Historyshops";
 import Instruments from "../../components/Admin/Instruments/Instruments";
+import Profile from "../../components/Admin/Profile/Profile";
 import Users from "../../components/Admin/Users/Users";
 import NavBarLoginAdmin from "../../components/NavBarLogin/NavbarLoginAdmin";
 
@@ -45,6 +46,12 @@ const Panel = () => {
           )}
           {componentVisible === "Historyshops" && (
             <Historyshops
+              setShowCreateComponent={setShowCreateComponent}
+              showCreateComponent={showCreateComponent}
+            />
+          )}
+          {componentVisible === "Profile" && (
+            <Profile
               setShowCreateComponent={setShowCreateComponent}
               showCreateComponent={showCreateComponent}
             />

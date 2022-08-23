@@ -53,34 +53,26 @@ export default function NavBarLoginAdmin({setearStates}) {
           <p>Historyshops</p>
         </li>
 
-        <li className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent hover:border-bluemunsell list-none">
-          <Link to="">
-            <p>About US</p>
-          </Link>
+        <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell list-none"
+        onClick={() => {setearStates("Profile")}}
+        >
+          <p>Profile</p>
         </li>
 
         <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell list-none">
-          <Link to="/user/Profile">
-            <p>Profile</p>
-          </Link>
-        </li>
-
-        <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell list-none">
-          <Link onClick={() => {
+          <div onClick={() => {
               window.localStorage.removeItem("dataUser");
               navigate("/");
-            }}
-            to="/user/Profile">
+            }}>
               <p>Log out</p>
-          </Link>
+          </div>
         </li>
 
-        <li className=" py-1 text-1xl text-secondary text-lg underline lg:inline-block">
-          <Link to="/user/Profile">
-            <h2 >
+        <li className=" py-1 text-1xl text-secondary text-lg underline lg:inline-block"
+        onClick={() => {setearStates("Profile")}}>
+            <h2 className="cursor-pointer">
               {`Welcome ${admin[0].userName}`}
             </h2>
-          </Link>
         </li>
       </div>
       }

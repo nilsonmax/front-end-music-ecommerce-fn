@@ -33,7 +33,6 @@ const App = () => {
   const handleOnClose = () => dispatch(showLogin(false));
   return (
     <Elements stripe={stripePromise}>
-      {/* <NavBar /> */}
       <Routes>
         <Route
           path="/"
@@ -53,7 +52,6 @@ const App = () => {
             </>
           }
         />
-        {/* <Route path="/user/perfil" element={} /> */}
         <Route
           path="/login"
           element={
@@ -87,7 +85,6 @@ const App = () => {
           }
         />
 
-        {/* <Route path="/instruments" element={<instruments />} /> */}
         <Route
           path="/instruments/:id"
           element={

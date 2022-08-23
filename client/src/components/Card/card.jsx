@@ -1,13 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useStateContext } from "../../context/stateContext";
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
-import { addToFavorites, removeFromFavorites, removeOneFromFavorites } from "../../redux/action/FavoritesActions";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../redux/action/FavoritesActions";
 import { StyledCard } from "./style";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
-import { useSelector, useDispatch } from 'react-redux';
-// import Toast from "react-hot-toast";
+import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
@@ -23,9 +23,8 @@ export default function Card({
   status,
   categoryId,
   categoryName,
-  instruments
+  instruments,
 }) {
-
   // const instruments = useSelector((state) => state.reducer.instruments);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
@@ -33,28 +32,27 @@ export default function Card({
   const favoriteItems = useSelector((state) => state.favorites.items);
 
   // console.log(favoriteItems, 'favoriteItems en card')
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const hanledSummit = (e) => {
     e.preventDefault();
-    dispatch(addToCart(cartItems, instruments))
-    dispatch(SetTotalQuanTities(cartItems, instruments))
-  }
+    dispatch(addToCart(cartItems, instruments));
+    dispatch(SetTotalQuanTities(cartItems, instruments));
+  };
   const [isFavorite, setIsFavorite] = useState(false);
   const isFavorite2 = window.localStorage.getItem("isFavorite2");
 
   const toogleFavoriteAddHandler = () => {
     // prevState ? setIsFavorite(prevState => !prevState) : prevStateSave
-    setIsFavorite(prevState => !prevState);
+    setIsFavorite((prevState) => !prevState);
     localStorage.setItem("isFavorite2", JSON.stringify(isFavorite));
     dispatch(addToFavorites(favoriteItems, instruments));
-  }
+  };
 
   const toogleFavoriteRemoveHandler = () => {
-
-    setIsFavorite(prevState => !prevState);
+    setIsFavorite((prevState) => !prevState);
     localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
     dispatch(removeFromFavorites(favoriteItems, instruments));
-  }
+  };
 
   const Toast = Swal.mixin({
     toast: true,
@@ -76,15 +74,13 @@ export default function Card({
   colMoney = colMoney.replace(".00", "");
 
   let activaShow = false;
-  cartItems.forEach(e => {
-
+  cartItems.forEach((e) => {
     if (e.id === id) {
       if (e.stock <= e.count) {
-        activaShow = true
+        activaShow = true;
       } else {
-        activaShow = false
+        activaShow = false;
       }
-
     }
   });
 
@@ -92,49 +88,56 @@ export default function Card({
     Toast.fire({
       icon: "warning",
       title: "Stock sold out",
-    })
-  }
+    });
+  };
   return (
     <StyledCard>
-
-      <img src={img} alt={name} onClick={e => navigate("/instruments/" + id)} />
+      <img
+        src={img}
+        alt={name}
+        onClick={(e) => navigate("/instruments/" + id)}
+      />
       <div className="flex justify-between">
-
         <p>{brand}</p>
-        {console.log(favoriteItems, 'isFavorite')}
-          {/* !favoriteItems ? */}
-        { 
-          !isFavorite ?
-            (
-              <HiOutlineHeart className="h-10 cursor-pointer" onClick={toogleFavoriteAddHandler} />
-            ) : (
-              <HiHeart className="h-10 cursor-pointer" onClick={toogleFavoriteRemoveHandler} />
-            ) 
-
-        }
+        {console.log(favoriteItems, "isFavorite")}
+        {/* !favoriteItems ? */}
+        {!isFavorite ? (
+          <HiOutlineHeart
+            className="h-10 cursor-pointer"
+            onClick={toogleFavoriteAddHandler}
+          />
+        ) : (
+          <HiHeart
+            className="h-10 cursor-pointer"
+            onClick={toogleFavoriteRemoveHandler}
+          />
+        )}
       </div>
-      <h2 onClick={e => navigate("/instruments/" + id)}>{name}</h2>
-      <h3 onClick={e => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
+      <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
+      <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
       {/* <span>{`USD${price/4500}`}</span> */}
       <br></br>
       <br></br>
       {/* <b>{`Status:`}</b> <span>{`${status}`}</span> */}
-      <b>{`Type:`}</b> <span onClick={e => navigate("/instruments/" + id)}>{`${categoryName}`}</span>
+      <b>{`Type:`}</b>{" "}
+      <span
+        onClick={(e) =>
+          navigate("/instruments/" + id)
+        }>{`${categoryName}`}</span>
       {/*         <span " text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
       {/* <a
             href={`#${product.id}`}
             onClick={(e) => this.props.addToCart(this.props.cartItems, product)}
           ></a> */}
-      <button onClick={(e) => stock<=0 || activaShow ? alert() : hanledSummit(e)}
-        className="inline-flex items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1"
-      >
+      <button
+        onClick={(e) => (stock <= 0 || activaShow ? alert() : hanledSummit(e))}
+        className="inline-flex items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1">
         <span className="">{`➕`}</span>
         <svg
           width="24px"
           height="24px"
           viewBox="0 0 25 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             fill="none"
             stroke="#FFFFFF"
@@ -143,7 +146,6 @@ export default function Card({
           />
         </svg>
       </button>
-
     </StyledCard>
   );
 }

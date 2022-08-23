@@ -1,13 +1,14 @@
 import React from "react";
 import Details from "../../components/Details/details";
-import Header from "../../components/Header/Header";
-
-
+import NavBarLogin from "../../components/NavBarLogin/NavbarLogin.jsx";
+import NavBarNoLogin from "../../components/NavbarNoLogin/NavbarNoLogin.jsx";
 export function DetailsContainer() {
-    return (
-        <>
-            <Header />
-            <Details />
-        </>
-    )
+  const localStore = window.localStorage.getItem("dataUser");
+
+  return (
+    <>
+      {localStore === null ? <NavBarNoLogin /> : <NavBarLogin />}
+      <Details />
+    </>
+  );
 }

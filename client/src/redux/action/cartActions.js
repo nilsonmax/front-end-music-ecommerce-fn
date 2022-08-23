@@ -10,6 +10,8 @@ import {
   SET_TOTAL_QUANTITIES,
 } from "./types";
 
+const { REACT_APP_HOST } = process.env;
+
 export const addToCart = (items, instruments) => (dispatch) => {
   const cartItems = items.slice();
   let instrumentsAlreadyInCart = false;
@@ -74,7 +76,7 @@ export const mailPurchase = (mailInfo) => {
   return async function () {
     try {
       let newMail = await axios.post(
-        "http://localhost:4000/mail/purchase",
+        `${REACT_APP_HOST}/mail/purchase`,
         mailInfo
       );
       return newMail.data;

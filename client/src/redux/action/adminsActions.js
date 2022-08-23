@@ -3,13 +3,14 @@ import axios from "axios";
 
 export const GET_ADMINS = "GET_ADMINS";
 export const GET_ADMINS_ID = "GET_ADMINS_ID";
-const REACT_APP_HOST = "http://localhost:4000";
+const { REACT_APP_HOST } = process.env;
+// const REACT_APP_HOST = "${REACT_APP_HOST}";
 
 export const getAdmins = (token) => {
   return async function (dispatch) {
     let tokenJSON = JSON.parse(token);
     return await axios
-      .get(`http://localhost:4000/admins`, {
+      .get(`${REACT_APP_HOST}/admins`, {
         headers: {
           Authorization: "Bearer " + tokenJSON.token,
         }})
@@ -29,7 +30,7 @@ export const getAdminId = (token) => {
   return async function (dispatch) {
     let tokenJSON = JSON.parse(token);
     return await axios
-      .get(`http://localhost:4000/admins/id`, {
+      .get(`${REACT_APP_HOST}/admins/id`, {
         headers: {
           Authorization: "Bearer " + tokenJSON.token,
         }})
@@ -50,7 +51,7 @@ export const deleteAdmin = (admin_id, token) => {
     try {
       let tokenJSON = JSON.parse(token);
       let adminDeleted = await axios.delete(
-        `http://localhost:4000/admins`,{data: {
+        `${REACT_APP_HOST}/admins`,{data: {
             id: admin_id
           },
             headers: {
@@ -69,7 +70,7 @@ export const putAdmin = (objectAdmin, token) => {
   return async function () {
     try {
       let tokenJSON = JSON.parse(token);
-      let admin = await axios.put("http://localhost:4000/admins", objectAdmin, {
+      let admin = await axios.put(`${REACT_APP_HOST}/admins`, objectAdmin, {
         headers: {
           Authorization: "Bearer " + tokenJSON.token,
         },
@@ -90,7 +91,7 @@ export const postAdmin = (objectAdmin, token) => {
     return async function () {
         try {
         let tokenJSON = JSON.parse(token);
-        let newAdmin = await axios.post("http://localhost:4000/admins/register", objectAdmin, {
+        let newAdmin = await axios.post(`${REACT_APP_HOST}/admins/register`, objectAdmin, {
           headers: {
             Authorization: "Bearer " + tokenJSON.token,
           },

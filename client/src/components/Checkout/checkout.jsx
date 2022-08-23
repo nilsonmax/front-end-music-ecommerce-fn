@@ -8,14 +8,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getDataClearCar, mailPurchase } from "../../redux/action/cartActions";
 import LoaderButton from "../Loader/loaderButton";
-
-
-const { REACT_APP_HOST } = process.env;
-
 import stripe_secure from "../../assets/stripe_secure.webp";
 import secure from "../../assets/secure.png";
 import { BsBoxSeam } from "react-icons/bs";
 
+const { REACT_APP_HOST } = process.env;
 
 function validate(userInfo) {
   let errors = {};

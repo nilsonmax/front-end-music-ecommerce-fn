@@ -31,25 +31,30 @@ export default function Card({
   const cartItems = useSelector((state) => state.cart.items);
   // console.log(cartItems, 'cartitems en card')
   const favoriteItems = useSelector((state) => state.favorites.items);
+
   // console.log(favoriteItems, 'favoriteItems en card')
   const navigate = useNavigate()
   const hanledSummit = (e) => {
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments))
-    dispatch(SetTotalQuanTities(cartItems, instruments)) 
+    dispatch(SetTotalQuanTities(cartItems, instruments))
   }
   const [isFavorite, setIsFavorite] = useState(false);
+  const isFavorite2 = window.localStorage.getItem("isFavorite2");
 
   const toogleFavoriteAddHandler = () => {
+    // prevState ? setIsFavorite(prevState => !prevState) : prevStateSave
     setIsFavorite(prevState => !prevState);
+    localStorage.setItem("isFavorite2", JSON.stringify(isFavorite));
     dispatch(addToFavorites(favoriteItems, instruments));
   }
 
   const toogleFavoriteRemoveHandler = () => {
+
     setIsFavorite(prevState => !prevState);
+    localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
     dispatch(removeFromFavorites(favoriteItems, instruments));
   }
-
 
   const Toast = Swal.mixin({
     toast: true,
@@ -96,13 +101,15 @@ export default function Card({
       <div className="flex justify-between">
 
         <p>{brand}</p>
-        {
+        {console.log(favoriteItems, 'isFavorite')}
+          {/* !favoriteItems ? */}
+        { 
           !isFavorite ?
             (
               <HiOutlineHeart className="h-10 cursor-pointer" onClick={toogleFavoriteAddHandler} />
             ) : (
               <HiHeart className="h-10 cursor-pointer" onClick={toogleFavoriteRemoveHandler} />
-            )
+            ) 
 
         }
       </div>

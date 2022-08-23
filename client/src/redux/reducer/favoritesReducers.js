@@ -1,10 +1,11 @@
-import { ADD_TO_FAVORITES, REMOVE_ALL_FROM_FAVORITES, REMOVE_ONE_FROM_FAVORITES, DATA_CLEAR_FAVORITES, SET_SHOW_FAVORITES, SET_TOTAL_QUANTITIES } from "../action/types";
+import { ADD_TO_FAVORITES, SET_IS_FAVORITES, REMOVE_ALL_FROM_FAVORITES, REMOVE_ONE_FROM_FAVORITES, DATA_CLEAR_FAVORITES, SET_SHOW_FAVORITES, SET_TOTAL_QUANTITIES } from "../action/types";
 
 const initialState = {
   showFavoritesList: false,
   items: {},
   favoriteItems: [],
-  quanTities: 0
+  quanTities: 0,
+  isFavorite:false
 };
 
 const favoritesReducers = (state = initialState, action) => {
@@ -26,20 +27,9 @@ const favoritesReducers = (state = initialState, action) => {
       return { ...state, items: action.payload.favoriteItems };
     }
 
-    case SET_TOTAL_QUANTITIES: {
-      console.log(action.payload, 'action.payload quanTities')
-      let quanTities = 0;
-
-      state.items.forEach((cp) => {
-        quanTities += cp.count;
-        console.log(cp, 'items dentro reducer')
-      });
-      localStorage.setItem("quanTities", JSON.stringify(quanTities));
-      console.log(quanTities, 'quanti reducer')
-      return {
-        ...state,
-        quanTities: quanTities
-      };
+    case SET_IS_FAVORITES: {
+      console.log(action.payload.isFavorite)
+       return { ...state, isFavorite: action.payload.isFavorite };
     }
 
     default:

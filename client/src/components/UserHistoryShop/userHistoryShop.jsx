@@ -26,16 +26,16 @@ export default function UserHistoryShop({obtenerId}) {
     }, [])
 
     return (
-        <div className="flex flex-col items-center my-10 border">
+        <div className="max-w-[700px] overflow-x-scroll flex flex-col items-center my-6 md:max-w-full">
             <div className="my-2 items-center font-semibold text-2xl text-center text-darkconrflower">
                 <h2>User HistoryShop:</h2>
             </div>
 
-            <table className="my-6">
+            <table>
                 {/*<button onClick = {e => console.log("HISTORYSHOP: ", historyShop)}>Ver</button>*/}
 
                 <thead>
-                    <tr className="bg-[#62A8AC] content-center  h-10 ">
+                    <tr className="bg-secondary content-center  h-10 ">
                         <th className="content-center font-raleway  text-white border">Sale id</th>
                         <th className="content-center font-raleway  text-white border">Date</th>
                         <th className="content-center font-raleway  text-white border">Products</th>

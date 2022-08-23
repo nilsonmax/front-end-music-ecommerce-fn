@@ -23,15 +23,17 @@ export const getByName = (name) => {
       const resp = await axios.get(
         `${REACT_APP_HOST}/instruments?name=${name}`
       );
-      const filterInstrument=resp.data.filter((data)=>data.isBanned===false)
-      if(filterInstrument.length===0)throw new Error("Instrument not Found")
+      const filterInstrument = resp.data.filter(
+        (data) => data.isBanned === false
+      );
+      if (filterInstrument.length === 0)
+        throw new Error("Instrument not Found");
       return dispatch({
         type: GET_BY_NAME,
         payload: resp.data,
       });
-
     } catch (error) {
-      throw new Error(error.response.data)
+      throw new Error(error.response.data);
     }
   };
 };
@@ -550,7 +552,7 @@ export const postResetPassowrd = (infoBody) => {
   return async function () {
     try {
       let newMail = await axios.post(
-        `${REACT_APP_HOST}/user/resetpass`,
+        `${REACT_APP_HOST}/users/resetpass`,
         infoBody
       );
       return newMail.data;
@@ -565,6 +567,34 @@ export const mailPasswordReseted = (infoBody) => {
     try {
       let newMail = await axios.post(
         `${REACT_APP_HOST}/mail/passwordreseted`,
+        infoBody
+      );
+      return newMail.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const mailPasswordAdmin = (admin) => {
+  return async function () {
+    try {
+      let newMail = await axios.post(
+        `${REACT_APP_HOST}/mail/resetpasswordadmin`,
+        admin
+      );
+      return newMail.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const postResetPassowrdAdmin = (infoBody) => {
+  return async function () {
+    try {
+      let newMail = await axios.post(
+        `${REACT_APP_HOST}/admins/resetpass`,
         infoBody
       );
       return newMail.data;

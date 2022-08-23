@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UserHistoryShop from "../UserHistoryShop/userHistoryShop";
 import { getUserHistoryShop } from "../../redux/action/Historyshop";
+import { mailPassword } from "../../redux/action/index";
 import { FaStar } from "react-icons/fa";
 
 export default function Profile() {
@@ -31,7 +32,11 @@ export default function Profile() {
 
   function handlePassword(e) {
     e.preventDefault();
-    navigate("/user/Profile/resetpassword");
+    dispatch(mailPassword(user));
+    Toast.fire({
+      icon: "success",
+      title: "We have sent you an email",
+    });
   }
   const colors = {
     orange: "#FFBA5A",
@@ -110,11 +115,6 @@ export default function Profile() {
       [e.target.name]: e.target.value,
       star: currentValue,
     });
-  }
-
-  function handlePassword(e) {
-    e.preventDefault();
-    navigate("/user/Profile/resetpassword");
   }
 
   function handledSubmit(e) {
@@ -230,7 +230,8 @@ export default function Profile() {
                 {user.rol ? user.rol : "unknown"}
               </div>
             </div>
-            {//final de ddatos
+            {
+              //final de ddatos
             }
             <div className="text-white inline-flex flex-col ">
               <button
@@ -251,18 +252,15 @@ export default function Profile() {
               >
                 Change Password
               </button>
-
             </div>
 
-             <UserHistoryShop obtenerId={obtenerId} /> 
+            <UserHistoryShop obtenerId={obtenerId} />
             <>
               {raiting && (
                 <div className="bg-slate-200 border border-sky-500 my-5">
                   <div className="text-center tex">
                     <p className="underline">{instrument.name}</p>
-                    <p className="text-sm">
-                      {"$" + instrument.price}
-                    </p>
+                    <p className="text-sm">{"$" + instrument.price}</p>
                   </div>
                   <div className="flex justify-center my-6 text-2xl">
                     {stars.map((_, index) => {
@@ -297,7 +295,6 @@ export default function Profile() {
                     >
                       Send
                     </button>
-
                   </div>
                 </div>
               )}

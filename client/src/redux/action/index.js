@@ -474,13 +474,14 @@ export const mailSignUp = (objectUser) => {
   };
 };
 
-export const mailUpdateProfile = (objectUser) => {
+export const mailUpdateProfile = (emailInfo) => {
   return async function () {
+    console.log("ACTION", emailInfo);
     try {
-      objectUser = camposNullUser(objectUser);
+      //values = camposNullUser(values);
       let newMail = await axios.post(
         `${REACT_APP_HOST}/mail/profile`,
-        objectUser
+        emailInfo
       );
       return newMail.data;
     } catch (error) {

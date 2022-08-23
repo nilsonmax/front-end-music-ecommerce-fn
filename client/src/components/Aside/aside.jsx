@@ -140,7 +140,7 @@ export default function Aside({
         </Dialog>
       </Transition.Root>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="md:-mt-[70px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-1">
         <div className=" flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
           <h1 className="text-4xl font-extrabold tracking-tight text-primary">
             Our Instruments

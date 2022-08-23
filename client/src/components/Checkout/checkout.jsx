@@ -14,6 +14,7 @@ import { BsBoxSeam } from "react-icons/bs";
 
 const { REACT_APP_HOST } = process.env;
 
+
 function validate(userInfo) {
   let errors = {};
 

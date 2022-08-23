@@ -47,7 +47,6 @@ export const get_instrumentID = (id) => {
   return async function (dispatch) {
     try {
       let api = await axios.get(`${REACT_APP_HOST}/instruments/` + id);
-
       return dispatch({
         type: GET_DETAILS_INSTRUMENTS,
         payload: api.data,

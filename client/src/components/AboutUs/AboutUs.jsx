@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import NavBarLogin from "../NavBarLogin/NavbarLogin";
+import NavBarNoLogin from "../NavbarNoLogin/NavbarNoLogin";
 import Desarrollador from "./Desarrollador"
 import ProfileCard from "../ProfileCard/ProfileCard";
 import { AboutUsContainer, AboutUsList, MainProfileCard, ProfileCardContainer } from "./styles";
@@ -89,6 +91,7 @@ export default function AboutUs() {
                 </div>
 
             </div>
+
                 <AboutUsList>
                     <li>#</li>
                     <li>T</li>
@@ -107,6 +110,7 @@ export default function AboutUs() {
                    <ProfileCard developer={developers}/> 
                 </MainProfileCard>
             </AboutUsContainer>
+
         </>
     )
 

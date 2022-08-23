@@ -10,11 +10,11 @@ import { XIcon } from "@heroicons/react/outline";
 import { FilterIcon, MinusSmIcon, PlusSmIcon } from "@heroicons/react/solid";
 
 const filters = [
-  {
+  /* {
     id: "color",
     name: "Color",
     options: [{ value: "all", label: "All", checked: true }],
-  },
+  }, */
 ];
 
 export default function Aside({
@@ -273,8 +273,8 @@ export default function Aside({
                         instruments={inst}
                         isBanned={inst.isBanned}
                       />
-                    )
-                  };
+                    );
+                  }
                 })}
               </StyledCardContainer>
             </div>

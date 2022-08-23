@@ -16,22 +16,22 @@ export const GET_USERS = "GET_USERS";
 export const DELETE_INSTRUMENT = "DELETE_INSTRUMENT";
 
 const { REACT_APP_HOST } = process.env;
-// const REACT_APP_HOST = "${REACT_APP_HOST}";
-console.log(REACT_APP_HOST, "url");
 
 export const getByName = (name) => {
   return async (dispatch) => {
     try {
-      // const resp = await axios.get(`${REACT_APP_HOST}/instruments?name=${name}`)
       const resp = await axios.get(
         `${REACT_APP_HOST}/instruments?name=${name}`
       );
+      const filterInstrument=resp.data.filter((data)=>data.isBanned===false)
+      if(filterInstrument.length===0)throw new Error("Instrument not Found")
       return dispatch({
         type: GET_BY_NAME,
         payload: resp.data,
       });
+
     } catch (error) {
-      // console.log(error, "error resp.data");
+      throw new Error(error.response.data)
     }
   };
 };
@@ -523,7 +523,7 @@ export const Create_Raiting = (rating) => {
 export const mailNews = (email) => {
   return async function () {
     try {
-      let newMail = await axios.post("http://localhost:4000/mail/news", email);
+      let newMail = await axios.post(`${REACT_APP_HOST}/mail/news`, email);
       return newMail.data;
     } catch (error) {
       throw error;
@@ -535,7 +535,7 @@ export const mailPassword = (email, token) => {
   return async function () {
     try {
       let newMail = await axios.post(
-        "http://localhost:4000/mail/resetpassword",
+        `${REACT_APP_HOST}/mail/resetpassword`,
         email,
         token
       );
@@ -550,7 +550,7 @@ export const postResetPassowrd = (infoBody) => {
   return async function () {
     try {
       let newMail = await axios.post(
-        "http://localhost:4000/user/resetpass",
+        `${REACT_APP_HOST}/user/resetpass`,
         infoBody
       );
       return newMail.data;
@@ -564,7 +564,7 @@ export const mailPasswordReseted = (infoBody) => {
   return async function () {
     try {
       let newMail = await axios.post(
-        "http://localhost:4000/mail/passwordreseted",
+        `${REACT_APP_HOST}/mail/passwordreseted`,
         infoBody
       );
       return newMail.data;

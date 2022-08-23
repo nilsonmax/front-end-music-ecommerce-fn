@@ -254,7 +254,7 @@ export default function Profile() {
 
             </div>
 
-            {/* <UserHistoryShop obtenerId={obtenerId} /> */}
+             <UserHistoryShop obtenerId={obtenerId} /> 
             <>
               {raiting && (
                 <div className="bg-slate-200 border border-sky-500 my-5">

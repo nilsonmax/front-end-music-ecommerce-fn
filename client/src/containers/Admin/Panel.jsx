@@ -5,6 +5,7 @@ import Historyshops from "../../components/Admin/Histotyshop/Historyshops";
 import Instruments from "../../components/Admin/Instruments/Instruments";
 import Users from "../../components/Admin/Users/Users";
 import NavBarLoginAdmin from "../../components/NavBarLogin/NavbarLoginAdmin";
+import Profile from "../../components/Admin/Profile/Profile";
 
 const Panel = () => {
   const [componentVisible, setComponentVisible] = useState("Instruments");
@@ -49,7 +50,13 @@ const Panel = () => {
               showCreateComponent={showCreateComponent}
             />
           )}
-          </div>
+          {componentVisible === "Profile" && (
+            <Profile
+              setShowCreateComponent={setShowCreateComponent}
+              showCreateComponent={showCreateComponent}
+            />
+          )}
+        </div>
     </div>
   );
 };

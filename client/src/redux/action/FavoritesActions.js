@@ -1,4 +1,4 @@
-import { ADD_TO_FAVORITES, REMOVE_ALL_FROM_FAVORITES, REMOVE_ONE_FROM_FAVORITES, DATA_CLEAR_CAR, SET_FAVORITES_ITEMS, SET_SHOW_FAVORITES, SET_TOTAL_QUANTITIES } from "./types";
+import { ADD_TO_FAVORITES, SET_IS_FAVORITES, REMOVE_ALL_FROM_FAVORITES, REMOVE_ONE_FROM_FAVORITES, DATA_CLEAR_CAR, SET_FAVORITES_ITEMS, SET_SHOW_FAVORITES, SET_TOTAL_QUANTITIES } from "./types";
 
 export const addToFavorites = (items, instruments) => async (dispatch) => {
   const favoriteItems = items.slice();
@@ -42,6 +42,12 @@ export const setShowFavorites = (items, instruments) => (dispatch) => {
   const favoriteItems = items.slice();
   localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
   dispatch({ type: SET_SHOW_FAVORITES, payload: { favoriteItems } });
+}
+
+export const setIsFavorite = (payload) => (dispatch) => {
+  const isFavorite = payload;
+  localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
+  dispatch({ type: SET_IS_FAVORITES, payload: { isFavorite } });
 }
 
 export const getDataClearCar = (payload) => (dispatch) => {

@@ -4,11 +4,13 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StyledCheckout } from "./style";
 import { StyledCard } from "../Card/style";
 import Swal from "sweetalert2";
-import axios from "axios"
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getDataClearCar, mailPurchase } from "../../redux/action/cartActions";
 import LoaderButton from "../Loader/loaderButton";
-
+import stripe_secure from "../../assets/stripe_secure.webp";
+import secure from "../../assets/secure.png";
+import { BsBoxSeam } from "react-icons/bs";
 
 function validate(userInfo) {
   let errors = {};
@@ -54,7 +56,6 @@ export default function Checkout() {
     }
   }, []);
 
-
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -86,7 +87,7 @@ export default function Checkout() {
     cus_city: "",
     cus_country: "",
     cus_zip: "",
-    cus_cardelement:false
+    cus_cardelement: false,
   });
 
   const [errors, setErrors] = useState({
@@ -97,7 +98,7 @@ export default function Checkout() {
     cus_city: "",
     cus_country: "",
     cus_zip: "",
-    cus_cardelement:false
+    cus_cardelement: false,
   });
 
   function onChange(e) {
@@ -121,9 +122,9 @@ export default function Checkout() {
       type: "card",
       card: elements.getElement(CardElement),
     });
-    
+
     const total = items.reduce((a, b) => a + b.price, 0);
-    
+
     if (!error) {
       setLoading(true);
       console.log("paymentMethod---------", paymentMethod);
@@ -187,34 +188,33 @@ export default function Checkout() {
       }
     }
   }
-  const onChangeCardElement=async()=>{
+  const onChangeCardElement = async () => {
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement), 
+      card: elements.getElement(CardElement),
     });
-    let booleanCardelement=null;
-    if(error){
-      booleanCardelement=false;
-    }else{
-      booleanCardelement=true;
+    let booleanCardelement = null;
+    if (error) {
+      booleanCardelement = false;
+    } else {
+      booleanCardelement = true;
     }
     setUserInfo({
       ...userInfo,
       cus_cardelement: booleanCardelement,
     });
-  }
+  };
 
   return (
     <StyledCheckout>
       <div class="leading-loose ">
         <form
           onSubmit={handleSubmit}
-          class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
+          class="max-w-xl m-2 pt-5 px-10 bg-white rounded shadow-xl">
           <h1 className="text-center font-bold text-4xl border-b-2 pb-4">
             Checkout
           </h1>
           <br></br>
-          <p class="text-gray-800 font-medium">Customer information</p>
           <div class="">
             <label class="block text-sm text-gray-00" for="cus_name">
               Name
@@ -352,10 +352,11 @@ export default function Checkout() {
             <label class="block text-sm text-gray-600">
               Payment information
             </label>
-            <CardElement class="w-full px-5  py-0 text-gray-700 bg-gray-200 rounded" 
-            onChange={()=>{
-              onChangeCardElement();
-            }}
+            <CardElement
+              class="w-full px-5  py-0 text-gray-700 bg-gray-200 rounded"
+              onChange={() => {
+                onChangeCardElement();
+              }}
             />
           </div>
 
@@ -368,31 +369,41 @@ export default function Checkout() {
             userInfo.cus_country &&
             userInfo.cus_zip != "" &&
             elements.getElement(CardElement).length != 0 &&
-            userInfo.cus_cardelement===true &&
+            userInfo.cus_cardelement === true &&
             Object.keys(errors).length === 0 ? (
-              <div class="flex items-center justify-center">{loading ? (
-                    <LoaderButton />
-                  ):
+              <div class="flex items-center justify-center">
+                {loading ? (
+                  <LoaderButton />
+                ) : (
                   <button
                     class="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
                     type="submit"
                     onSubmit={handleSubmit}
                     disabled={!stripe}>
-                      <span className="font-semibold">
-                       Pay with Stripe{" $"}
-                       {items.reduce((a, b) => a + b.price * b.count, 0)}
-                     </span>
+                    <span className="font-semibold">
+                      Pay with Stripe{" $"}
+                      {items.reduce((a, b) => a + b.price * b.count, 0)}
+                    </span>
                   </button>
-              }</div>
+                )}
+              </div>
             ) : (
               <span className="font-bold text-xl">
                 Total: ${items.reduce((a, b) => a + b.price * b.count, 0)}
               </span>
             )}
+            <div className="flex flex-wrap">
+              <img className="w-80" src={stripe_secure} alt="Stripe_security" />
+              <img
+                className="w-10 h-10 mt-4 mr-1"
+                src={secure}
+                alt="Stripe_security"
+              />
+            </div>
           </div>
         </form>
       </div>
-      <div class="leading-loose max-w-md max-h-screen box-content m-4 p-10 bg-white rounded shadow-xl">
+      <div class="leading-loose max-w-md max-h-screen overflow-auto m-4 p-10 bg-white rounded shadow-xl">
         <h2 className="text font-bold text-2xl">Resume items:</h2>
         {items.map((item) => {
           return (
@@ -402,6 +413,10 @@ export default function Checkout() {
               <h2>{item.name}</h2>
               <p>{`$${item.price}`}</p>
               <b>{`Status:`}</b> <span>{`${item.status}`}</span>
+              <span className="bg-black text-justify !important rounded-sm absolute top-5 left-4 text-xl text-white font-semibold">
+                {`X ${item.count}`}
+                <BsBoxSeam className="object-none" />
+              </span>
             </StyledCard>
           );
         })}

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { getDataClearCar, mailPurchase } from "../../redux/action/cartActions";
 import LoaderButton from "../Loader/loaderButton";
 import stripe_secure from "../../assets/stripe_secure.webp";
+import secure from "../../assets/secure.png";
 import { BsBoxSeam } from "react-icons/bs";
 
 function validate(userInfo) {
@@ -391,7 +392,14 @@ export default function Checkout() {
                 Total: ${items.reduce((a, b) => a + b.price * b.count, 0)}
               </span>
             )}
-            <img src={stripe_secure} alt="Stripe_security" />
+            <div className="flex flex-wrap">
+              <img className="w-80" src={stripe_secure} alt="Stripe_security" />
+              <img
+                className="w-10 h-10 mt-4 mr-1"
+                src={secure}
+                alt="Stripe_security"
+              />
+            </div>
           </div>
         </form>
       </div>

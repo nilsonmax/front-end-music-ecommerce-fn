@@ -125,7 +125,7 @@ export default function Card({
             href={`#${product.id}`}
             onClick={(e) => this.props.addToCart(this.props.cartItems, product)}
           ></a> */}
-      <button onClick={(e) => hanledSummit(e)}
+      <button onClick={(e) => stock<=0 || activaShow ? alert() : hanledSummit(e)}
         className="inline-flex items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1"
       >
         <span className="">{`➕`}</span>

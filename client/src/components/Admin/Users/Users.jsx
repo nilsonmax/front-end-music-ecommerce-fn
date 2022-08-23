@@ -12,7 +12,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.reducer.users);
   var [copyUser, setCopyUser] = useState([]);
-  const columns = ["Nombre y Apellido", "userName", "Email", "Rol"];
+  const columns = ["FullName ", "UserName", "Email", "Role"];
   var [dataRender, setDataRender] = useState([]);
   var [valueSearch, setValueSearch] = useState("");
   var [refreshUsers, setRefreshUsers] = useState(null);
@@ -86,7 +86,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
           />
         )}
         {dataRender.length < 1 && showCreateComponent === false && (
-          <p className="text-center">No hay users</p>
+          <p className="text-center">There are no users</p>
         )}
         {showCreateComponent === true && (
           <Crear

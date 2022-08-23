@@ -59,7 +59,7 @@ export default function Profile({ setShowCreateComponent, showCreateComponent })
 
             <div className="flex flex-col md:flex-row justify-between items-center  border-b gap-4 py-4 text-slate-600">
               <div className=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm ">
-                Rol:
+                Role:
               </div>
               <div className="mx-8 px-8 py-1 bg-slate-200 rounded-xl">
                 {admin[0].rol ? admin[0].rol : "unknown"}

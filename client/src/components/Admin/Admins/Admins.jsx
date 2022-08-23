@@ -12,7 +12,7 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
     const dispatch = useDispatch();
     const admins = useSelector((state) => state.admins.admins);
     var [copyAdmin, setCopyAdmin] = useState([]);
-    const columns = ["Nombres y Apellidos","userName", "email","rol"];
+    const columns = ["FullName","UserName", "Email","Role"];
     var [dataRender, setDataRender] = useState([]);
     var [valueSearch, setValueSearch] = useState("");
     var [refreshAdmins, setRefreshAdmins] = useState(null);
@@ -41,7 +41,7 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
         if(valueSearch!=="" && adminNoFound===true){
           Toast.fire({
             icon: "error",
-            title: "Admin no encontrado",
+            title: "Admin not found",
           })
         }
         setRefreshAdmins(false);
@@ -61,10 +61,10 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
       dispatch(deleteAdmin(idDelete,token))
         .then((data) => {
           setRefreshAdmins(true);
-          Swal.fire("Deleted!", "El Admin se elimino con exito.", "success");
+          Swal.fire("Deleted!", "The admin was succesfully deleted", "success");
         })
         .catch((error) => {
-          Swal.fire("Error!", "Algo salio mal.", "error");
+          Swal.fire("Error!", "Something went wrong", "error");
         });
     }
   }
@@ -88,7 +88,7 @@ const Admins = ({ setShowCreateComponent, showCreateComponent }) => {
           />
         )}
         {dataRender.length < 1 && showCreateComponent === false && (
-          <p className="text-center">No hay Admins</p>
+          <p className="text-center">There are no Admins</p>
         )} 
         {showCreateComponent === true && (
           <Crear

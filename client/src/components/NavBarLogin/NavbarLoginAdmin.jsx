@@ -38,7 +38,7 @@ export default function NavBarLoginAdmin({setearStates}) {
         <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell list-none"
           onClick={() => {setearStates("Categories")}}
         >
-              <p>Categorys</p>
+              <p>Categories</p>
         </li>
 
         <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell list-none"

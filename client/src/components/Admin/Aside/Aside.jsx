@@ -61,7 +61,7 @@ const Aside = ({ setShowCreateComponent, setRefresh, setValueSearch }) => {
       </form>
       <input
         type="button"
-        value="Crear"
+        value="Create"
         className="bg-blue-400 px-7 py-2 rounded-md mt-5 cursor-pointer"
         onClick={() => {
           setShowCreateComponent(true);

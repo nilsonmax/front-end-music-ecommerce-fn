@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StyledCheckout } from "./style";
 import { StyledCard } from "../Card/style";
 import Swal from "sweetalert2";
+import axios from "axios"
 import { useNavigate } from "react-router-dom";
-
+import { getDataClearCar, mailPurchase } from "../../redux/action/cartActions";
 import LoaderButton from "../Loader/loaderButton";
 
-import { getDataClearCar, mailPurchase } from "../../redux/action/cartActions";
 
 function validate(userInfo) {
   let errors = {};
@@ -35,13 +34,17 @@ function validate(userInfo) {
   } else if (!userInfo.cus_zip) {
     errors.cus_zip = "Input required";
   }
-
   return errors;
 }
 
 export default function Checkout() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const items = useSelector((state) => state.cart.items);
+  const stripe = useStripe();
+  const elements = useElements();
+  const dispatch = useDispatch();
+  const goBack = useNavigate();
 
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
@@ -51,12 +54,6 @@ export default function Checkout() {
     }
   }, []);
 
-  const items = useSelector((state) => state.cart.items);
-  console.log("items", items);
-  const stripe = useStripe();
-  const elements = useElements();
-  const goBack = useNavigate();
-  const dispatch = useDispatch();
 
   const Toast = Swal.mixin({
     toast: true,
@@ -89,6 +86,7 @@ export default function Checkout() {
     cus_city: "",
     cus_country: "",
     cus_zip: "",
+    cus_cardelement:false
   });
 
   const [errors, setErrors] = useState({
@@ -99,6 +97,7 @@ export default function Checkout() {
     cus_city: "",
     cus_country: "",
     cus_zip: "",
+    cus_cardelement:false
   });
 
   function onChange(e) {
@@ -116,18 +115,17 @@ export default function Checkout() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     setErrors(validate(userInfo));
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement), // Element capture input
+      card: elements.getElement(CardElement),
     });
-    setLoading(true);
-
+    
     const total = items.reduce((a, b) => a + b.price, 0);
-
+    
     if (!error) {
+      setLoading(true);
       console.log("paymentMethod---------", paymentMethod);
       const { id } = paymentMethod;
       try {
@@ -169,19 +167,16 @@ export default function Checkout() {
           cus_country: "",
           cus_zip: "",
         });
-
+        dispatch(getDataClearCar());
         setTimeout(() => {
           Toast.fire({
             icon: "success",
             title: "We have sent you an email with your order details.",
           }).then((result) => {
-            dispatch(getDataClearCar());
             goBack("/");
           });
-          // setSubmitting(false);
         }, 400);
       } catch (error) {
-        console.log(error);
         setTimeout(() => {
           Toast.fire({
             icon: "error",
@@ -192,9 +187,26 @@ export default function Checkout() {
       }
     }
   }
+  const onChangeCardElement=async()=>{
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement), 
+    });
+    let booleanCardelement=null;
+    if(error){
+      booleanCardelement=false;
+    }else{
+      booleanCardelement=true;
+    }
+    setUserInfo({
+      ...userInfo,
+      cus_cardelement: booleanCardelement,
+    });
+  }
 
   return (
     <StyledCheckout>
+      <p onClick={() =>{console.log(userInfo)}}>Ver</p>
       <div class="leading-loose ">
         <form
           onSubmit={handleSubmit}
@@ -341,7 +353,11 @@ export default function Checkout() {
             <label class="block text-sm text-gray-600">
               Payment information
             </label>
-            <CardElement class="w-full px-5  py-0 text-gray-700 bg-gray-200 rounded" />
+            <CardElement class="w-full px-5  py-0 text-gray-700 bg-gray-200 rounded" 
+            onChange={()=>{
+              onChangeCardElement();
+            }}
+            />
           </div>
 
           <div class="mt-4">
@@ -353,21 +369,22 @@ export default function Checkout() {
             userInfo.cus_country &&
             userInfo.cus_zip != "" &&
             elements.getElement(CardElement).length != 0 &&
+            userInfo.cus_cardelement===true &&
             Object.keys(errors).length === 0 ? (
-              <button
-                class="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
-                type="submit"
-                onSubmit={handleSubmit}
-                disabled={!stripe}>
-                {loading ? (
-                  <LoaderButton />
-                ) : (
-                  <span className="font-semibold">
-                    Pay with Stripe{" $"}
-                    {items.reduce((a, b) => a + b.price * b.count, 0)}
-                  </span>
-                )}
-              </button>
+              <div class="flex items-center justify-center">{loading ? (
+                    <LoaderButton />
+                  ):
+                  <button
+                    class="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
+                    type="submit"
+                    onSubmit={handleSubmit}
+                    disabled={!stripe}>
+                      <span className="font-semibold">
+                       Pay with Stripe{" $"}
+                       {items.reduce((a, b) => a + b.price * b.count, 0)}
+                     </span>
+                  </button>
+              }</div>
             ) : (
               <span className="font-bold text-xl">
                 Total: ${items.reduce((a, b) => a + b.price * b.count, 0)}

@@ -7,6 +7,7 @@ import NavBarLogin from "../../components/NavBarLogin/NavbarLogin.jsx";
 import Aside from "../../components/Aside/aside.jsx";
 import { combineReducers } from "redux";
 import { Whatsapp } from "../../components/Whatsapp/whatsapp.jsx";
+import Banner from "../../components/Banner/Banner.jsx";
 
 export default function HomeContainer() {
   const localStore = window.localStorage.getItem("dataUser");
@@ -42,16 +43,19 @@ export default function HomeContainer() {
           ) : (
             <NavBarLogin setCurrentPage={setCurrentPage} />
           )}
-          <Aside
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-            elementsPerPage={elementsPerPage}
-            totalElements={elementsToShow.length}
-            paginated={paginated}
-            currentElements={currentElements}
-          />
+          <main className="max-w-screen-2xl mx-auto">
+            <Banner />
+            <Aside
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              elementsPerPage={elementsPerPage}
+              totalElements={elementsToShow.length}
+              paginated={paginated}
+              currentElements={currentElements}
+            />
+          </main>
         </div>
         <Whatsapp />
-      </div>
+      </div >
     );
 }

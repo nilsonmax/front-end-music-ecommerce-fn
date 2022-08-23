@@ -5,8 +5,6 @@ import NavBarNoLogin from "../NavbarNoLogin/NavbarNoLogin";
 import Desarrollador from "./Desarrollador"
 import ProfileCard from "../ProfileCard/ProfileCard";
 import { AboutUsContainer, AboutUsList, MainProfileCard, ProfileCardContainer } from "./styles";
-import NavBarLogin from "../NavBarLogin/NavbarLogin"
-import NavBarNoLogin  from "../NavbarNoLogin/NavbarNoLogin"
 
 export default function AboutUs() {
     const navigate = useNavigate()

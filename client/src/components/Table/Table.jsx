@@ -46,10 +46,10 @@ const Table = ({ dataRender, columnsRender, activarEliminar, setRefresh }) => {
               );
             })}
             <th className="content-center font-raleway text-white p-2 border">
-              Eliminar
+              Delete
             </th>
             <th className="content-center font-raleway text-white p-2 border">
-              Editar
+              Edit
             </th>
           </tr>
         </thead>

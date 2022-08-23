@@ -33,7 +33,7 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
 
   return (
     <div>
-      <h1>Registrar un nuevo User</h1>
+      <h1>Register a new user</h1>
       <Formik
         initialValues={{
           dni: "",
@@ -117,7 +117,7 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
                   className="inputFormRegister outline-none rounded-md py-1.5 px-5"
                 >
                   <option value="rol" disabled>
-                    Rol
+                    Role
                   </option>
                   <option value="user">User</option>
                   <option value="banned">Banned</option>
@@ -127,7 +127,7 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
 
             <div className="mt-5">
               <ButtonAceptar type="submit" disabled={isSubmitting}>
-                Aceptar
+                Accept
               </ButtonAceptar>
               <ButtonCancelar
                 type="button"
@@ -135,7 +135,7 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
                   setShowCreateComponent(false);
                 }}
               >
-                Cancelar
+                Cancel
               </ButtonCancelar>
             </div>
           </form>

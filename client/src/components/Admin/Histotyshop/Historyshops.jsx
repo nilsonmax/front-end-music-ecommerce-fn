@@ -12,7 +12,7 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
   const dispatch = useDispatch();
   const historyshops = useSelector((state) => state.historyshops.historyshops);
   var [copyHistoryshops, setCopyHistoryshops] = useState([]);
-  var columnsEspecific=["saldo_caja","total_shops","productos_vendidos","ultima_shop"]
+  var columnsEspecific=["Cash_Balance","Total_Shops","Sold_Products","Last_Shop"]
   const columnsGeneral = ["id","status", "cost", "cus_name","cus_country"];
   var [dataRender, setDataRender] = useState([]);
   var [refreshHistoryshops, setRefreshHistoryshops] = useState(null);
@@ -92,7 +92,7 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
           </>
         )}
         {dataRender.length < 1 && showCreateComponent === false && (
-          <p className="text-center">No hay Historyshops</p>
+          <p className="text-center">There are no HistoryShops yet</p>
         )}
       </div>
     </div>

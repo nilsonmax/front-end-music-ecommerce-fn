@@ -28,8 +28,8 @@ const Table = ({ dataRender, columnsRender, activarEliminar, setRefresh }) => {
     });
   };
   return (
-    <>
-      <table className="table-auto  mx-auto max-w-[70%]">
+    <div>
+      <table className="table-auto">
         <thead>
           <tr className="bg-[#62A8AC] content-center  h-10 ">
             <th className="content-center font-raleway  text-white border">
@@ -109,7 +109,7 @@ const Table = ({ dataRender, columnsRender, activarEliminar, setRefresh }) => {
           }}
         />
       )}
-    </>
+    </div>
   );
 };
 

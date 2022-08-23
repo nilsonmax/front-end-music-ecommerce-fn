@@ -35,7 +35,7 @@ export default function Profile() {
     dispatch(mailPassword(user));
     Toast.fire({
       icon: "success",
-      title: "Email has sent you",
+      title: "We have sent you an email",
     });
   }
   const colors = {

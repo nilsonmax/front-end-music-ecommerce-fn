@@ -31,7 +31,7 @@ export default function Profile({
     dispatch(mailPasswordAdmin(emailInfo));
     Swal.fire({
       icon: "success",
-      title: "Email has sent you",
+      title: "We have sent you an email",
     });
   }
   return (

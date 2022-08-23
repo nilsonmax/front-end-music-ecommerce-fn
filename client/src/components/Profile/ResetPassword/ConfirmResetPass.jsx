@@ -65,7 +65,7 @@ function ConfirmResetPass() {
       dispatch(postResetPassowrd(infoBody)).then((data) => {
         Toast.fire({
           icon: "success",
-          title: "Email has sent you",
+          title: "We have sent you an email",
         });
       });
       navigate("/");

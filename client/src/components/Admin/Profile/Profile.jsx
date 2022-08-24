@@ -35,13 +35,13 @@ export default function Profile({
     });
   }
   return (
-    <>
+    <div className="px-10 mb-10">
       {admin ? (
         <div className="bg-white mt-4 max-w-7xl sm:pt-10 lg:pt-12 mx-auto flex flex-col">
           <p className="text-center text-gray-600 underline text-6xl font-bold font-sans">
             {admin[0].userName}
           </p>
-          <div className="max-w-screen-4xl px-1 md:px-8 flex flex-col shadow-2xl">
+          <div className="max-w-screen-4xl px-10 md:px-8 flex flex-col shadow-2xl">
             <div className="flex flex-col md:flex-row justify-between items-center border-b gap-4 py-4 ">
               <div className=" mx-8 px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
                 Firstname:
@@ -79,7 +79,7 @@ export default function Profile({
             </div>
 
             <button
-              className=" text-darkconrflower text-xl my-5 py-1 mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 "
+              className=" text-darkconrflower text-xl my-5 py-1 md:mx-96 text-center bg-gray-300 rounded-full hover:bg-teal-300 "
               onClick={(e) => handlePassword(e)}
             >
               Change Password
@@ -89,6 +89,6 @@ export default function Profile({
       ) : (
         <Loader />
       )}
-    </>
+    </div>
   );
 }

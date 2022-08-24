@@ -62,17 +62,18 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
   }, [historyshops, refreshHistoryshops]);
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row m-14">
       <div>
         <Aside 
           setShowCreateComponent={setShowCreateComponent}
           setRefresh={setRefreshHistoryshops} 
-          setValueSearch={setValueSearch} 
+          setValueSearch={setValueSearch}
+          trueHistoryshop={true} 
         />
       </div>
       <div>
         {dataRender.length > 0 && showCreateComponent === false && (
-          <>
+          <div className="md:pl-10">
             <div className="text-right">
               <TableEspecific 
                 dataRender={dataTableEspecific}
@@ -91,7 +92,7 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
               />:
               <Estadistics />}
             </>
-          </>
+          </div>
         )}
         {dataRender.length < 1 && showCreateComponent === false && (
           <p className="text-center">There are no HistoryShops yet</p>

@@ -7,6 +7,6 @@ export const StyledFilter = styled.div`
     flex-col
     py-4
     pl-2
-    text-gray-700
+    text-primary
   `}
 `;

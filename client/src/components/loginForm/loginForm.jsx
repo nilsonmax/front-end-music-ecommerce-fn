@@ -7,8 +7,6 @@ import Swal from "sweetalert2";
 
 import LoginGoogle from "../LoginGoogle/loginGoogle";
 
-
-
 const LoginForm = ({ visible, onClose }) => {
   const dispatch = useDispatch();
 
@@ -43,6 +41,12 @@ const LoginForm = ({ visible, onClose }) => {
           window.location.href = "/admin";
         } else if (token.user_rol === "user") {
           window.location.href = "/";
+        } else if (token.user_rol === "banned") {
+          window.localStorage.removeItem("dataUser");
+          Toast.fire({
+            icon: "warning",
+            title: "You were banned!",
+          });
         }
       })
       .catch((error) => {
@@ -64,7 +68,6 @@ const LoginForm = ({ visible, onClose }) => {
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
-
 
   if (!visible) return null;
   return (
@@ -174,27 +177,24 @@ const LoginForm = ({ visible, onClose }) => {
               </button> */}
             </div>
 
-
-            <LoginGoogle/>
-
+            <LoginGoogle />
 
             <div className="flex justify-center items-center bg-white   pb-14 ">
               <p className="text-dark font-bold  text-md text-center">
                 Don't have an account?{" "}
               </p>
-                <div
-                  to="/signup"
-                  className="text-darkcornflower hover:text-dark active:text-darkcornflower transition underline duration-100"
-                  onClick={() => {
-                    window.location.href = "/signup";
-                    setTimeout(() => {
-                      onClose();
-                    }, 2000);
-                  }}
-                >
-                  Sign Up
-                </div>
-              
+              <div
+                to="/signup"
+                className="text-darkcornflower hover:text-dark active:text-darkcornflower transition underline duration-100"
+                onClick={() => {
+                  window.location.href = "/signup";
+                  setTimeout(() => {
+                    onClose();
+                  }, 2000);
+                }}
+              >
+                Sign Up
+              </div>
             </div>
           </form>
         </div>

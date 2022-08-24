@@ -15,7 +15,9 @@ export default function HomeContainer() {
 
   const elementsToShow = useSelector((state) => state.reducer.instruments);
   const elementsPerPage = 10;
-  let showedElements = elementsToShow.filter((e) => e.isBanned !== true);
+  let showedElements = elementsToShow.filter(
+    (e) => e.isBanned !== true && e.category.isBanned !== true
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
   const firstIndex = [elementsPerPage * currentPage] - elementsPerPage;
@@ -29,6 +31,7 @@ export default function HomeContainer() {
   };
 
   useEffect(() => {
+    console.log(showedElements);
     dispatch(getInstruments());
     // console.log(localStore);
   }, [dispatch]);

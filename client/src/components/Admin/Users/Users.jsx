@@ -68,7 +68,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
   }
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col md:flex-row">
       <div>
         <Aside 
           setShowCreateComponent={setShowCreateComponent}

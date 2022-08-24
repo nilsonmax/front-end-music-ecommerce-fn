@@ -150,6 +150,7 @@ export default function Card({
           onClick={toogleFavoriteRemoveHandler}
         />
       )}
+
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
       <b>{`Type:`}</b>{" "}

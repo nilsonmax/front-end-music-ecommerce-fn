@@ -28,7 +28,9 @@ export default function Aside({
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const allElements = useSelector((state) => state.reducer.instruments);
-  let elementsToShow = allElements.filter((e) => e.isBanned !== true);
+  let elementsToShow = allElements.filter(
+    (e) => e.isBanned !== true && e.category.isBanned !== true
+  );
 
   return (
     <>
@@ -243,7 +245,6 @@ export default function Aside({
                 paginated={paginated}
               />
               <StyledCardContainer>
-                {console.log(currentElements, "elements")}
                 {currentElements.map((inst) => {
                   if (inst.isBanned === false) {
                     return (

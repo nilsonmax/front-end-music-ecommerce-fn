@@ -10,6 +10,7 @@ import {
 import { StyledCard } from "./style";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import Swal from "sweetalert2";
+import paintStars from "../../utils/paintStars";
 
 export default function Card({
   id,
@@ -93,26 +94,12 @@ export default function Card({
     });
   };
 
-  function paintStar() {
-    return (
-      <>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5 text-yellow-500"
-          viewBox="0 0 20 20"
-          fill="currentColor">
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-      </>
-    );
-  }
-
   function paintCart(params) {
     return (
       <>
         <svg
-          width="24px"
-          height="24px"
+          width="20px"
+          height="20px"
           viewBox="0 0 25 20"
           xmlns="http://www.w3.org/2000/svg">
           <path
@@ -125,6 +112,7 @@ export default function Card({
       </>
     );
   }
+
   return (
     <StyledCard>
       <img
@@ -133,36 +121,25 @@ export default function Card({
         onClick={(e) => navigate("/instruments/" + id)}
       />
       <p>{brand}</p>
-      <p className="font-bold text-black important!">
-        {paintStar()}
-        {raiting}
-      </p>
+      <p className="font-bold text-yellow important!">{paintStars(raiting)}</p>
       {console.log(favoriteItems, "isFavorite")}
       {/* !favoriteItems ? */}
       {!isFavorite ? (
         <HiOutlineHeart
-          className="h-10 cursor-pointer absolute top-0 right-14"
+          className="h-10 cursor-pointer absolute top-0 left-5"
           onClick={toogleFavoriteAddHandler}
         />
       ) : (
         <HiHeart
-          className="h-10 cursor-pointer absolute top-0 right-14"
+          className="h-10 cursor-pointer absolute top-0 left-5"
           onClick={toogleFavoriteRemoveHandler}
         />
       )}
-
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
-      <b>{`Type:`}</b>{" "}
-      <span
-        onClick={(e) =>
-          navigate("/instruments/" + id)
-        }>{`${categoryName}`}</span>
-      {/*         <span " text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
-      {/* <a
-            href={`#${product.id}`}
-            onClick={(e) => this.props.addToCart(this.props.cartItems, product)}
-          ></a> */}
+      <div class="bg-gray-200 px-3 py-2 rounded-full text-xs font-medium text-gray-800 hidden md:block">
+        {status}
+      </div>
       <button
         onClick={(e) => (stock <= 0 || activaShow ? alert() : hanledSummit(e))}
         className="flex items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1">

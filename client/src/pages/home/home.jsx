@@ -5,13 +5,15 @@ import { StyledHome } from "./style";
 
 const HomePage = () => {
   const token = window.localStorage.getItem("dataUser");
-  let [decodedToken, setDecodedToken] = useState("");
+  let [decodedToken, setDecodedToken] = useState(null);
 
   useEffect(() => {
+    console.log(token);
     if (token) {
       const decodedToken = decodeToken(token);
       if (decodedToken.user_rol == "admin") {
         window.location.href = "/admin";
+        setDecodedToken(false);
       } else {
         setDecodedToken(true);
       }
@@ -20,12 +22,11 @@ const HomePage = () => {
 
   return (
     <div>
-      {decodedToken == true ||
-        (token == null && (
-          <StyledHome>
-            <HomeContainer />
-          </StyledHome>
-        ))}
+      {(token == null || (token && decodedToken == true)) && (
+        <StyledHome>
+          <HomeContainer />
+        </StyledHome>
+      )}
     </div>
   );
 };

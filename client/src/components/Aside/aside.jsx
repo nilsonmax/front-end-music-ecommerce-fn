@@ -27,7 +27,9 @@ export default function Aside({
 }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  const elementsToShow = useSelector((state) => state.reducer.instruments);
+  const allElements = useSelector((state) => state.reducer.instruments);
+  let elementsToShow = allElements.filter((e) => e.isBanned !== true);
+
   return (
     <>
       <Transition.Root show={mobileFiltersOpen} as={Fragment}>

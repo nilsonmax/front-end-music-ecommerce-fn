@@ -15,12 +15,13 @@ export default function HomeContainer() {
 
   const elementsToShow = useSelector((state) => state.reducer.instruments);
   const elementsPerPage = 10;
+  let showedElements = elementsToShow.filter((e) => e.isBanned !== true);
 
   const [currentPage, setCurrentPage] = useState(1);
   const firstIndex = [elementsPerPage * currentPage] - elementsPerPage;
   const lastIndex = [elementsPerPage * currentPage] - 1;
   const currentElements =
-    elementsToShow && elementsToShow.slice(firstIndex, lastIndex + 1);
+    showedElements && showedElements.slice(firstIndex, lastIndex + 1);
 
   const paginated = (number) => {
     setCurrentPage(number);
@@ -32,7 +33,7 @@ export default function HomeContainer() {
     // console.log(localStore);
   }, [dispatch]);
 
-  if (elementsToShow.length === 0) {
+  if (showedElements.length === 0) {
     return <Loader />;
   } else
     return (
@@ -49,13 +50,13 @@ export default function HomeContainer() {
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
               elementsPerPage={elementsPerPage}
-              totalElements={elementsToShow.length}
+              totalElements={showedElements.length}
               paginated={paginated}
               currentElements={currentElements}
             />
           </main>
         </div>
         <Whatsapp />
-      </div >
+      </div>
     );
 }

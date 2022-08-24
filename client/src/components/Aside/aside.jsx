@@ -256,7 +256,7 @@ export default function Aside({
                 paginated={paginated}
               />
               <StyledCardContainer>
-                {console.log(currentElements, "elements")}
+                
                 {currentElements.map((inst) => {
                   if (inst.isBanned === false) {
                     return (

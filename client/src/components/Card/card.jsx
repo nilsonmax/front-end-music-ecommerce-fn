@@ -99,7 +99,7 @@ export default function Card({
       />
       <div className="flex justify-between">
         <p>{brand}</p>
-        {console.log(favoriteItems, "isFavorite")}
+        
         {/* !favoriteItems ? */}
         {!isFavorite ? (
           <HiOutlineHeart

@@ -20,6 +20,7 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
   const token = window.localStorage.getItem("dataUser");
   var [dataTableEspecific,setDataTableEspecific]=useState([]);
   var [visibleGrafica,setVisibleGrafica]=useState(false);
+
   useEffect(() => {
     if (historyshops.length === 0 && refreshHistoryshops === null) {
       dispatch(getHistoryShops(token));
@@ -73,7 +74,7 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
       </div>
       <div>
         {dataRender.length > 0 && showCreateComponent === false && (
-          <div className="md:pl-10">
+          <div className="mt-10 md:pl-10 md:mt-0">
             <div className="text-right">
               <TableEspecific 
                 dataRender={dataTableEspecific}

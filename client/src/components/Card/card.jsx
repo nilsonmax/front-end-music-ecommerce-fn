@@ -137,7 +137,7 @@ export default function Card({
       )}
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
-      <div class="bg-gray-200 px-3 py-2 rounded-full text-xs font-medium text-gray-800 hidden md:block">
+      <div class="bg-gray py-2 rounded-full m-0 text-xs font-bold text-gray-800 text-center hidden md:block">
         {status}
       </div>
       <button

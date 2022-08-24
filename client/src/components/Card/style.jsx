@@ -5,19 +5,17 @@ export const StyledCard = styled.div`
   ${tw`
     h-40
     rounded-lg
-    border-tertiary
     overflow-hidden
     p-0
-    m-0 
+    m-2 
     bg-background
     grid gap-0.5 
     grid-cols-6
     leading-tight
     relative
     max-w-md
-    border-solid
-    border-white
-    border
+    border-b-white
+    border-b-2
     scale-100
     hover:border-solid
     hover:border-white
@@ -47,13 +45,11 @@ export const StyledCard = styled.div`
       col-span-4
       m-0
       p-0
-      font-bold    
     `};
   }
 
   h3 {
     ${tw`
-        text-highlight
         font-bold
         col-span-4
       `}
@@ -61,7 +57,6 @@ export const StyledCard = styled.div`
 
   h4 {
     ${tw`
-      bg-orange-300
       p-1
       m-0
       rounded-full
@@ -74,11 +69,10 @@ export const StyledCard = styled.div`
 
   p {
     ${tw`
-      pt-2
+      p-0
       leading-tight
       text-xs
-      col-span-2
-      text-tertiary
+      col-span-4
       flex
       `}
   }

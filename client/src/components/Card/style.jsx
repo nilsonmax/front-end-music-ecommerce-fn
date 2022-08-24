@@ -7,7 +7,8 @@ export const StyledCard = styled.div`
     rounded-lg
     overflow-hidden
     p-0
-    m-2 
+    m-2
+    pt-4 
     bg-background
     grid gap-0.5 
     grid-cols-6
@@ -26,7 +27,7 @@ export const StyledCard = styled.div`
       place-content-center
       justify-center
       row-span-5
-      max-h-40
+      max-h-36
       self-auto
       border-0
       border-secondary

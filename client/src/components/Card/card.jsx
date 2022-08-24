@@ -137,12 +137,12 @@ export default function Card({
       )}
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
-      <div class="bg-black py-2 rounded-full m-0 text-xs font-bold text-white text-center hidden md:block">
+      <div class="bg-secondary py-2 rounded-full m-0 text-xs font-bold text-white text-center hidden md:block">
         {status}
       </div>
       <button
         onClick={(e) => (stock <= 0 || activaShow ? alert() : hanledSummit(e))}
-        className="flex items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1">
+        className="flex items-center h-8 px-2 text-background transition-primary duration-150 bg-black rounded-lg focus:shadow-outline hover:bg-primary col-span-1">
         <span className="">{`➕`}</span>
         <p>{paintCart()}</p>
       </button>

@@ -71,36 +71,36 @@ export default function NavBarNoLogin({ setCurrentPage }) {
           >
             <div className="flex justify-around">
 
-            <ul className="items-center  justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li className="font-bold transition cursor-pointer duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <p onClick={() => navigate("/aboutUs")}>About US</p>
-              </li>
-            </ul>
-        <button
-          type="button"
-          onClick={() => dispatch(showLogin(true))}
-          className=" relative link flex items-center"
-          >
-          <HiOutlineHeart size={20} className="h-10" />
-          <p className="hidden md:inline font-extrabold md: text-sm mt-2">
-            Favorites
-          </p>
-        </button>
-        <button
-          type="button"
-          onClick={() => dispatch(showLogin(true))}
-          className=" relative link flex items-center"
-          >
-          {totalQuantities !== 0 && (
-            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
-              {totalQuantities !== 0 && totalQuantities}
-            </span>
-          )}
-          <HiShoppingCart size={20} className="h-10" />
-          <p className="hidden md:inline font-extrabold md: text-sm mt-2">
-            Cart
-          </p>
-        </button>
+              <ul className="items-center  justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+                <li className="font-bold transition cursor-pointer duration-150 border-b-2 border-transparent hover:border-bluemunsell">
+                  <p onClick={() => navigate("/aboutUs")}>About US</p>
+                </li>
+              </ul>
+              <button
+                type="button"
+                onClick={() => dispatch(showLogin(true))}
+                className=" relative link flex items-center"
+              >
+                <HiOutlineHeart size={20} className="h-10" />
+                <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+                  Favorites
+                </p>
+              </button>
+              <button
+                type="button"
+                onClick={() => dispatch(showLogin(true))}
+                className=" relative link flex items-center"
+              >
+                {totalQuantities !== 0 && (
+                  <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
+                    {totalQuantities !== 0 && totalQuantities}
+                  </span>
+                )}
+                <HiShoppingCart size={20} className="h-10" />
+                <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+                  Cart
+                </p>
+              </button>
             </div>
 
             <div className="mt-3 space-y-2 lg:hidden">
@@ -122,6 +122,13 @@ export default function NavBarNoLogin({ setCurrentPage }) {
             </div>
           </div>
         </div>
+        <div className="hidden lg:flex lg:justify-around ">
+              <ul className="items-center  justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
+                <li className="font-bold transition cursor-pointer duration-150 border-b-2 border-transparent hover:border-bluemunsell">
+                  <p onClick={() => navigate("/aboutUs")}>About US</p>
+                </li>
+              </ul>
+            </div>
         <div className="hidden space-x-4 lg:flex justify-between">
           <div className="">
             <Search setCurrentPage={setCurrentPage} />
@@ -138,11 +145,35 @@ export default function NavBarNoLogin({ setCurrentPage }) {
           >
             Sign Up
           </div>
-
-        
-        {showCart && <Cart />}
-        {showFavorites && <FavoritesPreview />}
-          </div>
+              <button
+                type="button"
+                onClick={() => dispatch(showLogin(true))}
+                className=" relative link flex items-center"
+              >
+                <HiOutlineHeart size={20} className="h-10" />
+                <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+                  Favorites
+                </p>
+              </button>
+              <button
+                type="button"
+                onClick={() => dispatch(showLogin(true))}
+                className=" relative link flex items-center"
+              >
+                {totalQuantities !== 0 && (
+                  <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
+                    {totalQuantities !== 0 && totalQuantities}
+                  </span>
+                )}
+                <HiShoppingCart size={20} className="h-10" />
+                <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+                  Cart
+                </p>
+              </button>
+          
+          {showCart && <Cart />}
+          {showFavorites && <FavoritesPreview />}
+        </div>
       </DivJustifyBetween>
     </NavContainer>
   );

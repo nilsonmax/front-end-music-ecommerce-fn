@@ -15,11 +15,12 @@ export default function AboutUs() {
   const navigate = useNavigate();
   const developers = [
     {
-      img: "https://avatars.githubusercontent.com/u/10248108?v=4",
-      name: "Juan M. Parra",
+      img: "https://avatars.githubusercontent.com/u/80359162?v=4",
+      name: "Neider Urbano",
       nacionalidad: "Colombia",
-      git: "https://github.com/JuanParraIV",
-      linkedin: "https://www.linkedin.com/in/juanparraiv/",
+      git: "https://github.com/Neider-Urbano",
+      linkedin:
+        "https://www.linkedin.com/in/neider-julian-urbano-bastilla-30860b23b/",
       ocupation: "Full Stack Developer",
     },
     {
@@ -56,7 +57,7 @@ export default function AboutUs() {
       ocupation: "Full Stack Developer",
     },
     {
-      img: "https://icon-library.com/images/2018/3965934_usuario-aws-certification-transparent-png.png",
+      img: "https://avatars.githubusercontent.com/u/92263040?s=400&u=d78fb2d7072cdc4431339c692eb767992773af66&v=4",
       name: "Ezequiel Soto",
       nacionalidad: "Colombia",
       git: "https://github.com/SotoEzequiel",
@@ -64,12 +65,11 @@ export default function AboutUs() {
       ocupation: "Full Stack Developer",
     },
     {
-      img: "https://avatars.githubusercontent.com/u/80359162?v=4",
-      name: "Neider Urbano",
+      img: "https://avatars.githubusercontent.com/u/10248108?v=4",
+      name: "Juan M. Parra",
       nacionalidad: "Colombia",
-      git: "https://github.com/Neider-Urbano",
-      linkedin:
-        "https://www.linkedin.com/in/neider-julian-urbano-bastilla-30860b23b/",
+      git: "https://github.com/JuanParraIV",
+      linkedin: "https://www.linkedin.com/in/juanparraiv/",
       ocupation: "Full Stack Developer",
     },
   ];

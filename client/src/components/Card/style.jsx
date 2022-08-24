@@ -17,7 +17,7 @@ export const StyledCard = styled.div`
     relative
     transition-all duration-500
     scale-y-75
-    hover:scale-y-100
+    
   `};
 
   img {

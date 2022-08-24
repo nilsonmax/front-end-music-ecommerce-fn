@@ -31,7 +31,6 @@ const Crear = ({ setShowCreateComponent, setRefreshAdmins }) => {
 
   return (
     <div>
-      <h1>Registrar un nuevo Admin</h1>
       <Formik
         initialValues={{
           firstName: "",

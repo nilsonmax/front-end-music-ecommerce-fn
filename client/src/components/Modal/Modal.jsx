@@ -144,7 +144,7 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
       {copiaArray.length === 1 && (
         <div className="w-screen h-screen top-0 fixed z-10 left-0">
           <div className="absolute w-screen h-screen top-0 left-0 bg-gray-400 opacity-50"></div>
-          <div className="absolute w-screen h-screen flex items-center justify-center">
+          <div className="absolute w-screen h-screen flex items-center justify-center px-10">
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-[750px]">
               <BotonCerrar
                 type="button"
@@ -174,7 +174,7 @@ const Modal = ({ setModal, dataArrayRender, setRefresh }) => {
                   Datos {dataArrayRender.nameArray}
                 </h3>
                 <form action="#">
-                  <div className="grid gap-5 grid-cols-3 ">
+                  <div className="grid gap-5 grid-cols-2 md:grid-cols-3">
                     {keysArray.map((data, key) => {
                       return (
                         <div key={key + 1}>

@@ -3,6 +3,8 @@ import React,{useState, useEffect} from 'react'
 const TableEspecific = ({dataRender, columnsRender}) => {
 
     useEffect(() => {
+        console.log(dataRender)
+        console.log(columnsRender)
     },[])
 
 

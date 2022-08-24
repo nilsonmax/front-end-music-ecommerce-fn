@@ -79,23 +79,23 @@ export const setearDatarenderHistoryshop = (array, setDataRender) => {
 }
 
 export const getDataTableEspecific = (setDataTablePrincipal, dataRender) => {
-  var total_shops = 1;
-  var saldo_caja = 0;
-  var ultima_shop = ""
-  var productos_vendidos = 0;
+  var Total_Shops = 1;
+  var Cash_Balance = 0;
+  var Last_Shop = ""
+  var Sold_Products = 0;
   dataRender.map((history, key) => {
-    total_shops += (key)
-    saldo_caja += parseFloat(history.cost);
-    ultima_shop = history.createdAt;
+    Total_Shops += (key)
+    Cash_Balance += parseFloat(history.cost);
+    Last_Shop = history.createdAt;
     history.instrument.map((instrument) => {
-    productos_vendidos += instrument.count;
+    Sold_Products += instrument.count;
     })
   })
   setDataTablePrincipal([{
-    saldo_caja,
-    total_shops,
-    productos_vendidos,
-    ultima_shop,
+    Cash_Balance,
+    Total_Shops,
+    Sold_Products,
+    Last_Shop,
   }])
 }
 

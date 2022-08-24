@@ -32,8 +32,7 @@ const Crear = ({ setShowCreateComponent, setRefreshUsers }) => {
   });
 
   return (
-    <div className="pl-10">
-      <h1>Register a new user</h1>
+    <div className="md:pl-10">
       <Formik
         initialValues={{
           dni: "",

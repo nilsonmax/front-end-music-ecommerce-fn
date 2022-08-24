@@ -84,7 +84,7 @@ export default function AboutUs() {
             <AboutUsContainer>
             <div className="text-4xl p-14">
                 <div>
-                    <h1>¿What is MusicCommerce??</h1>
+                    <h1>What is MusiCommerce?</h1>
                     <p className="mt-5">We are an e-commerce specialized in the sale and distribution of musical instruments. Our main objective is to offer a variety of quality products to our potential buyers, which can be purchased safely and thus, satisfy the needs of the market in question.</p>
                 </div>
 

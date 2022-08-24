@@ -72,7 +72,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
     }
   }
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col md:flex-row m-14">
       <div>
         <Aside
           setShowCreateComponent={setShowCreateComponent}
@@ -80,6 +80,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
           setValueSearch={setValueSearch}
         />
       </div>
+      <div className="px-10">
       {dataRender.length > 0 && showCreateComponent === false && (
         <Table
           setRefresh={setRefreshInstruments}
@@ -97,6 +98,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
           setRefreshInstruments={setRefreshInstruments}
         />
       )}
+      </div>
     </div>
   );
 };

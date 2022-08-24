@@ -18,7 +18,7 @@ const Panel = () => {
   return (
     <div>
          <NavBarLoginAdmin setearStates={setearStates}/>
-           <div className="p-14">
+           <div className="">
 
           {componentVisible === "Users" && (
             <Users

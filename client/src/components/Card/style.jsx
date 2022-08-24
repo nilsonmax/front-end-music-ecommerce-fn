@@ -10,11 +10,11 @@ export const StyledCard = styled.div`
     p-0
     m-0 
     bg-background
-    w-2/5
     grid gap-0.5 
     grid-cols-6
     leading-tight
     relative
+    max-w-md
     border-solid
     border-white
     border
@@ -24,7 +24,6 @@ export const StyledCard = styled.div`
     hover:border
     hover:shadow-2xl
     hover:scale-125
-    hover:font-semibold
   `};
 
   img {
@@ -39,6 +38,7 @@ export const StyledCard = styled.div`
       m-0
       col-span-2
       block
+      hover:opacity-90
       `};
   }
 

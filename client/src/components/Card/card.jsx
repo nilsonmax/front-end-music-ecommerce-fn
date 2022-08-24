@@ -126,27 +126,20 @@ export default function Card({
       {/* !favoriteItems ? */}
       {!isFavorite ? (
         <HiOutlineHeart
-          className="h-10 cursor-pointer absolute top-0 right-5"
+          className="h-10 cursor-pointer absolute top-0 left-5"
           onClick={toogleFavoriteAddHandler}
         />
       ) : (
         <HiHeart
-          className="h-10 cursor-pointer absolute top-0 right-5"
+          className="h-10 cursor-pointer absolute top-0 left-5"
           onClick={toogleFavoriteRemoveHandler}
         />
       )}
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
-      <b>{`Type:`}</b>{" "}
-      <span
-        onClick={(e) =>
-          navigate("/instruments/" + id)
-        }>{`${categoryName}`}</span>
-      {/*         <span " text-ls font-bold leading-none text-tertiary rounded bottom-5 col-span-1 p-2 absolute top-2 left-2" >{status}</span> */}
-      {/* <a
-            href={`#${product.id}`}
-            onClick={(e) => this.props.addToCart(this.props.cartItems, product)}
-          ></a> */}
+      <div class="bg-gray-200 px-3 py-2 rounded-full text-xs font-medium text-gray-800 hidden md:block">
+        {status}
+      </div>
       <button
         onClick={(e) => (stock <= 0 || activaShow ? alert() : hanledSummit(e))}
         className="flex items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1">

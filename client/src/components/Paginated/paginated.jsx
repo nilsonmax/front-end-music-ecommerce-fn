@@ -31,18 +31,27 @@ function Paginated({
     <StyledNav>
       {pageNumbers[0] && (
         <ul className="flex">
-          <StyledLi  onClick={() => backward(currentPage)}>
-            Previous
-          </StyledLi>
+          <StyledLi onClick={() => backward(currentPage)}>Previous</StyledLi>
           {pageNumbers &&
             pageNumbers.map((number) => {
-              if (currentPage === number) return <li className="py-1 px-3 m-1 flex text-centerrounded shadow-lg border-b-4 border-secondary rounded-lg" key={number} onClick={() => paginated(number)}>{number}</li>
-              else return <StyledLi  key={number} onClick={() => paginated(number)}>{number}</StyledLi>
-            }
-            )}
-          <StyledLi  onClick={() => forward(currentPage)}>
-            Next
-          </StyledLi>
+              if (currentPage === number)
+                return (
+                  <li
+                    className="py-1 px-3 m-1 flex text-centerrounded shadow-lg border-b-4 border-secondary rounded-lg"
+                    key={number}
+                    onClick={() => paginated(number)}
+                  >
+                    {number}
+                  </li>
+                );
+              else
+                return (
+                  <StyledLi key={number} onClick={() => paginated(number)}>
+                    {number}
+                  </StyledLi>
+                );
+            })}
+          <StyledLi onClick={() => forward(currentPage)}>Next</StyledLi>
         </ul>
       )}
     </StyledNav>

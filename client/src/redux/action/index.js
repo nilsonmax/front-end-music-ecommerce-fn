@@ -24,7 +24,7 @@ export const getByName = (name) => {
         `${REACT_APP_HOST}/instruments?name=${name}`
       );
       const filterInstrument = resp.data.filter(
-        (data) => data.isBanned === false
+        (data) => data.isBanned !== true && data.category.isBanned !== true
       );
       if (filterInstrument.length === 0)
         throw new Error("Instrument not Found");

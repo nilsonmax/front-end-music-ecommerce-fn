@@ -13,7 +13,8 @@ function Filter({ setCurrentPage }) {
   const dispatch = useDispatch();
 
   const elementsToShow = useSelector((state) => state.reducer.instruments);
-  const categories = useSelector((state) => state.reducer.category);
+  const category = useSelector((state) => state.reducer.category);
+  let categories = category.filter((e) => e.isBanned !== true);
   let instruments = elementsToShow.filter((e) => e.isBanned !== true);
 
   const [checkState, setCheckState] = useState("");

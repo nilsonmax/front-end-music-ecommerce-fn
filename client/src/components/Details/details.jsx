@@ -8,6 +8,7 @@ import { showLogin } from "../../redux/action/index";
 import Swal from "sweetalert2";
 import { FaWhatsapp } from "react-icons/fa";
 import { BsCartPlus } from "react-icons/bs";
+import { FaStar } from "react-icons/fa";
 
 export default function Details() {
   const { id } = useParams();
@@ -22,6 +23,13 @@ export default function Details() {
     dispatch(getDataClear());
     // }
   }, [dispatch, id]);
+
+  //estrelas
+  const stars = Array(5).fill(0);
+  const colors = {
+    orange: "#FFBA5A",
+    grey: "#a9a9a9",
+  };
 
   const hanledSummit = (e) => {
     e.preventDefault();
@@ -41,7 +49,7 @@ export default function Details() {
 
   const Toast = Swal.mixin({
     toast: true,
-    position: "bottom-end",
+    position: "top-end",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
@@ -50,6 +58,21 @@ export default function Details() {
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
+
+  function paintStar() {
+    return (
+      <>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 text-yellow-500"
+          viewBox="0 0 20 20"
+          fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      </>
+    );
+  }
+
   if (!reduxDetail.name) return <Loader />;
   else
     return (
@@ -65,18 +88,17 @@ export default function Details() {
                 {reduxDetail.brand}
               </p>
               <div class="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 text-yellow-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
+                {paintStar()}
+
+                {reduxDetail.raiting ?? 5}
+
                 <p class="text-gray-600 font-bold text-sm ml-1">
-                  {reduxDetail.raiting !== null ? (
+                  {reduxDetail.raiting === 0 ? (
                     `No rating`
                   ) : (
-                    <span class="text-gray-500 font-normal">(0 reviews)</span>
+                    <span class="text-gray-500 font-normal">
+                      ({reduxDetail.Raitings.length} reviews)
+                    </span>
                   )}
                 </p>
               </div>
@@ -105,6 +127,40 @@ export default function Details() {
             </p>
           </div>
         </div>
+
+        {reduxDetail.Raitings.length ? (
+          reduxDetail.Raitings.map((e) => {
+            return (
+              <div className="my-9 border py-4 mx-7 ">
+                <div className="mb-7 mx-7">
+                  <span class="block font-bold text-secondary mb-1 ml-1 underline">
+                    {e.userName}
+                  </span>
+                  <span class="block text-gray-500 ">
+                    {e.createdAt.substr(0, 10)}
+                  </span>
+                  <div className="flex   text-yellow-500 text-2xl my-4">
+                    {stars.map((_, index) => {
+                      return (
+                        <FaStar
+                          key={index}
+                          color={e.star > index ? colors.orange : colors.grey}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+                <p class="text-gray-900 mx-7">{e.comment}</p>
+              </div>
+            );
+          })
+        ) : (
+          <>
+            <div className="block font-bold text-center text-base text-gray-400">
+              This instrument has not been rated
+            </div>
+          </>
+        )}
       </div>
     );
 }

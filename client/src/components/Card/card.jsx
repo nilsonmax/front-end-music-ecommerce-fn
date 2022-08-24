@@ -111,8 +111,8 @@ export default function Card({
     return (
       <>
         <svg
-          width="24px"
-          height="24px"
+          width="20px"
+          height="20px"
           viewBox="0 0 25 20"
           xmlns="http://www.w3.org/2000/svg">
           <path
@@ -136,21 +136,21 @@ export default function Card({
       <p className="font-bold text-black important!">
         {paintStar()}
         {raiting}
+        <b className="font-thin">{raiting ? `total` : `No rating`}</b>
       </p>
       {console.log(favoriteItems, "isFavorite")}
       {/* !favoriteItems ? */}
       {!isFavorite ? (
         <HiOutlineHeart
-          className="h-10 cursor-pointer absolute top-0 right-14"
+          className="h-10 cursor-pointer absolute top-0 right-5"
           onClick={toogleFavoriteAddHandler}
         />
       ) : (
         <HiHeart
-          className="h-10 cursor-pointer absolute top-0 right-14"
+          className="h-10 cursor-pointer absolute top-0 right-5"
           onClick={toogleFavoriteRemoveHandler}
         />
       )}
-
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
       <b>{`Type:`}</b>{" "}

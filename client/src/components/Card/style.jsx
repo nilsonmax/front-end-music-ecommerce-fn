@@ -10,14 +10,21 @@ export const StyledCard = styled.div`
     p-0
     m-0 
     bg-background
-    max-w-md
+    w-2/5
     grid gap-0.5 
     grid-cols-6
     leading-tight
     relative
-    transition-all duration-500
-    scale-y-75
-    hover:scale-y-100
+    border-solid
+    border-white
+    border
+    scale-100
+    hover:border-solid
+    hover:border-white
+    hover:border
+    hover:shadow-2xl
+    hover:scale-125
+    hover:font-semibold
   `};
 
   img {
@@ -25,7 +32,7 @@ export const StyledCard = styled.div`
       place-content-center
       justify-center
       row-span-5
-      max-h-48
+      max-h-40
       self-auto
       border-0
       border-secondary

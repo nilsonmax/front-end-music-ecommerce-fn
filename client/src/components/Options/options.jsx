@@ -15,7 +15,7 @@ function Options({ setCurrentPage }) {
     <Container>
       <div
         htmlFor="options"
-        className="mb-2 text-sm font-medium text-dark dark:text-primary flex"
+        className="mb-2 text-sm font-medium text-dark dark:text-primary flex mt-2"
       >
         <p className="text-xl mt-1 font-extralight text-stone-700">Sort by:</p>
         <select

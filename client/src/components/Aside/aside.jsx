@@ -143,16 +143,17 @@ export default function Aside({
       </Transition.Root>
 
       <main className="md:-mt-[70px] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-1">
-        <div className=" flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
+        {/* <div className="sm:flex-col flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200 "> */}
+          <div className="flex flex-col md:flex-row mt-32 md:justify-between">
           <h1 className="text-4xl font-extrabold tracking-tight text-primary">
             Our Instruments
           </h1>
 
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">
-              <div>
+           
                 <Options setCurrentPage={setCurrentPage} />
-              </div>
+              
               <Transition
                 as={Fragment}
                 enter="transition ease-out duration-100"

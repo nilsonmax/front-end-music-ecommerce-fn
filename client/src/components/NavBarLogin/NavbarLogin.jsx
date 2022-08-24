@@ -77,21 +77,23 @@ export default function NavBarLogin({ setCurrentPage }) {
 
         <div>
           <div
-            className={`flex-1 justify-self-center pb-3 mt- lg:block md:pb-0 md:mt-0 ${
-              navbar ? "block" : "hidden"
-            }`}>
-            <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
-                <p onClick={() => navigate("/aboutUs")}>About US</p>
+            className={`flex-1 bg-black px-8  justify-self-center pb-9  lg:block   ${navbar ? "block" : "hidden"
+              }`}>
+            {/* <ul className="items-center text-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0 lg:bg-red-700 lg:"> */}
+              <ul className="flex justify-between lg:h-[20px]" >
+              <li className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent hover:border-bluemunsell  lg:mt-4">
+                <Link to={"/aboutUs"}>
+                <p>About US</p>
+                </Link>
               </li>
 
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
+              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell lg:mx-5 lg:mt-4">
                 <Link to="/user/Profile">
                   <p>Profile</p>
                 </Link>
               </li>
 
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell">
+              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell  lg:mt-4">
                 <Link
                   onClick={() => {
                     window.localStorage.removeItem("dataUser");
@@ -102,13 +104,44 @@ export default function NavBarLogin({ setCurrentPage }) {
                 </Link>
               </li>
             </ul>
+            <div className="flex flex-col items-center">
+              <button
+                type="button"
+                onClick={() => setShowFavorites(true)}
+                className="flex relative link items-center lg:hidden">
+                <HiOutlineHeart size={20} className="h-10" />
+                <p className="text-white">
+                  Favorites
+                </p>
+              </button>
+              {showFavorites && <FavoritesPreview />}
+              <button
+                type="button"
+                onClick={() => setShowCart(true)}
+                className="flex relative link  items-center lg:hidden">
+                {(quanTities ? quanTities : quanTitie) !== 0 && (
+                  <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
+                    {quanTities
+                      ? quanTities
+                      : quanTitie !== 0 && quanTities
+                        ? quanTities
+                        : quanTitie}
+                  </span>
+                )}
+
+                <HiShoppingCart size={20} className="h-10" />
+                <p className="text-white ">
+                  Cart
+                </p>
+              </button>
+            </div>
 
             <div className="mt-3 space-y-2 lg:hidden">
               <div className="inline-block w-full">
                 <Search setCurrentPage={setCurrentPage} />
               </div>
               <div
-                className="box-decoration-slice bg-gradient-to-r from-primary to-secondary px- rounded-sm"
+                className="box-decoration-slice bg-gradient-to-r from-primary to-secondary py-1 text-center rounded-sm"
                 onClick={() => {
                   window.localStorage.removeItem("dataUser");
                   window.location.href = "/";
@@ -126,14 +159,14 @@ export default function NavBarLogin({ setCurrentPage }) {
           </div>
         </div>
         <a to="/user/Profile">
-          <h2 className="box-decoration-slice bg-gradient-to-r from-primary to-secondary px-2 rounded-sm">
+          <h2 className="hidden lg:block box-decoration-slice bg-gradient-to-r from-primary to-secondary px-2 rounded-sm">
             {`Welcome ${user.userName}`}
           </h2>
         </a>
         <button
           type="button"
           onClick={() => setShowFavorites(true)}
-          className=" relative link flex items-center">
+          className="hidden lg:flex relative link items-center">
           <HiOutlineHeart size={20} className="h-10" />
           <p className="hidden md:inline font-extrabold md: text-sm mt-2">
             Favorites
@@ -143,14 +176,14 @@ export default function NavBarLogin({ setCurrentPage }) {
         <button
           type="button"
           onClick={() => setShowCart(true)}
-          className=" relative link flex items-center">
+          className=" hidden lg:flex relative link  items-center">
           {(quanTities ? quanTities : quanTitie) !== 0 && (
             <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
               {quanTities
                 ? quanTities
                 : quanTitie !== 0 && quanTities
-                ? quanTities
-                : quanTitie}
+                  ? quanTities
+                  : quanTitie}
             </span>
           )}
 

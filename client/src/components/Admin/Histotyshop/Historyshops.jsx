@@ -62,7 +62,7 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
   }, [historyshops, refreshHistoryshops]);
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col md:flex-row">
       <div>
         <Aside 
           setShowCreateComponent={setShowCreateComponent}
@@ -78,7 +78,8 @@ const Historyshops = ({ setShowCreateComponent, showCreateComponent }) => {
                 dataRender={dataTableEspecific}
                 columnsRender={columnsEspecific}
               />
-              <button type="button" className="bg-blue-300 px-4 py-2 rounded-md mt-3 mb-6"
+              <button type="button" 
+                className="bg-secondary px-7 py-2 rounded-md mt-5 cursor-pointer mb-10 text-white"
                 onClick={() =>{setVisibleGrafica(!visibleGrafica)}}>
                 {visibleGrafica===true?"Tabla":"Estadistica"}
               </button>

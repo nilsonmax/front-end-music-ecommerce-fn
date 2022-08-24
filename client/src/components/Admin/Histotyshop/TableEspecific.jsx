@@ -8,7 +8,8 @@ const TableEspecific = ({dataRender, columnsRender}) => {
 
 
   return (
-    <table className="table-auto  mx-auto max-w-[70%]">
+    <div className="max-w-[370px] overflow-x-auto rounded-lg overflow-hidden border border-gray-300">
+        <table>
               <thead>
                 <tr className="bg-[#62A8AC] content-center  h-10 ">
                     {columnsRender.map((column,key)=>{
@@ -33,6 +34,7 @@ const TableEspecific = ({dataRender, columnsRender}) => {
                 }
               </tbody>
           </table>
+    </div>
   )
 }
 

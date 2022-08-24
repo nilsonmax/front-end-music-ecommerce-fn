@@ -28,17 +28,17 @@ const Table = ({ dataRender, columnsRender, activarEliminar, setRefresh }) => {
     });
   };
   return (
-    <div>
-      <table className="table-auto">
+    <div className="max-w-[370px] overflow-x-auto max-h-[500px] overflow-y-auto rounded-lg overflow-hidden border border-gray-300 md:max-w-full">
+      <table>
         <thead>
-          <tr className="bg-[#62A8AC] content-center  h-10 ">
-            <th className="content-center font-raleway  text-white border">
+        <tr className="bg-[#62A8AC] content-center">
+            <th className="content-center  text-white border px-3">
               Id
             </th>
             {columnsRender.map((name, key) => {
               return (
                 <th
-                  className="content-center font-raleway text-white border "
+                className="content-center  text-white border px-3"
                   key={key + 1}
                 >
                   {name}

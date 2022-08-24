@@ -26,7 +26,7 @@ const Aside = ({ setShowCreateComponent, setRefresh, setValueSearch }) => {
           </div>
           <input
             type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             id="simple-search"
             placeholder="Search"
             required
@@ -62,7 +62,7 @@ const Aside = ({ setShowCreateComponent, setRefresh, setValueSearch }) => {
       <input
         type="button"
         value="Create"
-        className="bg-blue-400 px-7 py-2 rounded-md mt-5 cursor-pointer"
+        className="bg-secondary px-7 py-2 rounded-md mt-5 cursor-pointer w-full mb-10 text-white hover:font-semibold"
         onClick={() => {
           setShowCreateComponent(true);
         }}

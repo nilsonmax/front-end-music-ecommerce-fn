@@ -59,7 +59,7 @@ const Estadistics = () => {
 
     return (
         <div className="flex flex-row">
-            <div className="flex flex-row">
+            <div className="max-w-[370px] overflow-x-auto max-h-[500px] overflow-y-auto rounded-lg overflow-hidden border border-gray-300">
                 {labels.length>0 && 
                     <Grafica data={
                         {

@@ -80,7 +80,7 @@ const Instruments = ({ setShowCreateComponent, showCreateComponent }) => {
           setValueSearch={setValueSearch}
         />
       </div>
-      <div className="px-10">
+      <div className="md:px-10">
       {dataRender.length > 0 && showCreateComponent === false && (
         <Table
           setRefresh={setRefreshInstruments}

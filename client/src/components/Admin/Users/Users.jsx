@@ -68,7 +68,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row m-14">
       <div>
         <Aside 
           setShowCreateComponent={setShowCreateComponent}
@@ -76,7 +76,7 @@ const Users = ({ setShowCreateComponent, showCreateComponent }) => {
           setValueSearch={setValueSearch} 
         />
       </div>
-      <div>
+      <div className="md:pl-10">
         {dataRender.length > 0 && showCreateComponent === false && (
           <Table
             setRefresh={setRefreshUsers}

@@ -3,12 +3,12 @@ import tw from "twin.macro";
 
 export const StyledCard = styled.div`
   ${tw`
-    h-56
+    h-40
     rounded-lg
     border-tertiary
     overflow-hidden
-    p-2
-    m-1 
+    p-0
+    m-0 
     bg-background
     max-w-md
     grid gap-0.5 
@@ -30,14 +30,14 @@ export const StyledCard = styled.div`
       border-0
       border-secondary
       m-0
-      col-span-3
+      col-span-2
       block
       `};
   }
 
   h2 {
     ${tw`
-      col-span-3
+      col-span-4
       m-0
       p-0
       font-bold    
@@ -48,7 +48,7 @@ export const StyledCard = styled.div`
     ${tw`
         text-highlight
         font-bold
-        col-span-2
+        col-span-4
       `}
   }
 
@@ -70,8 +70,9 @@ export const StyledCard = styled.div`
       pt-2
       leading-tight
       text-xs
-      col-span-3
+      col-span-2
       text-tertiary
+      flex
       `}
   }
 
@@ -79,7 +80,7 @@ export const StyledCard = styled.div`
     ${tw`
       m-0
       p-0
-      col-span-2
+      col-span-1
       row-span-1
     `}
   }

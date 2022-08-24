@@ -14,12 +14,9 @@ export const StyledCard = styled.div`
     leading-tight
     relative
     max-w-md
-    border-b-white
-    border-b-2
+    border-solid
+    border-white
     scale-100
-    hover:border-solid
-    hover:border-white
-    hover:border
     hover:shadow-2xl
     hover:scale-125
   `};
@@ -51,7 +48,8 @@ export const StyledCard = styled.div`
   h3 {
     ${tw`
         font-bold
-        col-span-4
+        col-span-2
+        text-2xl
       `}
   }
 

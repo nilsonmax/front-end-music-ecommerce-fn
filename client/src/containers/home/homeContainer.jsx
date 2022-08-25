@@ -8,6 +8,7 @@ import Aside from "../../components/Aside/aside.jsx";
 import { combineReducers } from "redux";
 import { Whatsapp } from "../../components/Whatsapp/whatsapp.jsx";
 import Banner from "../../components/Banner/Banner.jsx";
+import { getfavorites } from "../../redux/action/FavoritesActions.js";
 
 export default function HomeContainer() {
   const localStore = window.localStorage.getItem("dataUser");
@@ -30,9 +31,11 @@ export default function HomeContainer() {
     // dispatch(SetCurrentPageGlobal(number));
   };
 
+  const token = window.localStorage.getItem("dataUser");
   useEffect(() => {
     console.log(showedElements);
     dispatch(getInstruments());
+    dispatch(getfavorites(token))
     // console.log(localStore);
   }, [dispatch]);
 

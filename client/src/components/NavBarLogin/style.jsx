@@ -7,7 +7,7 @@ export const NavContainer = styled.nav`
 
 export const Button = styled.button`
   ${tw`
-  p-2 text-tertiary  rounded-md outline-none focus:border-tertiary  focus:border
+  p-2 text-tertiary  rounded-md outline-none focus:border-tertiary  focus:border hover:bg-yellow
   `}
 `;
 
@@ -24,5 +24,5 @@ export const DivItemsCenter = styled.div`
 `;
 
 export const Li = styled.li`
-  ${tw` font-bold transition duration-150 border-b-2 border-transparent hover:border-secondary`}
+  ${tw` font-bold transition duration-150 border-b-2 border-transparent hover:border-secondary  `}
 `;

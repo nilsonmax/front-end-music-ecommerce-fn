@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
 import {
@@ -52,28 +52,32 @@ export default function Card({
   const isFavorite2 = window.localStorage.getItem("isFavorite2");
 
   useEffect(() => {
-    if (!token) return;
-    else return dispatch(getfavorites(token));
+    dispatch(getfavorites(token));
   }, []);
 
   const toogleFavoriteAddHandler = () => {
     setIsFavorite((prevState) => !prevState);
-    if (!token) return;
-    else {
-      dispatch(postFavorites(instruments, token)).then(() => {
-        dispatch(getfavorites(token));
-      });
-    }
+    // localStorage.setItem("isFavorite2", JSON.stringify(isFavorite));
+    // dispatch(addToFavorites(favoriteItems, instruments));
+    dispatch(postFavorites(instruments, token)).then(() => {
+      dispatch(getfavorites(token));
+    });
   };
+
+  // const hanledDelete = (e, item) => {
+  //   console.log("estoy en hanled deleFavorite");
+  //   e.preventDefault();
+  //   // dispatch(removeFromFavorites(favoriteItems, item));
+  //   dispatch(deleteFavorites(item, token)).then(()=>{ dispatch(getfavorites(token))})
+  // };
 
   const toogleFavoriteRemoveHandler = () => {
     setIsFavorite((prevState) => !prevState);
-    if (!token) return;
-    else {
-      dispatch(postFavorites(instruments, token)).then(() => {
-        dispatch(getfavorites(token));
-      });
-    }
+    // localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
+    // dispatch(removeFromFavorites(favoriteItems, instruments));
+    dispatch(deleteFavorites(instruments, token)).then(() => {
+      dispatch(getfavorites(token));
+    });
   };
 
   const Toast = Swal.mixin({
@@ -140,7 +144,11 @@ export default function Card({
       />
       <p>{brand}</p>
 
-      <p className="font-bold text-black important!">{paintStars(raiting)}</p>
+      <div
+        onClick={(e) => navigate("/instruments/" + id)}
+        className="font-bold text-black important! flex">
+        {paintStars(raiting)}
+      </div>
       {/* {console.log(favoriteItems, "isFavorite")} */}
       {/* !favoriteItems ? */}
       {/* {!isFavorite ? (
@@ -168,13 +176,17 @@ export default function Card({
       )}
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
-      <div className="bg-secondary py-2 rounded-full m-0 text-xs font-bold text-white text-center hidden md:block">
+      <div
+        onClick={(e) => navigate("/instruments/" + id)}
+        className="bg-secondary py-2 rounded-full m-0 text-xs font-bold text-white text-center hidden md:block">
         {status}
       </div>
       <button
         onClick={(e) => (stock <= 0 || activaShow ? alert() : hanledSummit(e))}
         className="flex items-center h-8 px-2 text-background transition-primary duration-150 bg-black rounded-lg focus:shadow-outline hover:bg-primary col-span-1">
-        <span className="">{`➕`}</span>
+        <span
+          onClick={(e) => navigate("/instruments/" + id)}
+          className="">{`➕`}</span>
         <p>{paintCart()}</p>
       </button>
     </StyledCard>

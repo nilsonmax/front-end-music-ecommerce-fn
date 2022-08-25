@@ -50,8 +50,7 @@ export default function NavBarLogin({ setCurrentPage }) {
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-6 h-6"
                   viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
+                  fill="currentColor">
                   <path
                     fillRule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -65,8 +64,7 @@ export default function NavBarLogin({ setCurrentPage }) {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
-                >
+                  strokeWidth={2}>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -82,32 +80,36 @@ export default function NavBarLogin({ setCurrentPage }) {
           <div
             className={`flex-1 bg-black px-8  justify-self-center pb-9  lg:block   ${
               navbar ? "block" : "hidden"
-            }`}
-          >
+            }`}>
             {/* <ul className="items-center text-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0 lg:bg-red-700 lg:"> */}
             <ul className="flex justify-between lg:h-[20px]">
-              <li className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent hover:border-bluemunsell  lg:mt-4">
+              <li className="font-bold cursor-pointer transition duration-150 border-b-2 border-transparent lg:mt-4">
                 <Link to={"/aboutUs"}>
-                  <p>About US</p>
+                  <p className=" hover:border-bluemunsell hover:border-b-2">
+                    About US
+                  </p>
                 </Link>
               </li>
 
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell lg:mx-5 lg:mt-4">
+              <li className="font-bold transition duration-150 border-b-2 border-transparent lg:mx-5 lg:mt-4">
                 <Link to="/user/Profile">
-                  <p>Profile</p>
+                  <p className=" hover:border-bluemunsell hover:border-b-2">
+                    Profile
+                  </p>
                 </Link>
               </li>
 
-              <li className="font-bold transition duration-150 border-b-2 border-transparent hover:border-bluemunsell  lg:mt-4">
+              <li className="font-bold transition duration-150 border-b-2 border-transparent lg:mt-4">
                 <Link
                   onClick={() => {
                     dispatch(getDataClearCar());
                     window.localStorage.removeItem("dataUser");
                     window.location.href = "/";
                   }}
-                  to="/user/Profile"
-                >
-                  <p>Log out</p>
+                  to="/user/Profile">
+                  <p className=" hover:border-bluemunsell hover:border-b-2">
+                    Log out
+                  </p>
                 </Link>
               </li>
             </ul>
@@ -115,8 +117,7 @@ export default function NavBarLogin({ setCurrentPage }) {
               <button
                 type="button"
                 onClick={() => setShowFavorites(true)}
-                className="flex relative link items-center lg:hidden"
-              >
+                className="flex relative link items-center lg:hidden">
                 <HiOutlineHeart size={20} className="h-10" />
                 <p className="text-white">Favorites</p>
               </button>
@@ -124,8 +125,7 @@ export default function NavBarLogin({ setCurrentPage }) {
               <button
                 type="button"
                 onClick={() => setShowCart(true)}
-                className="flex relative link  items-center lg:hidden"
-              >
+                className="flex relative link  items-center lg:hidden">
                 {(quanTities ? quanTities : quanTitie) !== 0 && (
                   <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
                     {quanTities
@@ -150,8 +150,7 @@ export default function NavBarLogin({ setCurrentPage }) {
                 onClick={() => {
                   window.localStorage.removeItem("dataUser");
                   window.location.href = "/";
-                }}
-              >
+                }}>
                 <a to="/user/Profile">
                   <h2>{`Welcome ${user.userName}`}</h2>
                 </a>
@@ -172,10 +171,9 @@ export default function NavBarLogin({ setCurrentPage }) {
         <button
           type="button"
           onClick={() => setShowFavorites(true)}
-          className="hidden lg:flex relative link items-center"
-        >
+          className="hidden lg:flex relative link items-center">
           <HiOutlineHeart size={20} className="h-10" />
-          <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+          <p className="hidden md:inline font-extrabold md: text-sm mt-2 hover:border-bluemunsell hover:border-b-2">
             Favorites
           </p>
         </button>
@@ -183,8 +181,7 @@ export default function NavBarLogin({ setCurrentPage }) {
         <button
           type="button"
           onClick={() => setShowCart(true)}
-          className=" hidden lg:flex relative link  items-center"
-        >
+          className=" hidden lg:flex relative link  items-center">
           {(quanTities ? quanTities : quanTitie) !== 0 && (
             <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-teal-500 text-center rounded-full text-ora">
               {quanTities
@@ -196,7 +193,7 @@ export default function NavBarLogin({ setCurrentPage }) {
           )}
 
           <HiShoppingCart size={20} className="h-10" />
-          <p className="hidden md:inline font-extrabold md: text-sm mt-2">
+          <p className="hidden md:inline font-extrabold md: text-sm mt-2 hover:border-bluemunsell hover:border-b-2">
             Cart
           </p>
         </button>

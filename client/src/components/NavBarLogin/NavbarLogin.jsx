@@ -197,6 +197,7 @@ export default function NavBarLogin({ setCurrentPage }) {
             Cart
           </p>
         </button>
+
         {showCart && <Cart />}
       </DivJustifyBetween>
     </NavContainer>

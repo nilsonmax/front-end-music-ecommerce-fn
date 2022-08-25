@@ -26,7 +26,6 @@ module.exports = {
         blur: "rgba(0,0,0,0.5)",
         orange: colors.orange,
         yellow: "#FFE800",
-        gray: "#DEDEDE",
       },
     },
   },

@@ -1,11 +1,12 @@
-import { ADD_TO_FAVORITES, SET_IS_FAVORITES, REMOVE_ALL_FROM_FAVORITES, REMOVE_ONE_FROM_FAVORITES, DATA_CLEAR_FAVORITES, SET_SHOW_FAVORITES, SET_TOTAL_QUANTITIES } from "../action/types";
+import { ADD_TO_FAVORITES, GET_FAVORITES, SET_IS_FAVORITES, REMOVE_ALL_FROM_FAVORITES, REMOVE_ONE_FROM_FAVORITES, DATA_CLEAR_FAVORITES, SET_SHOW_FAVORITES, SET_TOTAL_QUANTITIES } from "../action/types";
 
 const initialState = {
   showFavoritesList: false,
   items: {},
   favoriteItems: [],
   quanTities: 0,
-  isFavorite:false
+  isFavorite: false,
+  favoritesList:[]
 };
 
 const favoritesReducers = (state = initialState, action) => {
@@ -20,7 +21,7 @@ const favoritesReducers = (state = initialState, action) => {
       return { ...state, items: action.payload.favoriteItems };
 
     case REMOVE_ONE_FROM_FAVORITES: {
-      return { ...state, items: action.payload.favoriteItems};
+      return { ...state, items: action.payload.favoriteItems };
     }
 
     case SET_SHOW_FAVORITES: {
@@ -28,8 +29,13 @@ const favoritesReducers = (state = initialState, action) => {
     }
 
     case SET_IS_FAVORITES: {
-      console.log(action.payload.isFavorite)
-       return { ...state, isFavorite: action.payload.isFavorite };
+      // console.log(action.payload.isFavorite)
+      return { ...state, isFavorite: action.payload.isFavorite };
+    }
+
+    case GET_FAVORITES: {
+      console.log(action.payload, "estoy en favo reducer")
+      return { ...state, favoritesList: action.payload };
     }
 
     default:

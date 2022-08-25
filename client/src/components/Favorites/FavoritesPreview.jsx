@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import {
@@ -40,9 +40,11 @@ import util from "../../utils/util";
 import { useDispatch, useSelector } from "react-redux";
 
 import e from "cors";
-import { removeFromFavorites, removeOneFromFavorites } from "../../redux/action/FavoritesActions";
+import { deleteFavorites, getfavorites, removeFromFavorites, removeOneFromFavorites } from "../../redux/action/FavoritesActions";
 import { HiHeart } from "react-icons/hi";
 import Buttons from "../Buttons/buttons";
+import { ButtonStyled } from "../Buttons/styled";
+// import { ButtonStyled } from './../Buttons/styled';
 
 const FavoritesPreview = () => {
 
@@ -50,18 +52,30 @@ const FavoritesPreview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const favoriteItems = useSelector((state) => state.favorites.items);
+  const favoritesList = useSelector((state) => state.favorites.favoritesList);
+  const token = window.localStorage.getItem("dataUser")
+
+  console.log(favoritesList, "favoritesList")
   //const quanTities = useSelector((state) => state.favorites.quanTities);
   //let quanTitie = window.localStorage.getItem("quanTities")
 
   const hanledDelete = (e, item) => {
-    console.log("estoy en hanled aadFavorite");
+    console.log("estoy en hanled deleFavorite");
     e.preventDefault();
-    dispatch(removeFromFavorites(favoriteItems, item));
+    // dispatch(removeFromFavorites(favoriteItems, item));
+    dispatch(deleteFavorites(item, token)).then(() => { dispatch(getfavorites(token)) })
   };
-  const navigateHandle = (e) => {
-    window.location.href = "/";
 
-    };
+  useEffect(() => {
+    dispatch(getfavorites(token))
+  }, [])
+
+  const navigateHandle = (e) => {
+    dispatch(getfavorites(token))
+    setShowFavorites(true)
+    window.location.href = "/favorites";
+
+  };
   return (
     <FavoriteWrapper>
       <FavoriteContainer>
@@ -74,7 +88,8 @@ const FavoritesPreview = () => {
           <Heading>Back to shopping</Heading>
         </FavoriteHeading>
 
-        {favoriteItems.length < 1 && (
+        {/* {favoriteItems.length < 1 && ( */}
+        {favoritesList.length < 1 && (
           <EmptyFavorite>
             <HiHeart size={150} />
             <h3>Your favorites list is empty</h3>
@@ -91,7 +106,8 @@ const FavoritesPreview = () => {
         )}
 
         <ProductContainer>
-          {favoriteItems.length >= 1 ? (
+          {/* {favoriteItems.length >= 1 ? ( */}
+          {favoritesList.length >= 1 ? (
             <div>
               <FavoriteHeading>Your favorites</FavoriteHeading>
               {/* <FavoriteNumItems>({quanTities?quanTities:quanTitie} items)</FavoriteNumItems> */}
@@ -104,8 +120,9 @@ const FavoritesPreview = () => {
           )}
 
           {/* {favoriteItems.length >= 1 && */}
-          {favoriteItems.length > 0 &&
-            favoriteItems.map((item, index) => (
+          {/* {favoriteItems.length > 0 && */}
+          {favoritesList.length > 0 &&
+            favoritesList.map((item, index) => (
               <Product key={item.id}>
                 <ItemImage src={item.img} alt="" />
                 <ItemDescription>
@@ -129,14 +146,19 @@ const FavoritesPreview = () => {
               </Product>
             ))}
         </ProductContainer>
-        {favoriteItems.length >= 1 && (
+        {favoritesList.length >= 1 && (
           <FavoriteBottom>
             <BtnContainer>
-              <Link to="/favorites">
-                <Buttons type="button" text="View full list" onClick={navigateHandle}/>
-              </Link>
+              {/* <Link to="/favorites"> */}
+              <ContinueShopping type="button" onClick={() => setShowFavorites(false)} >
+               <Link to="/favorites">
+               View full list 
+               </Link>
+              </ContinueShopping>
+              {/* </Link> */}
             </BtnContainer>
           </FavoriteBottom>
+
         )}
       </FavoriteContainer>
     </FavoriteWrapper>

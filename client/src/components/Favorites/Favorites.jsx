@@ -2,11 +2,12 @@ import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
-import { addToFavorites, removeFromFavorites, setShowFavorites } from "../../redux/action/FavoritesActions";
 import { EmptyFavorite, FavoriteContainer, StyledCard } from "./style";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import { useSelector, useDispatch } from 'react-redux';
 import { ContinueShopping } from "../Shopping/style";
+import { deleteFavorites, getfavorites } from "../../redux/action/FavoritesActions";
+import Swal from "sweetalert2";
 
 export default function Favorites({
   id,
@@ -19,36 +20,87 @@ export default function Favorites({
   status,
   categoryId,
   categoryName,
-  instruments
+  instruments,
+  raiting
 }) {
 
   // const instruments = useSelector((state) => state.reducer.instruments);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems, 'cartitems en card')
+  // console.log(cartItems, 'cartitems en card')
   const favoriteItems = useSelector((state) => state.favorites.items);
-  const favoriteItemsActive = useSelector((state) => state.favorites.items.active);
-  console.log(favoriteItems, 'favoriteItems en card');
+
+  ///////////////////////////
+  const favoritesList = useSelector((state) => state.favorites.favoritesList);
+  const token = window.localStorage.getItem("dataUser")
+
+  console.log(favoritesList, "favoritesList")
+  //const quanTities = useSelector((state) => state.favorites.quanTities);
+  //let quanTitie = window.localStorage.getItem("quanTities")
+
+  const favoriteRemoveHandle = (e, item) => {
+    console.log("estoy en hanled deleFavorite");
+    e.preventDefault();
+    // dispatch(removeFromFavorites(favoriteItems, item));
+    dispatch(deleteFavorites(instruments, token)).then(()=>{ dispatch(getfavorites(token))})
+  };
+
+  ////////////////////////////
+  
+  // console.log(favoriteItems, 'favoriteItems en card');
   const navigate = useNavigate();
   const active = window.localStorage.getItem('favoriteItemsActive');
 
   const [isFavorite, setIsFavorite] = useState(false);
-  const favoriteAddHandle = () => {
-    dispatch(addToFavorites(favoriteItems, instruments));
-    setIsFavorite((prevState) => !prevState);
+  // const favoriteAddHandle = () => {
+  //   dispatch(addToFavorites(favoriteItems, instruments));
+  //   setIsFavorite((prevState) => !prevState);
 
-  }
-  const favoriteRemoveHandle = () => {
-    setIsFavorite((prevState) => !prevState);
-    dispatch(removeFromFavorites(favoriteItems, instruments));
-  }
+  // }
+  // const favoriteRemoveHandle = () => {
+  //   setIsFavorite((prevState) => !prevState);
+  //   dispatch(removeFromFavorites(favoriteItems, instruments));
+  // }
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
   const hanledSummit = (e) => {
-    console.log('estoy en hanled aadcart')
     e.preventDefault();
-    dispatch(addToCart(cartItems, instruments))
-    dispatch(SetTotalQuanTities(cartItems, instruments))
-  }
+    dispatch(addToCart(cartItems, instruments));
+    dispatch(SetTotalQuanTities(cartItems, instruments));
+
+    Toast.fire({
+      icon: "success",
+      title: "Added to cart",
+    });
+  };
+
+  let activaShow = false;
+  cartItems.forEach((e) => {
+    if (e.id === id) {
+      if (e.stock <= e.count) {
+        activaShow = true;
+      } else {
+        activaShow = false;
+      }
+    }
+  });
+
+  const alert = () => {
+    Toast.fire({
+      icon: "warning",
+      title: "Stock sold out",
+    });
+  };
 
   // const { decQty, incQty, qty, addToCart, setShowCart } = useStateContext();
   const formattedMoney = price.toLocaleString("es-us", {
@@ -61,7 +113,7 @@ export default function Favorites({
   return (
     <>
 
-      {favoriteItems.length >= 1 && (
+      {favoritesList.length >= 1 && (
         <div className="flex py-7 px-2 pr-4 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out first:border-t">
           <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0">
             <img
@@ -81,20 +133,20 @@ export default function Favorites({
 
 
             <div className="flex justify-between items-end pt-5">
-              <div className="flex">
+              {/* <div className="flex">
                 <p className="flex items-center">
-                  {`Type: ${categoryName}`}
+                  {`Type: ${raiting}`}
                 </p>
-              </div>
+              </div> */}
               <div>
                 <p className="text-lg lg:text-2xl font-semibold pb-2">{colMoney}</p>
 
               </div>
             </div>
             <div className="flex justify-end items-end pt-5">
-              <button onClick={(e) => hanledSummit(e)}
+              <button onClick={(e) => (stock <= 0 || activaShow ? alert() : hanledSummit(e))}
                 className=" bottom-0 inline-flex w-auto items-center h-8 px-2 text-background transition-primary duration-150 bg-secondary rounded-lg focus:shadow-outline hover:bg-primary col-span-1"
-              >Agregar al Carrito
+              >
                 <span className="">{`➕`}</span>
                 <svg
                   width="24px"

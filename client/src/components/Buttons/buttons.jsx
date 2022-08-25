@@ -1,8 +1,8 @@
 import React from "react";
 import { ButtonStyled } from "./styled";
 
-const Buttons = ({ text }) => {
-  return <ButtonStyled type="button">{`${text}`}</ButtonStyled>;
+const Buttons = ({ text, onClick }) => {
+  return <ButtonStyled type="button" onClick={onClick}>{`${text}`}</ButtonStyled>;
 };
 
 export default Buttons;

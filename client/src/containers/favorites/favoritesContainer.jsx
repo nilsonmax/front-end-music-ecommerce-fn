@@ -1,20 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HiHeart } from 'react-icons/hi';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Favorites from '../../components/Favorites/Favorites'
 import { ContinueShopping, EmptyFavorite } from '../../components/Favorites/style';
 import NavBarLogin from '../../components/NavBarLogin/NavbarLogin'
-import { setShowFavorites } from '../../redux/action/FavoritesActions';
+import { getfavorites, setShowFavorites } from '../../redux/action/FavoritesActions';
 
 const FavoritesContainer = () => {
-  const favoriteItems = useSelector((state) => state.favorites.items);
+  const dispatch = useDispatch();
+  const token = window.localStorage.getItem("dataUser")
+  useEffect(() => {
+    dispatch(getfavorites(token))
+  }, [])
+  // const favoriteItems = useSelector((state) => state.favorites.items);
+  const favoritesList2 = useSelector((state) => state.favorites.favoritesList);
+  console.log(favoritesList2, "favoritesList2 2")
   const navigate = useNavigate();
   return (
     <>
       <NavBarLogin />
       <div className="relative py-10 px-40">
-        { favoriteItems.length ? favoriteItems.map((item) => {
+        {favoritesList2.length>0 ? favoritesList2.map((item) => {
+          console.log(favoritesList2, "returnn")
           return (
             <Favorites
               key={item.id}
@@ -27,21 +35,19 @@ const FavoritesContainer = () => {
               stock={item.stock}
               status={item.status}
               categoryId={item.categoryId}
-              categoryName={item.category.name}
               instruments={item}
             />
           );
-        })
-        : 
+        }) : (
           <EmptyFavorite>
             <h3>Your Favorite List is empty</h3>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <ContinueShopping
               type="button"
               // ShowFavorite={true}
@@ -49,9 +55,9 @@ const FavoritesContainer = () => {
             >
               Continue Shopping
             </ContinueShopping>
-          </EmptyFavorite>
-        
-      }
+          </EmptyFavorite>)
+
+        }
       </div>
     </>
 

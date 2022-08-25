@@ -6,6 +6,7 @@ import { isExpired, decodeToken } from "react-jwt";
 import Swal from "sweetalert2";
 
 import LoginGoogle from "../LoginGoogle/loginGoogle";
+import { getfavorites } from "../../redux/action/FavoritesActions";
 
 const LoginForm = ({ visible, onClose }) => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const LoginForm = ({ visible, onClose }) => {
         title: "userName or Password required",
       });
     }
-
+    
     dispatch(loginUser(state))
       .then(async (data) => {
         const token = decodeToken(data.token);
@@ -55,6 +56,10 @@ const LoginForm = ({ visible, onClose }) => {
           title: error.message,
         });
       });
+
+
+      
+
   };
 
   const Toast = Swal.mixin({
@@ -144,7 +149,7 @@ const LoginForm = ({ visible, onClose }) => {
                 Log in
               </button>
 
-              
+
             </div>
 
             <LoginGoogle />

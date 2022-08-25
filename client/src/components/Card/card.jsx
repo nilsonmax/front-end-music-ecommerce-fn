@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
 import {
   addToFavorites,
+  deleteFavorites,
+  getfavorites,
+  postFavorites,
   removeFromFavorites,
 } from "../../redux/action/FavoritesActions";
 import { StyledCard } from "./style";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import Swal from "sweetalert2";
 import paintStars from "../../utils/paintStars";
+
 
 export default function Card({
   id,
@@ -30,8 +34,10 @@ export default function Card({
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const favoriteItems = useSelector((state) => state.favorites.items);
-
+  const favoritesList = useSelector((state) => state.favorites.favoritesList);
+  // console.log(favoritesList, "favoritesList 1")
   const navigate = useNavigate();
+  
   const hanledSummit = (e) => {
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments));
@@ -42,19 +48,34 @@ export default function Card({
       title: "Added to cart",
     });
   };
+  const token = window.localStorage.getItem("dataUser");
   const [isFavorite, setIsFavorite] = useState(false);
   const isFavorite2 = window.localStorage.getItem("isFavorite2");
 
+  useEffect(() => {
+    dispatch(getfavorites(token))
+  },[])
+
   const toogleFavoriteAddHandler = () => {
-    setIsFavorite((prevState) => !prevState);
-    localStorage.setItem("isFavorite2", JSON.stringify(isFavorite));
-    dispatch(addToFavorites(favoriteItems, instruments));
+    setIsFavorite(prevState => !prevState);
+    // localStorage.setItem("isFavorite2", JSON.stringify(isFavorite));
+    // dispatch(addToFavorites(favoriteItems, instruments));
+    dispatch(postFavorites(instruments, token)).then(()=>{ dispatch(getfavorites(token))})
+
   };
 
+  // const hanledDelete = (e, item) => {
+  //   console.log("estoy en hanled deleFavorite");
+  //   e.preventDefault();
+  //   // dispatch(removeFromFavorites(favoriteItems, item));
+  //   dispatch(deleteFavorites(item, token)).then(()=>{ dispatch(getfavorites(token))})
+  // };
+
   const toogleFavoriteRemoveHandler = () => {
-    setIsFavorite((prevState) => !prevState);
-    localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
-    dispatch(removeFromFavorites(favoriteItems, instruments));
+    setIsFavorite(prevState => !prevState);
+    // localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
+    // dispatch(removeFromFavorites(favoriteItems, instruments));
+    dispatch(deleteFavorites(instruments, token)).then(()=>{ dispatch(getfavorites(token))})
   };
 
   const Toast = Swal.mixin({
@@ -112,7 +133,6 @@ export default function Card({
       </>
     );
   }
-
   return (
     <StyledCard>
       <img
@@ -121,10 +141,14 @@ export default function Card({
         onClick={(e) => navigate("/instruments/" + id)}
       />
       <p>{brand}</p>
-      <p className="font-bold text-yellow important!">{paintStars(raiting)}</p>
-      {console.log(favoriteItems, "isFavorite")}
+
+      <p className="font-bold text-black important!">
+        {paintStar()}
+        {raiting}
+      </p>
+      {/* {console.log(favoriteItems, "isFavorite")} */}
       {/* !favoriteItems ? */}
-      {!isFavorite ? (
+      {/* {!isFavorite ? (
         <HiOutlineHeart
           className="h-10 cursor-pointer absolute top-0 left-5"
           onClick={toogleFavoriteAddHandler}
@@ -134,6 +158,19 @@ export default function Card({
           className="h-10 cursor-pointer absolute top-0 left-5"
           onClick={toogleFavoriteRemoveHandler}
         />
+      )} */}
+      
+      {favoritesList && ( favoritesList.find(e =>e.id===id) ) ? (
+        <HiHeart
+          className="h-10 cursor-pointer absolute top-0 right-14"
+          onClick={toogleFavoriteRemoveHandler}
+        />
+      ) : (
+        <HiOutlineHeart
+          className="h-10 cursor-pointer absolute top-0 right-14"
+          onClick={toogleFavoriteAddHandler}
+        />
+        
       )}
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>

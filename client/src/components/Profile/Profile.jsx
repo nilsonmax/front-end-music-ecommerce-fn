@@ -158,63 +158,63 @@ export default function Profile() {
   return (
     <>
       {user ? (
-        <div class="bg-white my-5 mt-4 max-w-7xl sm:pt-10 lg:pt-12 mx-auto flex flex-col">
+        <div className="bg-white my-5 mt-4 max-w-7xl sm:pt-10 lg:pt-12 mx-auto flex flex-col">
           <p className="text-center text-gray-600 underline text-6xl font-bold font-sans">
             {user.userName}
           </p>
-          <div class="max-w-screen-4xl px-1 md:px-8 flex flex-col shadow-2xl">
+          <div className="max-w-screen-4xl px-1 md:px-8 flex flex-col shadow-2xl">
             {
               ////firsname
             }
-            <div class="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
-              <div class="  px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
+            <div className="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
+              <div className="  px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
                 Firstname:
               </div>
-              <div class=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
+              <div className=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
                 {user.firstName ? user.firstName : "unknown"}
               </div>
             </div>
             {
               ////lasname
             }
-            <div class="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
-              <div class=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
+            <div className="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
+              <div className=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
                 LastName:
               </div>
-              <div class=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
+              <div className=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
                 {user.lastName ? user.lastName : "unknown"}
               </div>
             </div>
             {
               ////email
             }
-            <div class="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
-              <div class=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
+            <div className="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
+              <div className=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
                 Email:
               </div>
-              <div class=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
+              <div className=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
                 {user.email ? user.email : "unknown"}
               </div>
             </div>
             {
               ////number
             }
-            <div class="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
-              <div class=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
+            <div className="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
+              <div className=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
                 Contact Number:
               </div>
-              <div class=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
+              <div className=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
                 {user.contactNumber ? user.contactNumber : "unknown"}
               </div>
             </div>
             {
               ////andress
             }
-            <div class="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
-              <div class=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
+            <div className="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
+              <div className=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
                 Address:
               </div>
-              <div class=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
+              <div className=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
                 {user.buyerAddress ? user.buyerAddress : "unknown"}
               </div>
             </div>
@@ -222,11 +222,11 @@ export default function Profile() {
             {
               ////role
             }
-            <div class="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
-              <div class=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
+            <div className="flex justify-between  md:flex-row  items-center border-b gap-4 py-4 ">
+              <div className=" px-4 border-l-4 border-x-secondary rounded-sm text-slate-600">
                 Role:
               </div>
-              <div class=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
+              <div className=" px-8 py-1 bg-slate-200 rounded-xl text-slate-600">
                 {user.rol ? user.rol : "unknown"}
               </div>
             </div>
@@ -236,20 +236,17 @@ export default function Profile() {
             <div className="text-white inline-flex flex-col ">
               <button
                 className="my-3 py-2 bg-secondary hover:bg-primary  mx-28 rounded"
-                onClick={(e) => navigate("/user/info")}
-              >
+                onClick={(e) => navigate("/user/info")}>
                 Edit my information
               </button>
               <button
                 className="my-3 py-2 hover:bg-red-900 bg-secondary mx-28 rounded"
-                onClick={(e) => handleDelete(e)}
-              >
+                onClick={(e) => handleDelete(e)}>
                 Delete my account
               </button>
               <button
                 className="my-3 py-2 hover:bg-primary bg-secondary  mx-28 rounded"
-                onClick={(e) => handlePassword(e)}
-              >
+                onClick={(e) => handlePassword(e)}>
                 Change Password
               </button>
             </div>
@@ -291,8 +288,7 @@ export default function Profile() {
                     )}
                     <button
                       className="bg-primary text-white rounded mx-12 my-8 py-1 hover:bg-teal-900"
-                      onClick={(e) => handledSubmit(e)}
-                    >
+                      onClick={(e) => handledSubmit(e)}>
                       Send
                     </button>
                   </div>

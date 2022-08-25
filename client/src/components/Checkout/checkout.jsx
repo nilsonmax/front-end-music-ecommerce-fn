@@ -14,7 +14,6 @@ import { BsBoxSeam } from "react-icons/bs";
 
 const { REACT_APP_HOST } = process.env;
 
-
 function validate(userInfo) {
   let errors = {};
 
@@ -210,20 +209,20 @@ export default function Checkout() {
 
   return (
     <StyledCheckout>
-      <div class="leading-loose ">
+      <div className="leading-loose ">
         <form
           onSubmit={handleSubmit}
-          class="max-w-xl m-2 pt-5 px-10 bg-white rounded shadow-xl">
+          className="max-w-xl m-2 pt-5 px-10 bg-white rounded shadow-xl">
           <h1 className="text-center font-bold text-4xl border-b-2 pb-4">
             Checkout
           </h1>
           <br></br>
-          <div class="">
-            <label class="block text-sm text-gray-00" for="cus_name">
+          <div className="">
+            <label className="block text-sm text-gray-00" for="cus_name">
               Name
             </label>
             <input
-              class="w-full px-5 py-0 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-5 py-0 text-gray-700 bg-gray-200 rounded"
               id="cus_name"
               name="cus_name"
               type="text"
@@ -237,12 +236,12 @@ export default function Checkout() {
             )}
           </div>
 
-          <div class="mt-2">
-            <label class="block text-sm text-gray-600" for="cus_email">
+          <div className="mt-2">
+            <label className="block text-sm text-gray-600" for="cus_email">
               Email
             </label>
             <input
-              class="w-full px-5  py-0 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-5  py-0 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -256,12 +255,12 @@ export default function Checkout() {
             )}
           </div>
 
-          <div class="mt-2">
-            <label class=" block text-sm text-gray-600" for="cus_email">
+          <div className="mt-2">
+            <label className=" block text-sm text-gray-600" for="cus_email">
               Phone
             </label>
             <input
-              class="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
               id="cus_phone"
               name="cus_phone"
               type="number"
@@ -275,12 +274,12 @@ export default function Checkout() {
             )}
           </div>
 
-          <div class="mt-2">
-            <label class=" block text-sm text-gray-600" for="cus_email">
+          <div className="mt-2">
+            <label className=" block text-sm text-gray-600" for="cus_email">
               Address
             </label>
             <input
-              class="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_address"
               type="text"
@@ -294,12 +293,12 @@ export default function Checkout() {
             )}
           </div>
 
-          <div class="mt-2">
-            <label class=" text-sm block text-gray-600" for="cus_email">
+          <div className="mt-2">
+            <label className=" text-sm block text-gray-600" for="cus_email">
               City
             </label>
             <input
-              class="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_city"
               type="text"
@@ -313,12 +312,12 @@ export default function Checkout() {
             )}
           </div>
 
-          <div class="inline-block mt-2 w-1/2 pr-1">
-            <label class="block text-sm text-gray-600" for="cus_email">
+          <div className="inline-block mt-2 w-1/2 pr-1">
+            <label className="block text-sm text-gray-600" for="cus_email">
               Country
             </label>
             <input
-              class="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_country"
               type="text"
@@ -332,12 +331,12 @@ export default function Checkout() {
             )}
           </div>
 
-          <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
-            <label class="block text-sm text-gray-600" for="cus_email">
+          <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
+            <label className="block text-sm text-gray-600" for="cus_email">
               Zip
             </label>
             <input
-              class="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-2 py-0 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_zip"
               type="number"
@@ -351,19 +350,19 @@ export default function Checkout() {
             )}
           </div>
 
-          <div class="mt-2">
-            <label class="block text-sm text-gray-600">
+          <div className="mt-2">
+            <label className="block text-sm text-gray-600">
               Payment information
             </label>
             <CardElement
-              class="w-full px-5  py-0 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-5  py-0 text-gray-700 bg-gray-200 rounded"
               onChange={() => {
                 onChangeCardElement();
               }}
             />
           </div>
 
-          <div class="mt-4">
+          <div className="mt-4">
             {userInfo.cus_name &&
             userInfo.cus_email &&
             userInfo.cus_phone &&
@@ -374,12 +373,12 @@ export default function Checkout() {
             elements.getElement(CardElement).length != 0 &&
             userInfo.cus_cardelement === true &&
             Object.keys(errors).length === 0 ? (
-              <div class="flex items-center justify-center">
+              <div className="flex items-center justify-center">
                 {loading ? (
                   <LoaderButton />
                 ) : (
                   <button
-                    class="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
+                    className="px-4  text-white font-light tracking-wider bg-primary  min-w-full rounded-md"
                     type="submit"
                     onSubmit={handleSubmit}
                     disabled={!stripe}>
@@ -406,7 +405,7 @@ export default function Checkout() {
           </div>
         </form>
       </div>
-      <div class="leading-loose max-w-md max-h-screen overflow-auto m-4 p-10 bg-white rounded shadow-xl">
+      <div className="leading-loose max-w-md max-h-screen overflow-auto m-4 p-10 bg-white rounded shadow-xl">
         <h2 className="text font-bold text-2xl">Resume items:</h2>
         {items.map((item) => {
           return (

@@ -15,7 +15,6 @@ import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import Swal from "sweetalert2";
 import paintStars from "../../utils/paintStars";
 
-
 export default function Card({
   id,
   name,
@@ -37,7 +36,7 @@ export default function Card({
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
   // console.log(favoritesList, "favoritesList 1")
   const navigate = useNavigate();
-  
+
   const hanledSummit = (e) => {
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments));
@@ -53,15 +52,16 @@ export default function Card({
   const isFavorite2 = window.localStorage.getItem("isFavorite2");
 
   useEffect(() => {
-    dispatch(getfavorites(token))
-  },[])
+    dispatch(getfavorites(token));
+  }, []);
 
   const toogleFavoriteAddHandler = () => {
-    setIsFavorite(prevState => !prevState);
+    setIsFavorite((prevState) => !prevState);
     // localStorage.setItem("isFavorite2", JSON.stringify(isFavorite));
     // dispatch(addToFavorites(favoriteItems, instruments));
-    dispatch(postFavorites(instruments, token)).then(()=>{ dispatch(getfavorites(token))})
-
+    dispatch(postFavorites(instruments, token)).then(() => {
+      dispatch(getfavorites(token));
+    });
   };
 
   // const hanledDelete = (e, item) => {
@@ -72,10 +72,12 @@ export default function Card({
   // };
 
   const toogleFavoriteRemoveHandler = () => {
-    setIsFavorite(prevState => !prevState);
+    setIsFavorite((prevState) => !prevState);
     // localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
     // dispatch(removeFromFavorites(favoriteItems, instruments));
-    dispatch(deleteFavorites(instruments, token)).then(()=>{ dispatch(getfavorites(token))})
+    dispatch(deleteFavorites(instruments, token)).then(() => {
+      dispatch(getfavorites(token));
+    });
   };
 
   const Toast = Swal.mixin({
@@ -142,10 +144,7 @@ export default function Card({
       />
       <p>{brand}</p>
 
-      <p className="font-bold text-black important!">
-        {paintStar()}
-        {raiting}
-      </p>
+      <p className="font-bold text-black important!">{paintStars(raiting)}</p>
       {/* {console.log(favoriteItems, "isFavorite")} */}
       {/* !favoriteItems ? */}
       {/* {!isFavorite ? (
@@ -159,8 +158,8 @@ export default function Card({
           onClick={toogleFavoriteRemoveHandler}
         />
       )} */}
-      
-      {favoritesList && ( favoritesList.find(e =>e.id===id) ) ? (
+
+      {favoritesList && favoritesList.find((e) => e.id === id) ? (
         <HiHeart
           className="h-10 cursor-pointer absolute top-0 right-14"
           onClick={toogleFavoriteRemoveHandler}
@@ -170,11 +169,10 @@ export default function Card({
           className="h-10 cursor-pointer absolute top-0 right-14"
           onClick={toogleFavoriteAddHandler}
         />
-        
       )}
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
-      <div class="bg-secondary py-2 rounded-full m-0 text-xs font-bold text-white text-center hidden md:block">
+      <div className="bg-secondary py-2 rounded-full m-0 text-xs font-bold text-white text-center hidden md:block">
         {status}
       </div>
       <button

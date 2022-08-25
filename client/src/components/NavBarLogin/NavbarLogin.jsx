@@ -75,7 +75,8 @@ export default function NavBarLogin({ setCurrentPage }) {
             </Button>
           </div>
         </DivItemsCenter>
-
+        {/*   para merge
+         */}{" "}
         <div>
           <div
             className={`flex-1 bg-black px-8  justify-self-center pb-9  lg:block   ${
@@ -197,7 +198,6 @@ export default function NavBarLogin({ setCurrentPage }) {
             Cart
           </p>
         </button>
-
         {showCart && <Cart />}
       </DivJustifyBetween>
     </NavContainer>

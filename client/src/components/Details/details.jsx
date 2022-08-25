@@ -60,7 +60,7 @@ export default function Details() {
 
   let activaShow = false;
   cartItems.forEach((e) => {
-    if (e.id === id) {
+    if (e.id === reduxDetail.id) {
       if (e.stock <= e.count) {
         activaShow = true;
       } else {
@@ -98,18 +98,18 @@ export default function Details() {
   if (!reduxDetail.name) return <Loader />;
   else
     return (
-      <div class="flex flex-col h-screen">
+      <div className="flex flex-col h-screen">
         {/* justify-center h-screen */}
-        <div class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
-          <div class="w-full md:w-1/3 bg-white grid place-items-center">
-            <img src={reduxDetail.img} loading="lazy" class="rounded-xl" />
+        <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
+          <div className="w-full md:w-1/3 bg-white grid place-items-center">
+            <img src={reduxDetail.img} loading="lazy" className="rounded-xl" />
           </div>
-          <div class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
-            <div class="flex justify-between item-center">
-              <p class="text-gray-500 font-medium hidden md:block">
+          <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
+            <div className="flex justify-between item-center">
+              <p className="text-gray-500 font-medium hidden md:block">
                 {reduxDetail.brand}
               </p>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 {reduxDetail.Raitings.length ? (
                   reduxDetail.Raitings.map((e) => {
                     return (
@@ -131,34 +131,40 @@ export default function Details() {
                   <>{paintStars(reduxDetail.Raitings.length)}</>
                 )}
 
-                <p class="text-gray-600 font-bold text-sm ml-1">
+                <p className="text-gray-600 font-bold text-sm ml-1">
                   {reduxDetail.raiting === 0 ? (
                     `No rating`
                   ) : (
-                    <span class="text-gray-500 font-normal">
+                    <span className="text-gray-500 font-normal">
                       ({reduxDetail.Raitings.length} reviews)
                     </span>
                   )}
                 </p>
               </div>
-              <div class="">stock: {reduxDetail.stock}</div>
-              <div class="bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 hidden md:block">
+              <div className="">stock: {reduxDetail.stock}</div>
+              <div className="bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 hidden md:block">
                 {reduxDetail.status}
               </div>
             </div>
-            <h3 class="font-black text-gray-800 md:text-3xl text-xl">
+            <h3 className="font-black text-gray-800 md:text-3xl text-xl">
               {reduxDetail.name}
             </h3>
-            <p class="md:text-lg text-gray-500 text-base">
+            <p className="md:text-lg text-gray-500 text-base">
               {reduxDetail.description}
             </p>
 
-            <p class="text-xl font-black text-gray-800">
+            <p className="text-xl font-black text-gray-800">
               ${reduxDetail.price}
-              <span class="font-normal text-gray-600 text-base">/each one</span>
+              <span className="font-normal text-gray-600 text-base">
+                /each one
+              </span>
               <div className="flex flex-wrap">
                 <button
-                  onClick={(e) => hanledSummit(e)}
+                  onClick={(e) =>
+                    reduxDetail.stock <= 0 || activaShow
+                      ? alert()
+                      : hanledSummit(e)
+                  }
                   className="flex items-center h-8 px-2 text-background transition-primary duration-150 bg-black rounded-lg focus:shadow-outline hover:bg-primary col-span-1">
                   <span className="">{`➕`}</span>
                   <p>{paintCart()}</p>
@@ -173,10 +179,10 @@ export default function Details() {
             return (
               <div className="my-9 border py-4 mx-7 ">
                 <div className="mb-7 mx-7">
-                  <span class="block font-bold text-secondary mb-1 ml-1 underline">
+                  <span className="block font-bold text-secondary mb-1 ml-1 underline">
                     {e.userName}
                   </span>
-                  <span class="block text-gray-500 ">
+                  <span className="block text-gray-500 ">
                     {e.createdAt.substr(0, 10)}
                   </span>
                   <div className="flex text-2xl my-4">
@@ -190,7 +196,7 @@ export default function Details() {
                     })}
                   </div>
                 </div>
-                <p class="text-gray-900 mx-7">{e.comment}</p>
+                <p className="text-gray-900 mx-7">{e.comment}</p>
               </div>
             );
           })

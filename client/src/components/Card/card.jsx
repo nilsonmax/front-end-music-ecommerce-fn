@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, SetTotalQuanTities } from "../../redux/action/cartActions";
 import {
@@ -14,7 +14,6 @@ import { StyledCard } from "./style";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import Swal from "sweetalert2";
 import paintStars from "../../utils/paintStars";
-
 
 export default function Card({
   id,
@@ -37,7 +36,7 @@ export default function Card({
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
   // console.log(favoritesList, "favoritesList 1")
   const navigate = useNavigate();
-  
+
   const hanledSummit = (e) => {
     e.preventDefault();
     dispatch(addToCart(cartItems, instruments));
@@ -53,15 +52,16 @@ export default function Card({
   const isFavorite2 = window.localStorage.getItem("isFavorite2");
 
   useEffect(() => {
-    dispatch(getfavorites(token))
-  },[])
+    dispatch(getfavorites(token));
+  }, []);
 
   const toogleFavoriteAddHandler = () => {
-    setIsFavorite(prevState => !prevState);
+    setIsFavorite((prevState) => !prevState);
     // localStorage.setItem("isFavorite2", JSON.stringify(isFavorite));
     // dispatch(addToFavorites(favoriteItems, instruments));
-    dispatch(postFavorites(instruments, token)).then(()=>{ dispatch(getfavorites(token))})
-
+    dispatch(postFavorites(instruments, token)).then(() => {
+      dispatch(getfavorites(token));
+    });
   };
 
   // const hanledDelete = (e, item) => {
@@ -72,10 +72,12 @@ export default function Card({
   // };
 
   const toogleFavoriteRemoveHandler = () => {
-    setIsFavorite(prevState => !prevState);
+    setIsFavorite((prevState) => !prevState);
     // localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
     // dispatch(removeFromFavorites(favoriteItems, instruments));
-    dispatch(deleteFavorites(instruments, token)).then(()=>{ dispatch(getfavorites(token))})
+    dispatch(deleteFavorites(instruments, token)).then(() => {
+      dispatch(getfavorites(token));
+    });
   };
 
   const Toast = Swal.mixin({
@@ -142,10 +144,11 @@ export default function Card({
       />
       <p>{brand}</p>
 
-      <p className="font-bold text-black important!">
-        {paintStar()}
-        {raiting}
-      </p>
+      <div
+        onClick={(e) => navigate("/instruments/" + id)}
+        className="font-bold text-black important! flex">
+        {paintStars(raiting)}
+      </div>
       {/* {console.log(favoriteItems, "isFavorite")} */}
       {/* !favoriteItems ? */}
       {/* {!isFavorite ? (
@@ -159,8 +162,8 @@ export default function Card({
           onClick={toogleFavoriteRemoveHandler}
         />
       )} */}
-      
-      {favoritesList && ( favoritesList.find(e =>e.id===id) ) ? (
+
+      {favoritesList && favoritesList.find((e) => e.id === id) ? (
         <HiHeart
           className="h-10 cursor-pointer absolute top-0 right-14"
           onClick={toogleFavoriteRemoveHandler}
@@ -170,17 +173,20 @@ export default function Card({
           className="h-10 cursor-pointer absolute top-0 right-14"
           onClick={toogleFavoriteAddHandler}
         />
-        
       )}
       <h2 onClick={(e) => navigate("/instruments/" + id)}>{name}</h2>
       <h3 onClick={(e) => navigate("/instruments/" + id)}>{`${colMoney}`}</h3>
-      <div class="bg-secondary py-2 rounded-full m-0 text-xs font-bold text-white text-center hidden md:block">
+      <div
+        onClick={(e) => navigate("/instruments/" + id)}
+        className="bg-secondary py-2 rounded-full m-0 text-xs font-bold text-white text-center hidden md:block">
         {status}
       </div>
       <button
         onClick={(e) => (stock <= 0 || activaShow ? alert() : hanledSummit(e))}
         className="flex items-center h-8 px-2 text-background transition-primary duration-150 bg-black rounded-lg focus:shadow-outline hover:bg-primary col-span-1">
-        <span className="">{`➕`}</span>
+        <span
+          onClick={(e) => navigate("/instruments/" + id)}
+          className="">{`➕`}</span>
         <p>{paintCart()}</p>
       </button>
     </StyledCard>

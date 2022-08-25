@@ -25,7 +25,6 @@ function Filter({ setCurrentPage }) {
       dispatch(getAllCategories());
       dispatch(getInstruments());
 
-      console.log(checkState);
       setDispatched(false);
     }
   }, [dispatch]);

@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -15,14 +15,14 @@ const stripePromise = loadStripe(
 export default function Checkout() {
   const stripe = useStripe();
   const elements = useElements();
-  const navigate = useNavigate()
-  useEffect(()=>{
+  const navigate = useNavigate();
+  useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
-    if(token){ 
-        navigate("/")
-        return 
+    if (token) {
+      navigate("/");
+      return;
     }
-  },[])
+  }, []);
 
   const { error, paymentMethod } = async function handleSubmit(event) {
     event.preventDefault();
@@ -35,15 +35,15 @@ export default function Checkout() {
 
   return (
     <Elements stripe={stripePromise}>
-      <div class="leading-loose">
-        <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
-          <p class="text-gray-800 font-medium">Customer information</p>
-          <div class="">
-            <label class="block text-sm text-gray-00" for="cus_name">
+      <div className="leading-loose">
+        <form className="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
+          <p className="text-gray-800 font-medium">Customer information</p>
+          <div className="">
+            <label className="block text-sm text-gray-00" for="cus_name">
               Name
             </label>
             <input
-              class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
               id="cus_name"
               name="cus_name"
               type="text"
@@ -52,12 +52,12 @@ export default function Checkout() {
               aria-label="Name"
             />
           </div>
-          <div class="mt-2">
-            <label class="block text-sm text-gray-600" for="cus_email">
+          <div className="mt-2">
+            <label className="block text-sm text-gray-600" for="cus_email">
               Email
             </label>
             <input
-              class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -66,12 +66,12 @@ export default function Checkout() {
               aria-label="Email"
             />
           </div>
-          <div class="mt-2">
-            <label class=" block text-sm text-gray-600" for="cus_email">
+          <div className="mt-2">
+            <label className=" block text-sm text-gray-600" for="cus_email">
               Address
             </label>
             <input
-              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -80,12 +80,12 @@ export default function Checkout() {
               aria-label="Email"
             />
           </div>
-          <div class="mt-2">
-            <label class=" text-sm block text-gray-600" for="cus_email">
+          <div className="mt-2">
+            <label className=" text-sm block text-gray-600" for="cus_email">
               City
             </label>
             <input
-              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -94,12 +94,12 @@ export default function Checkout() {
               aria-label="Email"
             />
           </div>
-          <div class="inline-block mt-2 w-1/2 pr-1">
-            <label class=" block text-sm text-gray-600" for="cus_email">
+          <div className="inline-block mt-2 w-1/2 pr-1">
+            <label className=" block text-sm text-gray-600" for="cus_email">
               Country
             </label>
             <input
-              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -108,12 +108,12 @@ export default function Checkout() {
               aria-label="Email"
             />
           </div>
-          <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
-            <label class=" block text-sm text-gray-600" for="cus_email">
+          <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
+            <label className=" block text-sm text-gray-600" for="cus_email">
               Zip
             </label>
             <input
-              class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+              className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
               id="cus_email"
               name="cus_email"
               type="text"
@@ -122,18 +122,17 @@ export default function Checkout() {
               aria-label="Email"
             />
           </div>
-          <p class="mt-4 text-gray-800 font-medium">Payment information</p>
-          <div class="">
-            <label class="block text-sm text-gray-600" for="cus_name">
+          <p className="mt-4 text-gray-800 font-medium">Payment information</p>
+          <div className="">
+            <label className="block text-sm text-gray-600" for="cus_name">
               Card
             </label>
-            <CardElement class="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded" />
+            <CardElement className="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded" />
           </div>
-          <div class="mt-4">
+          <div className="mt-4">
             <button
-              class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
-              type="submit"
-            >
+              className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
+              type="submit">
               $3.00
             </button>
           </div>

@@ -15,7 +15,6 @@ import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import Swal from "sweetalert2";
 import paintStars from "../../utils/paintStars";
 
-
 export default function Card({
   id,
   name,
@@ -143,7 +142,8 @@ export default function Card({
       <p>{brand}</p>
 
       <p className="font-bold text-black important!">
-        {paintStar()}
+        {paintStars()}
+
         {raiting}
       </p>
       {/* {console.log(favoriteItems, "isFavorite")} */}

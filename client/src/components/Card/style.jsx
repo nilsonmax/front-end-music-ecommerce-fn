@@ -5,19 +5,21 @@ export const StyledCard = styled.div`
   ${tw`
     h-40
     rounded-lg
-    border-tertiary
     overflow-hidden
     p-0
-    m-0 
+    m-2
+    pt-4 
     bg-background
-    max-w-md
     grid gap-0.5 
     grid-cols-6
     leading-tight
     relative
-    transition-all duration-500
-    scale-y-75
-    hover:scale-y-100
+    max-w-md
+    border-solid
+    border-white
+    scale-100
+    hover:shadow-2xl
+    hover:scale-125
   `};
 
   img {
@@ -25,13 +27,14 @@ export const StyledCard = styled.div`
       place-content-center
       justify-center
       row-span-5
-      max-h-48
+      max-h-36
       self-auto
       border-0
       border-secondary
       m-0
       col-span-2
       block
+      hover:opacity-90
       `};
   }
 
@@ -40,21 +43,19 @@ export const StyledCard = styled.div`
       col-span-4
       m-0
       p-0
-      font-bold    
     `};
   }
 
   h3 {
     ${tw`
-        text-highlight
         font-bold
-        col-span-4
+        col-span-2
+        text-2xl
       `}
   }
 
   h4 {
     ${tw`
-      bg-orange-300
       p-1
       m-0
       rounded-full
@@ -67,11 +68,10 @@ export const StyledCard = styled.div`
 
   p {
     ${tw`
-      pt-2
+      p-0
       leading-tight
       text-xs
-      col-span-2
-      text-tertiary
+      col-span-4
       flex
       `}
   }

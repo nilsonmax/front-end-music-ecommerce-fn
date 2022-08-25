@@ -31,7 +31,6 @@ const Crear = ({ setShowCreateComponent, setRefreshAdmins }) => {
 
   return (
     <div>
-      <h1>Registrar un nuevo Admin</h1>
       <Formik
         initialValues={{
           firstName: "",
@@ -77,7 +76,7 @@ const Crear = ({ setShowCreateComponent, setRefreshAdmins }) => {
           isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="flex flex-col md:grid grid-cols-2 gap-3 lg:grid-cols-3">
               {adminAtributos.map((data) => {
                 return (
                   <div key={data}>
@@ -96,7 +95,7 @@ const Crear = ({ setShowCreateComponent, setRefreshAdmins }) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values[data]}
-                      className="inputFormRegister outline-none rounded-md py-1.5 px-5"
+                      className="w-full inputFormRegister outline-none rounded-md py-1.5 px-5"
                     />
                     <p className="text-red-500 text-center">
                       {errors[data] && touched[data] && errors[data]}
@@ -108,7 +107,7 @@ const Crear = ({ setShowCreateComponent, setRefreshAdmins }) => {
                 <select
                   name="rol"
                   onChange={handleChange}
-                  className="inputFormRegister outline-none rounded-md py-1.5 px-5"
+                  className="w-full inputFormRegister outline-none rounded-md py-1.5 px-5"
                 >
                   <option value="rol" disabled>
                     Rol

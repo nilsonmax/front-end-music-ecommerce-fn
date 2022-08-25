@@ -31,7 +31,7 @@ const Modal = ({ setModal, idHistoryshop }) => {
       {copiaArray.length === 1 && (
         <div className="w-screen h-screen top-0 fixed z-10 left-0">
           <div className="absolute w-screen h-screen top-0 left-0 bg-gray-400 opacity-50"></div>
-          <div className="absolute w-screen h-screen flex items-center justify-center">
+          <div className="absolute w-screen h-screen flex items-center justify-center px-10">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-[750px] max-h-[500px] overflow-y-auto">
               <BotonCerrar
                 type="button"
@@ -61,7 +61,7 @@ const Modal = ({ setModal, idHistoryshop }) => {
                   Datos Historyshop
                 </h3>
                 <div>
-                  <div className="grid gap-5 grid-cols-3 ">
+                  <div className="grid gap-5 grid-cols-2 md:grid-cols-3 ">
                     {keysArray.map((data, key) => {
                       if(data!== "instrument" && data !== "user" && data !== "updatedAt"){
                         return <div key={key + 1}>

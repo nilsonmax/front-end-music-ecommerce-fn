@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "./style";
 
-const Aside = ({ setShowCreateComponent, setRefresh, setValueSearch }) => {
+const Aside = ({ setShowCreateComponent, setRefresh, setValueSearch,trueHistoryshop }) => {
   return (
     <div>
       <form className="flex items-center">
@@ -59,14 +59,14 @@ const Aside = ({ setShowCreateComponent, setRefresh, setValueSearch }) => {
           <span className="sr-only">Search</span>
         </Button>
       </form>
-      <input
+      {trueHistoryshop!==true &&<input
         type="button"
         value="Create"
         className="bg-secondary px-7 py-2 rounded-md mt-5 cursor-pointer w-full mb-10 text-white hover:font-semibold"
         onClick={() => {
           setShowCreateComponent(true);
         }}
-      />
+      />}
     </div>
   );
 };

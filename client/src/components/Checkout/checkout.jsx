@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StyledCheckout } from "./style";
-import { StyledCard } from "../Card/style";
+import { StyledResume } from "./style";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -218,7 +218,7 @@ export default function Checkout() {
           </h1>
           <br></br>
           <div className="">
-            <label className="block text-sm text-gray-00" for="cus_name">
+            <label className="block text-sm text-gray-00" htmlFor="cus_name">
               Name
             </label>
             <input
@@ -237,7 +237,7 @@ export default function Checkout() {
           </div>
 
           <div className="mt-2">
-            <label className="block text-sm text-gray-600" for="cus_email">
+            <label className="block text-sm text-gray-600" htmlFor="cus_email">
               Email
             </label>
             <input
@@ -256,7 +256,7 @@ export default function Checkout() {
           </div>
 
           <div className="mt-2">
-            <label className=" block text-sm text-gray-600" for="cus_email">
+            <label className=" block text-sm text-gray-600" htmlFor="cus_email">
               Phone
             </label>
             <input
@@ -275,7 +275,7 @@ export default function Checkout() {
           </div>
 
           <div className="mt-2">
-            <label className=" block text-sm text-gray-600" for="cus_email">
+            <label className=" block text-sm text-gray-600" htmlFor="cus_email">
               Address
             </label>
             <input
@@ -294,7 +294,7 @@ export default function Checkout() {
           </div>
 
           <div className="mt-2">
-            <label className=" text-sm block text-gray-600" for="cus_email">
+            <label className=" text-sm block text-gray-600" htmlFor="cus_email">
               City
             </label>
             <input
@@ -313,7 +313,7 @@ export default function Checkout() {
           </div>
 
           <div className="inline-block mt-2 w-1/2 pr-1">
-            <label className="block text-sm text-gray-600" for="cus_email">
+            <label className="block text-sm text-gray-600" htmlFor="cus_email">
               Country
             </label>
             <input
@@ -332,7 +332,7 @@ export default function Checkout() {
           </div>
 
           <div className="inline-block mt-2 -mx-1 pl-1 w-1/2">
-            <label className="block text-sm text-gray-600" for="cus_email">
+            <label className="block text-sm text-gray-600" htmlFor="cus_email">
               Zip
             </label>
             <input
@@ -407,19 +407,19 @@ export default function Checkout() {
       </div>
       <div className="leading-loose max-w-md max-h-screen overflow-auto m-4 p-10 bg-white rounded shadow-xl">
         <h2 className="text font-bold text-2xl">Resume items:</h2>
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
-            <StyledCard>
+            <StyledResume>
               <img src={item.img} alt={item.name} />
-              <p>{item.brand}</p>
+              <p key={index}>{item.brand}</p>
               <h2>{item.name}</h2>
               <p>{`$${item.price}`}</p>
               <b>{`Status:`}</b> <span>{`${item.status}`}</span>
-              <span className="bg-black text-justify !important rounded-sm absolute top-5 left-4 text-xl text-white font-semibold">
+              <span className="bg-black text-justify !important rounded-sm absolute top-2 left-0 text-xl text-white font-semibold">
                 {`X ${item.count}`}
                 <BsBoxSeam className="object-none" />
               </span>
-            </StyledCard>
+            </StyledResume>
           );
         })}
         <p></p>

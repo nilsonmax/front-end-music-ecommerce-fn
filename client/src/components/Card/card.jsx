@@ -52,32 +52,28 @@ export default function Card({
   const isFavorite2 = window.localStorage.getItem("isFavorite2");
 
   useEffect(() => {
-    dispatch(getfavorites(token));
+    if (!token) return;
+    else return dispatch(getfavorites(token));
   }, []);
 
   const toogleFavoriteAddHandler = () => {
     setIsFavorite((prevState) => !prevState);
-    // localStorage.setItem("isFavorite2", JSON.stringify(isFavorite));
-    // dispatch(addToFavorites(favoriteItems, instruments));
-    dispatch(postFavorites(instruments, token)).then(() => {
-      dispatch(getfavorites(token));
-    });
+    if (!token) return;
+    else {
+      dispatch(postFavorites(instruments, token)).then(() => {
+        dispatch(getfavorites(token));
+      });
+    }
   };
-
-  // const hanledDelete = (e, item) => {
-  //   console.log("estoy en hanled deleFavorite");
-  //   e.preventDefault();
-  //   // dispatch(removeFromFavorites(favoriteItems, item));
-  //   dispatch(deleteFavorites(item, token)).then(()=>{ dispatch(getfavorites(token))})
-  // };
 
   const toogleFavoriteRemoveHandler = () => {
     setIsFavorite((prevState) => !prevState);
-    // localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
-    // dispatch(removeFromFavorites(favoriteItems, instruments));
-    dispatch(deleteFavorites(instruments, token)).then(() => {
-      dispatch(getfavorites(token));
-    });
+    if (!token) return;
+    else {
+      dispatch(postFavorites(instruments, token)).then(() => {
+        dispatch(getfavorites(token));
+      });
+    }
   };
 
   const Toast = Swal.mixin({

@@ -8,7 +8,6 @@ const HomePage = () => {
   let [decodedToken, setDecodedToken] = useState(null);
 
   useEffect(() => {
-    console.log(token);
     if (token) {
       const decodedToken = decodeToken(token);
       if (decodedToken.user_rol == "admin") {

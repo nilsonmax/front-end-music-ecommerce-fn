@@ -74,13 +74,13 @@ export default function Profile() {
 
   useEffect(() => {
     const token = window.localStorage.getItem("dataUser");
-    console.log(token);
     if (token == null) {
       navigate("/");
       return;
     }
     let tokenEnObjeto = JSON.parse(token);
     dispatch(getUserHistoryShop(token));
+
     dispatch(get_user(tokenEnObjeto.token));
   }, []);
   let user = useSelector((e) => e.reducer.user);

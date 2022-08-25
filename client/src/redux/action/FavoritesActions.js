@@ -1,12 +1,20 @@
 import axios from "axios";
 
-import { ADD_TO_FAVORITES, GET_FAVORITES, SET_IS_FAVORITES, REMOVE_ALL_FROM_FAVORITES, REMOVE_ONE_FROM_FAVORITES, DATA_CLEAR_CAR, SET_FAVORITES_ITEMS, SET_SHOW_FAVORITES, SET_TOTAL_QUANTITIES } from "./types";
+import {
+  ADD_TO_FAVORITES,
+  GET_FAVORITES,
+  SET_IS_FAVORITES,
+  REMOVE_ALL_FROM_FAVORITES,
+  REMOVE_ONE_FROM_FAVORITES,
+  DATA_CLEAR_CAR,
+  SET_FAVORITES_ITEMS,
+  SET_SHOW_FAVORITES,
+  SET_TOTAL_QUANTITIES,
+} from "./types";
 
 const { REACT_APP_HOST } = process.env;
-// const token = 
+// const token =
 export const postFavorites = (payload, token) => {
-  // let favorites=instruments.id;
-  // console.log(payload, "pay favori")
   return async function (dispatch) {
     try {
       let tokenJSON = JSON.parse(token);
@@ -34,42 +42,33 @@ export const getfavorites = (token) => {
   return async function (dispatch) {
     let tokenJSON = JSON.parse(token);
     return await axios
-      .get(`${REACT_APP_HOST}/trolley`,
-      {
+      .get(`${REACT_APP_HOST}/trolley`, {
         headers: {
           Authorization: `Bearer ${tokenJSON.token}`,
         },
       })
       .then((rAxios) => {
-        console.log(rAxios.data, "rAxios.data")
         dispatch({
           type: GET_FAVORITES,
           payload: rAxios.data,
         });
       })
       .catch((error) => {
-        console.log("error in redux/action/getFavorites : " + error);
         return "error in redux/action/getFavorites : " + error;
       });
   };
 };
 
 export const deleteFavorites = (payload, token) => {
-  console.log(payload, "estoy en delete")
   return async function () {
     try {
       let tokenJSON = JSON.parse(token);
-      console.log(tokenJSON.token, "del token")
-      console.log(payload.id, "estoy en delete")
-      let favoritesDeleted = await axios.delete(
-        `${REACT_APP_HOST}/trolley`,
-        {
-          headers: {
-            Authorization: "Bearer " + tokenJSON.token,
-          },
-          data:{ id: payload.id }
+      let favoritesDeleted = await axios.delete(`${REACT_APP_HOST}/trolley`, {
+        headers: {
+          Authorization: "Bearer " + tokenJSON.token,
         },
-      );
+        data: { id: payload.id },
+      });
       return favoritesDeleted.data;
     } catch (error) {
       throw new TypeError(error.response.data);
@@ -91,22 +90,20 @@ export const addToFavorites = (items, instruments) => async (dispatch) => {
   // let favorites=instruments.id;
   // postFavorite(favorites,token)
   dispatch({ type: ADD_TO_FAVORITES, payload: { favoriteItems } });
-
 };
 
+export const removeOneFromFavorites =
+  (items, instruments) => async (dispatch) => {
+    const favoriteItems = items.slice();
+    favoriteItems.forEach((cp) => {
+      if (cp.id === instruments.id) {
+        cp.count -= 1;
+      }
+    });
 
-
-export const removeOneFromFavorites = (items, instruments) => async (dispatch) => {
-  const favoriteItems = items.slice();
-  favoriteItems.forEach((cp) => {
-    if (cp.id === instruments.id) {
-      cp.count -= 1;
-    }
-  });
-
-  localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
-  dispatch({ type: REMOVE_ONE_FROM_FAVORITES, payload: { favoriteItems } });
-};
+    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+    dispatch({ type: REMOVE_ONE_FROM_FAVORITES, payload: { favoriteItems } });
+  };
 
 export const removeFromFavorites = (items, instruments) => (dispatch) => {
   const favoriteItems = items.slice().filter((a) => a.id !== instruments.id);
@@ -124,13 +121,13 @@ export const setShowFavorites = (items, instruments) => (dispatch) => {
   const favoriteItems = items.slice();
   localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
   dispatch({ type: SET_SHOW_FAVORITES, payload: { favoriteItems } });
-}
+};
 
 export const setIsFavorite = (payload) => (dispatch) => {
   const isFavorite = payload;
   localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
   dispatch({ type: SET_IS_FAVORITES, payload: { isFavorite } });
-}
+};
 
 export const getDataClearCar = (payload) => (dispatch) => {
   const favoriteItems = [];

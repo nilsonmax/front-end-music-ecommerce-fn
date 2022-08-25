@@ -33,10 +33,8 @@ export default function HomeContainer() {
 
   const token = window.localStorage.getItem("dataUser");
   useEffect(() => {
-    console.log(showedElements);
     dispatch(getInstruments());
-    dispatch(getfavorites(token))
-    // console.log(localStore);
+    dispatch(getfavorites(token));
   }, [dispatch]);
 
   if (showedElements.length === 0) {

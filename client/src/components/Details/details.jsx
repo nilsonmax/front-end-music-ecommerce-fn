@@ -58,8 +58,6 @@ export default function Details() {
     },
   });
 
-  console.log("REduxStrock", reduxDetail);
-  console.log("cartItems", cartItems);
   let activaShow = false;
   cartItems.forEach((e) => {
     if (e.id === reduxDetail.id) {

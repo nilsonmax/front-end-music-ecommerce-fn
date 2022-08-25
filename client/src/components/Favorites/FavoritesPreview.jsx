@@ -40,41 +40,41 @@ import util from "../../utils/util";
 import { useDispatch, useSelector } from "react-redux";
 
 import e from "cors";
-import { deleteFavorites, getfavorites, removeFromFavorites, removeOneFromFavorites } from "../../redux/action/FavoritesActions";
+import {
+  deleteFavorites,
+  getfavorites,
+  removeFromFavorites,
+  removeOneFromFavorites,
+} from "../../redux/action/FavoritesActions";
 import { HiHeart } from "react-icons/hi";
 import Buttons from "../Buttons/buttons";
 import { ButtonStyled } from "../Buttons/styled";
 // import { ButtonStyled } from './../Buttons/styled';
 
 const FavoritesPreview = () => {
-
   const { setShowFavorites } = useStateContext();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const favoriteItems = useSelector((state) => state.favorites.items);
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
-  const token = window.localStorage.getItem("dataUser")
-
-  console.log(favoritesList, "favoritesList")
-  //const quanTities = useSelector((state) => state.favorites.quanTities);
-  //let quanTitie = window.localStorage.getItem("quanTities")
+  const token = window.localStorage.getItem("dataUser");
 
   const hanledDelete = (e, item) => {
     console.log("estoy en hanled deleFavorite");
     e.preventDefault();
-    // dispatch(removeFromFavorites(favoriteItems, item));
-    dispatch(deleteFavorites(item, token)).then(() => { dispatch(getfavorites(token)) })
+    dispatch(deleteFavorites(item, token)).then(() => {
+      dispatch(getfavorites(token));
+    });
   };
 
   useEffect(() => {
-    dispatch(getfavorites(token))
-  }, [])
+    dispatch(getfavorites(token));
+  }, []);
 
   const navigateHandle = (e) => {
-    dispatch(getfavorites(token))
-    setShowFavorites(true)
+    dispatch(getfavorites(token));
+    setShowFavorites(true);
     window.location.href = "/favorites";
-
   };
   return (
     <FavoriteWrapper>
@@ -82,8 +82,7 @@ const FavoritesPreview = () => {
         <FavoriteHeading
           type="button"
           // ShowFavorite={true}
-          onClick={() => setShowFavorites(false)}
-        >
+          onClick={() => setShowFavorites(false)}>
           <AiOutlineLeft />
           <Heading>Back to shopping</Heading>
         </FavoriteHeading>
@@ -98,7 +97,7 @@ const FavoritesPreview = () => {
               type="button"
               // ShowFavorite={true}
               onClick={() => setShowFavorites(false)}
-            // isSidebarOpen={isSidebarOpen} closeSidebar={() => setSidebarOpen(false)}
+              // isSidebarOpen={isSidebarOpen} closeSidebar={() => setSidebarOpen(false)}
             >
               Continue Shopping
             </ContinueShopping>
@@ -131,13 +130,10 @@ const FavoritesPreview = () => {
                     <h4>${item.price}</h4>
                   </Top>
                   <Bottom>
-
                     <QuantityDesc>
                       <RemoveItemButton
                         type="button"
-                        onClick={(e) => hanledDelete(e, item)}
-                      >
-
+                        onClick={(e) => hanledDelete(e, item)}>
                         <TiDeleteOutline size={25} />
                       </RemoveItemButton>
                     </QuantityDesc>
@@ -150,20 +146,18 @@ const FavoritesPreview = () => {
           <FavoriteBottom>
             <BtnContainer>
               {/* <Link to="/favorites"> */}
-              <ContinueShopping type="button" onClick={() => setShowFavorites(false)} >
-               <Link to="/favorites">
-               View full list 
-               </Link>
+              <ContinueShopping
+                type="button"
+                onClick={() => setShowFavorites(false)}>
+                <Link to="/favorites">View full list</Link>
               </ContinueShopping>
               {/* </Link> */}
             </BtnContainer>
           </FavoriteBottom>
-
         )}
       </FavoriteContainer>
     </FavoriteWrapper>
   );
-
 };
 
 export default FavoritesPreview;
